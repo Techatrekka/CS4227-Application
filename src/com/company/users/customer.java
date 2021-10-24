@@ -15,6 +15,12 @@ public class customer implements user{
     }
 
     @Override
+    public void logout() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
     public void logon(String username, String password) {
         // TODO Auto-generated method stub
         

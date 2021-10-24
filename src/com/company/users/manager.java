@@ -14,6 +14,12 @@ public class manager implements staff {
     }
 
     @Override
+    public void logout() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
     public void viewMenu(int menu_id) {
         // TODO Auto-generated method stub
         

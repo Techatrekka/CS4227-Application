@@ -2,6 +2,7 @@ package src.com.company.users;
 
 interface user {
     public void logon(String username, String password);
+    public void logout();
     public void Customer(int id_num, String full_name, String email);
     public void placeOrder(int order_id, String order);
     public void editOrder(int order_id, String new_order);
