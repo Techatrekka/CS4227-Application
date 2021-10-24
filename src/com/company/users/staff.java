@@ -1,5 +1,5 @@
 package src.com.company.users;
 
-public class staff extends user{
-    
+interface staff{
+    public void addStaff(int id_num, String full_name, String email, String user_type);
 }
