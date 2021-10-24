@@ -1,4 +1,4 @@
-package users;
+package src.com.company.users;
 
 public class user {
     private int id_num;
