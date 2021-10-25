@@ -1,7 +1,7 @@
 package src.com.company;
 
-import src.com.company.users.clerk;
-import src.com.company.users.manager;
+import src.com.company.users.Clerk;
+import src.com.company.users.Manager;
 
 public class Main {
     public static void main(String[] args) {

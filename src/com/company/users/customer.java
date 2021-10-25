@@ -1,17 +1,14 @@
 package src.com.company.users;
 
-public class customer implements user{
+public class Customer implements user{
     private int id_num;
     private String full_name;
     private String email;
-    private String user_type;
 
-    @Override
-    public void Customer(int id_num, String full_name, String email) {
+    public Customer(int id_num, String full_name, String email) {
         this.id_num = id_num;
         this.full_name = full_name;
         this.email = email;
-        this.user_type = "Customer";
     }
 
     @Override
@@ -33,28 +30,12 @@ public class customer implements user{
     }
 
     @Override
-    public void placeOrder(int order_id, String order) {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void editOrder(int order_id, String new_order) {
+    public void placeOrder(int order_id, Order order) {
         // TODO Auto-generated method stub
     }
 
     @Override
     public void cancelOrder(int order_id) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void redeemVoucher(int order_id, int voucher_number) {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void redeemCoupon(int order_id, int coupon_number) {
         // TODO Auto-generated method stub
         
     }

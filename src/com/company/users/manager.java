@@ -1,7 +1,7 @@
 package src.com.company.users;
 import java.util.Date;
 
-public class manager implements staff {
+public class Manager implements Staff {
     private int id_num;
     private String full_name;
     private String email;
@@ -23,11 +23,6 @@ public class manager implements staff {
     public void viewMenu(int menu_id) {
         // TODO Auto-generated method stub
         
-    }
-
-    @Override
-    public void Customer(int id_num, String full_name, String email) {
-        // TODO Auto-generated method stub
     }
 
     @Override
@@ -97,10 +92,6 @@ public class manager implements staff {
         this.user_type = user_type;
     }
 
-    public void removeStaff(int id_num){
-        // code
-    }
-
     public void editStaff(int id_num, String full_name, String email){
         // code
     }
@@ -113,19 +104,11 @@ public class manager implements staff {
         // code
     }
 
-    public void removeMenu(int menu_id){
-        // code
-    }
-
     public void addMenuItem(int menu_id, int item_id, String item){
         // code
     }
 
     public void editMenuItem(int item_id){
-        // code
-    }
-
-    public void removeMenuItem(int item_id, int menu_id){
         // code
     }
 
