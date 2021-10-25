@@ -5,11 +5,15 @@ abstract class User {
     private String userType;
     private String email;
     
-    public void logon(String username, String password);
-    public void logout();
-    public void placeOrder(int userID, Order order);
-    public void cancelOrder(int orderID);
-    public void viewMenu(int menu_id);
-    public void payOrder(int order_id);
-    public void addLoyaltyProgramme(int userID);
+    public void placeOrder(int userID /**, Order order**/){
+        // code
+    }
+
+    public void cancelOrder(int orderID){
+        // code
+    }
+
+    public void addLoyaltyProgramme(int userID){
+        // code
+    }
 }
