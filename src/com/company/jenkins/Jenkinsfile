@@ -1,10 +1,10 @@
 pipeline {
-    agent { docker { image 'maven:3.3.3'}}
+    agent { docker { image 'maven:3.3.3'} }
     stages {
         stage('Build Test Script') {
             steps {
-                javac test_script.java
-                java test_script
+                javac 'test_script.java'
+                java 'test_script'
             }
         }
     }
