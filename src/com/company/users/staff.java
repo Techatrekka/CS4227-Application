@@ -1,5 +1,4 @@
-package src.com.company.users;
-import java.util.Date;
+package com.company.users;
 
 interface staff extends user{
     public void orderStock(Date date, String order);

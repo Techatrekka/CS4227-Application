@@ -1,4 +1,4 @@
-package src.com.company.users;
+package com.company.users;
 
 interface user {
     public void logon(String username, String password);

@@ -1,4 +1,4 @@
-package src.com.company.users;
+package com.company.users;
 
 public class customer implements user{
     private int id_num;
