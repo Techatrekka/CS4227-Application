@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build Test Script') {
             steps {
-                javac -d . 'test_script.java'
+                javac '-d . test_script.java'
                 java 'com.company.jenkins.test_script'
             }
         }
