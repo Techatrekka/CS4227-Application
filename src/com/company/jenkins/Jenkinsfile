@@ -4,6 +4,9 @@ pipeline {
         stage('Build Test Script') {
             steps {
                 echo "TESTING"
+                sh 'javac -d . test_script.java'
+                sh 'java com.company.jenkins.test_script'
+
             }
         }
     }
