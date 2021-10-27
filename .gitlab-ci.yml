@@ -4,7 +4,7 @@ Job0:
   stage: build
   script:
     - echo "Buliding.."
-    - javac ./src/com/company/jenkins/test_script.java
+    - javac -d . ./src/com/company/jenkins/test_script.java
 
 Job1:
   stage: test
