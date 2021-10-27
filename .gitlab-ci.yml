@@ -1,18 +1,18 @@
 image: java:latest
 
 Job0:
-  stage: Build
+  stage: build
   script:
     - echo "Buliding.."
     - javac test_script.java
 
 Job1:
-  stage: Test
+  stage: test
   script:
     - echo "Testing.."
     - java test_script
 
 Job2:
-  stage: Deploy
+  stage: deploy
   script:
     - echo "Deploying Stage.."
