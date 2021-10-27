@@ -3,8 +3,7 @@ pipeline {
     stages {
         stage('Build Test Script') {
             steps {
-                sh 'javac -d . test_script.java'
-                sh 'java com.company.jenkins.test_script'
+                echo "TESTING"
             }
         }
     }
