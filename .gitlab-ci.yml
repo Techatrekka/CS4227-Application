@@ -4,13 +4,13 @@ Job0:
   stage: build
   script:
     - echo "Buliding.."
-    - javac test_script.java
+    - javac ./src/com/company/jenkins/test_script.java
 
 Job1:
   stage: test
   script:
     - echo "Testing.."
-    - java test_script
+    - java ./src/com/company/jenkins/test_script
 
 Job2:
   stage: deploy
