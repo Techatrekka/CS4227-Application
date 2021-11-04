@@ -1,18 +1,8 @@
 image: java:latest
 
-Job0:
+stages:
+  - build
+
+build:
   stage: build
-  script:
-    - echo "Buliding.."
-    - javac -d . ./src/com/company/jenkins/test_script.java
-
-Job1:
-  stage: test
-  script:
-    - echo "Testing.."
-    - java ./src/com/company/jenkins/test_script
-
-Job2:
-  stage: deploy
-  script:
-    - echo "Deploying Stage.."
+  script: echo "Hello"
