@@ -42,8 +42,8 @@ public class RestaurantTerminal {
 
     private boolean isValid(String choice, int min, int max) {
         try {
-            Integer.parseInt(choice);
-            if(Integer.parseInt(choice) > max && Integer.parseInt(choice) < min) {
+            int numChoice = Integer.parseInt(choice);
+            if(numChoice > max || numChoice < min) {
                 return false;
             }
         } catch(NumberFormatException e) {
