@@ -1,7 +1,7 @@
 import json
 
 # Adds new Data into JSON files
-def add_json(new_data, jsonName):
+def addJson(new_data, jsonName):
     with open(jsonName, 'r+') as file:
         file_data = json.load(file)
         file_data.append(new_data)
@@ -10,14 +10,14 @@ def add_json(new_data, jsonName):
         file.close()
 
 # Clears JSON file
-def clear_json(jsonName):
+def clearJson(jsonName):
     with open(jsonName, 'r+') as file:
         file.truncate()
         json.dump([], file)
         file.close()
 
 def start():
-    clear_json('account_info.json')
+    clearJson('accountInfo.json')
     username = input("Enter Username: \n")
     email = input("Enter Email: \n")
     password = input("Enter Password: \n")
@@ -26,7 +26,7 @@ def start():
         "email": email,
         "password": password
     }   
-    add_json(dict, 'account_info.json')
+    addJson(dict, 'accountInfo.json')
 
 
 start()
