@@ -1,11 +1,11 @@
-package src.com.company.users;
+package com.company.users;
 
 public class LoyaltyPoints{
     private int numOfPoints;
     private int pointsValue;
 
-    public LoyaltyPoints(){
-        this.numOfPoints = 0;
+    public LoyaltyPoints(int points){
+        this.numOfPoints = points;
     }
 
     public int getLoyaltyPoints(){
@@ -13,6 +13,7 @@ public class LoyaltyPoints{
     }
 
     public int getPointsValue(){
+        this.pointsValue = this.numOfPoints / 10;
         return this.pointsValue;
     }
 
