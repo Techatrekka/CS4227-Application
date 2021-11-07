@@ -8,8 +8,21 @@ import java.util.Scanner;
 public class RestaurantTerminal {
     private Scanner scanner = new Scanner(System.in);
 
-    void run() {
+    private static RestaurantTerminal single_instance = null;
+
+    private RestaurantTerminal() {
         System.out.println("Welcome to JJ's Diner! Enter a number to choose what you'd like to do");
+    }
+
+    public static RestaurantTerminal getInstance()
+    {
+        if (single_instance == null)
+            single_instance = new RestaurantTerminal();
+
+        return single_instance;
+    }
+
+    void run() {
         System.out.println("1. Login 2. Register 3. Quit");
         String choice = scanner.nextLine();
 
