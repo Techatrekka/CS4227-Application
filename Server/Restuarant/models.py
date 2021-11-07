@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.aggregates import Count
 from django.db.models.base import Model
+from django.db.models.deletion import SET_DEFAULT
 from django.db.models.fields import AutoField
 from django.db.models.fields.related import ForeignKey
 
@@ -9,7 +10,7 @@ class Users(models.Model):
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
     user_type = models.CharField(max_length=500)
-
+'''
 class Loyalty(models.Model):
     loyalty_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(Users, default=1,on_delete=models.SET_DEFAULT)
@@ -20,14 +21,12 @@ class Dishes(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=500)
     price = models.DecimalField(max_digits=10,decimal_places=10)
-    #ingredients = models.Fiel
     allergens = models.CharField(max_length=500)
 
 class Menu(models.Model):
     menu_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=500)
-    #menu_items =
     date_created = models.DateField()
     set_menu_price = models.DecimalField(max_digits=10,decimal_places=10)
     discount = models.DecimalField(max_digits=10,decimal_places=10)
@@ -59,6 +58,20 @@ class DrinkItems(models.Model):
 class Orders(models.Model):
     order_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(Users, default=1,on_delete=models.SET_DEFAULT)
-    #menu_items = models.Field
     total_cost = models.DecimalField(max_digits=10,decimal_places=10)
 
+class MenuItem(models.Model):
+    menu_item = models.AutoField(primary_key=True)
+    Dish_Bev_id = models.IntegerField()
+    menu_id = models.ForeignKey(Menu,default=1,on_delete=models.SET_DEFAULT)
+    food = models.BooleanField()
+
+class OrderLineItems(models.Model):
+    OrderLineItems = models.AutoField(primary_key=True)
+    order_id = models.ForeignKey(Orders,default=1,on_delete=models.SET_DEFAULT)
+    menu_item = models.ForeignKey(MenuItem,default=1,on_delete=models.SET_DEFAULT)
+    food = models.BooleanField()
+
+class Dishes_FoodItems(models.Model):
+    food_id = models.ForeignKey(FoodItems,default=1,on_delete=models.SET_DEFAULT)
+    dish_id = models.ForeignKey(Dishes,default=1,on_delete=models.SET_DEFAULT)'''
