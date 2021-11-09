@@ -2,7 +2,7 @@ from django.db import models
 from django.db.models.aggregates import Count
 from django.db.models.base import Model
 from django.db.models.deletion import SET_DEFAULT
-from django.db.models.fields import AutoField
+from django.db.models.fields import AutoField, DecimalField
 from django.db.models.fields.related import ForeignKey
 
 class Users(models.Model):
@@ -10,11 +10,16 @@ class Users(models.Model):
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
     user_type = models.CharField(max_length=500)
-'''
+
 class Loyalty(models.Model):
     loyalty_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(Users, default=1,on_delete=models.SET_DEFAULT)
     loyalty_points = models.IntegerField()
+
+class Orders(models.Model):
+    order_id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(Users, default=1,on_delete=models.SET_DEFAULT)
+    total_cost = models.DecimalField(max_digits=10,decimal_places=10)
 
 class Dishes(models.Model):
     dish_id = models.AutoField(primary_key=True)
@@ -33,10 +38,9 @@ class Menu(models.Model):
     two_for_one = models.BooleanField() 
 
 class Beverages(models.Model):
-    beverage_id = AutoField(primary_key=True)
+    beverage_id = models.AutoField(primary_key=True)
     name =  models.CharField(max_length=50)
-    description = models.CharField(max_length=500)
-    price = models.DecimalField(max_digits=10,decimal_places=10)
+    price = models.DecimalField(max_digits=4,decimal_places=2)
     alcoholic = models.BooleanField()
 
 class FoodItems(models.Model):
@@ -55,11 +59,6 @@ class DrinkItems(models.Model):
     expiry_date = models.DateField()
     alcohol_content = models.BooleanField()
 
-class Orders(models.Model):
-    order_id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(Users, default=1,on_delete=models.SET_DEFAULT)
-    total_cost = models.DecimalField(max_digits=10,decimal_places=10)
-
 class MenuItem(models.Model):
     menu_item = models.AutoField(primary_key=True)
     Dish_Bev_id = models.IntegerField()
@@ -74,4 +73,4 @@ class OrderLineItems(models.Model):
 
 class Dishes_FoodItems(models.Model):
     food_id = models.ForeignKey(FoodItems,default=1,on_delete=models.SET_DEFAULT)
-    dish_id = models.ForeignKey(Dishes,default=1,on_delete=models.SET_DEFAULT)'''
+    dish_id = models.ForeignKey(Dishes,default=1,on_delete=models.SET_DEFAULT)

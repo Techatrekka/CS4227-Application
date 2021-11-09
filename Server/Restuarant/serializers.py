@@ -6,7 +6,7 @@ class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
         fields = ('user_id','username','password','user_type')
-'''
+
 class OrdersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Orders
@@ -16,16 +16,6 @@ class LoyaltySerializer(serializers.ModelSerializer):
     class Meta:
         model = Loyalty
         fields = ('loyalty_id','user_id','loyalty_points')
-
-class OrderLineItemsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Orders
-        fields = ('orderlineitems_id','order_id','menu_item','count')
-
-class MenuItemSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = MenuItem
-        fields = ('menu_item','dish_bev_id','menu_id','food')
 
 class MenuSerializer(serializers.ModelSerializer):
     class Meta:
@@ -42,6 +32,16 @@ class BeveragesSerializer(serializers.ModelSerializer):
         model = Beverages
         fields = ('beverage_id','name','price','alcoholic')
 
+class OrderLineItemsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Orders
+        fields = ('orderlineitems_id','order_id','menu_item','count')
+
+class MenuItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MenuItem
+        fields = ('menu_item','dish_bev_id','menu_id','food')
+
 class DrinkItemsSerializers(serializers.ModelSerializer):
     class Meta:
         model = DrinkItems
@@ -55,4 +55,4 @@ class FoodItemsSerializers(serializers.ModelSerializer):
 class DishesFoodItemsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Dishes_FoodItems
-        fields = ('food_id','dish_id')'''
+        fields = ('food_id','dish_id')
