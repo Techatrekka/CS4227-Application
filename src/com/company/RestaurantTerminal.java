@@ -3,15 +3,17 @@ package com.company;
 import com.company.users.User;
 import com.company.users.UserFactory;
 import org.json.JSONObject;
-import java.util.Scanner;
+import java.util.*;
 
 public class RestaurantTerminal {
     private Scanner scanner = new Scanner(System.in);
 
     private static RestaurantTerminal single_instance = null;
+    BusinessHours businessHours;
 
     private RestaurantTerminal() {
-        System.out.println("Welcome to JJ's Diner! Enter a number to choose what you'd like to do");
+        businessHours = new BusinessHours();
+        System.out.println("Welcome to JJ's Diner!");
     }
 
     public static RestaurantTerminal getInstance()
@@ -23,6 +25,12 @@ public class RestaurantTerminal {
     }
 
     void run() {
+        System.out.println(businessHours.toString());
+        if(!businessHours.isOpenNow()) {
+            System.out.println("Sorry, the restaurant is closed right now");
+        }
+
+        System.out.println("Enter a number to choose what you'd like to do");
         System.out.println("1. Login 2. Register 3. Quit");
         String choice = scanner.nextLine();
 
