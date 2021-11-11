@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 public class UserLogin extends UserInterface {
     private boolean successfulLogin = false;
+    private String email = "";
 
     public UserLogin() {
     }
@@ -49,7 +50,7 @@ public class UserLogin extends UserInterface {
             validCredentials = validEmailAndPassword(email, password);
         }
         this.setSuccessfulLogin(true);
-        System.out.println("dead here?");
+        this.email = email;
     }
 
     private boolean validEmailAndPassword(String email, String password) {

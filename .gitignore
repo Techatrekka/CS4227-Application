@@ -1,3 +1,4 @@
 /src/com/company/*.class
 /.idea/
 /out/
+*/.DS_Store
