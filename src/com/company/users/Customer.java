@@ -1,19 +1,25 @@
 package com.company.users;
 
-public class Customer extends User{
-    private String password; // this will be hashed 
+import com.company.Observable;
+
+public class Customer extends User implements Observer{
     private LoyaltyPoints loyaltyPoints;
+    private Observable observable = null;
 
     public Customer(){
         // code
     }
 
-    public Customer(int userId, String email, String fullName, String password, int points) {
+    public Customer(int userId, String email, String fullName, int points) {
         super.setIdNum(userId);
         super.setEmail(email);
         super.setFullName(fullName);
-        this.password = password;
         loyaltyPoints = new LoyaltyPoints(points);
+    }
+
+    public static void addObservable(Customer customer, Observable observable) {
+        customer.observable = observable;
+        observable.registerObserver(customer);
     }
 
     protected void addLoyaltyProgramme(int userId) {
@@ -26,6 +32,16 @@ public class Customer extends User{
 
     protected int getLoyaltyPoints(){
         return this.loyaltyPoints.getLoyaltyPoints();
+    }
+
+    public String toString() {
+        return "User id: " + super.getIdNum() + "\nCustomer Name: " + super.getFullName() + "\nLoyalty Points: " + getLoyaltyPoints();
+    }
+
+    @Override
+    public void update() {
+        System.out.println("Hey from customer observer. It's customer with id " + super.getIdNum());
+        System.out.println("Can do stuff now");
     }
 }
 

@@ -39,7 +39,6 @@ public class Staff extends User{
     }
 
     public String toString() {
-
         return "Employee id: " + super.getIdNum() + "\nEmployee Name: " + super.getFullName() + "\nEmployee type: " + getEmployeeType();
     }
 
