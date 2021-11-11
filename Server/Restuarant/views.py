@@ -3,16 +3,8 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 
-from Restuarant.models import Users, Orders, Loyalty
-from Restuarant.serializers import UsersSerializer, OrdersSerializer, LoyaltySerializer
-from Restuarant.models import Beverages, Dishes, Menu
-from Restuarant.serializers import BeveragesSerializer, DishesSerializer, MenuSerializer
-from Restuarant.models import DrinkItems, FoodItems
-from Restuarant.serializers import DrinkItemsSerializers, FoodItemsSerializers
-from Restuarant.models import Dishes_FoodItems, MenuItem
-from Restuarant.serializers import DishesFoodItemsSerializer, MenuItemSerializer
-from Restuarant.models import OrderLineItems
-from Restuarant.serializers import OrderLineItemsSerializer
+from Restuarant.models import *
+from Restuarant.serializers import *
 
 @csrf_exempt
 def usersApi(request,id=0):
@@ -29,7 +21,7 @@ def usersApi(request,id=0):
         return JsonResponse("Unsuccessful",safe=False)
     elif request.method=='PUT':
         users_data=JSONParser().parse(request)
-        users_serializer=UsersSerializer.objects.get(users_id=users_data['users_id'])
+        users_serializer=UsersSerializer.objects.get(users_id=users_data['user_id'])
         users_serializer=UsersSerializer(Users,data=users_data)
         if users_serializer.is_valid():
             users_serializer.save()
@@ -39,6 +31,32 @@ def usersApi(request,id=0):
         users=Users.objects.get(users_id=id)
         users.delete()
         return JsonResponse("Delete succesful",safe=False)
+
+@csrf_exempt
+def employeesalaryApi(request,id=0):
+    if request.method=='GET':
+        employeesalary = EmployeeSalary.objects.all()
+        employeesalarySerializer = EmployeeSalarySerializer(employeesalary,many=True)
+        return JsonResponse(employeesalarySerializer.data, safe=False)
+    elif request.method=='POST':
+        employeesalary_data=JSONParser().parse(request)
+        employeesalarySerializer =EmployeeSalarySerializer(data=employeesalary_data)
+        if (employeesalarySerializer.is_valid()):
+            employeesalarySerializer.save()
+            return JsonResponse("Added Succesfully",safe=False)
+        return JsonResponse("Unsuccessful",safe=False)
+    elif request.method=='PUT':
+        employeesalary_data=JSONParser().parse(request)
+        employeesalarySerializer=EmployeeSalarySerializer.objects.get(user_id=employeesalary_data['user_id'])
+        employeesalarySerializer=EmployeeSalarySerializer(EmployeeSalary,data=employeesalary_data)
+        if employeesalarySerializer.is_valid():
+            employeesalarySerializer.save()
+            return JsonResponse("Success",safe=False)
+        return JsonResponse("failed",safe=True)
+    elif request.method=='DELETE':
+        employeesalary=EmployeeSalary.objects.get(users_id=id)
+        employeesalary.delete()
+        return JsonResponse("Delete succesful",safe=False) 
 
 @csrf_exempt
 def loyaltyApi(request,id=0):

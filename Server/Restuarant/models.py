@@ -7,9 +7,15 @@ from django.db.models.fields.related import ForeignKey
 
 class Users(models.Model):
     user_id = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=50)
+    fullname = models.CharField(max_length=50)
+    email = models.CharField(max_length=100)
     password = models.CharField(max_length=50)
     user_type = models.CharField(max_length=500)
+
+class EmployeeSalary(models.Model):
+    user_id = models.ForeignKey(Users, default=1, on_delete=models.SET_DEFAULT,primary_key=True)
+    employee_type = models.CharField(max_length=50)
+    salary = models.DecimalField(max_digits=5,decimal_places=2)
 
 class Loyalty(models.Model):
     loyalty_id = models.AutoField(primary_key=True)
@@ -46,7 +52,6 @@ class Beverages(models.Model):
 class FoodItems(models.Model):
     food_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=500)
     count = models.IntegerField()
     expiry_date = models.DateField()
     allergens = models.CharField(max_length=500)
@@ -54,10 +59,8 @@ class FoodItems(models.Model):
 class DrinkItems(models.Model):
     drink_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=500)
     count = models.IntegerField()
     expiry_date = models.DateField()
-    alcohol_content = models.BooleanField()
 
 class MenuItem(models.Model):
     menu_item = models.AutoField(primary_key=True)

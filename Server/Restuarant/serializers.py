@@ -5,7 +5,12 @@ from Restuarant.models import *
 class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = ('user_id','username','password','user_type')
+        fields = ('user_id','fullname','email','password','user_type')
+
+class EmployeeSalarySerializer(serializers.Serializer):
+    class Meta:
+        model = EmployeeSalary
+        fields = ('user_id','employee_type','salary')
 
 class OrdersSerializer(serializers.ModelSerializer):
     class Meta:
