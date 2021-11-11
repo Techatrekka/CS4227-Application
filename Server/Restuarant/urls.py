@@ -20,6 +20,9 @@ urlpatterns=[
     url(r'^drinkitems$',views.drinkitemsApi),
     url(r'^drinkitems/([0-9]+)$',views.drinkitemsApi),
 
+    url(r'^employeesalary$',views.employeesalaryApi),
+    url(r'^employeesalary/([0-9]+)$',views.employeesalaryApi),
+
     url(r'^beverages$',views.beveragesApi),
     url(r'^beverages/([0-9]+)$',views.beveragesApi),
     
