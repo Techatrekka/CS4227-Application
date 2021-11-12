@@ -2,10 +2,8 @@ package com.company.ui;
 
 import com.company.BusinessHours;
 import com.company.Database;
-import com.company.users.Customer;
-import com.company.users.Staff;
-import com.company.users.User;
-import com.company.users.UserFactory;
+import com.company.menu.Menu;
+import com.company.users.*;
 import org.json.JSONObject;
 
 import java.util.*;
@@ -39,10 +37,10 @@ public class RestaurantTerminal extends UserInterface {
         userLogin = new UserLogin();
         userRegistration = new UserRegistration();
 
-        displayHomeScreen();
+        displayLoginScreen();
 
         while(!userLogin.isSuccessfulLogin()) {
-            displayHomeScreen();
+            displayLoginScreen();
         }
 
         System.out.println("\nWelcome, " + user.getFullName() + ".");
@@ -133,7 +131,7 @@ public class RestaurantTerminal extends UserInterface {
         }
     }
 
-    private void displayHomeScreen() {
+    private void displayLoginScreen() {
         System.out.println("Enter a number to choose what you'd like to do");
         System.out.println("1. Login 2. Register 3. Quit");
         int numChoice = getInput(1, 3);
