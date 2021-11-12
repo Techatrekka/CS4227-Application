@@ -16,7 +16,7 @@ public class UserRegistration extends UserInterface {
         System.out.println("Enter Q on its own in the email or password field to shut down the system, or enter B to go back to the previous screen.");
         String email = getEmail();
         JSONObject existingUser = Database.readFromUserTable(email, null);
-        if(Objects.equals(existingUser.getString("email"), email)) {
+        if(existingUser.has("email") && Objects.equals(existingUser.getString("email"), email)) {
             System.out.println("Sorry, that email has already been used to register an account. Please use a different one or login if this is your account.");
             email = getEmail();
         }
@@ -57,6 +57,8 @@ public class UserRegistration extends UserInterface {
         Database.writeToDatabase("user", userDetails);
 
         System.out.println("Congratulations, you've successfully registered!");
+
+
         this.newUserEmail = email;
         return true;
     }

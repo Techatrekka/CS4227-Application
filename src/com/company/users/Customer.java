@@ -39,9 +39,8 @@ public class Customer extends User implements Observer{
     }
 
     @Override
-    public void update() {
-        System.out.println("Hey from customer observer. It's customer with id " + super.getIdNum());
-        System.out.println("Can do stuff now");
+    public void update(String updates) {
+        System.out.println(updates);
     }
 }
 

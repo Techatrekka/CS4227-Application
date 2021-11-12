@@ -32,11 +32,13 @@ public class BusinessHours implements Observable {
         LocalDateTime now = LocalDateTime.now();
         if(!openingHours.containsKey(now.getDayOfWeek())) {
             isOpen = false;
+            notifyObservers("Sorry, the restaurant is closed right now - you won't be able to place any orders.");
         } else if(now.getHour() > this.getClosingTime(openingHours.get(now.getDayOfWeek())).getHour() || now.getHour() < openingHours.get(now.getDayOfWeek()).getHour()) {
               isOpen = false;
+            notifyObservers("Sorry, the restaurant is closed right now - you won't be able to place any orders.");
        } else {
             isOpen = true;
-            notifyObservers();
+            notifyObservers("The restaurant is currently open.");
         }
         return isOpen;
     }
@@ -66,9 +68,9 @@ public class BusinessHours implements Observable {
     }
 
     @Override
-    public void notifyObservers() {
+    public void notifyObservers(String updates) {
         for(Observer user: users) {
-            user.update();
+            user.update(updates);
         }
     }
 }
