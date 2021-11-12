@@ -1,7 +1,7 @@
 package com.company.menu;
 
-public class largeMenuItem extends menuItemDecorator{
-    public largeMenuItem(MenuItem item){
+public class LargeMenuItem extends MenuItemDecorator {
+    public LargeMenuItem(MenuItem item){
         super(item);
     }
     public String getName(){

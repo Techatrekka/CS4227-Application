@@ -1,9 +1,9 @@
 package com.company.menu;
 
-public abstract class menuItemDecorator extends MenuItem{
+public abstract class MenuItemDecorator extends MenuItem{
     protected MenuItem decoratedMenuItem;
 
-    public menuItemDecorator(MenuItem decoratedMenuItem){
+    public MenuItemDecorator(MenuItem decoratedMenuItem){
         this.decoratedMenuItem =decoratedMenuItem;
     }
     public String getName() { return decoratedMenuItem.getName(); }

@@ -2,31 +2,27 @@ package com.company.menu;
 
 import java.util.ArrayList;
 
-public class specialMenu extends menu{
+public class SetMenu extends Menu {
 
     @Override
     public int getMenuID() {
-
         return menuID;
     }
 
     @Override
     public void setMenuID(int id) {
         this.menuID = id;
-
     }
 
     @Override
     public String getName() {
         return name;
 
-
     }
 
     @Override
     public void setName(String name) {
         this.name = name;
-
     }
 
     @Override
@@ -39,5 +35,6 @@ public class specialMenu extends menu{
         this.menuList = items;
 
     }
+
 
 }

@@ -2,7 +2,7 @@ package com.company.menu;
 
 import java.util.ArrayList;
 
-abstract class menu{
+class Menu {
     ArrayList<MenuItem>menuList;
     int menuID;
     String name;
