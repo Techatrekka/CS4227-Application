@@ -3,24 +3,21 @@ package com.company.ui;
 import com.company.BusinessHours;
 import com.company.Database;
 import com.company.users.Customer;
+import com.company.users.Staff;
 import com.company.users.User;
 import com.company.users.UserFactory;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javax.xml.crypto.Data;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.*;
 
-public class RestaurantTerminal {
+public class RestaurantTerminal extends UserInterface {
     BusinessHours businessHours = new BusinessHours();
 
     private Scanner scanner = new Scanner(System.in);
     private UserLogin userLogin;
     private UserRegistration userRegistration;
     private User user;
+    private JSONObject currentUser;
 
     private static RestaurantTerminal single_instance = null;
 
@@ -48,40 +45,67 @@ public class RestaurantTerminal {
             displayHomeScreen();
         }
 
-        createUser();
-
-        System.out.println("\nWelcome, " + user.getFullName() + ". You have " + "loyalty points.");
+        System.out.println("\nWelcome, " + user.getFullName() + ".");
         businessHours.isOpenNow();
 
         System.out.println("\nEnter a number to choose what you'd like to do:");
+
         // if customer then this - need var for user type
         if(Objects.equals(user.getUserType(), "customer")) {
+            System.out.println("You have " +  ((Customer) user).getLoyaltyPoints() + " loyalty points.");
             System.out.println("1. Place an order 2. View Menus 3. View Previous Orders 4. Settings 5. Logout 6. Quit");
-
+            String choice = scanner.nextLine();
+            if(Objects.equals(choice, "1")) changePassword();
         } else if(Objects.equals(user.getUserType(), "employee")) {
-            // if clerk then
-            // if manager then can add/remove employees - this includes account setup, they can't register themselves
+            String employeeType = ((Staff) user).getEmployeeType();
+            if(employeeType.equalsIgnoreCase("manager")) {
+                // if manager then can add/remove employees - this includes account setup, they can't register themselves
+            } else {
+                // if clerk then
+            }
         }
-
     }
 
     private void createUser() {
         UserFactory userFactory = new UserFactory();
-        JSONObject existingUser = Database.readFromUserTable(userLogin.getEmail(), null);
+        System.out.println("user reg email is " + userRegistration.getNewUserEmail());
+        System.out.println("user login email is " + userLogin.getEmail());
         List<String> cols = new ArrayList<>();
-        if(Objects.equals(existingUser.getString("userType"), "employee")) {
-            cols.add("salary");
-            cols.add("employee_Type");
-            JSONObject employeeTypeSalary = Database.readFromTable("employeesalary", existingUser.getInt("userID"), cols);
-            existingUser.put("salary", employeeTypeSalary.getDouble("salary"));
-            existingUser.put("employee_type", employeeTypeSalary.getString("employee_type"));
+        JSONObject userLoyalty = new JSONObject();
+
+        if(Objects.equals(userLogin.getEmail(), "") ) {
+            System.out.println("user login is empty");
+            currentUser = Database.readFromUserTable(userRegistration.getNewUserEmail(), null);
+            if(Objects.equals(currentUser.getString("userType"), "customer")) {
+                userLoyalty.put("user_id", currentUser.getInt("userID"));
+                userLoyalty.put("loyalty_points", 0);
+                if(Database.writeToDatabase("loyalty", userLoyalty)) {
+                    System.out.println("created in loyalty table");
+                } else {
+                    System.out.println("done fucked");
+                }
+                currentUser.put("loyalty_points", 0);
+            }
         } else {
-            cols.add("loyalty_points");
-            JSONObject userLoyalty = Database.readFromTable("loyalty", existingUser.getInt("userID"), cols);
-            existingUser.put("loyaltyPoints", userLoyalty.getInt("loyalty_points"));
+            System.out.println("user reg is empty");
+            currentUser = Database.readFromUserTable(userLogin.getEmail(), null);
+            if(Objects.equals(currentUser.getString("userType"), "customer")) {
+                cols.add("loyalty_points");
+                userLoyalty = Database.readFromTable("loyalty", currentUser.getInt("userID"), cols);
+                System.out.println(userLoyalty);
+                currentUser.put("loyalty_points", userLoyalty.getInt("loyalty_points"));
+            }
         }
 
-        user = userFactory.createUser(existingUser);
+        System.out.println(currentUser);
+        if(Objects.equals(currentUser.getString("userType"), "employee")) {
+            cols.add("salary");
+            cols.add("employee_Type");
+            JSONObject employeeTypeSalary = Database.readFromTable("employeesalary", currentUser.getInt("userID"), cols);
+            currentUser.put("salary", employeeTypeSalary.getDouble("salary"));
+            currentUser.put("employee_type", employeeTypeSalary.getString("employee_type"));
+        }
+        user = userFactory.createUser(currentUser);
         Customer.addObservable((Customer) user, businessHours);
     }
 
@@ -90,6 +114,22 @@ public class RestaurantTerminal {
         int choice = getInput(0,1);
         if(choice == 1) {
             // change password here
+            String newPass = getNewPassword();
+            System.out.println(currentUser);
+            currentUser.put("password", newPass);
+            System.out.println(currentUser);
+            if(Database.deleteFromTable("user", "user_id", currentUser.getInt("userID"))) {
+                JSONObject userNewPass = currentUser;
+                userNewPass.remove("loyalty_points");
+                if(Database.writeToDatabase("user", userNewPass)) {
+                    System.out.println("Password changed successfully");
+                } else {
+                    System.out.println("Sorry, password was not changed.");
+                }
+            } else {
+                System.out.println("Sorry, password was not changed.");
+            }
+
         }
     }
 
@@ -101,11 +141,16 @@ public class RestaurantTerminal {
         switch (numChoice) {
             case 1:
                 userLogin.displayLoginPrompt();
+                if(userLogin.isSuccessfulLogin()) createUser();
                 break;
             case 2:
                 boolean success = userRegistration.registerNewUser();
                 userLogin.setSuccessfulLogin(success);
-                if(success) changePassword();
+                if(success) {
+                    createUser();
+                    changePassword();
+                }
+
                 break;
             case 3:
                 System.out.println("Shutting down system.");
