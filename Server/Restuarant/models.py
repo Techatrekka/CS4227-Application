@@ -13,7 +13,7 @@ class Users(models.Model):
     user_type = models.CharField(max_length=500)
 
 class EmployeeSalary(models.Model):
-    user_id = models.OneToOneField(Users, on_delete=models.CASCADE, primary_key=True)
+    user_id = models.OneToOneField(Users, on_delete=models.SET_DEFAULT, default=0, primary_key=True)
     employee_type = models.CharField(max_length=50)
     salary = models.DecimalField(max_digits=5,decimal_places=2)
 
