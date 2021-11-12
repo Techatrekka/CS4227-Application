@@ -36,7 +36,7 @@ public class Dish extends MenuItem{
     public String toString(){
         StringBuilder allergenList = new StringBuilder();
         for(String item : allergens) {
-            allergens.add(item.toString() + "\n");
+            allergenList.append(item.toString()).append("\n");
         }
         return super.toString() + "Description " + description +
                                   "Allergens " + allergenList;

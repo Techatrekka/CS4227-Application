@@ -1,8 +1,13 @@
 package com.company.menu;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class SetMenu extends Menu {
+
+    public SetMenu(String name, String description, LocalDate date) {
+        super(name, description, date);
+    }
 
     @Override
     public int getMenuID() {
