@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 
-class Menu {
+public class Menu {
     ArrayList<MenuItem>menuList;
     int menuID;
     String name;
@@ -37,6 +37,7 @@ class Menu {
     public void setName(String name){
 
     }
+
     public ArrayList<MenuItem> getMenuItems(){
         return menuList;
 

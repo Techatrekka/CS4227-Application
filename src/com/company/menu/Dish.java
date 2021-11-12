@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Dish extends MenuItem{
     String description;
-    ArrayList<String> allergens;
-    public Dish(String name, double price, String description, int id, ArrayList<String> allergens){
+    List<String> allergens;
+    public Dish(String name, double price, String description, List<String> allergens){
         super.name = name;
         super.price = price;
         this.description = description;
