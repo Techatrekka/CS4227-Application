@@ -1,16 +1,18 @@
 package com.company.users;
 
 public class Manager extends Staff {
-    private int idNum;
-    private String fullName;
-    private String email;
-    private String userType;
 
-    protected void addStaffMember(int idNum, String fullName, String email, String userType) {
-        this.idNum = idNum;
-        this.fullName = fullName;
-        this.email = email;
-        this.userType = userType;
+    public Manager(int idNum, String fullName, String email, String employeeType, double salary) {
+        super.setIdNum(idNum);
+        super.setFullName(fullName);
+        super.setEmail(email);
+        super.setUserType("employee");
+        super.setEmployeeType(employeeType);
+        super.setSalary(salary);
+    }
+
+    protected void addStaffMember(int idNum, String fullName, String email, String employeeType) {
+
     }
 
     public void editStaffMember(int idNum, String fullName, String email){

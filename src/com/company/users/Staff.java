@@ -10,8 +10,9 @@ public class Staff extends User{
         super.setIdNum(userID);
         super.setEmail(email);
         super.setFullName(fullName);
-        this.employeeType = type;
-        this.salary = salary;
+        super.setUserType("employee");
+        this.setEmployeeType(type);
+        this.setSalary(salary);
     }
 
     public void setSalary(double salary) {

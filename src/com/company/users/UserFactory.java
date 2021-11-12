@@ -9,10 +9,15 @@ public class UserFactory {
     public User createUser(JSONObject user) {
         if(Objects.equals(user.getString("userType"), "customer")) {
             return new Customer(user.getInt("userID"), user.getString("email"),
-                    user.getString("fullName"), user.getInt("loyaltyPoints"));
+                    user.getString("fullName"), user.getInt("loyalty_points"));
         } else if(Objects.equals(user.getString("userType"), "staff")) {
-            return new Staff(user.getInt("userID"), user.getString("email"),
-                    user.getString("fullName"), user.getString("employeeType"), user.getDouble("salary"));
+            if(Objects.equals(user.getString("employeeType"), "manager")) {
+                return new Manager(user.getInt("userID"), user.getString("email"),
+                        user.getString("fullName"), user.getString("employeeType"), user.getDouble("salary"));
+            } else {
+                return new Staff(user.getInt("userID"), user.getString("email"),
+                        user.getString("fullName"), user.getString("employeeType"), user.getDouble("salary"));
+            }
         } else {
             return null;
         }
