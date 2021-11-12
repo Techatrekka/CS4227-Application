@@ -42,13 +42,17 @@ public class Database {
                     //change username to email when DB updated
                     if(password != null && Objects.equals(obj2.getString("email"), email) &&
                             Objects.equals(obj2.getString("password"), password)) {
-                        // store user type here
                         userData.put("password", password);
+                        userData.put("email", obj2.getString("email"));
+                        userData.put("userID", obj2.getInt("user_id"));
+                        userData.put("fullName", obj2.get("fullname"));
+                        userData.put("userType", obj2.get("user_type"));
+                    } else if(Objects.equals(obj2.getString("email"), email)) {
+                        userData.put("email", obj2.getString("email"));
+                        userData.put("userID", obj2.getInt("user_id"));
+                        userData.put("fullName", obj2.get("fullname"));
+                        userData.put("userType", obj2.get("user_type"));
                     }
-                    userData.put("email", obj2.getString("email"));
-                    userData.put("userID", obj2.getInt("user_id"));
-                    userData.put("fullName", obj2.get("fullname"));
-                    userData.put("userType", obj2.get("user_type"));
                 }
             }
             http.disconnect();

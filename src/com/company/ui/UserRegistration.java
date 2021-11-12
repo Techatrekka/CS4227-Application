@@ -15,6 +15,11 @@ public class UserRegistration extends UserInterface {
     public boolean registerNewUser() {
         System.out.println("Enter Q on its own in the email or password field to shut down the system, or enter B to go back to the previous screen.");
         String email = getEmail();
+        JSONObject existingUser = Database.readFromUserTable(email, null);
+        if(Objects.equals(existingUser.getString("email"), email)) {
+            System.out.println("Sorry, that email has already been used to register an account. Please use a different one or login if this is your account.");
+            email = getEmail();
+        }
         if(Objects.equals(email, "false")) return false;
         System.out.println("Enter your full name:");
         String name = scanner.nextLine();
@@ -104,6 +109,9 @@ public class UserRegistration extends UserInterface {
         while(password.length() < 8) {
             System.out.println("Password must be at least 8 characters, please try again");
             password = scanner.nextLine();
+            if(inputB(password)) {
+                return "false";
+            }
         }
         return password;
     }
