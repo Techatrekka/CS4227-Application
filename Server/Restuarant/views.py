@@ -1,5 +1,7 @@
+import re
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework import parsers
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 
@@ -28,7 +30,8 @@ def usersApi(request,id=0):
             return JsonResponse("Success",safe=False)
         return JsonResponse("failed",safe=True)
     elif request.method=='DELETE':
-        users=Users.objects.get(users_id=id)
+        users_data=JSONParser().parse(request)
+        users=Users.objects.get(users_id=users_data['user_id'])
         users.delete()
         return JsonResponse("Delete succesful",safe=False)
 
@@ -54,7 +57,8 @@ def employeesalaryApi(request,id=0):
             return JsonResponse("Success",safe=False)
         return JsonResponse("failed",safe=True)
     elif request.method=='DELETE':
-        employeesalary=EmployeeSalary.objects.get(users_id=id)
+        employeesalary_data=JSONParser().parse(request)
+        employeesalary=EmployeeSalary.objects.get(users_id=employeesalary_data['user_id'])
         employeesalary.delete()
         return JsonResponse("Delete succesful",safe=False) 
 
@@ -80,9 +84,10 @@ def loyaltyApi(request,id=0):
             return JsonResponse("Success",safe=False)
         return JsonResponse("failed",safe=True)
     elif request.method=='DELETE':
-        loyalty=Loyalty.objects.get(loyalty_id=id)
+        loyalty_data=JSONParser().parse(request)
+        loyalty=Loyalty.objects.get(loyalty_id=loyalty_data['loyalty_id'])
         loyalty.delete()
-        return JsonResponse("Delete succesful",safe=False)
+        return JsonResponse("Delete successful",safe=False)
 
 @csrf_exempt
 def ordersApi(request,id=0):
@@ -106,8 +111,9 @@ def ordersApi(request,id=0):
             return JsonResponse("Success",safe=False)
         return JsonResponse("failed",safe=True)
     elif request.method=='DELETE':
-        users=Users.objects.get(users_id=id)
-        users.delete()
+        orders_data=JSONParser().parse(request)
+        orders=Orders.objects.get(users_id=orders_data['order_id'])
+        orders.delete()
         return JsonResponse("Delete succesful",safe=False)
 
 @csrf_exempt
@@ -132,7 +138,8 @@ def menuApi(request,id=0):
             return JsonResponse("Success",safe=False)
         return JsonResponse("failed",safe=True)
     elif request.method=='DELETE':
-        menu=Menu.objects.get(menu_id=id)
+        menu_data=JSONParser().parse(request)
+        menu=Menu.objects.get(menu_id=menu_data['menu_id'])
         menu.delete()
         return JsonResponse("Delete succesful",safe=False)
 
@@ -158,7 +165,8 @@ def dishesApi(request,id=0):
             return JsonResponse("Success",safe=False)
         return JsonResponse("failed",safe=True)
     elif request.method=='DELETE':
-        dishes=Dishes.objects.get(dishes_id=id)
+        dishes_data=JSONParser().parse(request)
+        dishes=Dishes.objects.get(dishes_id=dishes_data['dishes_id'])
         dishes.delete()
         return JsonResponse("Delete succesful",safe=False)
 
@@ -174,10 +182,6 @@ def beveragesApi(request,id=0):
         if (beveragesSerializer.is_valid()):
             beveragesSerializer.save()
             return JsonResponse("Added Succesfully",safe=False)
-        print(beveragesSerializer.error_messages)
-        print(beveragesSerializer.field_name)
-        print(beverages_data)
-        print(beveragesSerializer)
         return JsonResponse("Unsuccessful",safe=False)
     elif request.method=='PUT':
         beverages_data=JSONParser().parse(request)
@@ -188,7 +192,8 @@ def beveragesApi(request,id=0):
             return JsonResponse("Success",safe=False)
         return JsonResponse("failed",safe=True)
     elif request.method=='DELETE':
-        beverages=Beverages.objects.get(beverage_id=id)
+        beverages_data = JSONParser().parse(request)
+        beverages=Beverages.objects.get(beverage_id=beverages_data['beverage_id'])
         beverages.delete()
         return JsonResponse("Delete succesful",safe=False)
 
@@ -214,7 +219,8 @@ def fooditemsApi(request,id=0):
             return JsonResponse("Success",safe=False)
         return JsonResponse("failed",safe=True)
     elif request.method=='DELETE':
-        fooditems=FoodItems.objects.get(fooditems_id=id)
+        fooditems_data=JSONParser().parse(request)
+        fooditems=FoodItems.objects.get(fooditems_id=fooditems_data['food_id'])
         fooditems.delete()
         return JsonResponse("Delete succesful",safe=False)
 
@@ -240,8 +246,9 @@ def drinkitemsApi(request,id=0):
             return JsonResponse("Success",safe=False)
         return JsonResponse("failed",safe=True)
     elif request.method=='DELETE':
-        drinkitems_data=DrinkItems.objects.get(drinkitems_id=id)
-        drinkitems_data.delete()
+        drinkitems_data=JSONParser().parse(request)
+        drinkitems=DrinkItems.objects.get(drinkitems_id=drinkitems_data['drinkitems_id'])
+        drinkitems.delete()
         return JsonResponse("Delete succesful",safe=False)
 
 @csrf_exempt
@@ -266,7 +273,8 @@ def menuitemApi(request,id=0):
             return JsonResponse("Success",safe=False)
         return JsonResponse("failed",safe=True)
     elif request.method=='DELETE':
-        menuitem=Menu.objects.get(menuitem_id=id)
+        menuitem_data=JSONParser().parse(request)
+        menuitem=Menu.objects.get(menuitem_id=menuitem_data['menuitem_id'])
         menuitem.delete()
         return JsonResponse("Delete succesful",safe=False)
 
@@ -292,6 +300,7 @@ def orderlineitemsApi(request,id=0):
             return JsonResponse("Success",safe=False)
         return JsonResponse("failed",safe=True)
     elif request.method=='DELETE':
-        orderlineitems=Menu.objects.get(orderlineitems_id=id)
+        orderlineitems_data=JSONParser().parse(request)
+        orderlineitems=Menu.objects.get(orderlineitems_id=orderlineitems_data['orderlineitems_id'])
         orderlineitems.delete()
         return JsonResponse("Delete succesful",safe=False)
