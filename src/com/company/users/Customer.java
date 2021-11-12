@@ -14,6 +14,7 @@ public class Customer extends User implements Observer{
         super.setIdNum(userId);
         super.setEmail(email);
         super.setFullName(fullName);
+        super.setUserType("customer");
         loyaltyPoints = new LoyaltyPoints(points);
     }
 
@@ -30,7 +31,7 @@ public class Customer extends User implements Observer{
         // code
     }
 
-    protected int getLoyaltyPoints(){
+    public int getLoyaltyPoints(){
         return this.loyaltyPoints.getLoyaltyPoints();
     }
 

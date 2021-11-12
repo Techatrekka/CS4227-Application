@@ -12,14 +12,22 @@ public class UserRegistration extends UserInterface {
     Scanner scanner = new Scanner(System.in);
     private String newUserEmail = "";
 
+    String getNewUserEmail() {
+        return this.newUserEmail;
+    }
+
     public boolean registerNewUser() {
         System.out.println("Enter Q on its own in the email or password field to shut down the system, or enter B to go back to the previous screen.");
-        String email = getEmail();
-        JSONObject existingUser = Database.readFromUserTable(email, null);
-        if(existingUser.has("email") && Objects.equals(existingUser.getString("email"), email)) {
+        String email1 = getEmail();
+
+        JSONObject existingUser = Database.readFromUserTable(email1, null);
+        if(existingUser.has("email") && Objects.equals(existingUser.getString("email"), email1)) {
             System.out.println("Sorry, that email has already been used to register an account. Please use a different one or login if this is your account.");
-            email = getEmail();
+            email1 = getEmail();
         }
+
+        String email = email1.replace(" ", "");
+
         if(Objects.equals(email, "false")) return false;
         System.out.println("Enter your full name:");
         String name = scanner.nextLine();
@@ -49,7 +57,7 @@ public class UserRegistration extends UserInterface {
         System.out.println("You've been sent an email containing a secure password. Use it to login now.");
          */
 
-        String password = getPassword();
+        String password = getNewPassword();
         if(Objects.equals(password, "false")) return false;
         userDetails.put("password", password);
         userDetails.put("user_type", "customer");
@@ -58,33 +66,8 @@ public class UserRegistration extends UserInterface {
 
         System.out.println("Congratulations, you've successfully registered!");
 
-
         this.newUserEmail = email;
         return true;
-    }
-
-    private String getPassword() {
-        System.out.println("Password:");
-        String password = scanner.nextLine();
-        checkQ(password);
-        if(inputB(password)) {
-            return "false";
-        }
-        password = checkPasswordLength(password);
-        System.out.println("Repeat password:");
-        String repeatPass = scanner.nextLine();
-        while(!Objects.equals(repeatPass, password)) {
-            System.out.println("Please enter the same password twice.\nPassword:");
-            password = scanner.nextLine();
-            checkQ(password);
-            if(inputB(password)) {
-                return "false";
-            }
-            password = checkPasswordLength(password);
-            System.out.println("Repeat password:");
-            repeatPass = scanner.nextLine();
-        }
-        return password;
     }
 
     private String getEmail() {
@@ -105,17 +88,6 @@ public class UserRegistration extends UserInterface {
         }
         //check for duplicate - can't register if so
         return email;
-    }
-
-    private String checkPasswordLength(String password) {
-        while(password.length() < 8) {
-            System.out.println("Password must be at least 8 characters, please try again");
-            password = scanner.nextLine();
-            if(inputB(password)) {
-                return "false";
-            }
-        }
-        return password;
     }
 
     private boolean isValidEmailAddress(String email) {

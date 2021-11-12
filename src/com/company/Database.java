@@ -56,9 +56,11 @@ public class Database {
                         userData.put("userID", obj2.getInt("user_id"));
                         userData.put("fullName", obj2.get("fullname"));
                         userData.put("userType", obj2.get("user_type"));
+                        userData.put("password", password);
                     }
                 }
             }
+            http.getResponseCode();
             http.disconnect();
         } catch (IOException e) {
             e.printStackTrace();
@@ -68,10 +70,11 @@ public class Database {
 
     public static JSONObject readFromTable(String table, int userId, List<String> cols) {
         JSONObject userLoyalty = new JSONObject();
-
+        HttpURLConnection http = null;
         try {
             URL url = new URL("http://slynch.ie:8000/" + table);
-            HttpURLConnection http = (HttpURLConnection)url.openConnection();
+            System.out.println("url is " + url);
+            http = (HttpURLConnection)url.openConnection();
             http.setRequestMethod("GET");
             http.connect();
             int responseCode = http.getResponseCode();
@@ -100,36 +103,77 @@ public class Database {
 
                 }
             }
-            http.disconnect();
+            http.getResponseCode();
         } catch (IOException e) {
+            if (http != null) {
+                http.disconnect();
+            }
             e.printStackTrace();
+        }
+        if (http != null) {
+            http.disconnect();
         }
         return userLoyalty;
     }
 
     public static boolean writeToDatabase(String table, JSONObject data) {
         URL url;
+        HttpURLConnection http = null;
         try {
             url = new URL("http://slynch.ie:8000/" + table);
-            HttpURLConnection http = (HttpURLConnection)url.openConnection();
+            http = (HttpURLConnection)url.openConnection();
             http.setRequestMethod("POST");
             http.setDoOutput(true);
             http.setRequestProperty("Accept", "application/json");
             http.setRequestProperty("Content-Type", "application/json");
 
             byte[] out = data.toString().getBytes(StandardCharsets.UTF_8);
-            System.out.println("helloooo");
-            System.out.println("amm a bit dead sometimes");
-            System.out.println(data);
 
             OutputStream stream = http.getOutputStream();
             stream.write(out);
 
-            http.disconnect();
+            http.getResponseCode();
+
         } catch (IOException e) {
             e.printStackTrace();
+            if (http != null) {
+                http.disconnect();
+            }
             return false;
         }
+        http.disconnect();
         return true;
+    }
+    public static boolean deleteFromTable(String table, String col, int id) {
+        boolean success = false;
+        HttpURLConnection http = null;
+        try {
+            URL url = new URL("http://slynch.ie:8000/" + table);
+            http = (HttpURLConnection)url.openConnection();
+            http.setRequestMethod("DELETE");
+            http.setDoOutput(true);
+            http.setRequestProperty("Accept", "application/json");
+            http.setRequestProperty("Content-Type", "application/json");
+
+            JSONObject data = new JSONObject();
+            data.put(col, id);
+
+            System.out.println(data);
+            byte[] out = data.toString().getBytes(StandardCharsets.UTF_8);
+
+            OutputStream stream = http.getOutputStream();
+            stream.write(out);
+            success = true;
+            http.getResponseCode();
+        } catch (IOException e) {
+            if (http != null) {
+                http.disconnect();
+            }
+            e.printStackTrace();
+        }
+        if (http != null) {
+            http.disconnect();
+        }
+        return success;
     }
 }
