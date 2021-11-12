@@ -4,10 +4,9 @@ import java.util.ArrayList;
 
 public class Beverage extends MenuItem {
     boolean alcoholic;
-    public Beverage(String name, double price, boolean alcoholic, int id){
+    public Beverage(String name, double price, boolean alcoholic){
         super.name = name;
         super.price = price;
-        super.ID = id;
         this.alcoholic = alcoholic;
     }
     @Override
@@ -29,5 +28,12 @@ public class Beverage extends MenuItem {
     public void setName(String name) {
         super.name = name;
     }
-
+    public String toString(){
+        if(alcoholic){
+            return super.toString()+"\nThis beverage is Alcoholic";
+        }
+        else{
+            return super.toString()+"\nThis beverage is non-alcoholic";
+        }
+    }
 }
