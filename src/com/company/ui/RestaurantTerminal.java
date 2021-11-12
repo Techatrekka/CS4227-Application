@@ -1,13 +1,26 @@
 package com.company.ui;
 
 import com.company.BusinessHours;
+import com.company.Database;
+import com.company.users.Customer;
+import com.company.users.User;
 import com.company.users.UserFactory;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import javax.xml.crypto.Data;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.*;
 
 public class RestaurantTerminal {
+    BusinessHours businessHours = new BusinessHours();
+
     private Scanner scanner = new Scanner(System.in);
     private UserLogin userLogin;
     private UserRegistration userRegistration;
+    private User user;
 
     private static RestaurantTerminal single_instance = null;
 
@@ -24,7 +37,6 @@ public class RestaurantTerminal {
     }
 
     public void run() {
-        BusinessHours businessHours = new BusinessHours();
         System.out.println(businessHours.toString());
 
         userLogin = new UserLogin();
@@ -35,51 +47,42 @@ public class RestaurantTerminal {
         while(!userLogin.isSuccessfulLogin()) {
             displayHomeScreen();
         }
-        // TODO: Don't actually need to have password field in Java - remove from all constructors
-        // TODO: Instantiate objects for the logged in/registered user - store email in UI instance as LoggedInUserEmail ? Then create obj in this class?
-        // TODO: Read and write from database
-        System.out.println("Successful login. Enter a number to choose what you'd like to do:");
+
+        createUser();
+
+        System.out.println("\nWelcome, " + user.getFullName() + ". You have " + "loyalty points.");
+        businessHours.isOpenNow();
+
+        System.out.println("\nEnter a number to choose what you'd like to do:");
         // if customer then this - need var for user type
-        System.out.println("1. Place an order 2. View Menus 3. Settings 4. Logout 5. Quit");
-        // if clerk then
+        if(Objects.equals(user.getUserType(), "customer")) {
+            System.out.println("1. Place an order 2. View Menus 3. View Previous Orders 4. Settings 5. Logout 6. Quit");
 
-        // if manager then can add/remove emmployees - this includes account setup, they can't register themselves
+        } else if(Objects.equals(user.getUserType(), "employee")) {
+            // if clerk then
+            // if manager then can add/remove employees - this includes account setup, they can't register themselves
+        }
 
+    }
+
+    private void createUser() {
         UserFactory userFactory = new UserFactory();
-     /*   JSONObject managerDetails = new JSONObject(
-                "{\"userID\":\"1\",\"userType\":\"staff\",\"fullName\":\"John doe\",\"email\":\"johndoe@gmail.com\", \"employeeType\":\"Manager\", \"salary\":\"20000\"}"
-        );
-        User manager = userFactory.createUser(managerDetails);
-        JSONObject customerDetails = new JSONObject(
-                "{\"userID\":\"2\",\"userType\":\"customer\",\"fullName\":\"Jane doe\",\"email\":\"janedoe@gmail.com\", \"password\":\"blahblah\", \"loyaltyPoints\":\"0\"}"
-        );
-        User customer = userFactory.createUser(customerDetails);
-        JSONObject customer2Details = new JSONObject(
-                "{\"userID\":\"3\",\"userType\":\"customer\",\"fullName\":\"Jill doe\",\"email\":\"jilldoe@gmail.com\", \"password\":\"blahblah\", \"loyaltyPoints\":\"10\"}"
-        );
-        User customer2 = userFactory.createUser(customer2Details);
-
-        System.out.println(manager);
-        System.out.println(customer);
-        System.out.println(customer2);
-
-        //Don't ask for this, just display it for all customers when they log in.
-        System.out.println("\nDoes customer1 want opening hours notifications? 0 = No, 1 = Yes");
-        numChoice = getInput(0, 1);
-        if(numChoice == 1) {
-            Customer.addObservable((Customer) customer, businessHours);
-        }
-        System.out.println("\nDoes customer2 want opening hours notifications? 0 = No, 1 = Yes");
-        numChoice = getInput(0, 1);
-        if(numChoice == 1) {
-            Customer.addObservable((Customer) customer2, businessHours);
-        }
-*/
-        if(!businessHours.isOpenNow()) {
-            System.out.println("Sorry, the restaurant is closed right now - you won't be able to place any orders.");
+        JSONObject existingUser = Database.readFromUserTable(userLogin.getEmail(), null);
+        List<String> cols = new ArrayList<>();
+        if(Objects.equals(existingUser.getString("userType"), "employee")) {
+            cols.add("salary");
+            cols.add("employee_Type");
+            JSONObject employeeTypeSalary = Database.readFromTable("employeesalary", existingUser.getInt("userID"), cols);
+            existingUser.put("salary", employeeTypeSalary.getDouble("salary"));
+            existingUser.put("employee_type", employeeTypeSalary.getString("employee_type"));
         } else {
-            System.out.println("The restaurant is currently open.");
+            cols.add("loyalty_points");
+            JSONObject userLoyalty = Database.readFromTable("loyalty", existingUser.getInt("userID"), cols);
+            existingUser.put("loyaltyPoints", userLoyalty.getInt("loyalty_points"));
         }
+
+        user = userFactory.createUser(existingUser);
+        Customer.addObservable((Customer) user, businessHours);
     }
 
     private void changePassword() {
@@ -102,7 +105,7 @@ public class RestaurantTerminal {
             case 2:
                 boolean success = userRegistration.registerNewUser();
                 userLogin.setSuccessfulLogin(success);
-                changePassword();
+                if(success) changePassword();
                 break;
             case 3:
                 System.out.println("Shutting down system.");
