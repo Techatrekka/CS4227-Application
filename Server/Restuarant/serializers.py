@@ -1,4 +1,3 @@
-from django.db.models import fields
 from rest_framework import serializers
 from Restuarant.models import *
 
@@ -7,7 +6,7 @@ class UsersSerializer(serializers.ModelSerializer):
         model = Users
         fields = ('user_id','fullname','email','password','user_type')
 
-class EmployeeSalarySerializer(serializers.Serializer):
+class EmployeeSalarySerializer(serializers.ModelSerializer):
     class Meta:
         model = EmployeeSalary
         fields = ('user_id','employee_type','salary')
