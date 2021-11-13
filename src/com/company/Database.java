@@ -144,6 +144,7 @@ public class Database {
         http.disconnect();
         return true;
     }
+
     public static boolean deleteFromTable(String table, String col, int id) {
         boolean success = false;
         HttpURLConnection http = null;

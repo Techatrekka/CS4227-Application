@@ -2,16 +2,15 @@ package com.company.ui;
 
 import com.company.BusinessHours;
 import com.company.Database;
-import com.company.users.Customer;
-import com.company.users.Staff;
-import com.company.users.User;
-import com.company.users.UserFactory;
+import com.company.menu.Menu;
+import com.company.users.*;
 import org.json.JSONObject;
 
 import java.util.*;
 
 public class RestaurantTerminal extends UserInterface {
     BusinessHours businessHours = new BusinessHours();
+    ArrayList<Menu> restaurantMenus = new ArrayList<>();
 
     private Scanner scanner = new Scanner(System.in);
     private UserLogin userLogin;
@@ -39,30 +38,158 @@ public class RestaurantTerminal extends UserInterface {
         userLogin = new UserLogin();
         userRegistration = new UserRegistration();
 
-        displayHomeScreen();
+        displayLoginScreen();
 
         while(!userLogin.isSuccessfulLogin()) {
-            displayHomeScreen();
+            displayLoginScreen();
         }
 
         System.out.println("\nWelcome, " + user.getFullName() + ".");
         businessHours.isOpenNow();
 
-        System.out.println("\nEnter a number to choose what you'd like to do:");
+        displayHomeScreen();
+        //@TODO: while loop to redisplay after B pressed?
 
-        // if customer then this - need var for user type
+    }
+
+    private void displayHomeScreen() {
+        System.out.println("\nEnter a number to choose what you'd like to do:");
+        int choice;
+
         if(Objects.equals(user.getUserType(), "customer")) {
             System.out.println("You have " +  ((Customer) user).getLoyaltyPoints() + " loyalty points.");
             System.out.println("1. Place an order 2. View Menus 3. View Previous Orders 4. Settings 5. Logout 6. Quit");
-            String choice = scanner.nextLine();
-            if(Objects.equals(choice, "1")) changePassword();
+            choice = getInput(1, 6);
+            switch(choice) {
+                case 1:
+                    user.placeOrder(user.getIdNum());
+                    break;
+                case 2:
+                    // @TODO: customer view menus - reuse method from staff??
+                    break;
+                case 3:
+                    // @TODO: get previous orders for user from DB, user.getOrders()
+                    break;
+                case 4:
+                    changePassword();
+                    break;
+                case 5:
+                    logout();
+                    break;
+                case 6:
+                    System.out.println("Shutting down system...");
+                    System.exit(0);
+            }
         } else if(Objects.equals(user.getUserType(), "employee")) {
             String employeeType = ((Staff) user).getEmployeeType();
             if(employeeType.equalsIgnoreCase("manager")) {
-                // if manager then can add/remove employees - this includes account setup, they can't register themselves
+                System.out.println("1.Place Order 2. Menu Management 3. Employee Management 4. Stock Management 5. Settings 6. Logout 7. Quit");
+                choice = getInput(1, 7);
+                switch(choice) {
+                    case 1:
+                        System.out.println("Enter the user id of the user you'd like to place an order for");
+                        // @TODO: get input. Check if valid id in DB
+                        user.placeOrder(1);
+                        break;
+                    case 2:
+                        menuManagement();
+                        break;
+                    case 3:
+                        employeeManagement();
+                        break;
+                    case 4:
+                        stockManagement();
+                        break;
+                    case 5:
+                        changePassword();
+                        break;
+                    case 6:
+                        logout();
+                        break;
+                    case 7:
+                        System.out.println("Shutting down system...");
+                        System.exit(0);
+                }
             } else {
                 // if clerk then
+                System.out.println("1. Place Order 2. Stock Management 3. Logout 4. Quit");
+                choice = getInput(1, 4);
+                switch(choice) {
+                    case 1:
+                        System.out.println("Enter the user id of the user you'd like to place an order for");
+                        // @TODO: get input. Check if valid id in DB
+                        user.placeOrder(1);
+                        break;
+                    case 2:
+                        stockManagement();
+                        break;
+                    case 3:
+                        logout();
+                        break;
+                    case 4:
+                        System.out.println("Shutting down system...");
+                        System.exit(0);
+                }
             }
+        }
+    }
+
+    private void logout() {
+    // @TODO: implement this - important to take all vars into account
+        
+    }
+
+    private void stockManagement() {
+        // @TODO: implement this
+        System.out.println("1. ");
+    }
+
+    private void employeeManagement() {
+        System.out.println("1. Add Employee 2. View Employees 3. Edit Employee 4. Remove Employee");
+        int choice = getInput(1, 4);
+        switch (choice) {
+            // @TODO: implement all these methods inside Manager class
+            case 1:
+                ((Manager) user).addStaffMember();
+                break;
+            case 2:
+                ((Manager) user).viewStaffMember();
+                break;
+            case 3:
+                ((Manager) user).editStaffMember();
+                break;
+            case 4:
+                ((Manager) user).removeStaffMember();
+                break;
+        }
+    }
+
+    private void menuManagement() {
+        System.out.println("1. Create Menu 2. Edit Menu 3. Delete Menu 4. View Menus");
+        int choice = getInput(1, 3);
+        switch(choice) {
+            case 1:
+                restaurantMenus.add(((Manager) user).makeMenu());
+                break;
+                // @TODO: implement next 2 methods in manager class
+            case 2:
+                // read menus from database and ask which to edit
+                ((Manager) user).editMenu();
+
+                System.out.println("What type of menu item would you like to create? 1. Beverage 2. Dish");
+                choice = getInput(1, 2);
+              //  menu.addNewMenuItem(choice);
+                break;
+            case 3:
+                // read menus from database and ask which to delete
+                ((Manager) user).deleteMenu();
+              //  restaurantMenus.remove(menu)
+                break;
+            case 4:
+                for(Menu menu : restaurantMenus) {
+                    System.out.println(menu);
+                }
+                break;
         }
     }
 
@@ -133,7 +260,7 @@ public class RestaurantTerminal extends UserInterface {
         }
     }
 
-    private void displayHomeScreen() {
+    private void displayLoginScreen() {
         System.out.println("Enter a number to choose what you'd like to do");
         System.out.println("1. Login 2. Register 3. Quit");
         int numChoice = getInput(1, 3);

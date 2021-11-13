@@ -24,4 +24,9 @@ public abstract class MenuItem{
     public void setMenuID(int ID){
         this.ID = ID;
     }
+    @Override
+    public String toString(){
+        return  "Name: " + name +
+                "\nPrice:" + price;
+    }
 }

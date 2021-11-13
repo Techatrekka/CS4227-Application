@@ -1,6 +1,15 @@
 package com.company.users;
 
+import com.company.Database;
+import com.company.menu.Menu;
+import jdk.vm.ci.meta.Local;
+import org.json.JSONObject;
+
+import java.time.LocalDate;
+import java.util.Scanner;
+
 public class Manager extends Staff {
+    Scanner scanner = new Scanner(System.in);
 
     public Manager(int idNum, String fullName, String email, String employeeType, double salary) {
         super.setIdNum(idNum);
@@ -11,27 +20,48 @@ public class Manager extends Staff {
         super.setSalary(salary);
     }
 
-    protected void addStaffMember(int idNum, String fullName, String email, String employeeType) {
+    public void addStaffMember() {
 
     }
 
-    public void editStaffMember(int idNum, String fullName, String email){
+    public void viewStaffMember() {
+
+    }
+
+    public void removeStaffMember() {
+
+    }
+
+    public void editStaffMember(){
         // code
     }
 
-    public void makeMenu(){
+    public Menu makeMenu(){
+        System.out.println("What will you call the menu?");
+        String name = scanner.nextLine();
+        System.out.println("Describe the menu:");
+        String description = scanner.nextLine();
+        Menu menu = new Menu(name, description, LocalDate.now());
+
+        JSONObject menuObj = new JSONObject();
+        menuObj.put("name", name);
+        menuObj.put("description", description);
+        menuObj.put("date_created", menu.getDate());
+        menuObj.put("set_menu_price", JSONObject.NULL);
+        menuObj.put("discount", JSONObject.NULL);
+        menuObj.put("two_for_one", JSONObject.NULL);
+
+        Database.writeToDatabase("menu", menuObj);
+        return menu;
+    }
+
+
+
+    public void editMenu(){
         // code
     }
 
-    public void editMenu(int menuId, String edits){
-        // code
-    }
-
-    public void addMenuItem(int menuId, int itemId, String item){
-        // code
-    }
-
-    public void editMenuItem(int itemId){
+    public void deleteMenu(){
         // code
     }
 
