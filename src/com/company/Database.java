@@ -110,6 +110,42 @@ public class Database {
         return userLoyalty;
     }
 
+    public static JSONArray readAllfromTable(String table) {
+        JSONArray tableData = null;
+
+        try {
+            URL url = new URL("http://slynch.ie:8000/" + table);
+            HttpURLConnection http = (HttpURLConnection)url.openConnection();
+            http.setRequestMethod("GET");
+            http.connect();
+            int responseCode = http.getResponseCode();
+            if (responseCode != 200) {
+                throw new RuntimeException("HttpResponseCode: " + responseCode);
+            } else {
+                StringBuilder inline = new StringBuilder();
+                Scanner scanner = new Scanner(url.openStream());
+
+                //Write all the JSON data into a string using a scanner
+                while (scanner.hasNext()) {
+                    inline.append(scanner.nextLine());
+                }
+
+                //Close the scanner
+                scanner.close();
+                tableData = new JSONArray(inline.toString());
+            }
+
+
+            http.getResponseCode();
+            http.disconnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return tableData;
+    }
+
+
+
     public static boolean writeToTable(String table, JSONObject data) {
         URL url;
         HttpURLConnection http = null;
@@ -202,6 +238,7 @@ public class Database {
             http.setRequestProperty("Content-Type", "application/json");
 
             JSONObject data = new JSONObject();
+            // col is for the id of each table
             data.put(col, id);
 
             byte[] out = data.toString().getBytes(StandardCharsets.UTF_8);

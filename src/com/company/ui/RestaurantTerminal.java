@@ -157,7 +157,7 @@ public class RestaurantTerminal extends UserInterface {
                 ((Manager) user).viewStaffMember();
                 break;
             case 3:
-                ((Manager) user).editStaffMember();
+                ((Manager) user).editStaffSalary();
                 break;
             case 4:
                 ((Manager) user).removeStaffMember();
