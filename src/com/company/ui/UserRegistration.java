@@ -16,7 +16,7 @@ public class UserRegistration extends UserInterface {
         return this.newUserEmail;
     }
 
-    public boolean registerNewUser() {
+    public boolean registerNewUser(String userType) {
         System.out.println("Enter Q on its own in the email or password field to shut down the system, or enter B to go back to the previous screen.");
         String email1 = getEmail();
 
@@ -60,7 +60,7 @@ public class UserRegistration extends UserInterface {
         String password = getNewPassword();
         if(Objects.equals(password, "false")) return false;
         userDetails.put("password", password);
-        userDetails.put("user_type", "customer");
+        userDetails.put("user_type", userType);
 
         Database.writeToDatabase("user", userDetails);
 
@@ -68,6 +68,10 @@ public class UserRegistration extends UserInterface {
 
         this.newUserEmail = email;
         return true;
+    }
+
+    protected void setEmail(String email) {
+        this.newUserEmail = email;
     }
 
     private String getEmail() {

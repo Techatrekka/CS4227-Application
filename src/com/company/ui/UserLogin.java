@@ -52,4 +52,7 @@ public class UserLogin extends UserInterface {
         this.setSuccessfulLogin(true);
         this.email = email;
     }
+    protected void setEmail(String email) {
+        this.email = email;
+    }
 }

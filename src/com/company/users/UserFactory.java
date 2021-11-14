@@ -10,13 +10,13 @@ public class UserFactory {
         if(Objects.equals(user.getString("userType"), "customer")) {
             return new Customer(user.getInt("userID"), user.getString("email"),
                     user.getString("fullName"), user.getInt("loyalty_points"));
-        } else if(Objects.equals(user.getString("userType"), "staff")) {
-            if(Objects.equals(user.getString("employeeType"), "manager")) {
+        } else if(Objects.equals(user.getString("userType"), "employee")) {
+            if(Objects.equals(user.getString("employee_type"), "manager")) {
                 return new Manager(user.getInt("userID"), user.getString("email"),
-                        user.getString("fullName"), user.getString("employeeType"), user.getDouble("salary"));
+                        user.getString("fullName"), user.getString("employee_type"), user.getDouble("salary"));
             } else {
                 return new Staff(user.getInt("userID"), user.getString("email"),
-                        user.getString("fullName"), user.getString("employeeType"), user.getDouble("salary"));
+                        user.getString("fullName"), user.getString("employee_type"), user.getDouble("salary"));
             }
         } else {
             return null;

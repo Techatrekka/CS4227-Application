@@ -2,7 +2,6 @@ package com.company.users;
 
 import com.company.Database;
 import com.company.menu.Menu;
-import jdk.vm.ci.meta.Local;
 import org.json.JSONObject;
 
 import java.time.LocalDate;
