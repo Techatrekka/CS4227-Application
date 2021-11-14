@@ -2,7 +2,7 @@ package com.company.ui;
 
 import com.company.BusinessHours;
 import com.company.Database;
-
+import com.company.Restaurant;
 import com.company.menu.Menu;
 import com.company.users.*;
 import org.json.JSONObject;
@@ -11,7 +11,7 @@ import java.util.*;
 
 public class RestaurantTerminal extends UserInterface {
     BusinessHours businessHours = new BusinessHours();
-    ArrayList<Menu> restaurantMenus = new ArrayList<>();
+    ArrayList<Menu> restaurantMenus;
 
     private Scanner scanner = new Scanner(System.in);
     private UserLogin userLogin;
@@ -33,6 +33,8 @@ public class RestaurantTerminal extends UserInterface {
     }
 
     public void run() {
+        Restaurant res = new Restaurant();
+        restaurantMenus = res.initMenus();
         System.out.println(businessHours.toString());
 
         userLogin = new UserLogin();
@@ -63,7 +65,7 @@ public class RestaurantTerminal extends UserInterface {
                     user.placeOrder(user.getIdNum());
                     break;
                 case 2:
-                    // @TODO: customer view menus - reuse method from staff??
+                    user.viewMenu();
                     break;
                 case 3:
                     // @TODO: get previous orders for user from DB, user.getOrders()
@@ -183,14 +185,18 @@ public class RestaurantTerminal extends UserInterface {
                 break;
             case 3:
                 // read menus from database and ask which to delete
-                ((Manager) user).deleteMenu();
-              //  restaurantMenus.remove(menu)
+                int menuID = ((Manager) user).deleteMenu();
+                for (Menu menu : restaurantMenus){
+                    if(menu.getId() == menuID){
+                        restaurantMenus.remove(menu);
+                    }
+                }
                 break;
             case 4:
-                user.viewMenu();
-                // for(Menu menu : restaurantMenus) {
-                //     System.out.println(menu);
-                // }
+                // user.viewMenu();
+                for(Menu menu : restaurantMenus) {
+                    System.out.println(menu);
+                }
                 break;
         }
     }

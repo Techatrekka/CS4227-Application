@@ -3,7 +3,6 @@ package com.company.menu;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Scanner;
 
 public class Menu {
@@ -14,28 +13,29 @@ public class Menu {
     LocalDate dateCreated;
     Scanner scanner = new Scanner(System.in);
 
-    public Menu(String name,String description, LocalDate date){
+    public Menu(int id, String name,String description, LocalDate date){
+        this.menuID = id;
         this.name = name;
         this.description = description;
         this.dateCreated = date;
     }
 
-    public int getMenuID(){
-        return 0;
+    public int getId(){
+        return this.menuID;
 
     }
     public LocalDate getDate(){
         return this.dateCreated;
     }
-    public void setMenuID(int id){
-
+    public void setId(int id){
+        this.menuID = id;
     }
     public String getName(){
-        return null;
+        return name;
 
     }
     public void setName(String name){
-
+        this.name = name;
     }
 
     public ArrayList<MenuItem> getMenuItems(){
@@ -110,13 +110,13 @@ public class Menu {
     @Override
     public String toString() {
         StringBuilder items = new StringBuilder();
-        for(MenuItem item : menuList) {
-            items.append(item.toString()).append("\n");
-        }
+        // for(MenuItem item : menuList) {
+        //     items.append(item.toString()).append("\n");
+        // }
         return  "Menu name: " + name +
-                "Menu ID: " + menuID +
-                "Menu Date: " + dateCreated.toString() +
-                "Menu Items: " + items;
+                " Menu ID: " + menuID +
+                " Menu Date: " + dateCreated.toString() +
+                " Menu Items: " + items;
     }
 
 }

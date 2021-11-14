@@ -63,7 +63,7 @@ public class Database {
         return userData;
     }
 
-    public static JSONObject readFromTable(String table, int userId, List<String> cols) {
+    public static JSONObject readFromTable(String table, int id, List<String> cols, String idCol) {
         JSONObject userLoyalty = new JSONObject();
         HttpURLConnection http = null;
         try {
@@ -89,7 +89,7 @@ public class Database {
 
                 for(Object obj : jsonData) {
                     JSONObject obj2 = (JSONObject) obj;
-                        if(obj2.getInt("user_id") == userId) {
+                        if(obj2.getInt(idCol) == id) {
                             for(String col : cols) {
                                 userLoyalty.put(col, obj2.get(col));
                             }

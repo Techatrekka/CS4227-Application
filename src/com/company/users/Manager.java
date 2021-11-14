@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-import javax.swing.text.StyledEditorKit;
+import javax.xml.crypto.Data;
 
 public class Manager extends Staff {
     Scanner scanner = new Scanner(System.in);
@@ -68,7 +68,7 @@ public class Manager extends Staff {
             List<String> salaryList = new ArrayList<String>();
             salaryList.add("salary");
             salaryList.add("employee_type");
-            JSONObject salary = Database.readFromTable("employeesalary", obj2.getInt("user_id"), salaryList);
+            JSONObject salary = Database.readFromTable("employeesalary", obj2.getInt("user_id"), salaryList, "user_id");
             System.out.println(obj2.get("user_id") + ": " + obj2.get("fullname") + " Salary: " + salary.get("salary") + " Position: " + salary.get("employee_type"));
         }
     }
@@ -135,13 +135,15 @@ public class Manager extends Staff {
                 menuObj.put("two_for_one", true);
             }
         }
-        Menu menu = new Menu(name, description, LocalDate.now());
 
         menuObj.put("name", name);
         menuObj.put("description", description);
-        menuObj.put("date_created", menu.getDate());
+        menuObj.put("date_created", LocalDate.now());
         System.out.println(menuObj);
         Database.writeToTable("menu", menuObj);
+        Database.readFromTable("menu", -1, null, null);
+        // needs to be changed for the menu id and factory method.
+        Menu menu = new Menu(10, name, description, LocalDate.now());
         return menu;
     }
 
@@ -171,16 +173,17 @@ public class Manager extends Staff {
         }
     }
 
-    public void deleteMenu(){
+    public int deleteMenu(){
         super.viewMenu();
 
         System.out.println("Enter the ID number of the Menu you want to delete");
-        int idNum = scanner.nextInt();
-        if (Database.deleteFromTable("menu", "menu_id", idNum)){
+        int menuID = scanner.nextInt();
+        if (Database.deleteFromTable("menu", "menu_id", menuID)){
             System.out.println("Menu deleted successfully");
         }else{
             System.out.println("Menu was not deleted");
         }
+        return menuID;
     }
 
     public void payStaff(){

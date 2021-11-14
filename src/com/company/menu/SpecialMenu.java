@@ -1,48 +1,17 @@
 package com.company.menu;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class SpecialMenu extends Menu {
+    int discount = 0;
 
-    public SpecialMenu(String name, String description, LocalDate date) {
-        super(name, description, date);
+    public SpecialMenu(int id, String name, String description, LocalDate date_created, int discount){
+        super(id, name, description, date_created);
+        this.discount = discount;
     }
 
-    @Override
-    public int getMenuID() {
-
-        return menuID;
-    }
-
-    @Override
-    public void setMenuID(int id) {
-        this.menuID = id;
-
-    }
-
-    @Override
-    public String getName() {
-        return name;
-
-
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-
-    }
-
-    @Override
-    public ArrayList<MenuItem> getMenuItems() {
-        return menuList;
-    }
-
-    @Override
-    public void setMenuItems(ArrayList<MenuItem> items) {
-        this.menuList = items;
-
+    public boolean isSpecialMenu(){
+        return true;
     }
 
 }

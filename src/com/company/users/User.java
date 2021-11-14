@@ -92,7 +92,6 @@ public abstract class User {
         List<String> cols = new ArrayList<>();
         // JSON for extra attributes for user depending on whether they're employees or customers
         JSONObject extraAttributes = new JSONObject();
-        Scanner scanner = new Scanner(System.in);
         User user;
         JSONObject userDetailsJson;
         userDetailsJson = Database.readFromUserTable(email, null);
@@ -108,12 +107,12 @@ public abstract class User {
         } else {
             if(Objects.equals(userDetailsJson.getString("user_type"), "customer")) {
                 cols.add("loyalty_points");
-                extraAttributes = Database.readFromTable("loyalty", userDetailsJson.getInt("user_id"), cols);
+                extraAttributes = Database.readFromTable("loyalty", userDetailsJson.getInt("user_id"), cols, "user_id");
                 userDetailsJson.put("loyalty_points", extraAttributes.getInt("loyalty_points"));
             } else if(Objects.equals(userDetailsJson.getString("user_type"), "employee")) {
                 cols.add("salary");
                 cols.add("employee_type");
-                JSONObject employeeTypeSalary = Database.readFromTable("employeesalary", userDetailsJson.getInt("user_id"), cols);
+                JSONObject employeeTypeSalary = Database.readFromTable("employeesalary", userDetailsJson.getInt("user_id"), cols, "user_id");
                 userDetailsJson.put("salary", employeeTypeSalary.getDouble("salary"));
                 userDetailsJson.put("employee_type", employeeTypeSalary.getString("employee_type"));
             }
