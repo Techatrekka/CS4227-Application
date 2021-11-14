@@ -1,6 +1,8 @@
 package com.company.users;
 
 import com.company.Database;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -13,6 +15,37 @@ public abstract class User {
     private int idNum;
     private String fullName;
     private String email;
+    Scanner scanner = new Scanner(System.in);
+
+    public int viewMenu(){
+        JSONArray menus = Database.readAllfromTable("menu", -1, null, "");
+
+        System.out.println("List of Menus: ");
+        for (Object obj : menus){
+            JSONObject obj2 = (JSONObject)obj;
+            System.out.println(obj2.get("menu_id") + ": " + obj2.get("name"));
+        }
+        System.out.println("Enter the menu you would like to see");
+        int menuID = scanner.nextInt();
+
+        for (Object obj : menus){
+            JSONObject obj2 = (JSONObject)obj;
+            if(obj2.getInt("menu_id") == (menuID)){
+                System.out.println(obj2.get("name"));
+                System.out.println(obj2.get("description"));
+                // JSONArray menuItems = Database.readAllfromTable("menuitem", menuID, "menu_id", "");
+                // for (Object obj3 : menuItems){
+                //     JSONObject obj4 = (JSONObject)obj3;
+                //     if(obj4.getBoolean("food")){
+                //         // Read from Food table
+                //     }else{
+                //         // Read from Beverage table
+                //     }
+                // }
+            }
+        }
+        return menuID;        
+    }
 
     public void setIdNum(int idNum) {
         this.idNum = idNum;

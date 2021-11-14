@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
+import javax.swing.text.StyledEditorKit;
+
 public class Manager extends Staff {
     Scanner scanner = new Scanner(System.in);
 
@@ -58,18 +60,16 @@ public class Manager extends Staff {
     }
 
     public void viewStaffMember() {
-        JSONArray allStaff = Database.readAllfromTable("user");
+        JSONArray allStaff = Database.readAllfromTable("user", -1, "user_type", "employee");
 
         System.out.println("List of Employees: ");
         for (Object obj : allStaff){
             JSONObject obj2 = (JSONObject)obj;
-            if (obj2.get("user_type").equals("employee")){
-                List<String> salaryList = new ArrayList<String>();
-                salaryList.add("salary");
-                salaryList.add("employee_type");
-                JSONObject salary = Database.readFromTable("employeesalary", obj2.getInt("user_id"), salaryList);
-                System.out.println(obj2.get("user_id") + ": " + obj2.get("fullname") + " Salary: " + salary.get("salary") + " Position: " + salary.get("employee_type"));
-            }
+            List<String> salaryList = new ArrayList<String>();
+            salaryList.add("salary");
+            salaryList.add("employee_type");
+            JSONObject salary = Database.readFromTable("employeesalary", obj2.getInt("user_id"), salaryList);
+            System.out.println(obj2.get("user_id") + ": " + obj2.get("fullname") + " Salary: " + salary.get("salary") + " Position: " + salary.get("employee_type"));
         }
     }
 
@@ -109,33 +109,92 @@ public class Manager extends Staff {
     }
 
     public Menu makeMenu(){
+        JSONObject menuObj = new JSONObject();
         System.out.println("What will you call the menu?");
         String name = scanner.nextLine();
         System.out.println("Describe the menu:");
         String description = scanner.nextLine();
+        System.out.println("Is this a set menu? y/n");
+        String specialMenu = scanner.nextLine();
+        if(specialMenu.toUpperCase().equals("Y")){
+            System.out.println("How much does it cost?");
+            specialMenu = scanner.nextLine();
+            menuObj.put("set_menu_price", specialMenu);
+            menuObj.put("discount", "0.0");
+            menuObj.put("two_for_one", false);
+        }else{
+            System.out.println("Does this menu have a discount on it? y/n");
+            specialMenu = scanner.nextLine();
+            if(specialMenu.toUpperCase().equals("Y")){
+                menuObj.put("set_menu_price", "0.0");
+                menuObj.put("discount", specialMenu);
+                menuObj.put("two_for_one", false);
+            }else{
+                menuObj.put("set_menu_price", "0.0");
+                menuObj.put("discount", "0.0");
+                menuObj.put("two_for_one", true);
+            }
+        }
         Menu menu = new Menu(name, description, LocalDate.now());
 
-        JSONObject menuObj = new JSONObject();
         menuObj.put("name", name);
         menuObj.put("description", description);
         menuObj.put("date_created", menu.getDate());
-        menuObj.put("set_menu_price", "0.0");
-        menuObj.put("discount", "0.0");
-        menuObj.put("two_for_one", false);
         System.out.println(menuObj);
         Database.writeToTable("menu", menuObj);
         return menu;
     }
 
     public void editMenu(){
-        // code
+        int menuID = super.viewMenu();
+
+        String newName = askAboutAttr("name");
+        String newDes = askAboutAttr("description");
+
+        JSONObject editedMenu = new JSONObject();
+        
+        if(newName != ""){
+            editedMenu.put("name", newName);
+        }
+        if(newDes != ""){
+            editedMenu.put("description", newDes);
+        }
+
+        if(newName != "" || newDes != ""){
+            editedMenu.put("menu_id", menuID);
+
+            if (Database.updateTable("menu", editedMenu)){
+                System.out.println("Menu edited successfully");
+            }else{
+                System.out.println("Menu was not edited");
+            }
+        }
     }
 
     public void deleteMenu(){
-        // code
+        super.viewMenu();
+
+        System.out.println("Enter the ID number of the Menu you want to delete");
+        int idNum = scanner.nextInt();
+        if (Database.deleteFromTable("menu", "menu_id", idNum)){
+            System.out.println("Menu deleted successfully");
+        }else{
+            System.out.println("Menu was not deleted");
+        }
     }
 
     public void payStaff(){
         // code
+    }
+
+    public String askAboutAttr(String attribute){
+        String newAttribute = "";
+        System.out.println("Do you want to change the menu " + attribute + "? y/n");
+        String input = scanner.nextLine();
+        if(input.toUpperCase().equals("Y")){
+            System.out.println("Enter the new menu " + attribute);
+            newAttribute = scanner.nextLine();
+        }
+        return newAttribute;
     }
 }

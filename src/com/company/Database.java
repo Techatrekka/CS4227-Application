@@ -110,7 +110,7 @@ public class Database {
         return userLoyalty;
     }
 
-    public static JSONArray readAllfromTable(String table) {
+    public static JSONArray readAllfromTable(String table, int idNum, String col, String matchVal) {
         JSONArray tableData = null;
 
         try {
@@ -141,10 +141,18 @@ public class Database {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        if((idNum != -1 || matchVal != "") && tableData != null){
+            JSONArray matchedTableData = new JSONArray();
+            for (Object obj : tableData){
+                JSONObject obj2 = (JSONObject)obj;
+                if(obj2.getInt(col) == (idNum)){
+                    matchedTableData.put(obj2);
+                }
+            } 
+            return matchedTableData;
+        }
         return tableData;
     }
-
-
 
     public static boolean writeToTable(String table, JSONObject data) {
         URL url;

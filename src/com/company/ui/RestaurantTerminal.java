@@ -167,7 +167,7 @@ public class RestaurantTerminal extends UserInterface {
 
     private void menuManagement() {
         System.out.println("1. Create Menu 2. Edit Menu 3. Delete Menu 4. View Menus");
-        int choice = getInput(1, 3);
+        int choice = getInput(1, 4);
         switch(choice) {
             case 1:
                 restaurantMenus.add(((Manager) user).makeMenu());
@@ -177,8 +177,8 @@ public class RestaurantTerminal extends UserInterface {
                 // read menus from database and ask which to edit
                 ((Manager) user).editMenu();
 
-                System.out.println("What type of menu item would you like to create? 1. Beverage 2. Dish");
-                choice = getInput(1, 2);
+                // System.out.println("What type of menu item would you like to create? 1. Beverage 2. Dish");
+                // choice = getInput(1, 2);
               //  menu.addNewMenuItem(choice);
                 break;
             case 3:
@@ -187,9 +187,10 @@ public class RestaurantTerminal extends UserInterface {
               //  restaurantMenus.remove(menu)
                 break;
             case 4:
-                for(Menu menu : restaurantMenus) {
-                    System.out.println(menu);
-                }
+                user.viewMenu();
+                // for(Menu menu : restaurantMenus) {
+                //     System.out.println(menu);
+                // }
                 break;
         }
     }
