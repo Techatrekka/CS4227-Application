@@ -2,6 +2,7 @@ package com.company.ui;
 
 import com.company.BusinessHours;
 import com.company.Database;
+
 import com.company.menu.Menu;
 import com.company.users.*;
 import org.json.JSONObject;
@@ -16,7 +17,7 @@ public class RestaurantTerminal extends UserInterface {
     private UserLogin userLogin;
     private UserRegistration userRegistration;
     private User user;
-    private JSONObject currentUser;
+    private JSONObject userDetailsJson;
 
     private static RestaurantTerminal single_instance = null;
 
@@ -44,19 +45,19 @@ public class RestaurantTerminal extends UserInterface {
             displayLoginScreen();
         }
 
-        System.out.println("\nWelcome, " + user.getFullName() + ".");
-        businessHours.isOpenNow();
-
-        displayHomeScreen();
-        //@TODO: while loop to redisplay after B pressed?
-
+        while(userLogin.isSuccessfulLogin()) {
+            displayHomeScreen();
+        }
     }
 
     private void displayHomeScreen() {
+        System.out.println("\nWelcome, " + user.getFullName() + ".");
+        businessHours.isOpenNow();
         System.out.println("\nEnter a number to choose what you'd like to do:");
         int choice;
 
         if(Objects.equals(user.getUserType(), "customer")) {
+            Customer.addObservable((Customer) user, businessHours);
             System.out.println("You have " +  ((Customer) user).getLoyaltyPoints() + " loyalty points.");
             System.out.println("1. Place an order 2. View Menus 3. View Previous Orders 4. Settings 5. Logout 6. Quit");
             choice = getInput(1, 6);
@@ -136,7 +137,12 @@ public class RestaurantTerminal extends UserInterface {
 
     private void logout() {
     // @TODO: implement this - important to take all vars into account
-        
+        user = null;
+        userLogin.setEmail("");
+        userLogin.setSuccessfulLogin(false);
+        userRegistration.setEmail("");
+        userDetailsJson = null;
+        displayLoginScreen();
     }
 
     private void stockManagement() {
@@ -195,45 +201,41 @@ public class RestaurantTerminal extends UserInterface {
 
     private void createUser() {
         UserFactory userFactory = new UserFactory();
-        System.out.println("user reg email is " + userRegistration.getNewUserEmail());
-        System.out.println("user login email is " + userLogin.getEmail());
         List<String> cols = new ArrayList<>();
-        JSONObject userLoyalty = new JSONObject();
+        // JSON for extra attributes for user depending on whether they're employees or customers
+        JSONObject extraAttributes = new JSONObject();
 
+        // if userLogin email is empty then this is a newly registered user
         if(Objects.equals(userLogin.getEmail(), "") ) {
-            System.out.println("user login is empty");
-            currentUser = Database.readFromUserTable(userRegistration.getNewUserEmail(), null);
-            if(Objects.equals(currentUser.getString("userType"), "customer")) {
-                userLoyalty.put("user_id", currentUser.getInt("userID"));
-                userLoyalty.put("loyalty_points", 0);
-                if(Database.writeToDatabase("loyalty", userLoyalty)) {
-                    System.out.println("created in loyalty table");
-                } else {
-                    System.out.println("done fucked");
-                }
-                currentUser.put("loyalty_points", 0);
+            userDetailsJson = Database.readFromUserTable(userRegistration.getNewUserEmail(), null);
+            if(Objects.equals(userDetailsJson.getString("userType"), "customer")) {
+                extraAttributes.put("user_id", userDetailsJson.getInt("userID"));
+                extraAttributes.put("loyalty_points", 0);
+                Database.writeToDatabase("loyalty", extraAttributes);
+                userDetailsJson.put("loyalty_points", 0);
+            } else {
+                extraAttributes.put("user_id", userDetailsJson.getInt("userID"));
+                System.out.println("How much should this employee be paid? Enter a salary between 15000 and 50000");
+                int salary = getInput(15000, 50000);
+                extraAttributes.put("salary", salary);
+                Database.writeToDatabase("employeesalary", extraAttributes);
+                userDetailsJson.put("salary", salary);
             }
         } else {
-            System.out.println("user reg is empty");
-            currentUser = Database.readFromUserTable(userLogin.getEmail(), null);
-            if(Objects.equals(currentUser.getString("userType"), "customer")) {
+            userDetailsJson = Database.readFromUserTable(userLogin.getEmail(), null);
+            if(Objects.equals(userDetailsJson.getString("userType"), "customer")) {
                 cols.add("loyalty_points");
-                userLoyalty = Database.readFromTable("loyalty", currentUser.getInt("userID"), cols);
-                System.out.println(userLoyalty);
-                currentUser.put("loyalty_points", userLoyalty.getInt("loyalty_points"));
+                extraAttributes = Database.readFromTable("loyalty", userDetailsJson.getInt("userID"), cols);
+                userDetailsJson.put("loyalty_points", extraAttributes.getInt("loyalty_points"));
+            } else if(Objects.equals(userDetailsJson.getString("userType"), "employee")) {
+                cols.add("salary");
+                cols.add("employee_type");
+                JSONObject employeeTypeSalary = Database.readFromTable("employeesalary", userDetailsJson.getInt("userID"), cols);
+                userDetailsJson.put("salary", employeeTypeSalary.getDouble("salary"));
+                userDetailsJson.put("employee_type", employeeTypeSalary.getString("employee_type"));
             }
         }
-
-        System.out.println(currentUser);
-        if(Objects.equals(currentUser.getString("userType"), "employee")) {
-            cols.add("salary");
-            cols.add("employee_Type");
-            JSONObject employeeTypeSalary = Database.readFromTable("employeesalary", currentUser.getInt("userID"), cols);
-            currentUser.put("salary", employeeTypeSalary.getDouble("salary"));
-            currentUser.put("employee_type", employeeTypeSalary.getString("employee_type"));
-        }
-        user = userFactory.createUser(currentUser);
-        Customer.addObservable((Customer) user, businessHours);
+        user = userFactory.createUser(userDetailsJson);
     }
 
     private void changePassword() {
@@ -242,11 +244,11 @@ public class RestaurantTerminal extends UserInterface {
         if(choice == 1) {
             // change password here
             String newPass = getNewPassword();
-            System.out.println(currentUser);
-            currentUser.put("password", newPass);
-            System.out.println(currentUser);
-            if(Database.deleteFromTable("user", "user_id", currentUser.getInt("userID"))) {
-                JSONObject userNewPass = currentUser;
+            System.out.println(userDetailsJson);
+            userDetailsJson.put("password", newPass);
+            System.out.println(userDetailsJson);
+            if(Database.deleteFromTable("user", "user_id", userDetailsJson.getInt("userID"))) {
+                JSONObject userNewPass = userDetailsJson;
                 userNewPass.remove("loyalty_points");
                 if(Database.writeToDatabase("user", userNewPass)) {
                     System.out.println("Password changed successfully");
@@ -271,7 +273,7 @@ public class RestaurantTerminal extends UserInterface {
                 if(userLogin.isSuccessfulLogin()) createUser();
                 break;
             case 2:
-                boolean success = userRegistration.registerNewUser();
+                boolean success = userRegistration.registerNewUser("customer");
                 userLogin.setSuccessfulLogin(success);
                 if(success) {
                     createUser();
