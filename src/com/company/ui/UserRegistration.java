@@ -62,7 +62,7 @@ public class UserRegistration extends UserInterface {
         userDetails.put("password", password);
         userDetails.put("user_type", userType);
 
-        Database.writeToDatabase("user", userDetails);
+        Database.writeToTable("user", userDetails);
 
         System.out.println("Congratulations, you've successfully registered!");
 

@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Manager extends Staff {
     Scanner scanner = new Scanner(System.in);
 
-    public Manager(int idNum, String fullName, String email, String employeeType, double salary) {
+    public Manager(int idNum, String email, String fullName, String employeeType, double salary) {
         super.setIdNum(idNum);
         super.setFullName(fullName);
         super.setEmail(email);
@@ -46,11 +46,11 @@ public class Manager extends Staff {
         menuObj.put("name", name);
         menuObj.put("description", description);
         menuObj.put("date_created", menu.getDate());
-        menuObj.put("set_menu_price", JSONObject.NULL);
-        menuObj.put("discount", JSONObject.NULL);
-        menuObj.put("two_for_one", JSONObject.NULL);
-
-        Database.writeToDatabase("menu", menuObj);
+        menuObj.put("set_menu_price", "0.0");
+        menuObj.put("discount", "0.0");
+        menuObj.put("two_for_one", false);
+        System.out.println(menuObj);
+        Database.writeToTable("menu", menuObj);
         return menu;
     }
 
