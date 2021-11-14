@@ -71,23 +71,6 @@ public abstract class User {
                 extraAttributes.put("loyalty_points", 0);
                 Database.writeToTable("loyalty", extraAttributes);
                 userDetailsJson.put("loyalty_points", 0);
-            } else {
-                extraAttributes.put("employee_type", "clerk");
-                userDetailsJson.put("employee_type", "clerk");
-                System.out.println("How much should this employee be paid? Enter a salary between 15000 and 50000");
-                String amount = scanner.nextLine();
-                boolean valid = false;
-                while(!valid) {
-                    try {
-                        double salary = Double.parseDouble(amount);
-                        extraAttributes.put("salary", salary);
-                        userDetailsJson.put("salary", salary);
-                        valid = true;
-                    } catch(NumberFormatException ignored) {
-
-                    }
-                }
-                Database.writeToTable("employeesalary", extraAttributes);
             }
         } else {
             if(Objects.equals(userDetailsJson.getString("user_type"), "customer")) {
