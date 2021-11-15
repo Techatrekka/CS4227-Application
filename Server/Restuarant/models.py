@@ -58,7 +58,7 @@ class DrinkItems(models.Model):
 
 class MenuItem(models.Model):
     menu_item = models.AutoField(primary_key=True)
-    Dish_Bev_id = models.IntegerField()
+    dish_bev_id = models.IntegerField()
     menu_id = models.ForeignKey(Menu,default=1,on_delete=models.CASCADE)
     food = models.BooleanField()
 
