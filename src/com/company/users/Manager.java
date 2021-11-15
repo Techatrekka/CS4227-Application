@@ -2,6 +2,7 @@ package com.company.users;
 
 import com.company.Database;
 import com.company.menu.Menu;
+import com.company.menu.MenuFactory;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,6 +17,7 @@ import javax.xml.crypto.Data;
 
 public class Manager extends Staff {
     Scanner scanner = new Scanner(System.in);
+    MenuFactory menuFactory = new MenuFactory();
 
     public Manager(int idNum, String email, String fullName, String employeeType, double salary) {
         super.setIdNum(idNum);
@@ -60,7 +62,7 @@ public class Manager extends Staff {
     }
 
     public void viewStaffMember() {
-        JSONArray allStaff = Database.readAllfromTable("user", -1, "user_type", "employee");
+        JSONArray allStaff = Database.readAllFromTable("user", -1, "user_type", "employee");
 
         System.out.println("List of Employees: ");
         for (Object obj : allStaff){
@@ -121,35 +123,30 @@ public class Manager extends Staff {
             specialMenu = scanner.nextLine();
             menuObj.put("set_menu_price", specialMenu);
             menuObj.put("discount", "0.0");
-            menuObj.put("two_for_one", false);
         }else{
             System.out.println("Does this menu have a discount on it? y/n");
             specialMenu = scanner.nextLine();
             if(specialMenu.toUpperCase().equals("Y")){
+                System.out.println("How much of a discount does this menu have?");
+                specialMenu = scanner.nextLine();
                 menuObj.put("set_menu_price", "0.0");
                 menuObj.put("discount", specialMenu);
-                menuObj.put("two_for_one", false);
             }else{
                 menuObj.put("set_menu_price", "0.0");
                 menuObj.put("discount", "0.0");
-                menuObj.put("two_for_one", true);
             }
         }
 
         menuObj.put("name", name);
         menuObj.put("description", description);
         menuObj.put("date_created", LocalDate.now());
-        System.out.println(menuObj);
-        Database.writeToTable("menu", menuObj);
-        Database.readFromTable("menu", -1, null, null);
-        // needs to be changed for the menu id and factory method.
-        Menu menu = new Menu(10, name, description, LocalDate.now());
+  
+        int id = Database.writeToTable("menu", menuObj);
+        Menu menu = new Menu(id, name, description, LocalDate.now());
         return menu;
     }
 
-    public void editMenu(){
-        int menuID = super.viewMenu();
-
+    public void editMenu(Menu menu){
         String newName = askAboutAttr("name");
         String newDes = askAboutAttr("description");
 
@@ -163,14 +160,44 @@ public class Manager extends Staff {
         }
 
         if(newName != "" || newDes != ""){
-            editedMenu.put("menu_id", menuID);
+            editedMenu.put("menu_id", menu.getId());
 
             if (Database.updateTable("menu", editedMenu)){
                 System.out.println("Menu edited successfully");
+                JSONArray updatedMenu = Database.readAllFromTable("menu", menu.getId(), "menu_id", "");
+                JSONObject updatedMenuDetails = updatedMenu.getJSONObject(0);
+                menu = menuFactory.createMenu(updatedMenuDetails);
             }else{
                 System.out.println("Menu was not edited");
             }
         }
+
+        System.out.println("Do you want to add or remove menu items? A = add, R = remove");
+        String choice2 = getInputChoice("r", "a");
+        if(choice2.equals("a")) {
+            System.out.println("Do you want to create a new menu item or choose from existing menu items? N = new, E = existing");
+            choice2 = getInputChoice("n", "e");
+            if(choice2.equals("n")) {
+                System.out.println("Would you like to create a new beverage or dish? B = Beverage, D = Dish");
+                choice2 = getInputChoice("b", "d");
+                menu.addNewMenuItem(choice2);
+            } else {
+                // get existing items
+            }
+        } else {
+            // remove menu items
+        }
+    }
+
+    String getInputChoice(String choice1, String choice2) {
+        String input = scanner.nextLine();
+        while(!input.toLowerCase().equals(choice1) && !input.toLowerCase().equals(choice2)) {
+            System.out.println("choice 1 is " + choice1 + " choice 2 " + choice2);
+            System.out.println("input is " + input);
+            System.out.println("Please enter a valid option.");
+            input = scanner.nextLine();
+        }
+        return input.toLowerCase();
     }
 
     public int deleteMenu(){

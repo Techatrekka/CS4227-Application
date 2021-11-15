@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -110,7 +111,7 @@ public class Database {
         return userLoyalty;
     }
 
-    public static JSONArray readAllfromTable(String table, int idNum, String col, String matchVal) {
+    public static JSONArray readAllFromTable(String table, int idNum, String col, String matchVal) {
         JSONArray tableData = null;
 
         try {
@@ -154,9 +155,11 @@ public class Database {
         return tableData;
     }
 
-    public static boolean writeToTable(String table, JSONObject data) {
+    public static int writeToTable(String table, JSONObject data) {
         URL url;
         HttpURLConnection http = null;
+        int idNum = -1;
+
         try {
             url = new URL("http://slynch.ie:8000/" + table);
             http = (HttpURLConnection)url.openConnection();
@@ -170,6 +173,22 @@ public class Database {
             OutputStream stream = http.getOutputStream();
             stream.write(out);
 
+            InputStream stream2 = http.getInputStream();
+            StringBuilder sb = new StringBuilder();
+            for (int ch; (ch = stream2.read()) != -1; ) {
+                sb.append((char) ch);
+            }
+            System.out.println(sb);
+            String[] splitSb = sb.toString().split(" ");
+            if(splitSb.length > 2) {
+                String num = splitSb[2].replace("\"", "");
+                try {
+                    idNum = Integer.parseInt(num);
+                } catch(NumberFormatException e) {
+                    idNum = -1;
+                }
+            }
+            
             http.getResponseCode();
 
         } catch (IOException e) {
@@ -177,10 +196,10 @@ public class Database {
             if (http != null) {
                 http.disconnect();
             }
-            return false;
+            return idNum;
         }
         http.disconnect();
-        return true;
+        return idNum;
     }
 
     public static boolean updateTable(String table, JSONObject data) {

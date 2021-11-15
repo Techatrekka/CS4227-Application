@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import javax.xml.crypto.Data;
+
+import com.company.Database;
+
+import org.json.JSONObject;
+
 public class Menu {
     ArrayList<MenuItem>menuList;
     int menuID;
@@ -38,6 +44,10 @@ public class Menu {
         this.name = name;
     }
 
+    public void setDescription(String desc) {
+        this.description = desc;
+    }
+
     public ArrayList<MenuItem> getMenuItems(){
         return menuList;
 
@@ -50,24 +60,30 @@ public class Menu {
             System.out.println(menuList.get(x).getName());
         }
     }
-    public MenuItem addNewMenuItem(int choice) {
+    public MenuItem addNewMenuItem(String choice) {
         System.out.println("What do you want to call this menu item?");
         String name = scanner.nextLine();
-        System.out.println("How much does this Menu Item cost?");
+        System.out.println("How much does this menu item cost?");
         String cost = scanner.nextLine();
-        Double price = getValidNum(cost);
-        if(choice ==  1){
-            System.out.println("Is this an alcoholic drink? 1. Yes 2. No");
+        Double price = Double.valueOf(cost);
+        JSONObject newMenuItem = new JSONObject();
+        newMenuItem.put("name", name);
+        newMenuItem.put("price", cost);
+
+        if(choice.equalsIgnoreCase("b")){
+            System.out.println("Is this an alcoholic drink? y/n");
             String alco = scanner.nextLine();
 
-            while(!isValid(alco, 1, 2)) {
-                System.out.println("Please enter a valid number.");
+            while(!alco.equalsIgnoreCase("y") && !alco.equalsIgnoreCase("n")) {
+                System.out.println("Please enter a valid option.");
                 alco = scanner.nextLine();
             }
-            int alcoholic = Integer.parseInt(alco);
 
-            boolean isAlcoholic = (alcoholic == 1) ? true : false;
-            MenuItem beverage = new Beverage(name, price, isAlcoholic);
+            boolean isAlcoholic = (alco.equals("y")) ? true : false;
+            newMenuItem.put("alcoholic", isAlcoholic);
+            int id = Database.writeToTable("beverages", newMenuItem);
+            MenuItem beverage = new Beverage(id, name, price, isAlcoholic);
+            menuList.add(beverage);
             return beverage;
         }
         else{
@@ -76,35 +92,19 @@ public class Menu {
             System.out.println("Does this dish contain any allergens? Please enter each allergen separated by a comma.");
             String allergens = scanner.nextLine();
             String[] allergenList = allergens.split(",");
-            MenuItem dish = new Dish(name, price, desc, Arrays.asList(allergenList));
+
+            newMenuItem.put("description", desc);
+            newMenuItem.put("allergens", allergens);
+            int id = Database.writeToTable("dishes", newMenuItem);
+            JSONObject newItem = new JSONObject();
+            newItem.put("dish_bev_id", id);
+            newItem.put("food", true);
+            newItem.put("menu_id", this.getId());
+            Database.writeToTable("menuitem", newItem);
+            MenuItem dish = new Dish(id, name, price, desc, Arrays.asList(allergenList));
+            menuList.add(dish);
             return dish;
         }
-    }
-
-    private boolean isValid(String choice, int min, int max) {
-        try {
-            int numChoice = Integer.parseInt(choice);
-            if(numChoice > max || numChoice < min) {
-                return false;
-            }
-        } catch(NumberFormatException e) {
-            return false;
-        }
-        return true;
-    }
-
-    private double getValidNum(String cost){
-        boolean isValidNum = false;
-        double price = 0.0;
-        while(!isValidNum) {
-            try {
-                price = Double.parseDouble(cost);
-                isValidNum = true;
-            } catch(NumberFormatException e) {
-                cost = scanner.nextLine();
-            }
-        }
-        return price;
     }
 
     @Override

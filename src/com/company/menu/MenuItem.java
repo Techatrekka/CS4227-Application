@@ -3,7 +3,7 @@ package com.company.menu;
 public abstract class MenuItem{
     public String name;
     public double price;
-    public int ID;
+    public int id;
     //public ArrayList<>
 
     public double getPrice(){
@@ -19,10 +19,10 @@ public abstract class MenuItem{
         this.name = name;
     }
     public int getMenuID(){
-        return ID;
+        return id;
     }
-    public void setMenuID(int ID){
-        this.ID = ID;
+    public void setMenuID(int id){
+        this.id = id;
     }
     @Override
     public String toString(){

@@ -10,7 +10,7 @@ import org.json.JSONObject;
 
 public class Restaurant {
     public ArrayList<Menu> initMenus() {
-        JSONArray dbMenus = Database.readAllfromTable("menu", -1, null, "");
+        JSONArray dbMenus = Database.readAllFromTable("menu", -1, null, "");
 
         MenuFactory menuFactory = new MenuFactory();
         ArrayList<Menu> menus = new ArrayList<Menu>();
