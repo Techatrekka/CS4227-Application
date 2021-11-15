@@ -324,7 +324,7 @@ def drinkitemsApi(request,id=0):
 def menuitemApi(request,id=0):
     if request.method=='GET':
         menuitem = MenuItem.objects.all()
-        menuitemSerializer = MenuSerializer(menuitem,many=True)
+        menuitemSerializer = MenuItemSerializer(menuitem,many=True)
         return JsonResponse(menuitemSerializer.data, safe=False)
     elif request.method=='POST':
         menuitem_data=JSONParser().parse(request)
