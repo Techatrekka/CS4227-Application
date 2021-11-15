@@ -24,7 +24,7 @@ class LoyaltySerializer(serializers.ModelSerializer):
 class MenuSerializer(serializers.ModelSerializer):
     class Meta:
         model = Menu
-        fields = ('menu_id','name','description','date_created','set_menu_price','discount','two_for_one')
+        fields = ('menu_id','name','description','date_created','set_menu_price','discount')
 
 class DishesSerializer(serializers.ModelSerializer):
     class Meta:
