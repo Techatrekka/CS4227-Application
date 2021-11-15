@@ -191,7 +191,7 @@ def dishesApi(request,id=0):
         dishesSerializer =DishesSerializer(data=dishes_data)
         if (dishesSerializer.is_valid()):
             dishesSerializer.save()
-            return JsonResponse("Added Succesfully",safe=False)
+            return JsonResponse("Added Succesfully " + str(dishesSerializer.data['dish_id']),safe=False)
         return JsonResponse("Unsuccessful",safe=False)
     elif request.method=='PUT':
         users_data=JSONParser().parse(request)
@@ -226,7 +226,7 @@ def beveragesApi(request,id=0):
         beveragesSerializer =BeveragesSerializer(data=beverages_data)
         if (beveragesSerializer.is_valid()):
             beveragesSerializer.save()
-            return JsonResponse("Added Succesfully",safe=False)
+            return JsonResponse("Added Succesfully" + str(beveragesSerializer.data['beverage_id']),safe=False)
         return JsonResponse("Unsuccessful",safe=False)
     elif request.method=='PUT':
         users_data=JSONParser().parse(request)
@@ -331,7 +331,7 @@ def menuitemApi(request,id=0):
         menuitemSerializer =MenuItemSerializer(data=menuitem_data)
         if (menuitemSerializer.is_valid()):
             menuitemSerializer.save()
-            return JsonResponse("Added Succesfully",safe=False)
+            return JsonResponse("Added Succesfully " + str(menuitemSerializer.data['menu_item']),safe=False)
         return JsonResponse("Unsuccessful",safe=False)
     elif request.method=='PUT':
         users_data=JSONParser().parse(request)
