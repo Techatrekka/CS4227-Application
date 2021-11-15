@@ -10,7 +10,7 @@ class Users(models.Model):
 class EmployeeSalary(models.Model):
     user_id = models.OneToOneField(Users, primary_key=True, on_delete=models.CASCADE)
     employee_type = models.CharField(max_length=50)
-    salary = models.DecimalField(max_digits=7,decimal_places=2)
+    salary = models.CharField(max_length=50)
 
 class Loyalty(models.Model):
     loyalty_id = models.AutoField(primary_key=True)
@@ -20,13 +20,13 @@ class Loyalty(models.Model):
 class Orders(models.Model):
     order_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(Users, default=1,on_delete=models.CASCADE)
-    total_cost = models.DecimalField(max_digits=10,decimal_places=10)
+    total_cost = models.CharField(max_length=50)
 
 class Dishes(models.Model):
     dish_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=500)
-    price = models.DecimalField(max_digits=10,decimal_places=10)
+    price = models.CharField(max_length=50)
     allergens = models.CharField(max_length=500)
 
 class Menu(models.Model):
@@ -34,14 +34,13 @@ class Menu(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=500)
     date_created = models.DateField()
-    set_menu_price = models.DecimalField(max_digits=10,decimal_places=10)
-    discount = models.DecimalField(max_digits=10,decimal_places=10)
-    two_for_one = models.BooleanField() 
+    set_menu_price = models.CharField(max_length=50)
+    discount = models.CharField(max_length=50)
 
 class Beverages(models.Model):
     beverage_id = models.AutoField(primary_key=True)
     name =  models.CharField(max_length=50)
-    price = models.DecimalField(max_digits=10,decimal_places=10)
+    price = models.CharField(max_length=50)
     alcoholic = models.BooleanField()
 
 class FoodItems(models.Model):

@@ -36,7 +36,7 @@ def usersApi(request,id=0):
         return JsonResponse("failed",safe=False)
     elif request.method=='DELETE':
         users_data=JSONParser().parse(request)
-        users=Users.objects.get(users_id=users_data['user_id'])
+        users=Users.objects.get(user_id=users_data['user_id'])
         users.delete()
         return JsonResponse("Delete succesful",safe=False)
 
@@ -71,7 +71,7 @@ def employeesalaryApi(request,id=0):
         return JsonResponse("failed",safe=False)
     elif request.method=='DELETE':
         employeesalary_data=JSONParser().parse(request)
-        employeesalary=EmployeeSalary.objects.get(users_id=employeesalary_data['user_id'])
+        employeesalary=EmployeeSalary.objects.get(user_id=employeesalary_data['user_id'])
         employeesalary.delete()
         return JsonResponse("Delete succesful",safe=False) 
 
@@ -141,7 +141,7 @@ def ordersApi(request,id=0):
         return JsonResponse("failed",safe=False)
     elif request.method=='DELETE':
         orders_data=JSONParser().parse(request)
-        orders=Orders.objects.get(users_id=orders_data['order_id'])
+        orders=Orders.objects.get(user_id=orders_data['order_id'])
         orders.delete()
         return JsonResponse("Delete succesful",safe=False)
 
@@ -156,7 +156,7 @@ def menuApi(request,id=0):
         menuSerializer =MenuSerializer(data=menu_data)
         if (menuSerializer.is_valid()):
             menuSerializer.save()
-            return JsonResponse("Added Successfully",safe=False)
+            return JsonResponse("Added Successfully "+ str(menuSerializer.data['menu_id']),safe=False)
         return JsonResponse("Unsuccessful",safe=False)
     elif request.method=='PUT':
         users_data=JSONParser().parse(request)
