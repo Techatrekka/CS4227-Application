@@ -36,10 +36,12 @@ public class Dish extends MenuItem{
     @Override
     public String toString(){
         StringBuilder allergenList = new StringBuilder();
-        for(String item : allergens) {
-            allergenList.append(item.toString()).append("\n");
+        if(allergens.size() > 0) {
+            for(String item : allergens) {
+                allergenList.append(item.toString()).append("\n");
+            }
         }
-        return super.toString() + "Description " + description +
-                                  "Allergens " + allergenList;
+        return super.toString() + "\nDescription: " + description +
+                                  "\nAllergens: " + allergenList;
     }
 }

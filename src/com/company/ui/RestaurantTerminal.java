@@ -65,7 +65,7 @@ public class RestaurantTerminal extends UserInterface {
                     user.placeOrder(user.getIdNum());
                     break;
                 case 2:
-                    user.viewMenu();
+                    user.viewMenu(restaurantMenus, "view:");
                     break;
                 case 3:
                     // @TODO: get previous orders for user from DB, user.getOrders()
@@ -175,23 +175,19 @@ public class RestaurantTerminal extends UserInterface {
             case 1:
                 restaurantMenus.add(((Manager) user).makeMenu());
                 break;
-                // @TODO: implement next 2 methods in manager class
             case 2:
                 // read menus from database and ask which to edit
-                int menuID = user.viewMenu();
+                int menuID = user.viewMenu(restaurantMenus, "edit:");
                 for(Menu menu : restaurantMenus) {
                     if(menu.getId() == menuID) {
                         ((Manager) user).editMenu(menu);
                     }
                 }
-                
-                
-                // choice = getInput(1, 2);
-              //  menu.addNewMenuItem(choice);
                 break;
             case 3:
                 // read menus from database and ask which to delete
-                menuID = ((Manager) user).deleteMenu();
+                menuID = user.viewMenu(restaurantMenus, "delete:");
+                ((Manager) user).deleteMenu(menuID);
                 for (Menu menu : restaurantMenus){
                     if(menu.getId() == menuID){
                         restaurantMenus.remove(menu);
@@ -199,10 +195,7 @@ public class RestaurantTerminal extends UserInterface {
                 }
                 break;
             case 4:
-                // user.viewMenu();
-                for(Menu menu : restaurantMenus) {
-                    System.out.println(menu);
-                }
+                user.viewMenu(restaurantMenus, "view:");
                 break;
         }
     }

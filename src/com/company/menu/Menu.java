@@ -12,7 +12,7 @@ import com.company.Database;
 import org.json.JSONObject;
 
 public class Menu {
-    ArrayList<MenuItem>menuList;
+    public ArrayList<MenuItem> menuList;
     int menuID;
     String name;
     String description;
@@ -24,6 +24,7 @@ public class Menu {
         this.name = name;
         this.description = description;
         this.dateCreated = date;
+        menuList = new ArrayList<>();
     }
 
     public int getId(){
@@ -107,16 +108,44 @@ public class Menu {
         }
     }
 
+    public boolean removeMenuItem() {
+        if(this.menuList.size() > 0) {
+            System.out.println(this.getMenuItems());
+            System.out.println("Enter the id of the item you'd like to remove from the menu:");
+            String choice = scanner.nextLine();
+            int id = Integer.valueOf(choice);
+            ArrayList<String> cols = new ArrayList<>();
+            cols.add("menu_item");
+            JSONObject menuItemDetails = Database.readFromTable("menuitem", id, cols, "dish_bev_id", this.getId(), "menu_id");
+            if(Database.deleteFromTable("menuitem", cols.get(0), menuItemDetails.getInt("menu_item"))) {
+                for(MenuItem menuItem : menuList) {
+                    if(id == menuItem.getID()) menuList.remove(menuItem);
+                }
+                return true;
+            }
+        } else {
+            System.out.println("This menu has no items in it.");
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         StringBuilder items = new StringBuilder();
-        // for(MenuItem item : menuList) {
-        //     items.append(item.toString()).append("\n");
-        // }
+        if(menuList != null && menuList.size() > 0) {
+            System.out.println("AM NOT NONE");
+            System.out.println("size is " + menuList.size());
+            for(MenuItem item : menuList) {
+                System.out.println(item);
+                items.append(item.toString()).append("\n");
+           }
+        } else {
+            items.append("None");
+        }
         return  "Menu name: " + name +
                 " Menu ID: " + menuID +
                 " Menu Date: " + dateCreated.toString() +
-                " Menu Items: " + items;
+                "\nMenu Items: \n" + items;
     }
 
 }

@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-import javax.xml.crypto.Data;
-
 public class Manager extends Staff {
     Scanner scanner = new Scanner(System.in);
     MenuFactory menuFactory = new MenuFactory();
@@ -70,7 +68,7 @@ public class Manager extends Staff {
             List<String> salaryList = new ArrayList<String>();
             salaryList.add("salary");
             salaryList.add("employee_type");
-            JSONObject salary = Database.readFromTable("employeesalary", obj2.getInt("user_id"), salaryList, "user_id");
+            JSONObject salary = Database.readFromTable("employeesalary", obj2.getInt("user_id"), salaryList, "user_id", -1, "");
             System.out.println(obj2.get("user_id") + ": " + obj2.get("fullname") + " Salary: " + salary.get("salary") + " Position: " + salary.get("employee_type"));
         }
     }
@@ -185,7 +183,7 @@ public class Manager extends Staff {
                 // get existing items
             }
         } else {
-            // remove menu items
+            menu.removeMenuItem();
         }
     }
 
@@ -200,17 +198,12 @@ public class Manager extends Staff {
         return input.toLowerCase();
     }
 
-    public int deleteMenu(){
-        super.viewMenu();
-
-        System.out.println("Enter the ID number of the Menu you want to delete");
-        int menuID = scanner.nextInt();
+    public void deleteMenu(int menuID){
         if (Database.deleteFromTable("menu", "menu_id", menuID)){
             System.out.println("Menu deleted successfully");
         }else{
             System.out.println("Menu was not deleted");
         }
-        return menuID;
     }
 
     public void payStaff(){

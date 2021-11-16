@@ -1,9 +1,13 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.company.menu.Menu;
+import com.company.menu.MenuItem;
 import com.company.menu.MenuFactory;
+import com.company.menu.Beverage;
+import com.company.menu.Dish;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -11,32 +15,47 @@ import org.json.JSONObject;
 public class Restaurant {
     public ArrayList<Menu> initMenus() {
         JSONArray dbMenus = Database.readAllFromTable("menu", -1, null, "");
+        JSONArray dbMenuItems = Database.readAllFromTable("menuitem", -1, null, "");
+        JSONArray dbDishes = Database.readAllFromTable("dishes", -1, null, "");
+        JSONArray dbBeverages = Database.readAllFromTable("beverages", -1, null, "");
 
+        
         MenuFactory menuFactory = new MenuFactory();
         ArrayList<Menu> menus = new ArrayList<Menu>();
-
+        ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
+        menuItems.add(new Dish(-1, "", -1,"", null));
 
         for (Object obj : dbMenus){
             JSONObject obj2 = (JSONObject)obj;
             Menu menu = menuFactory.createMenu(obj2);
             menus.add(menu);
         }
-
-        for (Object obj : dbMenus){
+        
+        for (Object obj : dbMenuItems) {
             JSONObject obj2 = (JSONObject)obj;
-             //if(obj2.getInt("menu_id") == (menuID)){
-                // System.out.println(obj2.get("name"));
-                // System.out.println(obj2.get("description"));
-                // JSONArray menuItems = Database.readAllfromTable("menuitem", menuID, "menu_id", "");
-                // for (Object obj3 : menuItems){
-                //     JSONObject obj4 = (JSONObject)obj3;
-                //     if(obj4.getBoolean("food")){
-                //         // Read from Food table
-                //     }else{
-                //         // Read from Beverage table
-                //     }
-                // }
+            for(Menu menu : menus) {
+                if(obj2.getInt("menu_id") == menu.getId()) {
+                    if(obj2.getBoolean("food")) {
+                        for(Object obj3 : dbDishes) {
+                            JSONObject obj4 = (JSONObject) obj3;
+                            if(obj2.getInt("dish_bev_id") == obj4.getInt("dish_id")) {
+                                String[] allergenList = obj4.getString("allergens").split(",");
+                                MenuItem dish = new Dish(obj4.getInt("dish_id"), obj4.getString("name"), Double.valueOf(obj4.getString("price")), obj4.getString("description"), Arrays.asList(allergenList));
+                                menu.menuList.add(dish);
+                            }
+                        }
+                    } else {
+                        for(Object obj3 : dbBeverages) {
+                            JSONObject obj4 = (JSONObject) obj3;
+                            if(obj2.getInt("dish_bev_id") == obj4.getInt("beverage_id")) {
+                                MenuItem beverage = new Beverage(obj4.getInt("beverage_id"), obj4.getString("name"), Double.valueOf(obj4.getString("price")), obj4.getBoolean("alcoholic"));
+                                menu.menuList.add(beverage);
+                            }
+                        }
+                    }
+                }
+            }
         }
-            return menus;
+        return menus;
     }
 }

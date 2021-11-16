@@ -1,6 +1,7 @@
 package com.company.users;
 
 import com.company.Database;
+import com.company.menu.Menu;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,33 +18,14 @@ public abstract class User {
     private String email;
     Scanner scanner = new Scanner(System.in);
 
-    public int viewMenu(){
-        JSONArray menus = Database.readAllFromTable("menu", -1, null, "");
-
-        System.out.println("List of Menus: ");
-        for (Object obj : menus){
-            JSONObject obj2 = (JSONObject)obj;
-            System.out.println(obj2.get("menu_id") + ": " + obj2.get("name"));
+    public int viewMenu(ArrayList<Menu> restaurantMenus, String toDo){
+        for(Menu menu : restaurantMenus) {
+            System.out.println(menu);
         }
-        System.out.println("Enter the id of the menu you want");
+
+        System.out.println("Enter the id of the menu to " + toDo);
         int menuID = scanner.nextInt();
 
-        for (Object obj : menus){
-            JSONObject obj2 = (JSONObject)obj;
-            if(obj2.getInt("menu_id") == (menuID)){
-                System.out.println(obj2.get("name"));
-                System.out.println(obj2.get("description"));
-                // JSONArray menuItems = Database.readAllFromTable("menuitem", menuID, "menu_id", "");
-                // for (Object obj3 : menuItems){
-                //     JSONObject obj4 = (JSONObject)obj3;
-                //     if(obj4.getBoolean("food")){
-                //         // Read from Food table
-                //     }else{
-                //         // Read from Beverage table
-                //     }
-                // }
-            }
-        }
         return menuID;        
     }
 
@@ -107,12 +89,12 @@ public abstract class User {
         } else {
             if(Objects.equals(userDetailsJson.getString("user_type"), "customer")) {
                 cols.add("loyalty_points");
-                extraAttributes = Database.readFromTable("loyalty", userDetailsJson.getInt("user_id"), cols, "user_id");
+                extraAttributes = Database.readFromTable("loyalty", userDetailsJson.getInt("user_id"), cols, "user_id", -1, "");
                 userDetailsJson.put("loyalty_points", extraAttributes.getInt("loyalty_points"));
             } else if(Objects.equals(userDetailsJson.getString("user_type"), "employee")) {
                 cols.add("salary");
                 cols.add("employee_type");
-                JSONObject employeeTypeSalary = Database.readFromTable("employeesalary", userDetailsJson.getInt("user_id"), cols, "user_id");
+                JSONObject employeeTypeSalary = Database.readFromTable("employeesalary", userDetailsJson.getInt("user_id"), cols, "user_id", -1, "");
                 userDetailsJson.put("salary", employeeTypeSalary.getDouble("salary"));
                 userDetailsJson.put("employee_type", employeeTypeSalary.getString("employee_type"));
             }

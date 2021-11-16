@@ -64,8 +64,8 @@ public class Database {
         return userData;
     }
 
-    public static JSONObject readFromTable(String table, int id, List<String> cols, String idCol) {
-        JSONObject userLoyalty = new JSONObject();
+        public static JSONObject readFromTable(String table, int id, List<String> cols, String idCol, int id2, String idCol2) {
+        JSONObject rowDetails = new JSONObject();
         HttpURLConnection http = null;
         try {
             URL url = new URL("http://slynch.ie:8000/" + table);
@@ -90,11 +90,15 @@ public class Database {
 
                 for(Object obj : jsonData) {
                     JSONObject obj2 = (JSONObject) obj;
-                        if(obj2.getInt(idCol) == id) {
-                            for(String col : cols) {
-                                userLoyalty.put(col, obj2.get(col));
-                            }
+                    if(id2 != -1 && obj2.getInt(idCol) == id && obj2.getInt(idCol2) == id2) {
+                        for(String col : cols) {
+                            rowDetails.put(col, obj2.get(col));
                         }
+                    } else if(obj2.getInt(idCol) == id) {
+                        for(String col : cols) {
+                            rowDetails.put(col, obj2.get(col));
+                        }
+                    }
 
                 }
             }
@@ -108,7 +112,7 @@ public class Database {
         if (http != null) {
             http.disconnect();
         }
-        return userLoyalty;
+        return rowDetails;
     }
 
     public static JSONArray readAllFromTable(String table, int idNum, String col, String matchVal) {
