@@ -6,7 +6,8 @@ import java.util.List;
 public class Dish extends MenuItem{
     String description;
     List<String> allergens;
-    public Dish(String name, double price, String description, List<String> allergens){
+    public Dish(int id, String name, double price, String description, List<String> allergens){
+        super.id = id;
         super.name = name;
         super.price = price;
         this.description = description;
@@ -35,10 +36,12 @@ public class Dish extends MenuItem{
     @Override
     public String toString(){
         StringBuilder allergenList = new StringBuilder();
-        for(String item : allergens) {
-            allergenList.append(item.toString()).append("\n");
+        if(allergens.size() > 0) {
+            for(String item : allergens) {
+                allergenList.append(item.toString()).append("\n");
+            }
         }
-        return super.toString() + "Description " + description +
-                                  "Allergens " + allergenList;
+        return super.toString() + "D{±13\nDescription: " + description +
+                                  "\nAllergens: " + allergenList + "\n";
     }
 }

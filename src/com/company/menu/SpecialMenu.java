@@ -4,45 +4,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class SpecialMenu extends Menu {
+    double discount = 0.0;
 
-    public SpecialMenu(String name, String description, LocalDate date) {
-        super(name, description, date);
+    public SpecialMenu(int id, String name, String description, LocalDate date_created, double discount){
+        super(id, name, description, date_created);
+        this.discount = discount;
+        super.menuList = new ArrayList<>();
     }
 
-    @Override
-    public int getMenuID() {
-
-        return menuID;
-    }
-
-    @Override
-    public void setMenuID(int id) {
-        this.menuID = id;
-
-    }
-
-    @Override
-    public String getName() {
-        return name;
-
-
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-
-    }
-
-    @Override
-    public ArrayList<MenuItem> getMenuItems() {
-        return menuList;
-    }
-
-    @Override
-    public void setMenuItems(ArrayList<MenuItem> items) {
-        this.menuList = items;
-
+    public boolean isSpecialMenu(){
+        return true;
     }
 
 }

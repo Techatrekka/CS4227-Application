@@ -2,6 +2,7 @@ package com.company.ui;
 
 import com.company.BusinessHours;
 import com.company.Database;
+import com.company.Restaurant;
 import com.company.menu.Menu;
 import com.company.users.*;
 import org.json.JSONObject;
@@ -10,13 +11,12 @@ import java.util.*;
 
 public class RestaurantTerminal extends UserInterface {
     BusinessHours businessHours = new BusinessHours();
-    ArrayList<Menu> restaurantMenus = new ArrayList<>();
+    ArrayList<Menu> restaurantMenus;
 
     private Scanner scanner = new Scanner(System.in);
     private UserLogin userLogin;
     private UserRegistration userRegistration;
     private User user;
-    private JSONObject currentUser;
 
     private static RestaurantTerminal single_instance = null;
 
@@ -33,30 +33,30 @@ public class RestaurantTerminal extends UserInterface {
     }
 
     public void run() {
+        Restaurant res = new Restaurant();
+        restaurantMenus = res.initMenus();
         System.out.println(businessHours.toString());
 
         userLogin = new UserLogin();
         userRegistration = new UserRegistration();
 
-        displayLoginScreen();
-
         while(!userLogin.isSuccessfulLogin()) {
             displayLoginScreen();
         }
 
-        System.out.println("\nWelcome, " + user.getFullName() + ".");
-        businessHours.isOpenNow();
-
-        displayHomeScreen();
-        //@TODO: while loop to redisplay after B pressed?
-
+        while(userLogin.isSuccessfulLogin()) {
+            System.out.println("\nWelcome, " + user.getFullName() + ".");
+            displayHomeScreen();
+        }
     }
 
     private void displayHomeScreen() {
+        businessHours.isOpenNow();
         System.out.println("\nEnter a number to choose what you'd like to do:");
         int choice;
 
         if(Objects.equals(user.getUserType(), "customer")) {
+            Customer.addObservable((Customer) user, businessHours);
             System.out.println("You have " +  ((Customer) user).getLoyaltyPoints() + " loyalty points.");
             System.out.println("1. Place an order 2. View Menus 3. View Previous Orders 4. Settings 5. Logout 6. Quit");
             choice = getInput(1, 6);
@@ -65,7 +65,7 @@ public class RestaurantTerminal extends UserInterface {
                     user.placeOrder(user.getIdNum());
                     break;
                 case 2:
-                    // @TODO: customer view menus - reuse method from staff??
+                    user.viewMenu(restaurantMenus, "view:");
                     break;
                 case 3:
                     // @TODO: get previous orders for user from DB, user.getOrders()
@@ -135,8 +135,11 @@ public class RestaurantTerminal extends UserInterface {
     }
 
     private void logout() {
-    // @TODO: implement this - important to take all vars into account
-        
+        user = null;
+        userLogin.setEmail("");
+        userLogin.setSuccessfulLogin(false);
+        userRegistration.setEmail("");
+        displayLoginScreen();
     }
 
     private void stockManagement() {
@@ -156,7 +159,7 @@ public class RestaurantTerminal extends UserInterface {
                 ((Manager) user).viewStaffMember();
                 break;
             case 3:
-                ((Manager) user).editStaffMember();
+                ((Manager) user).editStaffSalary();
                 break;
             case 4:
                 ((Manager) user).removeStaffMember();
@@ -166,97 +169,51 @@ public class RestaurantTerminal extends UserInterface {
 
     private void menuManagement() {
         System.out.println("1. Create Menu 2. Edit Menu 3. Delete Menu 4. View Menus");
-        int choice = getInput(1, 3);
+        System.out.println("NB: You can add/remove menu items from the edit menu section.");
+        int choice = getInput(1, 4);
         switch(choice) {
             case 1:
                 restaurantMenus.add(((Manager) user).makeMenu());
                 break;
-                // @TODO: implement next 2 methods in manager class
             case 2:
                 // read menus from database and ask which to edit
-                ((Manager) user).editMenu();
-
-                System.out.println("What type of menu item would you like to create? 1. Beverage 2. Dish");
-                choice = getInput(1, 2);
-              //  menu.addNewMenuItem(choice);
+                int menuID = user.viewMenu(restaurantMenus, "edit:");
+                for(Menu menu : restaurantMenus) {
+                    if(menu.getId() == menuID) {
+                        ((Manager) user).editMenu(menu);
+                    }
+                }
                 break;
             case 3:
                 // read menus from database and ask which to delete
-                ((Manager) user).deleteMenu();
-              //  restaurantMenus.remove(menu)
+                menuID = user.viewMenu(restaurantMenus, "delete:");
+                ((Manager) user).deleteMenu(menuID);
+                for (Menu menu : restaurantMenus){
+                    if(menu.getId() == menuID){
+                        restaurantMenus.remove(menu);
+                    }
+                }
                 break;
             case 4:
-                for(Menu menu : restaurantMenus) {
-                    System.out.println(menu);
-                }
+                user.viewMenu(restaurantMenus, "view:");
                 break;
         }
-    }
-
-    private void createUser() {
-        UserFactory userFactory = new UserFactory();
-        System.out.println("user reg email is " + userRegistration.getNewUserEmail());
-        System.out.println("user login email is " + userLogin.getEmail());
-        List<String> cols = new ArrayList<>();
-        JSONObject userLoyalty = new JSONObject();
-
-        if(Objects.equals(userLogin.getEmail(), "") ) {
-            System.out.println("user login is empty");
-            currentUser = Database.readFromUserTable(userRegistration.getNewUserEmail(), null);
-            if(Objects.equals(currentUser.getString("userType"), "customer")) {
-                userLoyalty.put("user_id", currentUser.getInt("userID"));
-                userLoyalty.put("loyalty_points", 0);
-                if(Database.writeToDatabase("loyalty", userLoyalty)) {
-                    System.out.println("created in loyalty table");
-                } else {
-                    System.out.println("done fucked");
-                }
-                currentUser.put("loyalty_points", 0);
-            }
-        } else {
-            System.out.println("user reg is empty");
-            currentUser = Database.readFromUserTable(userLogin.getEmail(), null);
-            if(Objects.equals(currentUser.getString("userType"), "customer")) {
-                cols.add("loyalty_points");
-                userLoyalty = Database.readFromTable("loyalty", currentUser.getInt("userID"), cols);
-                System.out.println(userLoyalty);
-                currentUser.put("loyalty_points", userLoyalty.getInt("loyalty_points"));
-            }
-        }
-
-        System.out.println(currentUser);
-        if(Objects.equals(currentUser.getString("userType"), "employee")) {
-            cols.add("salary");
-            cols.add("employee_Type");
-            JSONObject employeeTypeSalary = Database.readFromTable("employeesalary", currentUser.getInt("userID"), cols);
-            currentUser.put("salary", employeeTypeSalary.getDouble("salary"));
-            currentUser.put("employee_type", employeeTypeSalary.getString("employee_type"));
-        }
-        user = userFactory.createUser(currentUser);
-        Customer.addObservable((Customer) user, businessHours);
     }
 
     private void changePassword() {
         System.out.println("Do you want to change your password? 0 = No, 1 = Yes");
         int choice = getInput(0,1);
         if(choice == 1) {
-            // change password here
             String newPass = getNewPassword();
-            System.out.println(currentUser);
-            currentUser.put("password", newPass);
-            System.out.println(currentUser);
-            if(Database.deleteFromTable("user", "user_id", currentUser.getInt("userID"))) {
-                JSONObject userNewPass = currentUser;
-                userNewPass.remove("loyalty_points");
-                if(Database.writeToDatabase("user", userNewPass)) {
+            JSONObject userNewPass = new JSONObject();
+            userNewPass.put("password", newPass);
+            userNewPass.put("user_id", user.getIdNum());
+            System.out.println(userNewPass);
+            if(Database.updateTable("user", userNewPass)) {
                     System.out.println("Password changed successfully");
-                } else {
-                    System.out.println("Sorry, password was not changed.");
-                }
             } else {
                 System.out.println("Sorry, password was not changed.");
             }
-
         }
     }
 
@@ -268,16 +225,16 @@ public class RestaurantTerminal extends UserInterface {
         switch (numChoice) {
             case 1:
                 userLogin.displayLoginPrompt();
-                if(userLogin.isSuccessfulLogin()) createUser();
+                if(userLogin.isSuccessfulLogin()) {
+                    user = User.createUser(false, userLogin.getEmail());
+                }
                 break;
             case 2:
-                boolean success = userRegistration.registerNewUser();
+                boolean success = userRegistration.registerNewUser("customer");
                 userLogin.setSuccessfulLogin(success);
                 if(success) {
-                    createUser();
-                    changePassword();
+                    user = User.createUser(true, userRegistration.getNewUserEmail());
                 }
-
                 break;
             case 3:
                 System.out.println("Shutting down system.");

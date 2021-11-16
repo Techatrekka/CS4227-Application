@@ -35,7 +35,7 @@ public class UserLogin extends UserInterface {
         System.out.println("Enter Password:");
         String password = scanner.nextLine();
         JSONObject userDetails = Database.readFromUserTable(email,password);
-        boolean validCredentials = userDetails.has("password");
+        boolean validCredentials = userDetails.has("correct_pass");
         while(!validCredentials) {
             System.out.println("Please enter valid login details. You must register before you can login.");
             System.out.println("Enter Email address:");
@@ -47,9 +47,12 @@ public class UserLogin extends UserInterface {
             System.out.println("Enter Password:");
             password = scanner.nextLine();
             userDetails = Database.readFromUserTable(email,password);
-            validCredentials = userDetails.has("password");
+            validCredentials = userDetails.has("correct_pass");
         }
         this.setSuccessfulLogin(true);
+        this.email = email;
+    }
+    protected void setEmail(String email) {
         this.email = email;
     }
 }
