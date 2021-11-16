@@ -31,10 +31,10 @@ public class Beverage extends MenuItem {
     }
     public String toString(){
         if(alcoholic){
-            return super.toString()+"\nThis beverage is alcoholic.";
+            return super.toString()+"\nThis beverage is alcoholic.\n";
         }
         else{
-            return super.toString()+"\nThis beverage is non-alcoholic.";
+            return super.toString()+"\nThis beverage is non-alcoholic.\n";
         }
     }
 }

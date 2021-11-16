@@ -83,6 +83,11 @@ public class Menu {
             boolean isAlcoholic = (alco.equals("y")) ? true : false;
             newMenuItem.put("alcoholic", isAlcoholic);
             int id = Database.writeToTable("beverages", newMenuItem);
+            JSONObject newItem = new JSONObject();
+            newItem.put("dish_bev_id", id);
+            newItem.put("food", false);
+            newItem.put("menu_id", this.getId());
+            Database.writeToTable("menuitem", newItem);
             MenuItem beverage = new Beverage(id, name, price, isAlcoholic);
             menuList.add(beverage);
             return beverage;
@@ -133,17 +138,18 @@ public class Menu {
     public String toString() {
         StringBuilder items = new StringBuilder();
         if(menuList != null && menuList.size() > 0) {
-            System.out.println("AM NOT NONE");
-            System.out.println("size is " + menuList.size());
             for(MenuItem item : menuList) {
                 System.out.println(item);
                 items.append(item.toString()).append("\n");
            }
         } else {
+            if(this.getId() == 4) {
+                System.out.println("wHY HERE?");
+            }
             items.append("None");
         }
-        return  "Menu name: " + name +
-                " Menu ID: " + menuID +
+        return  "Menu ID: " + menuID +
+                " Menu name: " + name +
                 " Menu Date: " + dateCreated.toString() +
                 "\nMenu Items: \n" + items;
     }

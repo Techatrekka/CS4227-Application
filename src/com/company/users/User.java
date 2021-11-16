@@ -23,10 +23,13 @@ public abstract class User {
             System.out.println(menu);
         }
 
-        System.out.println("Enter the id of the menu to " + toDo);
-        int menuID = scanner.nextInt();
+        if(!toDo.equals("view:")) {
+            System.out.println("Enter the id of the menu to " + toDo);
+            int menuID = scanner.nextInt();
+            return menuID;   
+        }
 
-        return menuID;        
+        return -1;
     }
 
     public void setIdNum(int idNum) {
