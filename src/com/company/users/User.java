@@ -71,7 +71,10 @@ public abstract class User {
         double totalCost = 0.0;
         while(addToOrder) {
             int menuId = viewMenu(restaurantMenus, "order from:");
-            
+            for(Menu menu : restaurantMenus) {
+                if(menu.getId() == menuId) System.out.println("\n" + menu);
+            }
+            System.out.println("Enter the id of the item you'd like to order");
 
             System.out.println("Would you like to order anything else? y/n");
             String choice = scanner.nextLine();
