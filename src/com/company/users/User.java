@@ -2,6 +2,7 @@ package com.company.users;
 
 import com.company.Database;
 import com.company.menu.Menu;
+import com.company.order.Order;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -64,12 +65,25 @@ public abstract class User {
         return fullName;
     }
 
-    public void placeOrder(int userId /**, Order order**/){
-        // code
+    public void placeOrder(int userId, ArrayList<Menu> restaurantMenus){
+        boolean addToOrder = true;
+        Order newOrder = new Order();
+        double totalCost = 0.0;
+        while(addToOrder) {
+            int menuId = viewMenu(restaurantMenus, "order from:");
+            
+
+            System.out.println("Would you like to order anything else? y/n");
+            String choice = scanner.nextLine();
+            if(choice.equalsIgnoreCase("n")) addToOrder = false;
+        }
+        int time = (int) (Math.random() * 30) + 6;
+        newOrder.setTotalCost(totalCost);
+        System.out.println("Your order will be ready for collection in " + time + " minutes");
     }
 
     public void cancelOrder(int userId, int orderId){
-        // code
+        // Implement use case
     }
 
     public static User createUser(boolean isNewUser, String email) {

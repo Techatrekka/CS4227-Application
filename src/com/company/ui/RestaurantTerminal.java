@@ -62,7 +62,7 @@ public class RestaurantTerminal extends UserInterface {
             choice = getInput(1, 6);
             switch(choice) {
                 case 1:
-                    user.placeOrder(user.getIdNum());
+                    user.placeOrder(user.getIdNum(), restaurantMenus);
                     break;
                 case 2:
                     user.viewMenu(restaurantMenus, "view:");
@@ -88,8 +88,9 @@ public class RestaurantTerminal extends UserInterface {
                 switch(choice) {
                     case 1:
                         System.out.println("Enter the user id of the user you'd like to place an order for");
-                        // @TODO: get input. Check if valid id in DB
-                        user.placeOrder(1);
+                        String idChoice = scanner.nextLine();
+                        int id = Integer.parseInt(idChoice);
+                        user.placeOrder(id, restaurantMenus);
                         break;
                     case 2:
                         menuManagement();
@@ -117,8 +118,9 @@ public class RestaurantTerminal extends UserInterface {
                 switch(choice) {
                     case 1:
                         System.out.println("Enter the user id of the user you'd like to place an order for");
-                        // @TODO: get input. Check if valid id in DB
-                        user.placeOrder(1);
+                        String idChoice = scanner.nextLine();
+                        int id = Integer.parseInt(idChoice);
+                        user.placeOrder(id, restaurantMenus);
                         break;
                     case 2:
                         stockManagement();
@@ -143,15 +145,14 @@ public class RestaurantTerminal extends UserInterface {
     }
 
     private void stockManagement() {
-        // @TODO: implement this
-        System.out.println("1. ");
+        System.out.println("1. View stock 2. Order stock");
+        // @TODO: implement this - not doing, have enough use cases covered.
     }
 
     private void employeeManagement() {
         System.out.println("1. Add Employee 2. View Employees 3. Edit Employee 4. Remove Employee");
         int choice = getInput(1, 4);
         switch (choice) {
-            // @TODO: implement all these methods inside Manager class
             case 1:
                 ((Manager) user).addStaffMember();
                 break;
@@ -176,7 +177,6 @@ public class RestaurantTerminal extends UserInterface {
                 restaurantMenus.add(((Manager) user).makeMenu());
                 break;
             case 2:
-                // read menus from database and ask which to edit
                 int menuID = user.viewMenu(restaurantMenus, "edit:");
                 for(Menu menu : restaurantMenus) {
                     if(menu.getId() == menuID) {
@@ -185,7 +185,6 @@ public class RestaurantTerminal extends UserInterface {
                 }
                 break;
             case 3:
-                // read menus from database and ask which to delete
                 menuID = user.viewMenu(restaurantMenus, "delete:");
                 ((Manager) user).deleteMenu(menuID);
                 for (Menu menu : restaurantMenus){
