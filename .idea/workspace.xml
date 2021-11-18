@@ -2,21 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="55c6a95f-0bf6-4db6-acea-acdcb399304b" name="Changes" comment="Create MenuItem interface">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/json_20210307.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/json_20210307.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Beverage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Beverage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Dish.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Dish.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/menu/MenuItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/MenuItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/menu/SetMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/SetMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/menu/SpecialMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/SpecialMenu.java" afterDir="false" />
-    </list>
-    <list id="ac79e65b-577e-4f49-be63-d116da37d51a" name="Changes by Nicole" comment="">
-      <change beforePath="$PROJECT_DIR$/src/com/company/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Dish.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Dish.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cs4125-restaurant-project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/cs4125-restaurant-project.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/users/Customer.java~HEAD" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/users/Manager.java~HEAD" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/users/Staff.java~HEAD" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/users/User.java~HEAD" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/ui/RestaurantTerminal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/ui/RestaurantTerminal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/users/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/Manager.java" afterDir="false" />
     </list>
+    <list id="ac79e65b-577e-4f49-be63-d116da37d51a" name="Changes by Nicole" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,27 +32,8 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/com/company/menu/Menu.java">
-      <ranges>
-        <range start1="2" end1="2" start2="2" end2="3" changelist="55c6a95f-0bf6-4db6-acea-acdcb399304b" />
-        <range start1="3" end1="3" start2="4" end2="7" changelist="55c6a95f-0bf6-4db6-acea-acdcb399304b" />
-        <range start1="4" end1="5" start2="8" end2="9" changelist="ac79e65b-577e-4f49-be63-d116da37d51a" />
-        <range start1="8" end1="8" start2="12" end2="15" changelist="55c6a95f-0bf6-4db6-acea-acdcb399304b" />
-        <range start1="9" end1="9" start2="16" end2="21" changelist="55c6a95f-0bf6-4db6-acea-acdcb399304b" />
-        <range start1="14" end1="14" start2="26" end2="29" changelist="55c6a95f-0bf6-4db6-acea-acdcb399304b" />
-        <range start1="24" end1="24" start2="39" end2="40" changelist="ac79e65b-577e-4f49-be63-d116da37d51a" />
-        <range start1="36" end1="36" start2="52" end2="121" changelist="55c6a95f-0bf6-4db6-acea-acdcb399304b" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/com/company/menu/Dish.java">
-      <ranges>
-        <range start1="3" end1="3" start2="3" end2="4" changelist="55c6a95f-0bf6-4db6-acea-acdcb399304b" />
-        <range start1="6" end1="8" start2="7" end2="9" changelist="ac79e65b-577e-4f49-be63-d116da37d51a" />
-        <range start1="10" end1="11" start2="11" end2="11" changelist="55c6a95f-0bf6-4db6-acea-acdcb399304b" />
-        <range start1="34" end1="34" start2="34" end2="43" changelist="55c6a95f-0bf6-4db6-acea-acdcb399304b" />
-      </ranges>
-    </file>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="1zxldkxFuuryPyV2g1tnJv1dxMj" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -123,8 +99,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/json-20210307.jar" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/javax.mail.jar" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="vcs.Subversion.SSH" />

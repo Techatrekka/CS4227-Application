@@ -55,7 +55,7 @@ public class RestaurantTerminal extends UserInterface {
 
         if(Objects.equals(user.getUserType(), "customer")) {
             System.out.println("You have " +  ((Customer) user).getLoyaltyPoints() + " loyalty points.");
-            System.out.println("1. Place an order 2. View Menus 3. View Previous Orders 4. Settings 5. Logout 6. Quit\nB = go back");
+            System.out.println("1. Place an order 2. View Menus 3. View Previous Orders 4. Settings 5. Logout 6. Quit");
             choice = getInput(1, 6);
             switch(choice) {
                 case 1:
@@ -86,7 +86,7 @@ public class RestaurantTerminal extends UserInterface {
         } else if(Objects.equals(user.getUserType(), "employee")) {
             String employeeType = ((Staff) user).getEmployeeType();
             if(employeeType.equalsIgnoreCase("manager")) {
-                System.out.println("1.Place Order 2. Menu Management 3. Employee Management 4. Stock Management 5. Settings 6. Logout 7. Quit\nB = go back");
+                System.out.println("1.Place Order 2. Menu Management 3. Employee Management 4. Stock Management 5. Settings 6. Logout 7. Quit");
                 choice = getInput(1, 7);
                 switch(choice) {
                     case 1:
@@ -115,7 +115,7 @@ public class RestaurantTerminal extends UserInterface {
                 }
             } else {
                 // if clerk then
-                System.out.println("1. Place Order 2. Stock Management 3. Logout 4. Quit\nB = go back");
+                System.out.println("1. Place Order 2. Stock Management 3. Logout 4. Quit");
                 choice = getInput(1, 4);
                 switch(choice) {
                     case 1:
@@ -139,6 +139,7 @@ public class RestaurantTerminal extends UserInterface {
 
     private void staffPlaceOrder() {
         System.out.println("Enter the user id of the user you'd like to place an order for");
+        System.out.println("B = go back");
         String idChoice = scanner.nextLine();
         if(inputB(idChoice)) return;
         int id = Integer.parseInt(idChoice);
