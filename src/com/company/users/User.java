@@ -1,16 +1,13 @@
 package com.company.users;
 
 import com.company.Database;
-import com.company.menu.Menu;
+import com.company.menu.*;
 import com.company.order.Order;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public abstract class User {
     private String userType;
@@ -27,6 +24,7 @@ public abstract class User {
         if(!toDo.equals("view:")) {
             System.out.println("Enter the id of the menu to " + toDo);
             int menuID = scanner.nextInt();
+            scanner.nextLine();
             return menuID;   
         }
 
@@ -66,27 +64,120 @@ public abstract class User {
     }
 
     public void placeOrder(int userId, ArrayList<Menu> restaurantMenus){
-        boolean addToOrder = true;
         Order newOrder = new Order();
-        double totalCost = 0.0;
+        boolean addToOrder = true;
+        double setMealCost = 0.0;
         while(addToOrder) {
-            int menuId = viewMenu(restaurantMenus, "order from:");
-            for(Menu menu : restaurantMenus) {
-                if(menu.getId() == menuId) System.out.println("\n" + menu);
-            }
-            System.out.println("Enter the id of the item you'd like to order");
-
-            System.out.println("Would you like to order anything else? y/n");
+            System.out.println("Would you like to order a meal deal, which includes a set meal and drink? y/n");
             String choice = scanner.nextLine();
-            if(choice.equalsIgnoreCase("n")) addToOrder = false;
+            if(choice.equalsIgnoreCase("y")) {
+                MealDirector director = new MealDirector();
+                SetMealBuilder builder = null;
+                System.out.println("Do you want to order a kids meal? Y / N");
+                choice = scanner.nextLine();
+                if (choice.equalsIgnoreCase("y")) {
+                    builder = new KidsMealBuilder();
+                } else {
+                    builder = new AdultMealBuilder();
+                }
+                SetMeal meal = director.createMeal(builder);
+                setMealCost += meal.getMealPrice();
+                System.out.println(meal);
+            } else {
+                int menuId = viewMenu(restaurantMenus, "order from:");
+                for(Menu menu : restaurantMenus) {
+                    if (menu.getId() == menuId) {
+                        System.out.println("\n" + menu);
+                        if (menu.getMenuItems().size() < 1) {
+                            System.out.println("Sorry, this menu has no items you can order. Press any key to select a new menu.");
+                            scanner.nextLine();
+                        } else {
+                            System.out.println("Enter the id of the item you'd like to order");
+                            choice = scanner.nextLine();
+                            MenuItem item = null;
+                            for(MenuItem menuItem : menu.getMenuItems()) {
+                                if(menuItem.getID() == Integer.parseInt(choice)) {
+                                    item = getOrderItem(menuItem instanceof Dish, Integer.parseInt(choice));
+                                }
+                            }
+                            System.out.println("Would you like a small, regular or large? S/R/L");
+                            choice = scanner.nextLine();
+                            if(choice.equalsIgnoreCase("s")) {
+                                MenuItem item2 = new SmallItemDecorator(item);
+                            } else if(choice.equalsIgnoreCase("l")) {
+                                item = new LargeItemDecorator(item);
+                            }
+                            System.out.println("ITEM IS " + item);
+                            newOrder.addMenuItem(item);
+                        }
+                    }
+                }
+            }
+            System.out.println("Would you like to order anything else? y/n");
+            choice = scanner.nextLine();
+            if (choice.equalsIgnoreCase("n")) addToOrder = false;
         }
+        JSONObject orderDetails = new JSONObject();
+        orderDetails.put("total_cost", String.valueOf(setMealCost));
+        orderDetails.put("user_id", userId);
+        int orderId = Database.writeToTable("order", orderDetails);
+        System.out.println("ORDER ID IS " + orderId);
+        for(MenuItem item : newOrder.getMenuItems()) {
+            JSONObject orderLineDetails = new JSONObject();
+            orderDetails.put("menu_item_id", item.getID());
+            orderDetails.put("order_id", orderId);
+            orderDetails.put("food", item instanceof Dish);
+            Database.writeToTable("orderlineitems", orderLineDetails);
+        }
+
         int time = (int) (Math.random() * 30) + 6;
-        newOrder.setTotalCost(totalCost);
-        System.out.println("Your order will be ready for collection in " + time + " minutes");
+        newOrder.setTotalCost(setMealCost + newOrder.getTotalCost());
+        System.out.println("Your order will be ready for collection in " + time + " minutes and will cost €" + setMealCost);
+    }
+
+    private MenuItem getOrderItem(boolean isFood, int id) {
+        MenuItem item;
+        ArrayList<String> cols = new ArrayList<>();
+        cols.add("name");
+        cols.add("price");
+        if(isFood) {
+            cols.add("description");
+            cols.add("allergens");
+            cols.add("dish_id");
+            JSONObject itemDetails = Database.readFromTable("dishes", id, cols, "dish_id", -1, "");
+            item = new Dish(itemDetails);
+        } else {
+            cols.add("alcoholic");
+            cols.add("beverage_id");
+            JSONObject itemDetails = Database.readFromTable("beverages", id, cols, "beverage_id", -1, "");
+            item = new Beverage(itemDetails);
+        }
+        return item;
+    }
+
+    public void getOrders() {
+        JSONArray allUserOrders = Database.readAllFromTable("order", this.getIdNum(), "user_id", "");
+        if(allUserOrders.length() > 0) {
+            for (Object orderObj : allUserOrders){
+                JSONObject orderDetails = (JSONObject)orderObj;
+                Order order = new Order(orderDetails);
+                System.out.println(order);
+                JSONArray allOrderItems = Database.readAllFromTable("orderlineitems", orderDetails.getInt("order_id"), "order_id", "");
+                for (Object orderItemObj : allOrderItems) {
+                    JSONObject orderItemDetails = (JSONObject) orderItemObj;
+                    MenuItem item = getOrderItem(orderItemDetails.getBoolean("food"), orderItemDetails.getInt("menu_item_id"));
+                    order.addMenuItem(item);
+                }
+                System.out.println(order);
+            }
+        } else {
+            System.out.println("You have no previous orders");
+        }
+
     }
 
     public void cancelOrder(int userId, int orderId){
-        // Implement use case
+        // Not implementing this use case
     }
 
     public static User createUser(boolean isNewUser, String email) {
