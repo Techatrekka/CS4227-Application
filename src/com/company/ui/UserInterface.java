@@ -1,5 +1,6 @@
 package com.company.ui;
 
+import java.io.Console;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -21,25 +22,33 @@ public abstract class UserInterface {
     }
 
     String getNewPassword() {
-        System.out.println("Password:");
-        String password = scanner.nextLine();
+        String password = getPassword("Enter ");
         checkQ(password);
         if(inputB(password)) {
             return "false";
         }
         password = checkPasswordLength(password);
-        System.out.println("Repeat password:");
-        String repeatPass = scanner.nextLine();
+        String repeatPass = getPassword("Repeat ");
         while(!Objects.equals(repeatPass, password)) {
-            System.out.println("Please enter the same password twice.\nPassword:");
-            password = scanner.nextLine();
+            password = getPassword("Please enter the same password twice.\n");
             checkQ(password);
             if(inputB(password)) {
                 return "false";
             }
             password = checkPasswordLength(password);
-            System.out.println("Repeat password:");
-            repeatPass = scanner.nextLine();
+            repeatPass = getPassword("Repeat ");
+        }
+        return password;
+    }
+
+    String getPassword(String repeat) {
+        String password;
+        Console console = System.console();
+        if(console != null) {
+            password = new String(console.readPassword(repeat + "Password: "));
+        } else {
+            System.out.println(repeat + "Password: ");
+            password = scanner.nextLine();
         }
         return password;
     }

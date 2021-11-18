@@ -167,7 +167,7 @@ public class Database {
         try {
             url = new URL("http://slynch.ie:8000/" + table);
             http = (HttpURLConnection)url.openConnection();
-            http.setRequestProperty("X-HTTP-Method-Override", "PATCH");
+            http.setRequestMethod("POST");
             http.setDoOutput(true);
             http.setRequestProperty("Accept", "application/json");
             http.setRequestProperty("Content-Type", "application/json");

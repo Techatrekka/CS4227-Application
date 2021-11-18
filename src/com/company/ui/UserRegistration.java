@@ -36,7 +36,7 @@ public class UserRegistration extends UserInterface {
         userDetails.put("fullname", name);
         userDetails.put("email", email);
         /*
-        //Ansible attempt
+        //Ansible - can't use on Windows OS
         try {
             FileWriter f2 = new FileWriter(System.getProperty("user.dir") + "\\src\\com\\company\\ansible\\accountInfo.json", false);
             f2.write(userDetails.toString());

@@ -7,6 +7,7 @@ import com.company.order.Order;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.xml.crypto.Data;
 import java.util.*;
 
 public abstract class User {
@@ -87,7 +88,6 @@ public abstract class User {
                 int menuId = viewMenu(restaurantMenus, "order from:");
                 for(Menu menu : restaurantMenus) {
                     if (menu.getId() == menuId) {
-                        System.out.println("\n" + menu);
                         if (menu.getMenuItems().size() < 1) {
                             System.out.println("Sorry, this menu has no items you can order. Press any key to select a new menu.");
                             scanner.nextLine();
@@ -107,7 +107,6 @@ public abstract class User {
                             } else if(choice.equalsIgnoreCase("l")) {
                                 item = new LargeItemDecorator(item);
                             }
-                            System.out.println("ITEM IS " + item);
                             newOrder.addMenuItem(item);
                         }
                     }
@@ -118,21 +117,22 @@ public abstract class User {
             if (choice.equalsIgnoreCase("n")) addToOrder = false;
         }
         JSONObject orderDetails = new JSONObject();
-        orderDetails.put("total_cost", String.valueOf(setMealCost));
+        newOrder.setTotalCost(setMealCost + newOrder.getTotalCost());
+        orderDetails.put("total_cost", String.valueOf(newOrder.getTotalCost()));
         orderDetails.put("user_id", userId);
         int orderId = Database.writeToTable("order", orderDetails);
-        System.out.println("ORDER ID IS " + orderId);
         for(MenuItem item : newOrder.getMenuItems()) {
             JSONObject orderLineDetails = new JSONObject();
-            orderDetails.put("menu_item_id", item.getID());
-            orderDetails.put("order_id", orderId);
-            orderDetails.put("food", item instanceof Dish);
-            Database.writeToTable("orderlineitems", orderLineDetails);
+            orderLineDetails.put("menu_item", item.getID());
+            orderLineDetails.put("order_id", orderId);
+            orderLineDetails.put("food", item instanceof Dish);
+            Database.writeToTable("orderlineitem", orderLineDetails);
         }
 
         int time = (int) (Math.random() * 30) + 6;
-        newOrder.setTotalCost(setMealCost + newOrder.getTotalCost());
-        System.out.println("Your order will be ready for collection in " + time + " minutes and will cost €" + setMealCost);
+        orderDetails.put("total_cost", newOrder.getTotalCost());
+        Database.updateTable("order", orderDetails);
+        System.out.println("Your order will be ready for collection in " + time + " minutes and will cost €" + newOrder.getTotalCost());
     }
 
     private MenuItem getOrderItem(boolean isFood, int id) {
@@ -161,11 +161,10 @@ public abstract class User {
             for (Object orderObj : allUserOrders){
                 JSONObject orderDetails = (JSONObject)orderObj;
                 Order order = new Order(orderDetails);
-                System.out.println(order);
-                JSONArray allOrderItems = Database.readAllFromTable("orderlineitems", orderDetails.getInt("order_id"), "order_id", "");
+                JSONArray allOrderItems = Database.readAllFromTable("orderlineitem", orderDetails.getInt("order_id"), "order_id", "");
                 for (Object orderItemObj : allOrderItems) {
                     JSONObject orderItemDetails = (JSONObject) orderItemObj;
-                    MenuItem item = getOrderItem(orderItemDetails.getBoolean("food"), orderItemDetails.getInt("menu_item_id"));
+                    MenuItem item = getOrderItem(orderItemDetails.getBoolean("food"), orderItemDetails.getInt("menu_item"));
                     order.addMenuItem(item);
                 }
                 System.out.println(order);

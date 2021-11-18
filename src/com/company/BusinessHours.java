@@ -29,11 +29,12 @@ public class BusinessHours implements Observable {
     }
 
     public boolean isOpenNow() {
+        System.out.println("NUM OBS is " + users.size());
         LocalDateTime now = LocalDateTime.now();
         if(!openingHours.containsKey(now.getDayOfWeek())) {
             isOpen = false;
             notifyObservers("Sorry, the restaurant is closed right now - you won't be able to place any orders.");
-        } else if(now.getHour() > this.getClosingTime(openingHours.get(now.getDayOfWeek())).getHour() || now.getHour() < openingHours.get(now.getDayOfWeek()).getHour()) {
+        } else if(now.getHour() > this.getClosingTime(openingHours.get(now.getDayOfWeek())).getHour() && now.getHour() < openingHours.get(now.getDayOfWeek()).getHour()) {
               isOpen = false;
             notifyObservers("Sorry, the restaurant is closed right now - you won't be able to place any orders.");
        } else {

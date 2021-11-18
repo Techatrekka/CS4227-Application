@@ -2,6 +2,8 @@ package com.company.ui;
 
 import com.company.Database;
 import org.json.JSONObject;
+
+import java.io.Console;
 import java.util.Scanner;
 
 public class UserLogin extends UserInterface {
@@ -26,14 +28,14 @@ public class UserLogin extends UserInterface {
     protected void displayLoginPrompt() {
         System.out.println("Enter Q on its own in the email field to shut down the system, or enter B to go back to the previous screen.");
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter Email address:");
+        System.out.println("Enter Email Address:");
         String email = scanner.nextLine();
         checkQ(email);
         if(inputB(email)) {
             return;
         }
-        System.out.println("Enter Password:");
-        String password = scanner.nextLine();
+        String password = getPassword("Enter ");
+
         JSONObject userDetails = Database.readFromUserTable(email,password);
         boolean validCredentials = userDetails.has("correct_pass");
         while(!validCredentials) {
@@ -44,8 +46,7 @@ public class UserLogin extends UserInterface {
                 this.setSuccessfulLogin(false);
                 return;
             }
-            System.out.println("Enter Password:");
-            password = scanner.nextLine();
+            password = getPassword("Enter ");
             userDetails = Database.readFromUserTable(email,password);
             validCredentials = userDetails.has("correct_pass");
         }

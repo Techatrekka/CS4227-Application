@@ -46,7 +46,6 @@ public class RestaurantTerminal extends UserInterface {
         System.out.println("\nWelcome, " + user.getFullName() + ".");
         while(userLogin.isSuccessfulLogin()) {
             displayHomeScreen();
-            businessHours.isOpenNow();
         }
     }
 
@@ -55,16 +54,15 @@ public class RestaurantTerminal extends UserInterface {
         int choice;
 
         if(Objects.equals(user.getUserType(), "customer")) {
-            Customer.addObservable((Customer) user, businessHours);
             System.out.println("You have " +  ((Customer) user).getLoyaltyPoints() + " loyalty points.");
             System.out.println("1. Place an order 2. View Menus 3. View Previous Orders 4. Settings 5. Logout 6. Quit\nB = go back");
             choice = getInput(1, 6);
             switch(choice) {
                 case 1:
-                    if(!businessHours.isOpenNow()) {
+                    if(businessHours.isOpenNow()) {
                         user.placeOrder(user.getIdNum(), restaurantMenus);
                     } else {
-                        System.out.println("Sorry, you can't place an order right now as the restaurant is closed.");
+                       break;
                     }
                     break;
                 case 2:
@@ -152,6 +150,7 @@ public class RestaurantTerminal extends UserInterface {
     }
 
     private void logout() {
+        if(user instanceof Customer) businessHours.removeObserver((Customer)user);
         user = null;
         userLogin.setEmail("");
         userLogin.setSuccessfulLogin(false);
@@ -237,6 +236,7 @@ public class RestaurantTerminal extends UserInterface {
                 userLogin.displayLoginPrompt();
                 if(userLogin.isSuccessfulLogin()) {
                     user = User.createUser(false, userLogin.getEmail());
+                    if(user instanceof Customer) Customer.addObservable((Customer) user, businessHours);
                 }
                 break;
             case 2:
