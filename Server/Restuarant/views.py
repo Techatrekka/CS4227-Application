@@ -121,7 +121,7 @@ def ordersApi(request,id=0):
         ordersSerializer =OrdersSerializer(data=orders)
         if (ordersSerializer.is_valid()):
             ordersSerializer.save()
-            return JsonResponse("Added Succesfully",safe=False)
+            return JsonResponse("Added Succesfully "+str(ordersSerializer.data['order_id']),safe=False)
         return JsonResponse("Unsuccessful",safe=False)
     elif request.method=='PUT':
         users_data=JSONParser().parse(request)
@@ -366,7 +366,7 @@ def orderlineitemsApi(request,id=0):
         orderLineItemsSerializer =OrderLineItemsSerializer(data=orderlineitems)
         if (orderLineItemsSerializer.is_valid()):
             orderLineItemsSerializer.save()
-            return JsonResponse("Added Succesfully",safe=False)
+            return JsonResponse("Added Succesfully "+str(orderLineItemsSerializer.data['orderlineitems_id']),safe=False)
         return JsonResponse("Unsuccessful",safe=False)
     elif request.method=='PUT':
         users_data=JSONParser().parse(request)
