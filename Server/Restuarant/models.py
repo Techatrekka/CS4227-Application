@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.aggregates import Count
 
 class Users(models.Model):
     user_id = models.AutoField(primary_key=True)
