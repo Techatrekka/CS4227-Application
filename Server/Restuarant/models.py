@@ -64,7 +64,7 @@ class MenuItem(models.Model):
     food = models.BooleanField()
 
 class OrderLineItems(models.Model):
-    OrderLineItems = models.AutoField(primary_key=True)
+    orderlineitems_id = models.AutoField(primary_key=True)
     order_id = models.ForeignKey(Orders,default=1,on_delete=models.CASCADE)
     menu_item = models.ForeignKey(MenuItem,default=1,on_delete=models.CASCADE)
     food = models.BooleanField()
