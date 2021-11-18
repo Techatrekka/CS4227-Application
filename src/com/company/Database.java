@@ -146,7 +146,7 @@ public class Database {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if((idNum != -1 || matchVal != "") && tableData != null){
+        if((idNum != -1 || !Objects.equals(matchVal, "")) && tableData != null){
             JSONArray matchedTableData = new JSONArray();
             for (Object obj : tableData){
                 JSONObject obj2 = (JSONObject)obj;
@@ -182,7 +182,6 @@ public class Database {
             for (int ch; (ch = stream2.read()) != -1; ) {
                 sb.append((char) ch);
             }
-            System.out.println(sb);
             String[] splitSb = sb.toString().split(" ");
             if(splitSb.length > 2) {
                 String num = splitSb[2].replace("\"", "");

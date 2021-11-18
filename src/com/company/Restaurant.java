@@ -19,11 +19,9 @@ public class Restaurant {
         JSONArray dbDishes = Database.readAllFromTable("dishes", -1, null, "");
         JSONArray dbBeverages = Database.readAllFromTable("beverages", -1, null, "");
 
-        
         MenuFactory menuFactory = new MenuFactory();
-        ArrayList<Menu> menus = new ArrayList<Menu>();
-        ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
-        menuItems.add(new Dish(-1, "", -1,"", null));
+        ArrayList<Menu> menus = new ArrayList<>();
+        ArrayList<MenuItem> menuItems = new ArrayList<>();
 
         for (Object obj : dbMenus){
             JSONObject obj2 = (JSONObject)obj;
@@ -39,8 +37,7 @@ public class Restaurant {
                         for(Object obj3 : dbDishes) {
                             JSONObject obj4 = (JSONObject) obj3;
                             if(obj2.getInt("dish_bev_id") == obj4.getInt("dish_id")) {
-                                String[] allergenList = obj4.getString("allergens").split(",");
-                                MenuItem dish = new Dish(obj4.getInt("dish_id"), obj4.getString("name"), Double.valueOf(obj4.getString("price")), obj4.getString("description"), Arrays.asList(allergenList));
+                                MenuItem dish = new Dish(obj4);
                                 menu.menuList.add(dish);
                             }
                         }
@@ -48,7 +45,7 @@ public class Restaurant {
                         for(Object obj3 : dbBeverages) {
                             JSONObject obj4 = (JSONObject) obj3;
                             if(obj2.getInt("dish_bev_id") == obj4.getInt("beverage_id")) {
-                                MenuItem beverage = new Beverage(obj4.getInt("beverage_id"), obj4.getString("name"), Double.valueOf(obj4.getString("price")), obj4.getBoolean("alcoholic"));
+                                MenuItem beverage = new Beverage(obj4);
                                 menu.menuList.add(beverage);
                             }
                         }
