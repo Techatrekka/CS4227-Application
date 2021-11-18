@@ -1,0 +1,205 @@
+Index: src/com/company/ui/RestaurantTerminal.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.company.ui;\r\n\r\nimport com.company.BusinessHours;\r\nimport com.company.Database;\r\nimport com.company.users.Customer;\r\nimport com.company.users.User;\r\nimport com.company.users.UserFactory;\r\nimport org.json.JSONArray;\r\nimport org.json.JSONObject;\r\n\r\nimport javax.xml.crypto.Data;\r\nimport java.io.IOException;\r\nimport java.net.HttpURLConnection;\r\nimport java.net.URL;\r\nimport java.util.*;\r\n\r\npublic class RestaurantTerminal {\r\n    BusinessHours businessHours = new BusinessHours();\r\n\r\n    private Scanner scanner = new Scanner(System.in);\r\n    private UserLogin userLogin;\r\n    private UserRegistration userRegistration;\r\n    private User user;\r\n\r\n    private static RestaurantTerminal single_instance = null;\r\n\r\n    private RestaurantTerminal() {\r\n        System.out.println(\"Welcome to JJ's Diner!\");\r\n    }\r\n\r\n    public static RestaurantTerminal getInstance()\r\n    {\r\n        if (single_instance == null)\r\n            single_instance = new RestaurantTerminal();\r\n\r\n        return single_instance;\r\n    }\r\n\r\n    public void run() {\r\n        System.out.println(businessHours.toString());\r\n\r\n        userLogin = new UserLogin();\r\n        userRegistration = new UserRegistration();\r\n\r\n        displayHomeScreen();\r\n\r\n        while(!userLogin.isSuccessfulLogin()) {\r\n            displayHomeScreen();\r\n        }\r\n\r\n        createUser();\r\n\r\n        System.out.println(\"\\nWelcome, \" + user.getFullName() + \". You have \" + \"loyalty points.\");\r\n        businessHours.isOpenNow();\r\n\r\n        System.out.println(\"\\nEnter a number to choose what you'd like to do:\");\r\n        // if customer then this - need var for user type\r\n        if(Objects.equals(user.getUserType(), \"customer\")) {\r\n            System.out.println(\"1. Place an order 2. View Menus 3. View Previous Orders 4. Settings 5. Logout 6. Quit\");\r\n\r\n        } else if(Objects.equals(user.getUserType(), \"employee\")) {\r\n            // if clerk then\r\n            // if manager then can add/remove employees - this includes account setup, they can't register themselves\r\n        }\r\n\r\n    }\r\n\r\n    private void createUser() {\r\n        UserFactory userFactory = new UserFactory();\r\n        JSONObject existingUser = Database.readFromUserTable(userLogin.getEmail(), null);\r\n        List<String> cols = new ArrayList<>();\r\n        if(Objects.equals(existingUser.getString(\"userType\"), \"employee\")) {\r\n            cols.add(\"salary\");\r\n            cols.add(\"employee_Type\");\r\n            JSONObject employeeTypeSalary = Database.readFromTable(\"employeesalary\", existingUser.getInt(\"userID\"), cols);\r\n            existingUser.put(\"salary\", employeeTypeSalary.getDouble(\"salary\"));\r\n            existingUser.put(\"employee_type\", employeeTypeSalary.getString(\"employee_type\"));\r\n        } else {\r\n            cols.add(\"loyalty_points\");\r\n            JSONObject userLoyalty = Database.readFromTable(\"loyalty\", existingUser.getInt(\"userID\"), cols);\r\n            existingUser.put(\"loyaltyPoints\", userLoyalty.getInt(\"loyalty_points\"));\r\n        }\r\n\r\n        user = userFactory.createUser(existingUser);\r\n        Customer.addObservable((Customer) user, businessHours);\r\n    }\r\n\r\n    private void changePassword() {\r\n        System.out.println(\"Do you want to change your password? 0 = No, 1 = Yes\");\r\n        int choice = getInput(0,1);\r\n        if(choice == 1) {\r\n            // change password here\r\n        }\r\n    }\r\n\r\n    private void displayHomeScreen() {\r\n        System.out.println(\"Enter a number to choose what you'd like to do\");\r\n        System.out.println(\"1. Login 2. Register 3. Quit\");\r\n        int numChoice = getInput(1, 3);\r\n\r\n        switch (numChoice) {\r\n            case 1:\r\n                userLogin.displayLoginPrompt();\r\n                break;\r\n            case 2:\r\n                boolean success = userRegistration.registerNewUser();\r\n                userLogin.setSuccessfulLogin(success);\r\n                if(success) changePassword();\r\n                break;\r\n            case 3:\r\n                System.out.println(\"Shutting down system.\");\r\n                System.exit(0);\r\n                break;\r\n        }\r\n    }\r\n\r\n    private int getInput(int min, int max) {\r\n        String choice = scanner.nextLine();\r\n\r\n        while(!isValid(choice, min, max)) {\r\n            System.out.println(\"Please enter a valid number.\");\r\n            choice = scanner.nextLine();\r\n        }\r\n        return Integer.parseInt(choice);\r\n    }\r\n\r\n    private boolean isValid(String choice, int min, int max) {\r\n        try {\r\n            int numChoice = Integer.parseInt(choice);\r\n            if(numChoice > max || numChoice < min) {\r\n                return false;\r\n            }\r\n        } catch(NumberFormatException e) {\r\n            return false;\r\n        }\r\n        return true;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/company/ui/RestaurantTerminal.java b/src/com/company/ui/RestaurantTerminal.java
+--- a/src/com/company/ui/RestaurantTerminal.java	(revision 2ea308aa5fc2b90478032dde58d8b57ccff0b854)
++++ b/src/com/company/ui/RestaurantTerminal.java	(date 1636753130400)
+@@ -3,24 +3,21 @@
+ import com.company.BusinessHours;
+ import com.company.Database;
+ import com.company.users.Customer;
++import com.company.users.Staff;
+ import com.company.users.User;
+ import com.company.users.UserFactory;
+-import org.json.JSONArray;
+ import org.json.JSONObject;
+ 
+-import javax.xml.crypto.Data;
+-import java.io.IOException;
+-import java.net.HttpURLConnection;
+-import java.net.URL;
+ import java.util.*;
+ 
+-public class RestaurantTerminal {
++public class RestaurantTerminal extends UserInterface {
+     BusinessHours businessHours = new BusinessHours();
+ 
+     private Scanner scanner = new Scanner(System.in);
+     private UserLogin userLogin;
+     private UserRegistration userRegistration;
+     private User user;
++    private JSONObject currentUser;
+ 
+     private static RestaurantTerminal single_instance = null;
+ 
+@@ -48,40 +45,67 @@
+             displayHomeScreen();
+         }
+ 
+-        createUser();
+-
+-        System.out.println("\nWelcome, " + user.getFullName() + ". You have " + "loyalty points.");
++        System.out.println("\nWelcome, " + user.getFullName() + ".");
+         businessHours.isOpenNow();
+ 
+         System.out.println("\nEnter a number to choose what you'd like to do:");
++
+         // if customer then this - need var for user type
+         if(Objects.equals(user.getUserType(), "customer")) {
++            System.out.println("You have " +  ((Customer) user).getLoyaltyPoints() + " loyalty points.");
+             System.out.println("1. Place an order 2. View Menus 3. View Previous Orders 4. Settings 5. Logout 6. Quit");
+-
++            String choice = scanner.nextLine();
++            if(Objects.equals(choice, "1")) changePassword();
+         } else if(Objects.equals(user.getUserType(), "employee")) {
+-            // if clerk then
+-            // if manager then can add/remove employees - this includes account setup, they can't register themselves
++            String employeeType = ((Staff) user).getEmployeeType();
++            if(employeeType.equalsIgnoreCase("manager")) {
++                // if manager then can add/remove employees - this includes account setup, they can't register themselves
++            } else {
++                // if clerk then
++            }
+         }
+-
+     }
+ 
+     private void createUser() {
+         UserFactory userFactory = new UserFactory();
+-        JSONObject existingUser = Database.readFromUserTable(userLogin.getEmail(), null);
++        System.out.println("user reg email is " + userRegistration.getNewUserEmail());
++        System.out.println("user login email is " + userLogin.getEmail());
+         List<String> cols = new ArrayList<>();
+-        if(Objects.equals(existingUser.getString("userType"), "employee")) {
+-            cols.add("salary");
+-            cols.add("employee_Type");
+-            JSONObject employeeTypeSalary = Database.readFromTable("employeesalary", existingUser.getInt("userID"), cols);
+-            existingUser.put("salary", employeeTypeSalary.getDouble("salary"));
+-            existingUser.put("employee_type", employeeTypeSalary.getString("employee_type"));
++        JSONObject userLoyalty = new JSONObject();
++
++        if(Objects.equals(userLogin.getEmail(), "") ) {
++            System.out.println("user login is empty");
++            currentUser = Database.readFromUserTable(userRegistration.getNewUserEmail(), null);
++            if(Objects.equals(currentUser.getString("userType"), "customer")) {
++                userLoyalty.put("user_id", currentUser.getInt("userID"));
++                userLoyalty.put("loyalty_points", 0);
++                if(Database.writeToDatabase("loyalty", userLoyalty)) {
++                    System.out.println("created in loyalty table");
++                } else {
++                    System.out.println("done fucked");
++                }
++                currentUser.put("loyalty_points", 0);
++            }
+         } else {
+-            cols.add("loyalty_points");
+-            JSONObject userLoyalty = Database.readFromTable("loyalty", existingUser.getInt("userID"), cols);
+-            existingUser.put("loyaltyPoints", userLoyalty.getInt("loyalty_points"));
++            System.out.println("user reg is empty");
++            currentUser = Database.readFromUserTable(userLogin.getEmail(), null);
++            if(Objects.equals(currentUser.getString("userType"), "customer")) {
++                cols.add("loyalty_points");
++                userLoyalty = Database.readFromTable("loyalty", currentUser.getInt("userID"), cols);
++                System.out.println(userLoyalty);
++                currentUser.put("loyalty_points", userLoyalty.getInt("loyalty_points"));
++            }
+         }
+ 
+-        user = userFactory.createUser(existingUser);
++        System.out.println(currentUser);
++        if(Objects.equals(currentUser.getString("userType"), "employee")) {
++            cols.add("salary");
++            cols.add("employee_Type");
++            JSONObject employeeTypeSalary = Database.readFromTable("employeesalary", currentUser.getInt("userID"), cols);
++            currentUser.put("salary", employeeTypeSalary.getDouble("salary"));
++            currentUser.put("employee_type", employeeTypeSalary.getString("employee_type"));
++        }
++        user = userFactory.createUser(currentUser);
+         Customer.addObservable((Customer) user, businessHours);
+     }
+ 
+@@ -90,6 +114,22 @@
+         int choice = getInput(0,1);
+         if(choice == 1) {
+             // change password here
++            String newPass = getNewPassword();
++            System.out.println(currentUser);
++            currentUser.put("password", newPass);
++            System.out.println(currentUser);
++            if(Database.deleteFromTable("user", "user_id", currentUser.getInt("userID"))) {
++                JSONObject userNewPass = currentUser;
++                userNewPass.remove("loyalty_points");
++                if(Database.writeToDatabase("user", userNewPass)) {
++                    System.out.println("Password changed successfully");
++                } else {
++                    System.out.println("Sorry, password was not changed.");
++                }
++            } else {
++                System.out.println("Sorry, password was not changed.");
++            }
++
+         }
+     }
+ 
+@@ -101,11 +141,16 @@
+         switch (numChoice) {
+             case 1:
+                 userLogin.displayLoginPrompt();
++                if(userLogin.isSuccessfulLogin()) createUser();
+                 break;
+             case 2:
+                 boolean success = userRegistration.registerNewUser();
+                 userLogin.setSuccessfulLogin(success);
+-                if(success) changePassword();
++                if(success) {
++                    createUser();
++                    changePassword();
++                }
++
+                 break;
+             case 3:
+                 System.out.println("Shutting down system.");
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"55c6a95f-0bf6-4db6-acea-acdcb399304b\" name=\"Changes\" comment=\"Create MenuItem interface\">\r\n      <change afterPath=\"$PROJECT_DIR$/lib/json-20210307.jar\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/com/company/users/UserFactory.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/cs4125-restaurant-project.iml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/cs4125-restaurant-project.iml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/Main.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/Main.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/com/company/Main.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/com/company/Main.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/com/company/users/LoyaltyPoints.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/com/company/users/LoyaltyPoints.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/com/company/users/customer.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/com/company/users/Customer.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/com/company/users/manager.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/com/company/users/Manager.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/com/company/users/staff.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/com/company/users/Staff.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/com/company/users/user.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/com/company/users/User.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"users\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1zxldkxFuuryPyV2g1tnJv1dxMj\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectView\">\r\n    <navigator currentView=\"ProjectPane\" proportions=\"\" version=\"1\" splitterProportion=\"0.5\">\r\n      <flattenPackages />\r\n      <showMembers />\r\n      <showModules />\r\n      <showLibraryContents />\r\n      <hideEmptyPackages />\r\n      <abbreviatePackageNames />\r\n      <autoscrollToSource />\r\n      <autoscrollFromSource />\r\n      <sortByType />\r\n    </navigator>\r\n    <panes>\r\n      <pane id=\"Scope\" />\r\n      <pane id=\"PackagesPane\" />\r\n      <pane id=\"ProjectPane\">\r\n        <subPane>\r\n          <PATH>\r\n            <PATH_ELEMENT>\r\n              <option name=\"myItemId\" value=\"untitled104\" />\r\n              <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\r\n            </PATH_ELEMENT>\r\n          </PATH>\r\n          <PATH>\r\n            <PATH_ELEMENT>\r\n              <option name=\"myItemId\" value=\"untitled104\" />\r\n              <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\r\n            </PATH_ELEMENT>\r\n            <PATH_ELEMENT>\r\n              <option name=\"myItemId\" value=\"untitled104\" />\r\n              <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\r\n            </PATH_ELEMENT>\r\n          </PATH>\r\n          <PATH>\r\n            <PATH_ELEMENT>\r\n              <option name=\"myItemId\" value=\"untitled104\" />\r\n              <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\r\n            </PATH_ELEMENT>\r\n            <PATH_ELEMENT>\r\n              <option name=\"myItemId\" value=\"untitled104\" />\r\n              <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\r\n            </PATH_ELEMENT>\r\n            <PATH_ELEMENT>\r\n              <option name=\"myItemId\" value=\"src\" />\r\n              <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\r\n            </PATH_ELEMENT>\r\n            <PATH_ELEMENT>\r\n              <option name=\"myItemId\" value=\"company\" />\r\n              <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\r\n            </PATH_ELEMENT>\r\n          </PATH>\r\n        </subPane>\r\n      </pane>\r\n    </panes>\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/lib/json-20210307.jar\" />\r\n    <property name=\"project.structure.last.edited\" value=\"Modules\" />\r\n    <property name=\"project.structure.proportion\" value=\"0.15\" />\r\n    <property name=\"project.structure.side.proportion\" value=\"0.2\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"vcs.Subversion.SSH\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"G:\\My Drive\\Uni\\Year 4 Semester 1\\CS4125 - Systems Analysis\\Project\\cs4125-restaurant-project\\lib\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.company.Main\" />\r\n      <module name=\"cs4125-restaurant-project\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"file://$PROJECT_DIR$\" />\r\n      <RunnerSettings RunnerId=\"Run\" />\r\n      <ConfigurationWrapper RunnerId=\"Run\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Main\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"SvnConfiguration\">\r\n    <configuration>C:\\Users\\Nicole\\AppData\\Roaming\\Subversion</configuration>\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"55c6a95f-0bf6-4db6-acea-acdcb399304b\" name=\"Changes\" comment=\"\" />\r\n      <created>1635097714009</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1635097714009</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Create project with basic main class\">\r\n      <created>1635097844776</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1635097844776</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Create project with basic main class\">\r\n      <created>1635098921425</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1635098921425</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Create MenuItem interface\">\r\n      <created>1635109448325</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1635109448325</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"4\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"CUSTOM_BOOLEAN_PROPERTIES\">\r\n                <map>\r\n                  <entry key=\"Show.Git.Branches\" value=\"true\" />\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_FILTERS\">\r\n      <map>\r\n        <entry key=\"User\">\r\n          <value>\r\n            <list>\r\n              <RecentGroup>\r\n                <option name=\"FILTER_VALUES\">\r\n                  <option value=\"*\" />\r\n                </option>\r\n              </RecentGroup>\r\n            </list>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Create project with basic main class\" />\r\n    <MESSAGE value=\"Create MenuItem interface\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Create MenuItem interface\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 2ea308aa5fc2b90478032dde58d8b57ccff0b854)
++++ b/.idea/workspace.xml	(date 1636753104196)
+@@ -2,17 +2,8 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="55c6a95f-0bf6-4db6-acea-acdcb399304b" name="Changes" comment="Create MenuItem interface">
+-      <change afterPath="$PROJECT_DIR$/lib/json-20210307.jar" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/com/company/users/UserFactory.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/cs4125-restaurant-project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/cs4125-restaurant-project.iml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/Main.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/com/company/users/LoyaltyPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/LoyaltyPoints.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/com/company/users/customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/Customer.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/com/company/users/manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/Manager.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/com/company/users/staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/Staff.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/com/company/users/user.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/User.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/com/company/ui/RestaurantTerminal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/ui/RestaurantTerminal.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -98,8 +89,8 @@
+   <component name="PropertiesComponent">
+     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/json-20210307.jar" />
+-    <property name="project.structure.last.edited" value="Modules" />
++    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/javax.mail.jar" />
++    <property name="project.structure.last.edited" value="Libraries" />
+     <property name="project.structure.proportion" value="0.15" />
+     <property name="project.structure.side.proportion" value="0.2" />
+     <property name="settings.editor.selected.configurable" value="vcs.Subversion.SSH" />

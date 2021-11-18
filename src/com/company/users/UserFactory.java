@@ -1,4 +1,4 @@
-package com.company.users;
+package com.company.users.user;
 import org.json.JSONObject;
 
 import java.util.Objects;
