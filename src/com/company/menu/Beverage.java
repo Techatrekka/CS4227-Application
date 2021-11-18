@@ -1,14 +1,16 @@
 package com.company.menu;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class Beverage extends MenuItem {
     boolean alcoholic;
-    public Beverage(int id, String name, double price, boolean alcoholic){
-        super.id = id;
-        super.name = name;
-        super.price = price;
-        this.alcoholic = alcoholic;
+    public Beverage(JSONObject bevDetails){
+        super.id = bevDetails.getInt("beverage_id");
+        super.name = bevDetails.getString("name");
+        super.price = bevDetails.getDouble("price");
+        this.alcoholic = bevDetails.getBoolean("alcoholic");
     }
     @Override
     public double getPrice() {
@@ -31,10 +33,10 @@ public class Beverage extends MenuItem {
     }
     public String toString(){
         if(alcoholic){
-            return super.toString()+"\nThis beverage is alcoholic.\n";
+            return super.toString()+"\n\tAlcoholic: Yes\n";
         }
         else{
-            return super.toString()+"\nThis beverage is non-alcoholic.\n";
+            return super.toString()+"\n\tAlcoholic: No\n";
         }
     }
 }

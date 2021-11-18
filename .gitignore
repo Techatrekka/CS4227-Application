@@ -1,4 +1,4 @@
-/src/com/company/*.class
-/.idea/
-/out/
+\src\com\company\*.class
+\.idea\
+\out\
 .DS_Store

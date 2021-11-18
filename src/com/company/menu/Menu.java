@@ -57,8 +57,8 @@ public class Menu {
         this.menuList = items;
     }
     public void printMenu(){
-        for(int x=0; x<menuList.size();x++){
-            System.out.println(menuList.get(x).getName());
+        for (MenuItem menuItem : menuList) {
+            System.out.println(menuItem.getName());
         }
     }
     public MenuItem addNewMenuItem(String choice) {
@@ -80,7 +80,7 @@ public class Menu {
                 alco = scanner.nextLine();
             }
 
-            boolean isAlcoholic = (alco.equals("y")) ? true : false;
+            boolean isAlcoholic = alco.equals("y");
             newMenuItem.put("alcoholic", isAlcoholic);
             int id = Database.writeToTable("beverages", newMenuItem);
             JSONObject newItem = new JSONObject();
@@ -88,7 +88,7 @@ public class Menu {
             newItem.put("food", false);
             newItem.put("menu_id", this.getId());
             Database.writeToTable("menuitem", newItem);
-            MenuItem beverage = new Beverage(id, name, price, isAlcoholic);
+            MenuItem beverage = new Beverage(newItem);
             menuList.add(beverage);
             return beverage;
         }
@@ -107,7 +107,7 @@ public class Menu {
             newItem.put("food", true);
             newItem.put("menu_id", this.getId());
             Database.writeToTable("menuitem", newItem);
-            MenuItem dish = new Dish(id, name, price, desc, Arrays.asList(allergenList));
+            MenuItem dish = new Dish(newItem);
             menuList.add(dish);
             return dish;
         }
@@ -118,14 +118,12 @@ public class Menu {
             System.out.println(this.getMenuItems());
             System.out.println("Enter the id of the item you'd like to remove from the menu:");
             String choice = scanner.nextLine();
-            int id = Integer.valueOf(choice);
+            int id = Integer.parseInt(choice);
             ArrayList<String> cols = new ArrayList<>();
             cols.add("menu_item");
             JSONObject menuItemDetails = Database.readFromTable("menuitem", id, cols, "dish_bev_id", this.getId(), "menu_id");
             if(Database.deleteFromTable("menuitem", cols.get(0), menuItemDetails.getInt("menu_item"))) {
-                for(MenuItem menuItem : menuList) {
-                    if(id == menuItem.getID()) menuList.remove(menuItem);
-                }
+                menuList.removeIf(menuItem -> id == menuItem.getID());
                 return true;
             }
         } else {
@@ -139,18 +137,14 @@ public class Menu {
         StringBuilder items = new StringBuilder();
         if(menuList != null && menuList.size() > 0) {
             for(MenuItem item : menuList) {
-                System.out.println(item);
-                items.append(item.toString()).append("\n");
+                items.append(item.toString());
            }
         } else {
-            if(this.getId() == 4) {
-                System.out.println("wHY HERE?");
-            }
-            items.append("None");
+            items.append("\tNone\n");
         }
         return  "Menu ID: " + menuID +
                 " Menu name: " + name +
-                " Menu Date: " + dateCreated.toString() +
+                " Date Created: " + dateCreated.toString() +
                 "\nMenu Items: \n" + items;
     }
 

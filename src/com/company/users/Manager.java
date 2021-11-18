@@ -65,7 +65,7 @@ public class Manager extends Staff {
         System.out.println("List of Employees: ");
         for (Object obj : allStaff){
             JSONObject obj2 = (JSONObject)obj;
-            List<String> salaryList = new ArrayList<String>();
+            List<String> salaryList = new ArrayList<>();
             salaryList.add("salary");
             salaryList.add("employee_type");
             JSONObject salary = Database.readFromTable("employeesalary", obj2.getInt("user_id"), salaryList, "user_id", -1, "");
@@ -116,7 +116,7 @@ public class Manager extends Staff {
         String description = scanner.nextLine();
         System.out.println("Is this a set menu? y/n");
         String specialMenu = scanner.nextLine();
-        if(specialMenu.toUpperCase().equals("Y")){
+        if(specialMenu.equalsIgnoreCase("Y")){
             System.out.println("How much does it cost?");
             specialMenu = scanner.nextLine();
             menuObj.put("set_menu_price", specialMenu);
@@ -124,7 +124,7 @@ public class Manager extends Staff {
         }else{
             System.out.println("Does this menu have a discount on it? y/n");
             specialMenu = scanner.nextLine();
-            if(specialMenu.toUpperCase().equals("Y")){
+            if(specialMenu.equalsIgnoreCase("Y")){
                 System.out.println("How much of a discount does this menu have?");
                 specialMenu = scanner.nextLine();
                 menuObj.put("set_menu_price", "0.0");
@@ -150,14 +150,14 @@ public class Manager extends Staff {
 
         JSONObject editedMenu = new JSONObject();
         
-        if(newName != ""){
+        if(!Objects.equals(newName, "")){
             editedMenu.put("name", newName);
         }
-        if(newDes != ""){
+        if(!Objects.equals(newDes, "")){
             editedMenu.put("description", newDes);
         }
 
-        if(newName != "" || newDes != ""){
+        if(!Objects.equals(newName, "") || !Objects.equals(newDes, "")){
             editedMenu.put("menu_id", menu.getId());
 
             if (Database.updateTable("menu", editedMenu)){
@@ -181,6 +181,7 @@ public class Manager extends Staff {
                 menu.addNewMenuItem(choice2);
             } else {
                 // get existing items
+                System.out.println("Sorry, this use case was not implemented");
             }
         } else {
             menu.removeMenuItem();
@@ -207,14 +208,14 @@ public class Manager extends Staff {
     }
 
     public void payStaff(){
-        // code
+        // Use case not implemented
     }
 
     public String askAboutAttr(String attribute){
         String newAttribute = "";
         System.out.println("Do you want to change the menu " + attribute + "? y/n");
         String input = scanner.nextLine();
-        if(input.toUpperCase().equals("Y")){
+        if(input.equalsIgnoreCase("Y")){
             System.out.println("Enter the new menu " + attribute);
             newAttribute = scanner.nextLine();
         }

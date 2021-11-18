@@ -146,7 +146,7 @@ public class Database {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if((idNum != -1 || matchVal != "") && tableData != null){
+        if((idNum != -1 || !Objects.equals(matchVal, "")) && tableData != null){
             JSONArray matchedTableData = new JSONArray();
             for (Object obj : tableData){
                 JSONObject obj2 = (JSONObject)obj;
@@ -167,7 +167,7 @@ public class Database {
         try {
             url = new URL("http://slynch.ie:8000/" + table);
             http = (HttpURLConnection)url.openConnection();
-            http.setRequestProperty("X-HTTP-Method-Override", "PATCH");
+            http.setRequestMethod("POST");
             http.setDoOutput(true);
             http.setRequestProperty("Accept", "application/json");
             http.setRequestProperty("Content-Type", "application/json");
@@ -182,7 +182,6 @@ public class Database {
             for (int ch; (ch = stream2.read()) != -1; ) {
                 sb.append((char) ch);
             }
-            System.out.println(sb);
             String[] splitSb = sb.toString().split(" ");
             if(splitSb.length > 2) {
                 String num = splitSb[2].replace("\"", "");

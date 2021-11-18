@@ -43,32 +43,33 @@ public class RestaurantTerminal extends UserInterface {
         while(!userLogin.isSuccessfulLogin()) {
             displayLoginScreen();
         }
-
+        System.out.println("\nWelcome, " + user.getFullName() + ".");
         while(userLogin.isSuccessfulLogin()) {
-            System.out.println("\nWelcome, " + user.getFullName() + ".");
             displayHomeScreen();
         }
     }
 
     private void displayHomeScreen() {
-        businessHours.isOpenNow();
         System.out.println("\nEnter a number to choose what you'd like to do:");
         int choice;
 
         if(Objects.equals(user.getUserType(), "customer")) {
-            Customer.addObservable((Customer) user, businessHours);
             System.out.println("You have " +  ((Customer) user).getLoyaltyPoints() + " loyalty points.");
-            System.out.println("1. Place an order 2. View Menus 3. View Previous Orders 4. Settings 5. Logout 6. Quit");
+            System.out.println("1. Place an order 2. View Menus 3. View Previous Orders 4. Settings 5. Logout 6. Quit\nB = go back");
             choice = getInput(1, 6);
             switch(choice) {
                 case 1:
-                    user.placeOrder(user.getIdNum());
+                    if(businessHours.isOpenNow()) {
+                        user.placeOrder(user.getIdNum(), restaurantMenus);
+                    } else {
+                       break;
+                    }
                     break;
                 case 2:
                     user.viewMenu(restaurantMenus, "view:");
                     break;
                 case 3:
-                    // @TODO: get previous orders for user from DB, user.getOrders()
+                    user.getOrders();
                     break;
                 case 4:
                     changePassword();
@@ -79,17 +80,17 @@ public class RestaurantTerminal extends UserInterface {
                 case 6:
                     System.out.println("Shutting down system...");
                     System.exit(0);
+                default:
+                    break;
             }
         } else if(Objects.equals(user.getUserType(), "employee")) {
             String employeeType = ((Staff) user).getEmployeeType();
             if(employeeType.equalsIgnoreCase("manager")) {
-                System.out.println("1.Place Order 2. Menu Management 3. Employee Management 4. Stock Management 5. Settings 6. Logout 7. Quit");
+                System.out.println("1.Place Order 2. Menu Management 3. Employee Management 4. Stock Management 5. Settings 6. Logout 7. Quit\nB = go back");
                 choice = getInput(1, 7);
                 switch(choice) {
                     case 1:
-                        System.out.println("Enter the user id of the user you'd like to place an order for");
-                        // @TODO: get input. Check if valid id in DB
-                        user.placeOrder(1);
+                        staffPlaceOrder();
                         break;
                     case 2:
                         menuManagement();
@@ -109,16 +110,16 @@ public class RestaurantTerminal extends UserInterface {
                     case 7:
                         System.out.println("Shutting down system...");
                         System.exit(0);
+                    default:
+                        break;
                 }
             } else {
                 // if clerk then
-                System.out.println("1. Place Order 2. Stock Management 3. Logout 4. Quit");
+                System.out.println("1. Place Order 2. Stock Management 3. Logout 4. Quit\nB = go back");
                 choice = getInput(1, 4);
                 switch(choice) {
                     case 1:
-                        System.out.println("Enter the user id of the user you'd like to place an order for");
-                        // @TODO: get input. Check if valid id in DB
-                        user.placeOrder(1);
+                        staffPlaceOrder();
                         break;
                     case 2:
                         stockManagement();
@@ -129,12 +130,27 @@ public class RestaurantTerminal extends UserInterface {
                     case 4:
                         System.out.println("Shutting down system...");
                         System.exit(0);
+                    default:
+                        break;
                 }
             }
         }
     }
 
+    private void staffPlaceOrder() {
+        System.out.println("Enter the user id of the user you'd like to place an order for");
+        String idChoice = scanner.nextLine();
+        if(inputB(idChoice)) return;
+        int id = Integer.parseInt(idChoice);
+        if(businessHours.isOpenNow()) {
+            user.placeOrder(id, restaurantMenus);
+        } else {
+            System.out.println("Sorry, you can't place an order right now as the restaurant is closed.");
+        }
+    }
+
     private void logout() {
+        if(user instanceof Customer) businessHours.removeObserver((Customer)user);
         user = null;
         userLogin.setEmail("");
         userLogin.setSuccessfulLogin(false);
@@ -143,15 +159,14 @@ public class RestaurantTerminal extends UserInterface {
     }
 
     private void stockManagement() {
-        // @TODO: implement this
-        System.out.println("1. ");
+        System.out.println("1. View stock 2. Order stock");
+        System.out.println("Sorry, this use case was not implemented");
     }
 
     private void employeeManagement() {
-        System.out.println("1. Add Employee 2. View Employees 3. Edit Employee 4. Remove Employee");
+        System.out.println("1. Add Employee 2. View Employees 3. Edit Employee 4. Remove Employee\nB = go back");
         int choice = getInput(1, 4);
         switch (choice) {
-            // @TODO: implement all these methods inside Manager class
             case 1:
                 ((Manager) user).addStaffMember();
                 break;
@@ -169,14 +184,13 @@ public class RestaurantTerminal extends UserInterface {
 
     private void menuManagement() {
         System.out.println("1. Create Menu 2. Edit Menu 3. Delete Menu 4. View Menus");
-        System.out.println("NB: You can add/remove menu items from the edit menu section.");
+        System.out.println("NB: You can add/remove menu items from the edit menu section. B = go back.");
         int choice = getInput(1, 4);
         switch(choice) {
             case 1:
                 restaurantMenus.add(((Manager) user).makeMenu());
                 break;
             case 2:
-                // read menus from database and ask which to edit
                 int menuID = user.viewMenu(restaurantMenus, "edit:");
                 for(Menu menu : restaurantMenus) {
                     if(menu.getId() == menuID) {
@@ -185,14 +199,9 @@ public class RestaurantTerminal extends UserInterface {
                 }
                 break;
             case 3:
-                // read menus from database and ask which to delete
                 menuID = user.viewMenu(restaurantMenus, "delete:");
                 ((Manager) user).deleteMenu(menuID);
-                for (Menu menu : restaurantMenus){
-                    if(menu.getId() == menuID){
-                        restaurantMenus.remove(menu);
-                    }
-                }
+                restaurantMenus.removeIf(menu -> menu.getId() == menuID);
                 break;
             case 4:
                 user.viewMenu(restaurantMenus, "view:");
@@ -227,6 +236,7 @@ public class RestaurantTerminal extends UserInterface {
                 userLogin.displayLoginPrompt();
                 if(userLogin.isSuccessfulLogin()) {
                     user = User.createUser(false, userLogin.getEmail());
+                    if(user instanceof Customer) Customer.addObservable((Customer) user, businessHours);
                 }
                 break;
             case 2:
@@ -245,7 +255,7 @@ public class RestaurantTerminal extends UserInterface {
 
     private int getInput(int min, int max) {
         String choice = scanner.nextLine();
-
+        if(inputB(choice)) return -1;
         while(!isValid(choice, min, max)) {
             System.out.println("Please enter a valid number.");
             choice = scanner.nextLine();
