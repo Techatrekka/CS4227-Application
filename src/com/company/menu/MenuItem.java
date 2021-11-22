@@ -1,9 +1,9 @@
 package com.company.menu;
 
 public abstract class MenuItem{
-    public String name;
-    public double price;
-    public int id;
+    protected String name;
+    protected double price;
+    protected int id;
     //public ArrayList<>
 
     public double getPrice(){

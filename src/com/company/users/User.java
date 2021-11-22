@@ -15,7 +15,7 @@ public abstract class User {
     private int idNum;
     private String fullName;
     private String email;
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
     public int viewMenu(ArrayList<Menu> restaurantMenus, String toDo){
         for(Menu menu : restaurantMenus) {

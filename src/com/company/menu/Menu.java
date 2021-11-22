@@ -13,11 +13,11 @@ import org.json.JSONObject;
 
 public class Menu {
     public ArrayList<MenuItem> menuList;
-    int menuID;
-    String name;
-    String description;
-    LocalDate dateCreated;
-    Scanner scanner = new Scanner(System.in);
+    private int menuID;
+    private String name;
+    protected String description;
+    private LocalDate dateCreated;
+    private Scanner scanner = new Scanner(System.in);
 
     public Menu(int id, String name,String description, LocalDate date){
         this.menuID = id;

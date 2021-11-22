@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 
 public class SetMenu extends Menu {
-    double set_menu_price = 0.0;
+    protected double setMenuPrice = 0.0;
 
-    public SetMenu(int id, String name, String description, LocalDate date, double set_menu_price) {
+    public SetMenu(int id, String name, String description, LocalDate date, double setMenuPrice) {
         super(id, name, description, date);
-        this.set_menu_price = set_menu_price;
+        this.setMenuPrice = setMenuPrice;
         super.menuList = new ArrayList<>();
     }
 }
