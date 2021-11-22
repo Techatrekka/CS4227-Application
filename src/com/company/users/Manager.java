@@ -14,8 +14,8 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Manager extends Staff {
-    Scanner scanner = new Scanner(System.in);
-    MenuFactory menuFactory = new MenuFactory();
+    private Scanner scanner = new Scanner(System.in);
+    private MenuFactory menuFactory = new MenuFactory();
 
     public Manager(int idNum, String email, String fullName, String employeeType, double salary) {
         super.setIdNum(idNum);

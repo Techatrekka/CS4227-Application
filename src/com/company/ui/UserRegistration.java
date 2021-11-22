@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class UserRegistration extends UserInterface {
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
     private String newUserEmail = "";
 
     String getNewUserEmail() {

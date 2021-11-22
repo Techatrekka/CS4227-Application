@@ -16,7 +16,7 @@ def usersApi(request,id=0):
         users_serializer =UsersSerializer(data=users_data)
         if (users_serializer.is_valid()):
             users_serializer.save()
-            return JsonResponse("Added Succesfully",safe=False)
+            return JsonResponse("Added Successfully",safe=False)
         return JsonResponse("Unsuccessful",safe=False)
     elif request.method=='PUT':
         users_data=JSONParser().parse(request)
@@ -121,7 +121,7 @@ def ordersApi(request,id=0):
         ordersSerializer =OrdersSerializer(data=orders)
         if (ordersSerializer.is_valid()):
             ordersSerializer.save()
-            return JsonResponse("Added Succesfully "+str(ordersSerializer.data['order_id']),safe=False)
+            return JsonResponse("Added Successfully "+str(ordersSerializer.data['order_id']),safe=False)
         return JsonResponse("Unsuccessful",safe=False)
     elif request.method=='PUT':
         users_data=JSONParser().parse(request)
@@ -261,7 +261,7 @@ def fooditemsApi(request,id=0):
         foodItemsSerializers=FoodItemsSerializers(data=fooditems_data)
         if (foodItemsSerializers.is_valid()):
             foodItemsSerializers.save()
-            return JsonResponse("Added Succesfully",safe=False)
+            return JsonResponse("Added Successfully",safe=False)
         return JsonResponse("Unsuccessful",safe=False)
     elif request.method=='PUT':
         users_data=JSONParser().parse(request)
@@ -296,7 +296,7 @@ def drinkitemsApi(request,id=0):
         drinkitems_serializers =DrinkItemsSerializers(data=drinkitems_data)
         if (drinkitems_serializers.is_valid()):
             drinkitems_serializers.save()
-            return JsonResponse("Added Succesfully",safe=False)
+            return JsonResponse("Added Successfully",safe=False)
         return JsonResponse("Unsuccessful",safe=False)
     elif request.method=='PUT':
         users_data=JSONParser().parse(request)
@@ -366,7 +366,7 @@ def orderlineitemsApi(request,id=0):
         orderLineItemsSerializer =OrderLineItemsSerializer(data=orderlineitems)
         if (orderLineItemsSerializer.is_valid()):
             orderLineItemsSerializer.save()
-            return JsonResponse("Added Succesfully "+str(orderLineItemsSerializer.data['orderlineitems_id']),safe=False)
+            return JsonResponse("Added Successfully "+str(orderLineItemsSerializer.data['orderlineitems_id']),safe=False)
         return JsonResponse("Unsuccessful",safe=False)
     elif request.method=='PUT':
         users_data=JSONParser().parse(request)

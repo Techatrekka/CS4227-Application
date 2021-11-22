@@ -5,7 +5,8 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public abstract class UserInterface {
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
+    
     boolean inputB(String input) {
         if(input.equalsIgnoreCase("b")) {
             System.out.println("Returning to previous screen..");

@@ -41,6 +41,7 @@ class Menu(models.Model):
 class Beverages(models.Model):
     beverage_id = models.AutoField(primary_key=True)
     name =  models.CharField(max_length=50)
+    description = models.CharField(max_length=500,default="")
     price = models.CharField(max_length=50)
     alcoholic = models.BooleanField()
 
