@@ -1,6 +1,6 @@
 package com.company.users;
 
-import com.company.Observable;
+import com.company.restaurant.Observable;
 
 public class Customer extends User implements Observer{
     private LoyaltyPoints loyaltyPoints;

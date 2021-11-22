@@ -1,7 +1,6 @@
-package com.company;
+package com.company.restaurant;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import com.company.menu.Menu;
 import com.company.menu.MenuItem;

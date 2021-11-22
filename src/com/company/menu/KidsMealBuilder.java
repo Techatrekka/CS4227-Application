@@ -2,7 +2,7 @@ package com.company.menu;
 
 import java.util.Collections;
 
-public class KidsMealBuilder extends SetMealBuilder {
+public class    KidsMealBuilder extends SetMealBuilder {
     public void buildDrink() {
         super.menuItemDetails.put("beverage_id", 6);
         super.menuItemDetails.put("name", "Ribena");

@@ -1,4 +1,4 @@
-package com.company;
+package com.company.restaurant;
 
 import com.company.users.Observer;
 
@@ -29,7 +29,6 @@ public class BusinessHours implements Observable {
     }
 
     public boolean isOpenNow() {
-        System.out.println("NUM OBS is " + users.size());
         LocalDateTime now = LocalDateTime.now();
         if(!openingHours.containsKey(now.getDayOfWeek())) {
             isOpen = false;

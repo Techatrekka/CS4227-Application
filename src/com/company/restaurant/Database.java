@@ -1,4 +1,4 @@
-package com.company;
+package com.company.restaurant;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

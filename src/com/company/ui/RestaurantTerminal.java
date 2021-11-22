@@ -1,8 +1,8 @@
 package com.company.ui;
 
-import com.company.BusinessHours;
-import com.company.Database;
-import com.company.Restaurant;
+import com.company.restaurant.BusinessHours;
+import com.company.restaurant.Database;
+import com.company.restaurant.Restaurant;
 import com.company.menu.Menu;
 import com.company.users.*;
 import org.json.JSONObject;
