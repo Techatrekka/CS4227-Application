@@ -3,13 +3,11 @@ package com.company.order;
 import com.company.menu.MenuItem;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Order{
     private int orderID;
-    //private ArrayList<MenuItem> menuItems = new ArrayList<>();
-    HashMap<Integer, MenuItem> menuItems = new HashMap<Integer, MenuItem>();
+    HashMap<Integer, MenuItem> menuItems = new HashMap<>();
     private double totalCost;
 
     public Order() {

@@ -4,7 +4,6 @@ import com.company.restaurant.Observable;
 
 public class Customer extends User implements Observer{
     private LoyaltyPoints loyaltyPoints;
-    private Observable observable = null;
 
     public Customer(){
         // code
@@ -19,7 +18,6 @@ public class Customer extends User implements Observer{
     }
 
     public static void addObservable(Customer customer, Observable observable) {
-        customer.observable = observable;
         observable.registerObserver(customer);
     }
 

@@ -45,6 +45,7 @@ public class Dish extends MenuItem{
                 allergenList.append(item).append("\n");
             }
         }
+        if(description == null) description = "";
         return super.toString() + "\n\tDescription: " + description +
                                   "\n\tAllergens: " + allergenList;
     }

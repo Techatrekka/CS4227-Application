@@ -5,7 +5,6 @@ public abstract class MenuItem{
     public double price;
     public int id;
     String description;
-    //public ArrayList<>
 
     public double getPrice(){
         return price;

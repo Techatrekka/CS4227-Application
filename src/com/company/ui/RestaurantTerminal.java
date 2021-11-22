@@ -21,7 +21,7 @@ public class RestaurantTerminal extends UserInterface {
     private static RestaurantTerminal single_instance = null;
 
     private RestaurantTerminal() {
-        System.out.println("Welcome to JJ's Diner!");
+        System.out.println("Welcome to The Dream Team's Diner!");
     }
 
     public static RestaurantTerminal getInstance()
@@ -43,8 +43,8 @@ public class RestaurantTerminal extends UserInterface {
         while(!userLogin.isSuccessfulLogin()) {
             displayLoginScreen();
         }
-        System.out.println("\nWelcome, " + user.getFullName() + ".");
         while(userLogin.isSuccessfulLogin()) {
+            System.out.println("\nWelcome, " + user.getFullName() + ".");
             displayHomeScreen();
         }
     }
@@ -237,7 +237,6 @@ public class RestaurantTerminal extends UserInterface {
                 userLogin.displayLoginPrompt();
                 if(userLogin.isSuccessfulLogin()) {
                     user = User.createUser(false, userLogin.getEmail());
-                    if(user instanceof Customer) Customer.addObservable((Customer) user, businessHours);
                 }
                 break;
             case 2:
@@ -252,6 +251,7 @@ public class RestaurantTerminal extends UserInterface {
                 System.exit(0);
                 break;
         }
+        if(user instanceof Customer) Customer.addObservable((Customer) user, businessHours);
     }
 
     private int getInput(int min, int max) {

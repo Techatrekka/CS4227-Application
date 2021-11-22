@@ -9,10 +9,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class BusinessHours implements Observable {
-   private LinkedHashMap<DayOfWeek, LocalTime> openingHours;
-   private List<Observer> users = new ArrayList<>();
-   private String msg;
-   private boolean isOpen = false;
+    private List<Observer> users = new ArrayList<>();
+    private LinkedHashMap<DayOfWeek, LocalTime> openingHours;
+    private boolean isOpen = false;
 
     public BusinessHours() {
         openingHours = new LinkedHashMap<>();

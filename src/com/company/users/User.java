@@ -190,11 +190,9 @@ public abstract class User {
     }
 
     public static User createUser(boolean isNewUser, String email) {
-        UserFactory userFactory = new UserFactory();
         List<String> cols = new ArrayList<>();
         // JSON for extra attributes for user depending on whether they're employees or customers
         JSONObject extraAttributes = new JSONObject();
-        User user;
         JSONObject userDetailsJson;
         userDetailsJson = Database.readFromUserTable(email, null);
         extraAttributes.put("user_id", userDetailsJson.getInt("user_id"));
@@ -219,8 +217,8 @@ public abstract class User {
                 userDetailsJson.put("employee_type", employeeTypeSalary.getString("employee_type"));
             }
         }
-        user = userFactory.createUser(userDetailsJson);
-        return user;
+        UserFactory userFactory = new UserFactory();
+        return userFactory.createUser(userDetailsJson);
     }
 
 }
