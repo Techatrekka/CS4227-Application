@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    stages {
+        stage('Run Test on Dish') {
+            steps {
+                dir('src/com/company/jenkins/test') {
+                    sh "pwd"
+                    sh 'javac dishTest.java'
+                    sh 'java dishTest'
+                }
+            }
+        }
+        stage('Run Test on User') {
+            steps {
+                dir('src/com/company/jenkins/test') {
+                    sh "pwd"
+                    sh 'javac userTest.java'
+                    sh 'java userTest'
+                }                
+            }
+        }
+    }
+}
