@@ -34,7 +34,7 @@ class DishesSerializer(serializers.ModelSerializer):
 class BeveragesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Beverages
-        fields = ('beverage_id','name','price','alcoholic')
+        fields = ('beverage_id','name','description','price','alcoholic')
 
 class OrderLineItemsSerializer(serializers.ModelSerializer):
     class Meta:
