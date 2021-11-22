@@ -1,9 +1,8 @@
 package com.company.ui;
 
-import com.company.Database;
+import com.company.restaurant.Database;
 import org.json.JSONObject;
 
-import java.io.Console;
 import java.util.Scanner;
 
 public class UserLogin extends UserInterface {

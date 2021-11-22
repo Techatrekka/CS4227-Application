@@ -1,13 +1,12 @@
 package com.company.users;
 
-import com.company.Database;
+import com.company.restaurant.Database;
 import com.company.menu.*;
 import com.company.order.Order;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javax.xml.crypto.Data;
 import java.util.*;
 
 public abstract class User {
@@ -26,6 +25,9 @@ public abstract class User {
             System.out.println("Enter the id of the menu to " + toDo);
             int menuID = scanner.nextInt();
             scanner.nextLine();
+            for(Menu menu : restaurantMenus) {
+                if(menu.getId() == menuID) System.out.println(menu);
+            }
             return menuID;   
         }
 
@@ -69,7 +71,7 @@ public abstract class User {
         boolean addToOrder = true;
         double setMealCost = 0.0;
         while(addToOrder) {
-            System.out.println("Would you like to order a meal deal, which includes a set meal and drink? y/n");
+            System.out.println("Would you like to order a meal deal, which includes a set meal and drink? Y / N");
             String choice = scanner.nextLine();
             if(choice.equalsIgnoreCase("y")) {
                 MealDirector director = new MealDirector();
@@ -95,19 +97,27 @@ public abstract class User {
                             System.out.println("Enter the id of the item you'd like to order");
                             choice = scanner.nextLine();
                             MenuItem item = null;
+                            JSONObject itemDetails;
                             for(MenuItem menuItem : menu.getMenuItems()) {
                                 if(menuItem.getID() == Integer.parseInt(choice)) {
-                                    item = getOrderItem(menuItem instanceof Dish, Integer.parseInt(choice));
+                                    System.out.println("Would you like chips, wedges, or both with your order? C = chips, W = wedges, B = both, N = none");
+                                    String sideChoice = scanner.nextLine();
+                                    if(sideChoice.equalsIgnoreCase("c")) {
+                                        itemDetails = getOrderItem(menuItem instanceof Dish, Integer.parseInt(choice));
+                                        item = menuItem instanceof Dish ? new Chips(new Dish(itemDetails)) : new Chips(new Beverage(itemDetails));
+                                    } else if(sideChoice.equalsIgnoreCase("w")) {
+                                        itemDetails = getOrderItem(menuItem instanceof Dish, Integer.parseInt(choice));
+                                        item = menuItem instanceof Dish ? new Wedges(new Dish(itemDetails)) : new Wedges(new Beverage(itemDetails));
+                                    } else if(sideChoice.equalsIgnoreCase("b")) {
+                                        itemDetails = getOrderItem(menuItem instanceof Dish, Integer.parseInt(choice));
+                                        item = menuItem instanceof Dish ? new Wedges(new Chips(new Dish(itemDetails))) : new Wedges(new Chips(new Beverage(itemDetails)));
+                                    } else {
+                                        itemDetails = getOrderItem(menuItem instanceof Dish, Integer.parseInt(choice));
+                                        item = menuItem instanceof Dish ? new Dish(itemDetails) : new Beverage(itemDetails);
+                                    }
                                 }
                             }
-                            System.out.println("Would you like a small, regular or large? S/R/L");
-                            choice = scanner.nextLine();
-                            if(choice.equalsIgnoreCase("s")) {
-                                MenuItem item2 = new SmallItemDecorator(item);
-                            } else if(choice.equalsIgnoreCase("l")) {
-                                item = new LargeItemDecorator(item);
-                            }
-                            newOrder.addMenuItem(item);
+                            newOrder.addMenuItem(menuId, item);
                         }
                     }
                 }
@@ -117,26 +127,26 @@ public abstract class User {
             if (choice.equalsIgnoreCase("n")) addToOrder = false;
         }
         JSONObject orderDetails = new JSONObject();
-        newOrder.setTotalCost(setMealCost + newOrder.getTotalCost());
+        newOrder.setTotalCost(newOrder.calcCostOfItems() + setMealCost);
         orderDetails.put("total_cost", String.valueOf(newOrder.getTotalCost()));
         orderDetails.put("user_id", userId);
+
         int orderId = Database.writeToTable("order", orderDetails);
-        for(MenuItem item : newOrder.getMenuItems()) {
+        for(MenuItem item : newOrder.getMenuItems().values()) {
             JSONObject orderLineDetails = new JSONObject();
-            orderLineDetails.put("menu_item", item.getID());
+            JSONObject menuItem = Database.readFromTable("menuitem", item.getID(), Collections.singletonList("menu_item"), "dish_bev_id", newOrder.getOrderItemMenuId(item.getID()), "menu_id");
+            orderLineDetails.put("menu_item", menuItem.getInt("menu_item"));
             orderLineDetails.put("order_id", orderId);
             orderLineDetails.put("food", item instanceof Dish);
             Database.writeToTable("orderlineitem", orderLineDetails);
         }
 
         int time = (int) (Math.random() * 30) + 6;
-        orderDetails.put("total_cost", newOrder.getTotalCost());
-        Database.updateTable("order", orderDetails);
         System.out.println("Your order will be ready for collection in " + time + " minutes and will cost €" + newOrder.getTotalCost());
     }
 
-    private MenuItem getOrderItem(boolean isFood, int id) {
-        MenuItem item;
+    private JSONObject getOrderItem(boolean isFood, int id) {
+        JSONObject itemDetails;
         ArrayList<String> cols = new ArrayList<>();
         cols.add("name");
         cols.add("price");
@@ -144,15 +154,13 @@ public abstract class User {
             cols.add("description");
             cols.add("allergens");
             cols.add("dish_id");
-            JSONObject itemDetails = Database.readFromTable("dishes", id, cols, "dish_id", -1, "");
-            item = new Dish(itemDetails);
+            itemDetails = Database.readFromTable("dishes", id, cols, "dish_id", -1, "");
         } else {
             cols.add("alcoholic");
             cols.add("beverage_id");
-            JSONObject itemDetails = Database.readFromTable("beverages", id, cols, "beverage_id", -1, "");
-            item = new Beverage(itemDetails);
+            itemDetails = Database.readFromTable("beverages", id, cols, "beverage_id", -1, "");
         }
-        return item;
+        return itemDetails;
     }
 
     public void getOrders() {
@@ -164,8 +172,10 @@ public abstract class User {
                 JSONArray allOrderItems = Database.readAllFromTable("orderlineitem", orderDetails.getInt("order_id"), "order_id", "");
                 for (Object orderItemObj : allOrderItems) {
                     JSONObject orderItemDetails = (JSONObject) orderItemObj;
-                    MenuItem item = getOrderItem(orderItemDetails.getBoolean("food"), orderItemDetails.getInt("menu_item"));
-                    order.addMenuItem(item);
+                    JSONObject dishBevId = Database.readFromTable("menuitem", orderItemDetails.getInt("menu_item"), Collections.singletonList("dish_bev_id"), "menu_item", -1, "");
+                    JSONObject itemDetails = getOrderItem(orderItemDetails.getBoolean("food"), dishBevId.getInt("dish_bev_id"));
+                    MenuItem item = orderItemDetails.getBoolean("food") ? new Dish(itemDetails) : new Beverage(itemDetails);
+                    order.addMenuItem(-1, item);
                 }
                 System.out.println(order);
             }
@@ -180,11 +190,9 @@ public abstract class User {
     }
 
     public static User createUser(boolean isNewUser, String email) {
-        UserFactory userFactory = new UserFactory();
         List<String> cols = new ArrayList<>();
         // JSON for extra attributes for user depending on whether they're employees or customers
         JSONObject extraAttributes = new JSONObject();
-        User user;
         JSONObject userDetailsJson;
         userDetailsJson = Database.readFromUserTable(email, null);
         extraAttributes.put("user_id", userDetailsJson.getInt("user_id"));
@@ -209,8 +217,8 @@ public abstract class User {
                 userDetailsJson.put("employee_type", employeeTypeSalary.getString("employee_type"));
             }
         }
-        user = userFactory.createUser(userDetailsJson);
-        return user;
+        UserFactory userFactory = new UserFactory();
+        return userFactory.createUser(userDetailsJson);
     }
 
 }

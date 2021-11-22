@@ -1,4 +1,4 @@
-package com.company;
+package com.company.restaurant;
 
 import com.company.users.Observer;
 
@@ -9,10 +9,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class BusinessHours implements Observable {
-   private LinkedHashMap<DayOfWeek, LocalTime> openingHours;
-   private List<Observer> users = new ArrayList<>();
-   private String msg;
-   private boolean isOpen = false;
+    private List<Observer> users = new ArrayList<>();
+    private LinkedHashMap<DayOfWeek, LocalTime> openingHours;
+    private boolean isOpen = false;
 
     public BusinessHours() {
         openingHours = new LinkedHashMap<>();
@@ -29,7 +28,6 @@ public class BusinessHours implements Observable {
     }
 
     public boolean isOpenNow() {
-        System.out.println("NUM OBS is " + users.size());
         LocalDateTime now = LocalDateTime.now();
         if(!openingHours.containsKey(now.getDayOfWeek())) {
             isOpen = false;

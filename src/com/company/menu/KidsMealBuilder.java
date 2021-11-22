@@ -1,7 +1,5 @@
 package com.company.menu;
 
-import java.util.Collections;
-
 public class KidsMealBuilder extends SetMealBuilder {
     public void buildDrink() {
         super.menuItemDetails.put("beverage_id", 6);
@@ -18,5 +16,7 @@ public class KidsMealBuilder extends SetMealBuilder {
         super.menuItemDetails.put("allergens", "None");
         super.meal.dish = new Dish(super.menuItemDetails);
     }
-    public SetMeal getMeal() {return meal;}
+    public SetMeal getMeal() {
+        return meal;
+    }
 }

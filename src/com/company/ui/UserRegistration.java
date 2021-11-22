@@ -1,6 +1,6 @@
 package com.company.ui;
 
-import com.company.Database;
+import com.company.restaurant.Database;
 import org.json.JSONObject;
 
 import javax.mail.internet.AddressException;

@@ -4,7 +4,7 @@ public abstract class MenuItem{
     public String name;
     public double price;
     public int id;
-    //public ArrayList<>
+    String description;
 
     public double getPrice(){
         return price;
@@ -23,6 +23,13 @@ public abstract class MenuItem{
     }
     public void setID(int id){
         this.id = id;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public String getDescription() {
+        return this.description;
     }
     @Override
     public String toString(){

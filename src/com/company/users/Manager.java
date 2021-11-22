@@ -1,6 +1,6 @@
 package com.company.users;
 
-import com.company.Database;
+import com.company.restaurant.Database;
 import com.company.menu.Menu;
 import com.company.menu.MenuFactory;
 
