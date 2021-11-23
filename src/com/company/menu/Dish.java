@@ -46,7 +46,6 @@ public class Dish extends MenuItem{
             }
         }
         if(description == null) description = "";
-        return super.toString() + "\n\tDescription: " + description +
-                                  "\n\tAllergens: " + allergenList;
+        return super.toString() + "\n\tAllergens: " + allergenList;
     }
 }

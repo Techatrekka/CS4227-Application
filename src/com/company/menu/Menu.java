@@ -63,10 +63,12 @@ public class Menu {
         String name = scanner.nextLine();
         System.out.println("How much does this menu item cost?");
         String cost = scanner.nextLine();
-        Double price = Double.valueOf(cost);
+        System.out.println("Describe this menu item:");
+        String desc = scanner.nextLine();
         JSONObject newMenuItem = new JSONObject();
         newMenuItem.put("name", name);
         newMenuItem.put("price", cost);
+        newMenuItem.put("description", desc);
 
         if(choice.equalsIgnoreCase("b")){
             System.out.println("Is this an alcoholic drink? y/n");
@@ -90,13 +92,10 @@ public class Menu {
             return beverage;
         }
         else{
-            System.out.println("Description of the dish:");
-            String desc = scanner.nextLine();
             System.out.println("Does this dish contain any allergens? Please enter each allergen separated by a comma.");
             String allergens = scanner.nextLine();
             String[] allergenList = allergens.split(",");
 
-            newMenuItem.put("description", desc);
             newMenuItem.put("allergens", allergens);
             int id = Database.writeToTable("dishes", newMenuItem);
             JSONObject newItem = new JSONObject();

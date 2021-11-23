@@ -82,6 +82,7 @@ public abstract class User {
                     builder = new KidsMealBuilder();
                 } else {
                     builder = new AdultMealBuilder();
+                    System.out.println("Adult's meal has been ordered.");
                 }
                 SetMeal meal = director.createMeal(builder);
                 setMealCost += meal.getMealPrice();
@@ -150,8 +151,8 @@ public abstract class User {
         ArrayList<String> cols = new ArrayList<>();
         cols.add("name");
         cols.add("price");
+        cols.add("description");
         if(isFood) {
-            cols.add("description");
             cols.add("allergens");
             cols.add("dish_id");
             itemDetails = Database.readFromTable("dishes", id, cols, "dish_id", -1, "");

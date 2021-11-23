@@ -33,7 +33,7 @@ public abstract class MenuItem{
     }
     @Override
     public String toString(){
-        return  "\n\tId: " + this.getID() + "\n\tName: " + name +
-                "\n\tPrice: €" + price;
+        return  "\n\tId: " + this.getID() + "\n\tName: " + this.getName() +
+                "\n\tPrice: €" + this.getPrice() + "\n\tDescription: " + this.getDescription();
     }
 }

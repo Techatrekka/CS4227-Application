@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Change attributes to private where possible. Various small edits to structure and format in multiple classes.">
+    <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Update view employees to display employee details better. Fix bug in datatase class which caused error due to a lack of a check for an int.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/restaurant/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/restaurant/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/users/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Beverage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Beverage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Dish.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Dish.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/MenuItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/MenuItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/users/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,6 +16,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="21HLxJKEZoFKPsO7h30voYhBa5d" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -72,7 +83,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637630804714</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Update view employees to display employee details better. Fix bug in datatase class which caused error due to a lack of a check for an int.">
+      <created>1637631824899</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1637631824899</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -90,6 +108,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update Order to print menu items in order without menu id. Small edits to other files to tidy up project." />
     <MESSAGE value="Change attributes to private where possible. Various small edits to structure and format in multiple classes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Change attributes to private where possible. Various small edits to structure and format in multiple classes." />
+    <MESSAGE value="Update view employees to display employee details better. Fix bug in datatase class which caused error due to a lack of a check for an int." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update view employees to display employee details better. Fix bug in datatase class which caused error due to a lack of a check for an int." />
   </component>
 </project>

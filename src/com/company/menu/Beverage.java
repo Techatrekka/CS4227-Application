@@ -8,6 +8,7 @@ public class Beverage extends MenuItem {
         super.id = bevDetails.getInt("beverage_id");
         super.name = bevDetails.getString("name");
         super.price = bevDetails.getDouble("price");
+        super.description = bevDetails.getString("description");
         this.alcoholic = bevDetails.getBoolean("alcoholic");
     }
     @Override
