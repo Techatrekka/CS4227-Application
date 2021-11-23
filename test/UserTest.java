@@ -14,11 +14,6 @@ class UserTest {
     Customer testUser = new Customer();
     private User user;
     @Test
-    public void testName(){
-        testUser.setFullName(name);
-        assertEquals(testUser.getFullName(), name);
-    }
-    @Test
     public void testEmail(){
         JSONObject userDetails = new JSONObject();
         userDetails.put("fullname", name);
