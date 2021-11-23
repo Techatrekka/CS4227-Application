@@ -62,8 +62,12 @@ public class Order{
      }
 
      public String toString() {
+        StringBuilder items = new StringBuilder();
+         for (int i : menuItems.keySet()) {
+             items.append(menuItems.get(i));
+         }
         return "Order id: " + this.getOrderID() + "\tTotal cost: €" + this.getTotalCost() + "\nOrder items:\n" +
-                getMenuItems();
+                items;
      }
 
 }
