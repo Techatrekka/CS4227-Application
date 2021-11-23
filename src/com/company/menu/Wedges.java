@@ -1,7 +1,8 @@
 package com.company.menu;
 
 public class Wedges extends MenuItemDecorator {
-    MenuItem item;
+    private MenuItem item;
+
     public Wedges(MenuItem item){
         this.item = item;
     }

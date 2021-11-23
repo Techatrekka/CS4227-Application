@@ -1,7 +1,7 @@
 package com.company.menu;
 
 public class Chips extends MenuItemDecorator {
-    MenuItem item;
+    private MenuItem item;
     public Chips(MenuItem item){
         this.item = item;
     }

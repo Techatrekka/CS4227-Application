@@ -10,14 +10,13 @@ import org.json.JSONObject;
 import java.util.*;
 
 public class RestaurantTerminal extends UserInterface {
-    BusinessHours businessHours = new BusinessHours();
-    ArrayList<Menu> restaurantMenus;
-
-    private Scanner scanner = new Scanner(System.in);
+    private ArrayList<Menu> restaurantMenus;
     private UserLogin userLogin;
     private UserRegistration userRegistration;
     private User user;
 
+    private BusinessHours businessHours = new BusinessHours();
+    private Scanner scanner = new Scanner(System.in);
     private static RestaurantTerminal single_instance = null;
 
     private RestaurantTerminal() {

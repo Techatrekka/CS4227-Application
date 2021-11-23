@@ -6,8 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Dish extends MenuItem{
-    protected String description;
-    protected List<String> allergens;
+    private String description;
+    private List<String> allergens;
     public Dish(JSONObject dishDetails){
         super.id = dishDetails.getInt("dish_id");
         super.name = dishDetails.getString("name");

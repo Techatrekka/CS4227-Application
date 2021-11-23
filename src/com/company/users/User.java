@@ -197,7 +197,7 @@ public abstract class User {
         userDetailsJson = Database.readFromUserTable(email, null);
         extraAttributes.put("user_id", userDetailsJson.getInt("user_id"));
 
-        // if userLogin email is empty then this is a newly registered user
+        // if it's a new user, we need to write loyalty points to the loyalty table
         if(isNewUser) {
             if(Objects.equals(userDetailsJson.getString("user_type"), "customer")) {
                 extraAttributes.put("loyalty_points", 0);

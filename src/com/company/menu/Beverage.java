@@ -2,10 +2,8 @@ package com.company.menu;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
 public class Beverage extends MenuItem {
-    boolean alcoholic;
+    private boolean alcoholic;
     public Beverage(JSONObject bevDetails){
         super.id = bevDetails.getInt("beverage_id");
         super.name = bevDetails.getString("name");

@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Clean up code in several classes - remove imports, unused variables, clean up spacing, etc.">
+    <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Update Order to print menu items in order without menu id. Small edits to other files to tidy up project.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cs4125-restaurant-project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/cs4125-restaurant-project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/ansible/accountInfo.json" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/ansible/accountInfo.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Beverage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Beverage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Chips.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Chips.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Dish.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Dish.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/SetMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/SetMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/SpecialMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/SpecialMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Wedges.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Wedges.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/order/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/order/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/users/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/restaurant/Observable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/restaurant/Observable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/ui/RestaurantTerminal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/ui/RestaurantTerminal.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +66,14 @@
       <option name="presentableId" value="Default" />
       <updated>1637593316619</updated>
     </task>
+    <task id="LOCAL-00001" summary="Update Order to print menu items in order without menu id. Small edits to other files to tidy up project.">
+      <created>1637630046744</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1637630046744</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -73,5 +87,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update Order to print menu items in order without menu id. Small edits to other files to tidy up project." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Order to print menu items in order without menu id. Small edits to other files to tidy up project." />
   </component>
 </project>

@@ -6,7 +6,6 @@ public class Customer extends User implements Observer{
     private LoyaltyPoints loyaltyPoints;
 
     public Customer(){
-        // code
     }
 
     public Customer(int userId, String email, String fullName, int points) {

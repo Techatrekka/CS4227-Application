@@ -9,12 +9,12 @@ import com.company.restaurant.Database;
 import org.json.JSONObject;
 
 public class Menu {
-    public ArrayList<MenuItem> menuList;
     private int menuID;
     private String name;
-    protected String description;
+    private String description;
     private LocalDate dateCreated;
     private Scanner scanner = new Scanner(System.in);
+    public ArrayList<MenuItem> menuList;
 
     public Menu(int id, String name,String description, LocalDate date){
         this.menuID = id;

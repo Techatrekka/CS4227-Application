@@ -5,9 +5,9 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class Order{
+public class Order {
     private int orderID;
-    HashMap<Integer, MenuItem> menuItems = new HashMap<>();
+    private HashMap<Integer, MenuItem> menuItems = new HashMap<>();
     private double totalCost;
 
     public Order() {

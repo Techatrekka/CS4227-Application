@@ -1,6 +1,5 @@
 package com.company.restaurant;
 
-
 import com.company.users.Observer;
 
 public interface Observable {
