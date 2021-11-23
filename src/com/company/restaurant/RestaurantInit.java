@@ -11,7 +11,7 @@ import com.company.menu.Dish;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class Restaurant {
+public class RestaurantInit {
     public ArrayList<Menu> initMenus() {
         JSONArray dbMenus = Database.readAllFromTable("menu", -1, null, "");
         JSONArray dbMenuItems = Database.readAllFromTable("menuitem", -1, null, "");

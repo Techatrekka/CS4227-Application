@@ -2,7 +2,7 @@ package com.company.ui;
 
 import com.company.restaurant.BusinessHours;
 import com.company.restaurant.Database;
-import com.company.restaurant.Restaurant;
+import com.company.restaurant.RestaurantInit;
 import com.company.menu.Menu;
 import com.company.users.*;
 import org.json.JSONObject;
@@ -32,7 +32,7 @@ public class RestaurantTerminal extends UserInterface {
     }
 
     public void run() {
-        Restaurant res = new Restaurant();
+        RestaurantInit res = new RestaurantInit();
         restaurantMenus = res.initMenus();
         System.out.println(businessHours.toString());
 
