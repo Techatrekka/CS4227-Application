@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Update view employees to display employee details better. Fix bug in datatase class which caused error due to a lack of a check for an int.">
+    <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Update to include description field for beverages in all classes that create or read beverages.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Beverage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Beverage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/menu/Dish.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Dish.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/menu/MenuItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/MenuItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/users/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/restaurant/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/restaurant/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/users/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/Manager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +89,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637631824899</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Update to include description field for beverages in all classes that create or read beverages.">
+      <created>1637683632491</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1637683632491</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -109,6 +115,7 @@
     <MESSAGE value="Update Order to print menu items in order without menu id. Small edits to other files to tidy up project." />
     <MESSAGE value="Change attributes to private where possible. Various small edits to structure and format in multiple classes." />
     <MESSAGE value="Update view employees to display employee details better. Fix bug in datatase class which caused error due to a lack of a check for an int." />
-    <option name="LAST_COMMIT_MESSAGE" value="Update view employees to display employee details better. Fix bug in datatase class which caused error due to a lack of a check for an int." />
+    <MESSAGE value="Update to include description field for beverages in all classes that create or read beverages." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update to include description field for beverages in all classes that create or read beverages." />
   </component>
 </project>

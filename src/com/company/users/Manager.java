@@ -168,6 +168,11 @@ public class Manager extends Staff {
             }else{
                 System.out.println("Menu was not edited");
             }
+            System.out.println("Continue editing the menu to add/remove items or go back to home screen? B = back, Any other key = continue");
+            String choice = scanner.nextLine();
+            if(choice.equalsIgnoreCase("b")) {
+                return;
+            }
         }
 
         System.out.println("Do you want to add or remove menu items? A = add, R = remove");
@@ -191,8 +196,6 @@ public class Manager extends Staff {
     String getInputChoice(String choice1, String choice2) {
         String input = scanner.nextLine();
         while(!input.toLowerCase().equals(choice1) && !input.toLowerCase().equals(choice2)) {
-            System.out.println("choice 1 is " + choice1 + " choice 2 " + choice2);
-            System.out.println("input is " + input);
             System.out.println("Please enter a valid option.");
             input = scanner.nextLine();
         }

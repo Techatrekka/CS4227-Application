@@ -183,11 +183,11 @@ public class Database {
                 sb.append((char) ch);
             }
             String[] splitSb = sb.toString().split(" ");
-            if(splitSb.length > 2) {
+            if (splitSb.length > 2) {
                 String num = splitSb[2].replace("\"", "");
                 try {
                     idNum = Integer.parseInt(num);
-                } catch(NumberFormatException e) {
+                } catch (NumberFormatException e) {
                     idNum = -1;
                 }
             }

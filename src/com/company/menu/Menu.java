@@ -82,29 +82,31 @@ public class Menu {
             boolean isAlcoholic = alco.equals("y");
             newMenuItem.put("alcoholic", isAlcoholic);
             int id = Database.writeToTable("beverages", newMenuItem);
+            newMenuItem.put("beverage_id", id);
             JSONObject newItem = new JSONObject();
             newItem.put("dish_bev_id", id);
             newItem.put("food", false);
             newItem.put("menu_id", this.getId());
             Database.writeToTable("menuitem", newItem);
-            MenuItem beverage = new Beverage(newItem);
+            MenuItem beverage = new Beverage(newMenuItem);
             menuList.add(beverage);
             return beverage;
         }
         else{
             System.out.println("Does this dish contain any allergens? Please enter each allergen separated by a comma.");
             String allergens = scanner.nextLine();
-            String[] allergenList = allergens.split(",");
-
             newMenuItem.put("allergens", allergens);
             int id = Database.writeToTable("dishes", newMenuItem);
+            newMenuItem.put("dish_id", id);
             JSONObject newItem = new JSONObject();
             newItem.put("dish_bev_id", id);
             newItem.put("food", true);
             newItem.put("menu_id", this.getId());
             Database.writeToTable("menuitem", newItem);
-            MenuItem dish = new Dish(newItem);
+            MenuItem dish = new Dish(newMenuItem);
+            System.out.println("DISH IS " + dish);
             menuList.add(dish);
+            System.out.println("MENU LIST IS " + menuList);
             return dish;
         }
     }
@@ -140,6 +142,7 @@ public class Menu {
         }
         return  "Menu ID: " + menuID +
                 " Menu name: " + name +
+                " Menu Description: " + description +
                 " Date Created: " + dateCreated.toString() +
                 "\nMenu Items: \n" + items;
     }

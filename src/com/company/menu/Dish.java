@@ -42,10 +42,10 @@ public class Dish extends MenuItem{
         StringBuilder allergenList = new StringBuilder();
         if(allergens.size() > 0) {
             for(String item : allergens) {
-                allergenList.append(item).append("\n");
+                allergenList.append(item).append("\t\t");
             }
         }
         if(description == null) description = "";
-        return super.toString() + "\n\tAllergens: " + allergenList;
+        return super.toString() + "\n\tAllergens: " + allergenList + "\n";
     }
 }
