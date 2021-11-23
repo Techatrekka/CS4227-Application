@@ -150,7 +150,7 @@ public class Database {
             JSONArray matchedTableData = new JSONArray();
             for (Object obj : tableData){
                 JSONObject obj2 = (JSONObject)obj;
-                if(obj2.getInt(col) == (idNum)){
+                if((idNum != -1 && obj2.getInt(col) == (idNum)) || obj2.get(col).equals(matchVal)){
                     matchedTableData.put(obj2);
                 }
             } 
