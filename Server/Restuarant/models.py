@@ -22,13 +22,11 @@ class Orders(models.Model):
     order_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(Users, default=1,on_delete=models.CASCADE)
     total_cost = models.CharField(max_length=50)
-
-class Dishes(models.Model):
-    dish_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50)
-    description = models.CharField(max_length=500)
-    price = models.CharField(max_length=50)
-    allergens = models.CharField(max_length=500)
+    
+class OrderLineItems(models.Model):
+    line_item = models.AutoField(primary_key=True)
+    Order_id = models.ForeignKey(Orders, default=1, on_delete=models.CASCADE)
+    menu_item = models.IntegerField()
 
 class Menu(models.Model):
     menu_id = models.AutoField(primary_key=True)
@@ -38,38 +36,19 @@ class Menu(models.Model):
     set_menu_price = models.CharField(max_length=50)
     discount = models.CharField(max_length=50)
 
-class Beverages(models.Model):
-    beverage_id = models.AutoField(primary_key=True)
-    name =  models.CharField(max_length=50)
-    description = models.CharField(max_length=500,default="")
-    price = models.CharField(max_length=50)
-    alcoholic = models.BooleanField()
-
-class FoodItems(models.Model):
-    food_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50)
-    count = models.IntegerField()
-    expiry_date = models.DateField()
-    allergens = models.CharField(max_length=500)
-
-class DrinkItems(models.Model):
-    drink_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50)
-    count = models.IntegerField()
-    expiry_date = models.DateField()
-
 class MenuItem(models.Model):
     menu_item = models.AutoField(primary_key=True)
-    dish_bev_id = models.IntegerField()
-    menu_id = models.ForeignKey(Menu,default=1,on_delete=models.CASCADE)
-    food = models.BooleanField()
+    name = models.CharField(max_length=500)
+    Description = models.CharField(max_length=500)
+    Price = models.DecimalField(max_digits=5,decimal_places=2)
+    Alcoholic = models.BooleanField()
+    Ingredients=models.CharField(max_length=500)
+    isFood = models.BooleanField()
 
-class OrderLineItems(models.Model):
-    orderlineitems_id = models.AutoField(primary_key=True)
-    order_id = models.ForeignKey(Orders,default=1,on_delete=models.CASCADE)
-    menu_item = models.ForeignKey(MenuItem,default=1,on_delete=models.CASCADE)
-    food = models.BooleanField()
-
-class Dishes_FoodItems(models.Model):
-    food_id = models.ForeignKey(FoodItems,default=1,on_delete=models.CASCADE)
-    dish_id = models.ForeignKey(Dishes,default=1,on_delete=models.CASCADE)
+class StockItems(models.Model):
+    stock_item_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=500)
+    count=models.IntegerField()
+    expiry_date=models.DateField()
+    allergens=models.CharField(max_length=500)
+    isFood=models.BooleanField()
