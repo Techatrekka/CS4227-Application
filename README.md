@@ -1,4 +1,4 @@
-# CS4125-Restaurant Project
+# CS4227-Restaurant Application
 
 
 ## Names and ID numbers
