@@ -26,16 +26,6 @@ class MenuSerializer(serializers.ModelSerializer):
         model = Menu
         fields = ('menu_id','name','description','date_created','set_menu_price','discount')
 
-class DishesSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Dishes
-        fields = ('dish_id','name','description','price','allergens')
-
-class BeveragesSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Beverages
-        fields = ('beverage_id','name','description','price','alcoholic')
-
 class OrderLineItemsSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderLineItems
@@ -45,18 +35,8 @@ class MenuItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = MenuItem
         fields = ('menu_item','dish_bev_id','menu_id','food')
-
-class DrinkItemsSerializers(serializers.ModelSerializer):
+        
+class StockItemsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = DrinkItems
-        fields = ('drink_id','beverage_id','description','count','expiry_date')
-
-class FoodItemsSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = FoodItems
-        fields = ('food_id','name','description','count','expiry_date','allergens')
-
-class DishesFoodItemsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Dishes_FoodItems
-        fields = ('food_id','dish_id')
+        model = StockItems
+        fields = ('stock_item_id','name','count','expiry_date','allergens','isFood')

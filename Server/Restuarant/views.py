@@ -181,143 +181,38 @@ def menuApi(request,id=0):
         return JsonResponse("Delete succesful",safe=False)
 
 @csrf_exempt
-def dishesApi(request,id=0):
+def stockitemsApi(request,id=0):
     if request.method=='GET':
-        dishes = Dishes.objects.all()
-        dishesSerializer = DishesSerializer(dishes,many=True)
-        return JsonResponse(dishesSerializer.data, safe=False)
+        stockitem = StockItems.objects.all()
+        stockitemsserializer = StockItemsSerializer(stockitem,many=True)
+        return JsonResponse(stockitemsserializer.data, safe=False)
     elif request.method=='POST':
-        dishes_data=JSONParser().parse(request)
-        dishesSerializer =DishesSerializer(data=dishes_data)
-        if (dishesSerializer.is_valid()):
-            dishesSerializer.save()
-            return JsonResponse("Added Successfully " + str(dishesSerializer.data['dish_id']),safe=False)
+        stockitem_data=JSONParser().parse(request)
+        stockitemsserializer =StockItemsSerializer(data=stockitem_data)
+        if (stockitemsserializer.is_valid()):
+            stockitemsserializer.save()
+            return JsonResponse("Added Successfully " + str(stockitemsserializer.data['stock_item']),safe=False)
         return JsonResponse("Unsuccessful",safe=False)
     elif request.method=='PUT':
-        users_data=JSONParser().parse(request)
-        users=Dishes.objects.get(dishes_id=users_data['dishes_id'])
-        users_serializer=DishesSerializer(users, data=users_data)
-        if users_serializer.is_valid():
-            users_serializer.save()
+        stockitem_data=JSONParser().parse(request)
+        stockitem=StockItems.objects.get(stockitem_id=stockitem_data['stock_item_id'])
+        stockitemsserializer=StockItemsSerializer(stockitem, data=stockitem_data)
+        if stockitemsserializer.is_valid():
+            stockitemsserializer.save()
             return JsonResponse("Success",safe=False)
         return JsonResponse("failed",safe=True)
     elif request.method=='PATCH':
-        users_data=JSONParser().parse(request)
-        users=Dishes.objects.get(dishes_id=users_data['dishes_id'])
-        users_serializer=DishesSerializer(users, data=users_data,partial=True)
-        if users_serializer.is_valid():
-            users_serializer.save()
+        stockitem_data=JSONParser().parse(request)
+        stockitem=MenuItem.objects.get(stockitem_id=stockitem_data['stock_item_id'])
+        stockitemsserializer=stockitemsserializer(stockitem, data=stockitem_data,partial=True)
+        if stockitemsserializer.is_valid():
+            stockitemsserializer.save()
             return JsonResponse("Successful update",safe=False)
         return JsonResponse("failed",safe=False)
     elif request.method=='DELETE':
-        dishes_data=JSONParser().parse(request)
-        dishes=Dishes.objects.get(dishes_id=dishes_data['dishes_id'])
-        dishes.delete()
-        return JsonResponse("Delete succesful",safe=False)
-
-@csrf_exempt
-def beveragesApi(request,id=0):
-    if request.method=='GET':
-        beverages = Beverages.objects.all()
-        beveragesSerializer = BeveragesSerializer(beverages,many=True)
-        return JsonResponse(beveragesSerializer.data, safe=False)
-    elif request.method=='POST':
-        beverages_data=JSONParser().parse(request)
-        beveragesSerializer =BeveragesSerializer(data=beverages_data)
-        if (beveragesSerializer.is_valid()):
-            beveragesSerializer.save()
-            return JsonResponse("Added Successfully " + str(beveragesSerializer.data['beverage_id']),safe=False)
-        return JsonResponse("Unsuccessful",safe=False)
-    elif request.method=='PUT':
-        users_data=JSONParser().parse(request)
-        users=Beverages.objects.get(beverages_id=users_data['beverage_id'])
-        users_serializer=BeveragesSerializer(users, data=users_data)
-        if users_serializer.is_valid():
-            users_serializer.save()
-            return JsonResponse("Success",safe=False)
-        return JsonResponse("failed",safe=True)
-    elif request.method=='PATCH':
-        users_data=JSONParser().parse(request)
-        users=Beverages.objects.get(beverages_id=users_data['beverage_id'])
-        users_serializer=BeveragesSerializer(users, data=users_data,partial=True)
-        if users_serializer.is_valid():
-            users_serializer.save()
-            return JsonResponse("Successful update",safe=False)
-        return JsonResponse("failed",safe=False)
-    elif request.method=='DELETE':
-        beverages_data = JSONParser().parse(request)
-        beverages=Beverages.objects.get(beverage_id=beverages_data['beverage_id'])
-        beverages.delete()
-        return JsonResponse("Delete succesful",safe=False)
-
-@csrf_exempt
-def fooditemsApi(request,id=0):
-    if request.method=='GET':
-        fooditems = Users.objects.all()
-        foodItemsSerializers = FoodItemsSerializers(fooditems,many=True)
-        return JsonResponse(foodItemsSerializers.data, safe=False)
-    elif request.method=='POST':
-        fooditems_data=JSONParser().parse(request)
-        foodItemsSerializers=FoodItemsSerializers(data=fooditems_data)
-        if (foodItemsSerializers.is_valid()):
-            foodItemsSerializers.save()
-            return JsonResponse("Added Successfully",safe=False)
-        return JsonResponse("Unsuccessful",safe=False)
-    elif request.method=='PUT':
-        users_data=JSONParser().parse(request)
-        users=FoodItems.objects.get(loyalty_id=users_data['food_id'])
-        users_serializer=FoodItemsSerializers(users, data=users_data)
-        if users_serializer.is_valid():
-            users_serializer.save()
-            return JsonResponse("Success",safe=False)
-        return JsonResponse("failed",safe=True)
-    elif request.method=='PATCH':
-        users_data=JSONParser().parse(request)
-        users=FoodItems.objects.get(loyalty_id=users_data['food_id'])
-        users_serializer=FoodItemsSerializers(users, data=users_data,partial=True)
-        if users_serializer.is_valid():
-            users_serializer.save()
-            return JsonResponse("Successful update",safe=False)
-        return JsonResponse("failed",safe=False)   
-    elif request.method=='DELETE':
-        fooditems_data=JSONParser().parse(request)
-        fooditems=FoodItems.objects.get(fooditems_id=fooditems_data['food_id'])
-        fooditems.delete()
-        return JsonResponse("Delete succesful",safe=False)
-
-@csrf_exempt
-def drinkitemsApi(request,id=0):
-    if request.method=='GET':
-        drinkitems = DrinkItems.objects.all()
-        drinkitems_serializers = DrinkItemsSerializers(drinkitems,many=True)
-        return JsonResponse(drinkitems_serializers.data, safe=False)
-    elif request.method=='POST':
-        drinkitems_data=JSONParser().parse(request)
-        drinkitems_serializers =DrinkItemsSerializers(data=drinkitems_data)
-        if (drinkitems_serializers.is_valid()):
-            drinkitems_serializers.save()
-            return JsonResponse("Added Successfully",safe=False)
-        return JsonResponse("Unsuccessful",safe=False)
-    elif request.method=='PUT':
-        users_data=JSONParser().parse(request)
-        users=DrinkItems.objects.get(loyalty_id=users_data['drinkitems_id'])
-        users_serializer=DrinkItemsSerializers(users, data=users_data)
-        if users_serializer.is_valid():
-            users_serializer.save()
-            return JsonResponse("Success",safe=False)
-        return JsonResponse("failed",safe=True)
-    elif request.method=='PATCH':
-        users_data=JSONParser().parse(request)
-        users=DrinkItems.objects.get(loyalty_id=users_data['drinkitems_id'])
-        users_serializer=DrinkItemsSerializers(users, data=users_data,partial=True)
-        if users_serializer.is_valid():
-            users_serializer.save()
-            return JsonResponse("Successful update",safe=False)
-        return JsonResponse("failed",safe=False)
-    elif request.method=='DELETE':
-        drinkitems_data=JSONParser().parse(request)
-        drinkitems=DrinkItems.objects.get(drinkitems_id=drinkitems_data['drinkitems_id'])
-        drinkitems.delete()
+        stockitem_data=JSONParser().parse(request)
+        stockitem=Menu.objects.get(stockitem_id=stockitem_data['stock_item_id'])
+        stockitem.delete()
         return JsonResponse("Delete succesful",safe=False)
 
 @csrf_exempt
