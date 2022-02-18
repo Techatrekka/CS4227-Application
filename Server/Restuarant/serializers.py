@@ -29,7 +29,7 @@ class MenuSerializer(serializers.ModelSerializer):
 class OrderLineItemsSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderLineItems
-        fields = ('orderlineitems_id','order_id','menu_item')
+        fields = ('line_item','order_id','menu_item')
 
 class MenuItemSerializer(serializers.ModelSerializer):
     class Meta:

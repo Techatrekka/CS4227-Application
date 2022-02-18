@@ -854,3 +854,445 @@ Not Found: /stockitem
 [18/Feb/2022 17:15:31] "GET /stockitems HTTP/1.1" 200 2
 [18/Feb/2022 17:15:38] "GET /stockitem/1 HTTP/1.1" 200 2
 [18/Feb/2022 17:15:43] "GET /user/1 HTTP/1.1" 200 5825
+[18/Feb/2022 17:15:50] "GET /stockitems HTTP/1.1" 200 2
+[18/Feb/2022 17:20:27] "GET /user HTTP/1.1" 200 5825
+Internal Server Error: /orderlineitem
+Traceback (most recent call last):
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/CS4227/CS4227-Application/Server/Restuarant/views.py", line 258, in orderlineitemsApi
+    return JsonResponse(orderLineItemsSerializer.data, safe=False)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 745, in data
+    ret = super().data
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 246, in data
+    self._data = self.to_representation(self.instance)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 663, in to_representation
+    return [
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 664, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 500, in to_representation
+    for field in fields:
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 361, in _readable_fields
+    for field in self.fields.values():
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/utils/functional.py", line 48, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 349, in fields
+    for key, value in self.get_fields().items():
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 1053, in get_fields
+    field_class, field_kwargs = self.build_field(
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 1199, in build_field
+    return self.build_unknown_field(field_name, model_class)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 1317, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `orderlineitems_id` is not valid for model `OrderLineItems`.
+[18/Feb/2022 17:20:34] "GET /orderlineitem HTTP/1.1" 500 115503
+Not Found: /favicon.ico
+[18/Feb/2022 17:20:34] "GET /favicon.ico HTTP/1.1" 404 4807
+/root/CS4227/CS4227-Application/Server/Restuarant/models.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+February 18, 2022 - 17:10:13
+Django version 3.2.9, using settings 'Server.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Watching for file changes with StatReloader
+/root/CS4227/CS4227-Application/Server/Restuarant/models.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+February 18, 2022 - 17:21:12
+Django version 3.2.9, using settings 'Server.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Watching for file changes with StatReloader
+Internal Server Error: /orderlineitem
+Traceback (most recent call last):
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+psycopg2.errors.UndefinedColumn: column Restuarant_orderlineitems.orderlineitems_id does not exist
+LINE 1: SELECT "Restuarant_orderlineitems"."orderlineitems_id", "Res...
+               ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/CS4227/CS4227-Application/Server/Restuarant/views.py", line 258, in orderlineitemsApi
+    return JsonResponse(orderLineItemsSerializer.data, safe=False)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 745, in data
+    ret = super().data
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 246, in data
+    self._data = self.to_representation(self.instance)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 663, in to_representation
+    return [
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/query.py", line 280, in __iter__
+    self._fetch_all()
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/query.py", line 1324, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/query.py", line 51, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1175, in execute_sql
+    cursor.execute(sql, params)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+django.db.utils.ProgrammingError: column Restuarant_orderlineitems.orderlineitems_id does not exist
+LINE 1: SELECT "Restuarant_orderlineitems"."orderlineitems_id", "Res...
+               ^
+
+[18/Feb/2022 17:21:42] "GET /orderlineitem HTTP/1.1" 500 129616
+Not Found: /favicon.ico
+[18/Feb/2022 17:21:43] "GET /favicon.ico HTTP/1.1" 404 4807
+Internal Server Error: /orderlineitem
+Traceback (most recent call last):
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+psycopg2.errors.UndefinedColumn: column Restuarant_orderlineitems.orderlineitems_id does not exist
+LINE 1: SELECT "Restuarant_orderlineitems"."orderlineitems_id", "Res...
+               ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/CS4227/CS4227-Application/Server/Restuarant/views.py", line 258, in orderlineitemsApi
+    return JsonResponse(orderLineItemsSerializer.data, safe=False)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 745, in data
+    ret = super().data
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 246, in data
+    self._data = self.to_representation(self.instance)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 663, in to_representation
+    return [
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/query.py", line 280, in __iter__
+    self._fetch_all()
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/query.py", line 1324, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/query.py", line 51, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1175, in execute_sql
+    cursor.execute(sql, params)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+django.db.utils.ProgrammingError: column Restuarant_orderlineitems.orderlineitems_id does not exist
+LINE 1: SELECT "Restuarant_orderlineitems"."orderlineitems_id", "Res...
+               ^
+
+[18/Feb/2022 17:21:44] "GET /orderlineitem HTTP/1.1" 500 129616
+/root/CS4227/CS4227-Application/Server/Restuarant/serializers.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+February 18, 2022 - 17:21:41
+Django version 3.2.9, using settings 'Server.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Watching for file changes with StatReloader
+Internal Server Error: /orderlineitem
+Traceback (most recent call last):
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+psycopg2.errors.UndefinedColumn: column Restuarant_orderlineitems.orderlineitems_id does not exist
+LINE 1: SELECT "Restuarant_orderlineitems"."orderlineitems_id", "Res...
+               ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/CS4227/CS4227-Application/Server/Restuarant/views.py", line 258, in orderlineitemsApi
+    return JsonResponse(orderLineItemsSerializer.data, safe=False)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 745, in data
+    ret = super().data
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 246, in data
+    self._data = self.to_representation(self.instance)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 663, in to_representation
+    return [
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/query.py", line 280, in __iter__
+    self._fetch_all()
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/query.py", line 1324, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/query.py", line 51, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1175, in execute_sql
+    cursor.execute(sql, params)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+django.db.utils.ProgrammingError: column Restuarant_orderlineitems.orderlineitems_id does not exist
+LINE 1: SELECT "Restuarant_orderlineitems"."orderlineitems_id", "Res...
+               ^
+
+[18/Feb/2022 17:22:18] "GET /orderlineitem HTTP/1.1" 500 129164
+/root/CS4227/CS4227-Application/Server/Restuarant/models.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+February 18, 2022 - 17:22:16
+Django version 3.2.9, using settings 'Server.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Watching for file changes with StatReloader
+Internal Server Error: /orderlineitem
+Traceback (most recent call last):
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+psycopg2.errors.UndefinedColumn: column Restuarant_orderlineitems.order_id_id does not exist
+LINE 1: SELECT "Restuarant_orderlineitems"."line_item", "Restuarant_...
+                                                        ^
+HINT:  Perhaps you meant to reference the column "Restuarant_orderlineitems.Order_id_id".
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/CS4227/CS4227-Application/Server/Restuarant/views.py", line 258, in orderlineitemsApi
+    return JsonResponse(orderLineItemsSerializer.data, safe=False)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 745, in data
+    ret = super().data
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 246, in data
+    self._data = self.to_representation(self.instance)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 663, in to_representation
+    return [
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/query.py", line 280, in __iter__
+    self._fetch_all()
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/query.py", line 1324, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/query.py", line 51, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1175, in execute_sql
+    cursor.execute(sql, params)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+django.db.utils.ProgrammingError: column Restuarant_orderlineitems.order_id_id does not exist
+LINE 1: SELECT "Restuarant_orderlineitems"."line_item", "Restuarant_...
+                                                        ^
+HINT:  Perhaps you meant to reference the column "Restuarant_orderlineitems.Order_id_id".
+
+[18/Feb/2022 17:22:34] "GET /orderlineitem HTTP/1.1" 500 131993
+Internal Server Error: /orderlineitem
+Traceback (most recent call last):
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+psycopg2.errors.UndefinedColumn: column Restuarant_orderlineitems.order_id_id does not exist
+LINE 1: SELECT "Restuarant_orderlineitems"."line_item", "Restuarant_...
+                                                        ^
+HINT:  Perhaps you meant to reference the column "Restuarant_orderlineitems.Order_id_id".
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/CS4227/CS4227-Application/Server/Restuarant/views.py", line 258, in orderlineitemsApi
+    return JsonResponse(orderLineItemsSerializer.data, safe=False)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 745, in data
+    ret = super().data
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 246, in data
+    self._data = self.to_representation(self.instance)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 663, in to_representation
+    return [
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/query.py", line 280, in __iter__
+    self._fetch_all()
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/query.py", line 1324, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/query.py", line 51, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1175, in execute_sql
+    cursor.execute(sql, params)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+django.db.utils.ProgrammingError: column Restuarant_orderlineitems.order_id_id does not exist
+LINE 1: SELECT "Restuarant_orderlineitems"."line_item", "Restuarant_...
+                                                        ^
+HINT:  Perhaps you meant to reference the column "Restuarant_orderlineitems.Order_id_id".
+
+[18/Feb/2022 17:23:10] "GET /orderlineitem HTTP/1.1" 500 131993
+Internal Server Error: /orderlineitem
+Traceback (most recent call last):
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+psycopg2.errors.UndefinedColumn: column Restuarant_orderlineitems.order_id_id does not exist
+LINE 1: SELECT "Restuarant_orderlineitems"."line_item", "Restuarant_...
+                                                        ^
+HINT:  Perhaps you meant to reference the column "Restuarant_orderlineitems.Order_id_id".
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/CS4227/CS4227-Application/Server/Restuarant/views.py", line 258, in orderlineitemsApi
+    return JsonResponse(orderLineItemsSerializer.data, safe=False)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 745, in data
+    ret = super().data
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 246, in data
+    self._data = self.to_representation(self.instance)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 663, in to_representation
+    return [
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/query.py", line 280, in __iter__
+    self._fetch_all()
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/query.py", line 1324, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/query.py", line 51, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1175, in execute_sql
+    cursor.execute(sql, params)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+django.db.utils.ProgrammingError: column Restuarant_orderlineitems.order_id_id does not exist
+LINE 1: SELECT "Restuarant_orderlineitems"."line_item", "Restuarant_...
+                                                        ^
+HINT:  Perhaps you meant to reference the column "Restuarant_orderlineitems.Order_id_id".
+
+[18/Feb/2022 17:23:47] "GET /orderlineitem HTTP/1.1" 500 131993
+Internal Server Error: /orderlineitem
+Traceback (most recent call last):
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+psycopg2.errors.UndefinedColumn: column Restuarant_orderlineitems.order_id_id does not exist
+LINE 1: SELECT "Restuarant_orderlineitems"."line_item", "Restuarant_...
+                                                        ^
+HINT:  Perhaps you meant to reference the column "Restuarant_orderlineitems.Order_id_id".
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/CS4227/CS4227-Application/Server/Restuarant/views.py", line 258, in orderlineitemsApi
+    return JsonResponse(orderLineItemsSerializer.data, safe=False)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 745, in data
+    ret = super().data
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 246, in data
+    self._data = self.to_representation(self.instance)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/rest_framework/serializers.py", line 663, in to_representation
+    return [
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/query.py", line 280, in __iter__
+    self._fetch_all()
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/query.py", line 1324, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/query.py", line 51, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1175, in execute_sql
+    cursor.execute(sql, params)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/root/RMS/Server/lvenv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+django.db.utils.ProgrammingError: column Restuarant_orderlineitems.order_id_id does not exist
+LINE 1: SELECT "Restuarant_orderlineitems"."line_item", "Restuarant_...
+                                                        ^
+HINT:  Perhaps you meant to reference the column "Restuarant_orderlineitems.Order_id_id".
+
+[18/Feb/2022 17:24:27] "GET /orderlineitem HTTP/1.1" 500 131993
+Watching for file changes with StatReloader
