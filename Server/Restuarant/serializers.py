@@ -29,12 +29,12 @@ class MenuSerializer(serializers.ModelSerializer):
 class OrderLineItemsSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderLineItems
-        fields = ('orderlineitems_id','order_id','menu_item','food')
+        fields = ('line_item','order_id','menu_item')
 
 class MenuItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = MenuItem
-        fields = ('menu_item','dish_bev_id','menu_id','food')
+        fields = ('menu_item','Alcoholic','Description','Ingredients','Price','isFood','name')
         
 class StockItemsSerializer(serializers.ModelSerializer):
     class Meta:

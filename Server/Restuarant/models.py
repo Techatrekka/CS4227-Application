@@ -25,7 +25,7 @@ class Orders(models.Model):
     
 class OrderLineItems(models.Model):
     line_item = models.AutoField(primary_key=True)
-    Order_id = models.ForeignKey(Orders, default=1, on_delete=models.CASCADE)
+    order_id = models.ForeignKey(Orders, default=1, on_delete=models.CASCADE)
     menu_item = models.IntegerField()
 
 class Menu(models.Model):
