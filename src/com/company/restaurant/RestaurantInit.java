@@ -12,7 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class RestaurantInit {
-    public ArrayList<Menu> initMenus() {
+    public static ArrayList<Menu> initMenus() {
         JSONArray dbMenus = Database.readAllFromTable("menu", -1, null, "");
         JSONArray dbMenuItems = Database.readAllFromTable("menuitem", -1, null, "");
         JSONArray dbDishes = Database.readAllFromTable("dishes", -1, null, "");

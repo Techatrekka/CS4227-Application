@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 import java.util.Scanner;
 
-public class UserLogin extends UserInterface {
+public class UserLogin extends UiUtils {
     private boolean successfulLogin = false;
     private String email = "";
 

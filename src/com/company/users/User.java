@@ -16,19 +16,19 @@ public abstract class User {
     private String email;
     private Scanner scanner = new Scanner(System.in);
 
-    public int viewMenu(ArrayList<Menu> restaurantMenus, String toDo){
+    public int viewMenu(ArrayList<Menu> restaurantMenus, String option){
         for(Menu menu : restaurantMenus) {
             System.out.println(menu);
         }
 
-        if(!toDo.equals("view:")) {
-            System.out.println("Enter the id of the menu to " + toDo);
+        if(!option.equals("view:")) {
+            System.out.println("Enter the id of the menu to " + option);
             int menuID = scanner.nextInt();
             scanner.nextLine();
             for(Menu menu : restaurantMenus) {
                 if(menu.getId() == menuID) System.out.println(menu);
             }
-            return menuID;   
+            return menuID;
         }
 
         return -1;

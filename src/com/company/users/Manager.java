@@ -4,6 +4,7 @@ import com.company.restaurant.Database;
 import com.company.menu.Menu;
 import com.company.menu.MenuFactory;
 
+import com.company.ui.UiUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -15,7 +16,6 @@ import java.util.Scanner;
 
 public class Manager extends Staff {
     private Scanner scanner = new Scanner(System.in);
-    private MenuFactory menuFactory = new MenuFactory();
 
     public Manager(int idNum, String email, String fullName, String employeeType, double salary) {
         super.setIdNum(idNum);
@@ -30,13 +30,7 @@ public class Manager extends Staff {
         System.out.println("What is the Staff member's full name?");
         String fullName = scanner.nextLine();
         System.out.println("Enter their email");
-        String email = scanner.nextLine();
-        JSONObject existingUser = Database.readFromUserTable(email, null);
-        while(existingUser.has("email") && Objects.equals(existingUser.getString("email"), email)) {
-            System.out.println("Sorry, that email has already been used to register an account. Please use a different one or login if this is your account.");
-            email = scanner.nextLine();
-            existingUser = Database.readFromUserTable(email, null);
-        }
+        String email = UiUtils.getEmail();
         System.out.println("Enter temporary password");
         String password = scanner.nextLine();
         System.out.println("What is their salary? EG: 25000.0");
@@ -48,15 +42,15 @@ public class Manager extends Staff {
         staffDetails.put("password", password);
         staffDetails.put("user_type", "employee");
         Database.writeToTable("user", staffDetails);
-        
+
         JSONObject staffID = Database.readFromUserTable(email, null);
 
         JSONObject newStaffSalary = new JSONObject();
         newStaffSalary.put("user_id", staffID.get("user_id"));
         newStaffSalary.put("employee_type", "clerk");
         newStaffSalary.put("salary", salary);
-        
-        Database.writeToTable("employeesalary", newStaffSalary); 
+
+        Database.writeToTable("employeesalary", newStaffSalary);
     }
 
     public void viewStaffMember() {
@@ -79,7 +73,7 @@ public class Manager extends Staff {
         System.out.println("Enter the ID number of the employee you want to delete");
         int idNum = scanner.nextInt();
         while (idNum == this.getIdNum()){
-            System.out.println("You can not delete yourself, enter new ID number");
+            System.out.println("You cannot delete yourself, enter new ID number");
             idNum = scanner.nextInt();
         }
         if (Database.deleteFromTable("user", "user_id", idNum)){
@@ -138,10 +132,9 @@ public class Manager extends Staff {
         menuObj.put("name", name);
         menuObj.put("description", description);
         menuObj.put("date_created", LocalDate.now());
-  
+
         int id = Database.writeToTable("menu", menuObj);
-        Menu menu = new Menu(id, name, description, LocalDate.now());
-        return menu;
+        return new Menu(id, name, description, LocalDate.now());
     }
 
     public void editMenu(Menu menu){
@@ -149,12 +142,14 @@ public class Manager extends Staff {
         String newDes = askAboutAttr("description");
 
         JSONObject editedMenu = new JSONObject();
-        
+
         if(!Objects.equals(newName, "")){
             editedMenu.put("name", newName);
+            menu.setName(newName);
         }
         if(!Objects.equals(newDes, "")){
             editedMenu.put("description", newDes);
+            menu.setDescription(newDes);
         }
 
         if(!Objects.equals(newName, "") || !Objects.equals(newDes, "")){
@@ -162,27 +157,37 @@ public class Manager extends Staff {
 
             if (Database.updateTable("menu", editedMenu)){
                 System.out.println("Menu edited successfully");
-                JSONArray updatedMenu = Database.readAllFromTable("menu", menu.getId(), "menu_id", "");
-                JSONObject updatedMenuDetails = updatedMenu.getJSONObject(0);
-                menu = menuFactory.createMenu(updatedMenuDetails);
             }else{
                 System.out.println("Menu was not edited");
             }
             System.out.println("Continue editing the menu to add/remove items or go back to home screen? B = back, Any other key = continue");
             String choice = scanner.nextLine();
-            if(choice.equalsIgnoreCase("b")) {
-                return;
-            }
+            UiUtils.inputB(choice);
         }
 
         System.out.println("Do you want to add or remove menu items? A = add, R = remove");
-        String choice2 = getInputChoice("r", "a");
+        String choice2 = UiUtils.getInputChoice(new ArrayList<String>() {
+            {
+                add("r");
+                add("a");
+            }
+        });
         if(choice2.equals("a")) {
             System.out.println("Do you want to create a new menu item or choose from existing menu items? N = new, E = existing");
-            choice2 = getInputChoice("n", "e");
+            choice2 = UiUtils.getInputChoice(new ArrayList<String>() {
+                {
+                    add("n");
+                    add("e");
+                }
+            });
             if(choice2.equals("n")) {
                 System.out.println("Would you like to create a new beverage or dish? B = Beverage, D = Dish");
-                choice2 = getInputChoice("b", "d");
+                choice2 = UiUtils.getInputChoice(new ArrayList<String>() {
+                    {
+                        add("b");
+                        add("d");
+                    }
+                });
                 menu.addNewMenuItem(choice2);
             } else {
                 // get existing items
@@ -191,15 +196,6 @@ public class Manager extends Staff {
         } else {
             menu.removeMenuItem();
         }
-    }
-
-    String getInputChoice(String choice1, String choice2) {
-        String input = scanner.nextLine();
-        while(!input.toLowerCase().equals(choice1) && !input.toLowerCase().equals(choice2)) {
-            System.out.println("Please enter a valid option.");
-            input = scanner.nextLine();
-        }
-        return input.toLowerCase();
     }
 
     public void deleteMenu(int menuID){
