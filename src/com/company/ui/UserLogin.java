@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 import java.util.Scanner;
 
-public class UserLogin extends UiUtils {
+public class UserLogin {
     private boolean successfulLogin = false;
     private String email = "";
 
@@ -29,11 +29,11 @@ public class UserLogin extends UiUtils {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter Email Address:");
         String email = scanner.nextLine();
-        checkQ(email);
-        if(inputB(email)) {
+        UiUtils.checkQ(email);
+        if(UiUtils.inputB(email)) {
             return;
         }
-        String password = getPassword("Enter ");
+        String password = UiUtils.getPassword("Enter ");
 
         JSONObject userDetails = Database.readFromUserTable(email,password);
         boolean validCredentials = userDetails.has("correct_pass");
@@ -41,11 +41,11 @@ public class UserLogin extends UiUtils {
             System.out.println("Please enter valid login details. You must register before you can login.");
             System.out.println("Enter Email address:");
             email = scanner.nextLine();
-            if(inputB(email)) {
+            if(UiUtils.inputB(email)) {
                 this.setSuccessfulLogin(false);
                 return;
             }
-            password = getPassword("Enter ");
+            password = UiUtils.getPassword("Enter ");
             userDetails = Database.readFromUserTable(email,password);
             validCredentials = userDetails.has("correct_pass");
         }
