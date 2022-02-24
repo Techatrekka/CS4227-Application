@@ -28,14 +28,6 @@ class OrderLineItems(models.Model):
     order_id = models.ForeignKey(Orders, default=1, on_delete=models.CASCADE)
     menu_item = models.IntegerField()
 
-class Menu(models.Model):
-    menu_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50)
-    description = models.CharField(max_length=500)
-    date_created = models.DateField()
-    set_menu_price = models.CharField(max_length=50)
-    discount = models.CharField(max_length=50)
-
 class MenuItem(models.Model):
     menu_item = models.AutoField(primary_key=True)
     name = models.CharField(max_length=500)
@@ -44,6 +36,15 @@ class MenuItem(models.Model):
     Alcoholic = models.BooleanField()
     Ingredients=models.CharField(max_length=500)
     isFood = models.BooleanField()
+    
+class Menu(models.Model):
+    menu_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50)
+    description = models.CharField(max_length=500)
+    date_created = models.DateField()
+    menu_item = models.CharField(max_length=500)
+    set_menu_price = models.CharField(max_length=50)
+    discount = models.CharField(max_length=50)
 
 class StockItems(models.Model):
     stock_item_id = models.AutoField(primary_key=True)

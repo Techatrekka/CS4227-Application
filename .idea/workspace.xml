@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Update edit menu to actually work. Small edits to formatting" />
+    <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Update edit menu to actually work. Small edits to formatting">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +19,9 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="21HLxJKEZoFKPsO7h30voYhBa5d" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -110,7 +115,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update Order to print menu items in order without menu id. Small edits to other files to tidy up project." />

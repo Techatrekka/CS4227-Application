@@ -84,7 +84,7 @@ DATABASES = {
         'NAME': 'RMS',
         'USER': 'postgres',
         'PASSWORD': 'password',
-        'HOST' : 'localhost',
+        'HOST' : 'slynch.ie',
         'PORT' : '5432'
 
     }
