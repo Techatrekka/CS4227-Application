@@ -42,7 +42,7 @@ class Menu(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=500)
     date_created = models.DateField()
-    menu_item = models.CharField(max_length=500)
+    menu_items = models.CharField(max_length=500)
     set_menu_price = models.CharField(max_length=50)
     discount = models.CharField(max_length=50)
 
