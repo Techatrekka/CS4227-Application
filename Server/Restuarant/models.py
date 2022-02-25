@@ -34,6 +34,7 @@ class MenuItem(models.Model):
     Description = models.CharField(max_length=500)
     Price = models.DecimalField(max_digits=5,decimal_places=2)
     Alcoholic = models.BooleanField()
+    Allergens=models.CharField(max_length=500)
     Ingredients=models.CharField(max_length=500)
     isFood = models.BooleanField()
     
