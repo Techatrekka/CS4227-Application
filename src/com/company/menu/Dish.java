@@ -9,10 +9,10 @@ public class Dish extends MenuItem{
     private String description;
     private List<String> allergens;
     public Dish(JSONObject dishDetails){
-        super.id = dishDetails.getInt("dish_id");
+        super.id = dishDetails.getInt("menu_item");
         super.name = dishDetails.getString("name");
-        super.price = dishDetails.getDouble("price");
-        super.description = dishDetails.getString("description");
+        super.price = dishDetails.getDouble("Price");
+        super.description = dishDetails.getString("Description");
         String dishAllergens = dishDetails.getString("allergens");
         String[] dishAllergenArr = dishAllergens.split(",");
         this.allergens = Arrays.asList(dishAllergenArr);

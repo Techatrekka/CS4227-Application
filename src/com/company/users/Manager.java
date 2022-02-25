@@ -134,7 +134,8 @@ public class Manager extends Staff {
         menuObj.put("date_created", LocalDate.now());
 
         int id = Database.writeToTable("menu", menuObj);
-        return new Menu(id, name, description, LocalDate.now());
+        String menuItems = "";
+        return new Menu(id, name, description, LocalDate.now(), menuItems);
     }
 
     public void editMenu(Menu menu){

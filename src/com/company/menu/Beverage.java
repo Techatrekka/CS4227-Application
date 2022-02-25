@@ -5,11 +5,11 @@ import org.json.JSONObject;
 public class Beverage extends MenuItem {
     private boolean alcoholic;
     public Beverage(JSONObject bevDetails){
-        super.id = bevDetails.getInt("beverage_id");
+        super.id = bevDetails.getInt("menu_item");
         super.name = bevDetails.getString("name");
-        super.price = bevDetails.getDouble("price");
-        super.description = bevDetails.getString("description");
-        this.alcoholic = bevDetails.getBoolean("alcoholic");
+        super.price = bevDetails.getDouble("Price");
+        super.description = bevDetails.getString("Description");
+        this.alcoholic = bevDetails.getBoolean("Alcoholic");
     }
     @Override
     public double getPrice() {

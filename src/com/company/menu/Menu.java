@@ -16,12 +16,30 @@ public class Menu {
     private Scanner scanner = new Scanner(System.in);
     public ArrayList<MenuItem> menuList;
 
-    public Menu(int id, String name,String description, LocalDate date){
+    public Menu(int id, String name,String description, LocalDate date, String menuItems){
         this.menuID = id;
         this.name = name;
         this.description = description;
         this.dateCreated = date;
         menuList = new ArrayList<>();
+
+        ArrayList<String> cols = new ArrayList<>();
+        cols.add("menu_item");
+        cols.add("Alcoholic");
+        cols.add("Description");
+        cols.add("Ingredients");
+        cols.add("Price");
+        cols.add("isFood");
+        cols.add("name");
+        String[] items = menuItems.split(",");
+        for(String menuItemId : items) {
+            JSONObject itemDetails = Database.readFromTable("menuitem", Integer.parseInt(menuItemId), cols, "menu_item", -1, "");
+            if(itemDetails.getBoolean("isFood")) {
+                menuList.add(new Dish(itemDetails));
+            } else {
+                menuList.add(new Beverage(itemDetails));
+            }
+        }
     }
 
     public int getId(){
