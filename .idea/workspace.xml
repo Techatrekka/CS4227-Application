@@ -2,9 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Update edit menu to actually work. Small edits to formatting">
-      <change afterPath="$PROJECT_DIR$/.scannerwork/.sonar_lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Beverage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Beverage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Dish.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Dish.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/MenuFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/MenuFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/SetMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/SetMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/SpecialMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/SpecialMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/restaurant/RestaurantInit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/restaurant/RestaurantInit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/users/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/users/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,6 +20,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">

@@ -18,7 +18,13 @@ public abstract class User {
 
     public int viewMenu(ArrayList<Menu> restaurantMenus, String option){
         for(Menu menu : restaurantMenus) {
-            System.out.println(menu);
+            if(userType.equals("customer") && menu.menuList.size() > 0) {
+                System.out.println(menu);
+            } else if(userType.equals("employee")) {
+                System.out.println(menu);
+                System.out.println("Note: Customers will only see the menus that have items in them." +
+                        "Use the edit menu option to add menu items.");
+            }
         }
 
         if(!option.equals("view:")) {
@@ -26,7 +32,9 @@ public abstract class User {
             int menuID = scanner.nextInt();
             scanner.nextLine();
             for(Menu menu : restaurantMenus) {
-                if(menu.getId() == menuID) System.out.println(menu);
+                if(menu.getId() == menuID) {
+                    System.out.println(menu);
+                }
             }
             return menuID;
         }
@@ -88,11 +96,13 @@ public abstract class User {
                 setMealCost += meal.getMealPrice();
                 System.out.println(meal);
             } else {
+                System.out.println("Press any key to view menus to order a la carte.");
+                scanner.nextLine();
                 int menuId = viewMenu(restaurantMenus, "order from:");
                 for(Menu menu : restaurantMenus) {
                     if (menu.getId() == menuId) {
                         if (menu.getMenuItems().size() < 1) {
-                            System.out.println("Sorry, this menu has no items you can order. Press any key to select a new menu.");
+                            System.out.println("Sorry, this menu has no items you can order. Press any key to continue.");
                             scanner.nextLine();
                         } else {
                             System.out.println("Enter the id of the item you'd like to order");
@@ -142,8 +152,10 @@ public abstract class User {
             Database.writeToTable("orderlineitem", orderLineDetails);
         }
 
-        int time = (int) (Math.random() * 30) + 6;
-        System.out.println("Your order will be ready for collection in " + time + " minutes and will cost €" + newOrder.getTotalCost());
+        if(newOrder.getTotalCost() > 0) {
+            int time = (int) (Math.random() * 30) + 6;
+            System.out.println("Your order will be ready for collection in " + time + " minutes and will cost €" + newOrder.getTotalCost());
+        }
     }
 
     private JSONObject getOrderItem(boolean isFood, int id) {
