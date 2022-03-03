@@ -4,6 +4,7 @@ import com.company.restaurant.Database;
 import com.company.menu.*;
 import com.company.order.Order;
 
+import com.company.ui.UiUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -18,12 +19,12 @@ public abstract class User {
 
     public int viewMenu(ArrayList<Menu> restaurantMenus, String option){
         for(Menu menu : restaurantMenus) {
-            if(userType.equals("customer") && menu.menuList.size() > 0) {
+            if(userType.equals("customer") && menu.getMenuItems().size() > 0) {
                 System.out.println(menu);
             } else if(userType.equals("employee")) {
                 System.out.println(menu);
                 System.out.println("Note: Customers will only see the menus that have items in them." +
-                        "Use the edit menu option to add menu items.");
+                        "Managers can use the edit menu option to add menu items.");
             }
         }
 
@@ -38,7 +39,6 @@ public abstract class User {
             }
             return menuID;
         }
-
         return -1;
     }
 
@@ -90,7 +90,7 @@ public abstract class User {
                     builder = new KidsMealBuilder();
                 } else {
                     builder = new AdultMealBuilder();
-                    System.out.println("Adult's meal has been ordered.");
+                    System.out.println("Adult's meal deal has been ordered.");
                 }
                 SetMeal meal = director.createMeal(builder);
                 setMealCost += meal.getMealPrice();
@@ -101,35 +101,33 @@ public abstract class User {
                 int menuId = viewMenu(restaurantMenus, "order from:");
                 for(Menu menu : restaurantMenus) {
                     if (menu.getId() == menuId) {
-                        if (menu.getMenuItems().size() < 1) {
-                            System.out.println("Sorry, this menu has no items you can order. Press any key to continue.");
-                            scanner.nextLine();
-                        } else {
-                            System.out.println("Enter the id of the item you'd like to order");
+                        System.out.println("Enter the id of the item you'd like to order");
+                        choice = scanner.nextLine();
+                        while(!UiUtils.isValid(choice, -1, -1)) {
                             choice = scanner.nextLine();
-                            MenuItem item = null;
-                            JSONObject itemDetails;
-                            for(MenuItem menuItem : menu.getMenuItems()) {
-                                if(menuItem.getID() == Integer.parseInt(choice)) {
-                                    System.out.println("Would you like chips, wedges, or both with your order? C = chips, W = wedges, B = both, N = none");
-                                    String sideChoice = scanner.nextLine();
-                                    if(sideChoice.equalsIgnoreCase("c")) {
-                                        itemDetails = getOrderItem(menuItem instanceof Dish, Integer.parseInt(choice));
-                                        item = menuItem instanceof Dish ? new Chips(new Dish(itemDetails)) : new Chips(new Beverage(itemDetails));
-                                    } else if(sideChoice.equalsIgnoreCase("w")) {
-                                        itemDetails = getOrderItem(menuItem instanceof Dish, Integer.parseInt(choice));
-                                        item = menuItem instanceof Dish ? new Wedges(new Dish(itemDetails)) : new Wedges(new Beverage(itemDetails));
-                                    } else if(sideChoice.equalsIgnoreCase("b")) {
-                                        itemDetails = getOrderItem(menuItem instanceof Dish, Integer.parseInt(choice));
-                                        item = menuItem instanceof Dish ? new Wedges(new Chips(new Dish(itemDetails))) : new Wedges(new Chips(new Beverage(itemDetails)));
-                                    } else {
-                                        itemDetails = getOrderItem(menuItem instanceof Dish, Integer.parseInt(choice));
-                                        item = menuItem instanceof Dish ? new Dish(itemDetails) : new Beverage(itemDetails);
-                                    }
+                        }
+                        MenuItem item = null;
+                        JSONObject itemDetails;
+                        for(MenuItem menuItem : menu.getMenuItems()) {
+                            if(menuItem.getID() == Integer.parseInt(choice)) {
+                                System.out.println("Would you like chips, wedges, both, or neither with your order? C = chips, W = wedges, B = both, N = none");
+                                String sideChoice = scanner.nextLine();
+                                if(sideChoice.equalsIgnoreCase("c")) {
+                                    itemDetails = getOrderItem(Integer.parseInt(choice));
+                                    item = menuItem instanceof Dish ? new Chips(new Dish(itemDetails)) : new Chips(new Beverage(itemDetails));
+                                } else if(sideChoice.equalsIgnoreCase("w")) {
+                                    itemDetails = getOrderItem(Integer.parseInt(choice));
+                                    item = menuItem instanceof Dish ? new Wedges(new Dish(itemDetails)) : new Wedges(new Beverage(itemDetails));
+                                } else if(sideChoice.equalsIgnoreCase("b")) {
+                                    itemDetails = getOrderItem(Integer.parseInt(choice));
+                                    item = menuItem instanceof Dish ? new Wedges(new Chips(new Dish(itemDetails))) : new Wedges(new Chips(new Beverage(itemDetails)));
+                                } else {
+                                    itemDetails = getOrderItem(Integer.parseInt(choice));
+                                    item = menuItem instanceof Dish ? new Dish(itemDetails) : new Beverage(itemDetails);
                                 }
                             }
-                            newOrder.addMenuItem(menuId, item);
                         }
+                        newOrder.addMenuItem(menuId, item);
                     }
                 }
             }
@@ -144,36 +142,34 @@ public abstract class User {
 
         int orderId = Database.writeToTable("order", orderDetails);
         for(MenuItem item : newOrder.getMenuItems().values()) {
-            JSONObject orderLineDetails = new JSONObject();
-            JSONObject menuItem = Database.readFromTable("menuitem", item.getID(), Collections.singletonList("menu_item"), "dish_bev_id", newOrder.getOrderItemMenuId(item.getID()), "menu_id");
-            orderLineDetails.put("menu_item", menuItem.getInt("menu_item"));
-            orderLineDetails.put("order_id", orderId);
-            orderLineDetails.put("food", item instanceof Dish);
-            Database.writeToTable("orderlineitem", orderLineDetails);
+            JSONObject orderItemDetails = new JSONObject();
+            orderItemDetails.put("menu_item", item.getID());
+            orderItemDetails.put("order_id", orderId);
+            Database.writeToTable("orderlineitem", orderItemDetails);
         }
 
         if(newOrder.getTotalCost() > 0) {
             int time = (int) (Math.random() * 30) + 6;
             System.out.println("Your order will be ready for collection in " + time + " minutes and will cost €" + newOrder.getTotalCost());
+        } else {
+            System.out.println("The order was cancelled.");
         }
     }
 
-    private JSONObject getOrderItem(boolean isFood, int id) {
-        JSONObject itemDetails;
-        ArrayList<String> cols = new ArrayList<>();
-        cols.add("name");
-        cols.add("price");
-        cols.add("description");
-        if(isFood) {
-            cols.add("allergens");
-            cols.add("dish_id");
-            itemDetails = Database.readFromTable("dishes", id, cols, "dish_id", -1, "");
-        } else {
-            cols.add("alcoholic");
-            cols.add("beverage_id");
-            itemDetails = Database.readFromTable("beverages", id, cols, "beverage_id", -1, "");
-        }
-        return itemDetails;
+    private JSONObject getOrderItem(int menuItemId) {
+        JSONObject menuItemDetails;
+        ArrayList<String> cols = new ArrayList<String>() {{
+            add("name");
+            add("Price");
+            add("Description");
+            add("Ingredients");
+            add("isFood");
+            add("Allergens");
+            add("menu_item");
+            add("Alcoholic");
+        }};
+        menuItemDetails = Database.readFromTable("menuitem", menuItemId, cols, "menu_item", -1, "");
+        return menuItemDetails;
     }
 
     public void getOrders() {
@@ -185,9 +181,8 @@ public abstract class User {
                 JSONArray allOrderItems = Database.readAllFromTable("orderlineitem", orderDetails.getInt("order_id"), "order_id", "");
                 for (Object orderItemObj : allOrderItems) {
                     JSONObject orderItemDetails = (JSONObject) orderItemObj;
-                    JSONObject dishBevId = Database.readFromTable("menuitem", orderItemDetails.getInt("menu_item"), Collections.singletonList("dish_bev_id"), "menu_item", -1, "");
-                    JSONObject itemDetails = getOrderItem(orderItemDetails.getBoolean("food"), dishBevId.getInt("dish_bev_id"));
-                    MenuItem item = orderItemDetails.getBoolean("food") ? new Dish(itemDetails) : new Beverage(itemDetails);
+                    JSONObject itemDetails = getOrderItem(orderItemDetails.getInt("menu_item"));
+                    MenuItem item = orderItemDetails.getBoolean("isFood") ? new Dish(itemDetails) : new Beverage(itemDetails);
                     order.addMenuItem(-1, item);
                 }
                 System.out.println(order);
@@ -218,10 +213,12 @@ public abstract class User {
                 userDetailsJson.put("loyalty_points", 0);
             }
         } else {
+            // If it's an existing customer, read their loyalty points value from the database
             if(Objects.equals(userDetailsJson.getString("user_type"), "customer")) {
                 cols.add("loyalty_points");
                 extraAttributes = Database.readFromTable("loyalty", userDetailsJson.getInt("user_id"), cols, "user_id", -1, "");
                 userDetailsJson.put("loyalty_points", extraAttributes.getInt("loyalty_points"));
+            // If it's an existing employee, read their salary and employee type from the database
             } else if(Objects.equals(userDetailsJson.getString("user_type"), "employee")) {
                 cols.add("salary");
                 cols.add("employee_type");

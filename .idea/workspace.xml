@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Update edit menu to actually work. Small edits to formatting">
+    <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Beverage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Beverage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Dish.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Dish.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/menu/MenuFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/MenuFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/menu/SetMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/SetMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/menu/SpecialMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/SpecialMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/restaurant/RestaurantInit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/restaurant/RestaurantInit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/ui/UiUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/ui/UiUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/users/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/Manager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/users/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/User.java" afterDir="false" />
     </list>
@@ -119,7 +112,21 @@
       <option name="project" value="LOCAL" />
       <updated>1637703250888</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Update readme to include instructions for running via command line. Add check for whether order cost is 0, if so don't tell user order will be ready soon. Add check to prevent customers from seeing empty menus while allowing employees to still view them">
+      <created>1645798320729</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1645798320729</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Update initMenus method based on refactored database. Update Menu constructor to read menu items from the database and create dishes or beverages from them. Update constructors for all related menu and menu item classes.">
+      <created>1645798453154</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1645798453154</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -139,6 +146,8 @@
     <MESSAGE value="Update view employees to display employee details better. Fix bug in datatase class which caused error due to a lack of a check for an int." />
     <MESSAGE value="Update to include description field for beverages in all classes that create or read beverages." />
     <MESSAGE value="Update edit menu to actually work. Small edits to formatting" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update edit menu to actually work. Small edits to formatting" />
+    <MESSAGE value="Update readme to include instructions for running via command line. Add check for whether order cost is 0, if so don't tell user order will be ready soon. Add check to prevent customers from seeing empty menus while allowing employees to still view them" />
+    <MESSAGE value="Update initMenus method based on refactored database. Update Menu constructor to read menu items from the database and create dishes or beverages from them. Update constructors for all related menu and menu item classes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update initMenus method based on refactored database. Update Menu constructor to read menu items from the database and create dishes or beverages from them. Update constructors for all related menu and menu item classes." />
   </component>
 </project>

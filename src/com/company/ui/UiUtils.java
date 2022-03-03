@@ -81,10 +81,10 @@ public final class UiUtils {
         return Integer.parseInt(choice);
     }
 
-    static boolean isValid(String choice, int min, int max) {
+    public static boolean isValid(String choice, int min, int max) {
         try {
             int numChoice = Integer.parseInt(choice);
-            if(numChoice > max || numChoice < min) {
+            if(max != -1 && min != -1 && (numChoice > max || numChoice < min)) {
                 return false;
             }
         } catch(NumberFormatException e) {

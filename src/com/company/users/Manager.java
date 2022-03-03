@@ -73,7 +73,7 @@ public class Manager extends Staff {
         System.out.println("Enter the ID number of the employee you want to delete");
         int idNum = scanner.nextInt();
         while (idNum == this.getIdNum()){
-            System.out.println("You cannot delete yourself, enter new ID number");
+            System.out.println("You cannot delete yourself, enter a different ID number");
             idNum = scanner.nextInt();
         }
         if (Database.deleteFromTable("user", "user_id", idNum)){
@@ -104,26 +104,27 @@ public class Manager extends Staff {
 
     public Menu makeMenu(){
         JSONObject menuObj = new JSONObject();
-        System.out.println("What will you call the menu?");
+        System.out.println("What will you call the menu? Press B to go back to the previous screen");
         String name = scanner.nextLine();
+        UiUtils.inputB(name);
         System.out.println("Describe the menu:");
         String description = scanner.nextLine();
         System.out.println("Is this a set menu? y/n");
-        String specialMenu = scanner.nextLine();
-        if(specialMenu.equalsIgnoreCase("Y")){
+        String menuType = scanner.nextLine();
+        if(menuType.equalsIgnoreCase("Y")){
             System.out.println("How much does it cost?");
-            specialMenu = scanner.nextLine();
-            menuObj.put("set_menu_price", specialMenu);
+            menuType = scanner.nextLine();
+            menuObj.put("set_menu_price", menuType);
             menuObj.put("discount", "0.0");
-        }else{
+        } else {
             System.out.println("Does this menu have a discount on it? y/n");
-            specialMenu = scanner.nextLine();
-            if(specialMenu.equalsIgnoreCase("Y")){
-                System.out.println("How much of a discount does this menu have?");
-                specialMenu = scanner.nextLine();
+            menuType = scanner.nextLine();
+            if(menuType.equalsIgnoreCase("Y")){
+                System.out.println("How much of a discount does this menu have? Enter a number for the percentage discount");
+                menuType = scanner.nextLine();
                 menuObj.put("set_menu_price", "0.0");
-                menuObj.put("discount", specialMenu);
-            }else{
+                menuObj.put("discount", menuType);
+            } else {
                 menuObj.put("set_menu_price", "0.0");
                 menuObj.put("discount", "0.0");
             }
@@ -132,10 +133,10 @@ public class Manager extends Staff {
         menuObj.put("name", name);
         menuObj.put("description", description);
         menuObj.put("date_created", LocalDate.now());
+        menuObj.put("menu_items", "");
 
         int id = Database.writeToTable("menu", menuObj);
-        String menuItems = "";
-        return new Menu(id, name, description, LocalDate.now(), menuItems);
+        return new Menu(id, name, description, LocalDate.now(), "");
     }
 
     public void editMenu(Menu menu){
@@ -161,9 +162,11 @@ public class Manager extends Staff {
             }else{
                 System.out.println("Menu was not edited");
             }
-            System.out.println("Continue editing the menu to add/remove items or go back to home screen? B = back, Any other key = continue");
+            System.out.println("Continue editing the menu to add/remove menu items or go back to home screen? B = back, Any other key = continue");
             String choice = scanner.nextLine();
             UiUtils.inputB(choice);
+        } else {
+            System.out.println("You entered a blank value, try again!");
         }
 
         System.out.println("Do you want to add or remove menu items? A = add, R = remove");
