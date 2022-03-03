@@ -29,17 +29,21 @@ public abstract class User {
         }
 
         if(!option.equals("view:")) {
-            System.out.println("Enter the id of the menu to " + option);
-            int menuID = scanner.nextInt();
-            scanner.nextLine();
-            for(Menu menu : restaurantMenus) {
-                if(menu.getId() == menuID) {
-                    System.out.println(menu);
-                }
-            }
-            return menuID;
+            return chooseMenu(option, restaurantMenus);
         }
         return -1;
+    }
+
+    int chooseMenu(String option, ArrayList<Menu> restaurantMenus) {
+        System.out.println("Enter the id of the menu to " + option);
+        int menuID = scanner.nextInt();
+        scanner.nextLine();
+        for(Menu menu : restaurantMenus) {
+            if(menu.getId() == menuID) {
+                System.out.println(menu);
+            }
+        }
+        return menuID;
     }
 
     public void setIdNum(int idNum) {
@@ -82,19 +86,7 @@ public abstract class User {
             System.out.println("Would you like to order a meal deal, which includes a set meal and drink? Y / N");
             String choice = scanner.nextLine();
             if(choice.equalsIgnoreCase("y")) {
-                MealDirector director = new MealDirector();
-                SetMealBuilder builder = null;
-                System.out.println("Do you want to order a kids meal? Y / N");
-                choice = scanner.nextLine();
-                if (choice.equalsIgnoreCase("y")) {
-                    builder = new KidsMealBuilder();
-                } else {
-                    builder = new AdultMealBuilder();
-                    System.out.println("Adult's meal deal has been ordered.");
-                }
-                SetMeal meal = director.createMeal(builder);
-                setMealCost += meal.getMealPrice();
-                System.out.println(meal);
+                setMealCost += buildMeal();
             } else {
                 System.out.println("Press any key to view menus to order a la carte.");
                 scanner.nextLine();
@@ -107,24 +99,9 @@ public abstract class User {
                             choice = scanner.nextLine();
                         }
                         MenuItem item = null;
-                        JSONObject itemDetails;
                         for(MenuItem menuItem : menu.getMenuItems()) {
                             if(menuItem.getID() == Integer.parseInt(choice)) {
-                                System.out.println("Would you like chips, wedges, both, or neither with your order? C = chips, W = wedges, B = both, N = none");
-                                String sideChoice = scanner.nextLine();
-                                if(sideChoice.equalsIgnoreCase("c")) {
-                                    itemDetails = getOrderItem(Integer.parseInt(choice));
-                                    item = menuItem instanceof Dish ? new Chips(new Dish(itemDetails)) : new Chips(new Beverage(itemDetails));
-                                } else if(sideChoice.equalsIgnoreCase("w")) {
-                                    itemDetails = getOrderItem(Integer.parseInt(choice));
-                                    item = menuItem instanceof Dish ? new Wedges(new Dish(itemDetails)) : new Wedges(new Beverage(itemDetails));
-                                } else if(sideChoice.equalsIgnoreCase("b")) {
-                                    itemDetails = getOrderItem(Integer.parseInt(choice));
-                                    item = menuItem instanceof Dish ? new Wedges(new Chips(new Dish(itemDetails))) : new Wedges(new Chips(new Beverage(itemDetails)));
-                                } else {
-                                    itemDetails = getOrderItem(Integer.parseInt(choice));
-                                    item = menuItem instanceof Dish ? new Dish(itemDetails) : new Beverage(itemDetails);
-                                }
+                                item = chooseSideDish(Integer.parseInt(choice),  menuItem instanceof Dish);
                             }
                         }
                         newOrder.addMenuItem(menuId, item);
@@ -145,6 +122,7 @@ public abstract class User {
             JSONObject orderItemDetails = new JSONObject();
             orderItemDetails.put("menu_item", item.getID());
             orderItemDetails.put("order_id", orderId);
+            System.out.println(orderItemDetails);
             Database.writeToTable("orderlineitem", orderItemDetails);
         }
 
@@ -168,7 +146,7 @@ public abstract class User {
             add("menu_item");
             add("Alcoholic");
         }};
-        menuItemDetails = Database.readFromTable("menuitem", menuItemId, cols, "menu_item", -1, "");
+        menuItemDetails = Database.readFromTable("menuitem", menuItemId, cols, "menu_item");
         return menuItemDetails;
     }
 
@@ -182,7 +160,7 @@ public abstract class User {
                 for (Object orderItemObj : allOrderItems) {
                     JSONObject orderItemDetails = (JSONObject) orderItemObj;
                     JSONObject itemDetails = getOrderItem(orderItemDetails.getInt("menu_item"));
-                    MenuItem item = orderItemDetails.getBoolean("isFood") ? new Dish(itemDetails) : new Beverage(itemDetails);
+                    MenuItem item = itemDetails.getBoolean("isFood") ? new Dish(itemDetails) : new Beverage(itemDetails);
                     order.addMenuItem(-1, item);
                 }
                 System.out.println(order);
@@ -216,13 +194,13 @@ public abstract class User {
             // If it's an existing customer, read their loyalty points value from the database
             if(Objects.equals(userDetailsJson.getString("user_type"), "customer")) {
                 cols.add("loyalty_points");
-                extraAttributes = Database.readFromTable("loyalty", userDetailsJson.getInt("user_id"), cols, "user_id", -1, "");
+                extraAttributes = Database.readFromTable("loyalty", userDetailsJson.getInt("user_id"), cols, "user_id");
                 userDetailsJson.put("loyalty_points", extraAttributes.getInt("loyalty_points"));
             // If it's an existing employee, read their salary and employee type from the database
             } else if(Objects.equals(userDetailsJson.getString("user_type"), "employee")) {
                 cols.add("salary");
                 cols.add("employee_type");
-                JSONObject employeeTypeSalary = Database.readFromTable("employeesalary", userDetailsJson.getInt("user_id"), cols, "user_id", -1, "");
+                JSONObject employeeTypeSalary = Database.readFromTable("employeesalary", userDetailsJson.getInt("user_id"), cols, "user_id");
                 userDetailsJson.put("salary", employeeTypeSalary.getDouble("salary"));
                 userDetailsJson.put("employee_type", employeeTypeSalary.getString("employee_type"));
             }
@@ -231,4 +209,40 @@ public abstract class User {
         return userFactory.createUser(userDetailsJson);
     }
 
+    MenuItem chooseSideDish(int choice, boolean isFood) {
+        MenuItem item = null;
+        JSONObject itemDetails;
+        System.out.println("Would you like chips, wedges, both, or neither with your order? C = chips, W = wedges, B = both, N = none");
+        String sideChoice = scanner.nextLine();
+        if(sideChoice.equalsIgnoreCase("c")) {
+            itemDetails = getOrderItem(choice);
+            item = isFood ? new Chips(new Dish(itemDetails)) : new Chips(new Beverage(itemDetails));
+        } else if(sideChoice.equalsIgnoreCase("w")) {
+            itemDetails = getOrderItem(choice);
+            item = isFood ? new Wedges(new Dish(itemDetails)) : new Wedges(new Beverage(itemDetails));
+        } else if(sideChoice.equalsIgnoreCase("b")) {
+            itemDetails = getOrderItem(choice);
+            item = isFood ? new Wedges(new Chips(new Dish(itemDetails))) : new Wedges(new Chips(new Beverage(itemDetails)));
+        } else {
+            itemDetails = getOrderItem(choice);
+            item = isFood ? new Dish(itemDetails) : new Beverage(itemDetails);
+        }
+        return item;
+    }
+
+    double buildMeal() {
+        MealDirector director = new MealDirector();
+        SetMealBuilder builder = null;
+        System.out.println("Do you want to order a kids meal? Y / N");
+        String choice = scanner.nextLine();
+        if (choice.equalsIgnoreCase("y")) {
+            builder = new KidsMealBuilder();
+        } else {
+            builder = new AdultMealBuilder();
+            System.out.println("Adult's meal deal has been ordered.");
+        }
+        SetMeal meal = director.createMeal(builder);
+        System.out.println(meal);
+        return meal.getMealPrice();
+    }
 }
