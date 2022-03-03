@@ -29,11 +29,12 @@ public class Menu {
         cols.add("Description");
         cols.add("Ingredients");
         cols.add("Price");
+        cols.add("Allergens");
         cols.add("isFood");
         cols.add("name");
         String[] items = menuItems.split(",");
         for(String menuItemId : items) {
-            JSONObject itemDetails = Database.readFromTable("menuitem", Integer.parseInt(menuItemId), cols, "menu_item", -1, "");
+            JSONObject itemDetails = Database.readFromTable("menuitem", Integer.parseInt(menuItemId), cols, "menu_item");
             if(itemDetails.getBoolean("isFood")) {
                 menuList.add(new Dish(itemDetails));
             } else {
@@ -135,10 +136,7 @@ public class Menu {
             System.out.println("Enter the id of the item you'd like to remove from the menu:");
             String choice = scanner.nextLine();
             int id = Integer.parseInt(choice);
-            ArrayList<String> cols = new ArrayList<>();
-            cols.add("menu_item");
-            JSONObject menuItemDetails = Database.readFromTable("menuitem", id, cols, "dish_bev_id", this.getId(), "menu_id");
-            if(Database.deleteFromTable("menuitem", cols.get(0), menuItemDetails.getInt("menu_item"))) {
+            if(Database.deleteFromTable("menuitem", "menu_item", id)) {
                 menuList.removeIf(menuItem -> id == menuItem.getID());
                 return true;
             }

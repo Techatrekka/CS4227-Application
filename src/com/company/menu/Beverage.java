@@ -2,6 +2,8 @@ package com.company.menu;
 
 import org.json.JSONObject;
 
+import java.util.Arrays;
+
 public class Beverage extends MenuItem {
     private boolean alcoholic;
     public Beverage(JSONObject bevDetails){
@@ -10,6 +12,8 @@ public class Beverage extends MenuItem {
         super.price = bevDetails.getDouble("Price");
         super.description = bevDetails.getString("Description");
         this.alcoholic = bevDetails.getBoolean("Alcoholic");
+        String[] bevAllergenArr = bevDetails.getString("Allergens").split(",");
+        super.allergens = Arrays.asList(bevAllergenArr);
     }
     @Override
     public double getPrice() {

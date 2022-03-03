@@ -62,7 +62,7 @@ public class Manager extends Staff {
             List<String> salaryList = new ArrayList<>();
             salaryList.add("salary");
             salaryList.add("employee_type");
-            JSONObject salary = Database.readFromTable("employeesalary", obj2.getInt("user_id"), salaryList, "user_id", -1, "");
+            JSONObject salary = Database.readFromTable("employeesalary", obj2.getInt("user_id"), salaryList, "user_id");
             System.out.printf("\tID: %s\t\tName: %s\n\t\t\t\tSalary: €%s\t Position: %s\n", obj2.get("user_id"), obj2.get("fullname"), salary.get("salary"), salary.get("employee_type"));
         }
     }

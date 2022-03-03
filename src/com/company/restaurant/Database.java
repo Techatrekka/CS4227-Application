@@ -64,7 +64,7 @@ public class Database {
         return userData;
     }
 
-        public static JSONObject readFromTable(String table, int id, List<String> cols, String idCol, int id2, String idCol2) {
+        public static JSONObject readFromTable(String table, int id, List<String> cols, String idCol) {
         JSONObject rowDetails = new JSONObject();
         HttpURLConnection http = null;
         try {
@@ -90,11 +90,7 @@ public class Database {
 
                 for(Object obj : jsonData) {
                     JSONObject obj2 = (JSONObject) obj;
-                    if(id2 != -1 && obj2.getInt(idCol) == id && obj2.getInt(idCol2) == id2) {
-                        for(String col : cols) {
-                            rowDetails.put(col, obj2.get(col));
-                        }
-                    } else if(obj2.getInt(idCol) == id) {
+                    if(obj2.getInt(idCol) == id) {
                         for(String col : cols) {
                             rowDetails.put(col, obj2.get(col));
                         }

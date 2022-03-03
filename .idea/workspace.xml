@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="">
+    <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Refactor manager class to make variable names and ui more readable. Update UiUtils to be public and include check for -1 max and min values for when the range isn't needed. Refactor User class to work with new database structure">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ui/UiUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/ui/UiUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/AdultMealBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/AdultMealBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Beverage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Beverage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Dish.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Dish.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/KidsMealBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/KidsMealBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/MenuItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/MenuItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/restaurant/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/restaurant/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/restaurant/RestaurantInit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/restaurant/RestaurantInit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/users/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/Manager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/users/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/User.java" afterDir="false" />
     </list>
@@ -46,7 +53,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/cs4125-restaurant-project-main" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -126,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1645798453154</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Refactor manager class to make variable names and ui more readable. Update UiUtils to be public and include check for -1 max and min values for when the range isn't needed. Refactor User class to work with new database structure">
+      <created>1646317182504</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1646317182504</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -148,6 +162,18 @@
     <MESSAGE value="Update edit menu to actually work. Small edits to formatting" />
     <MESSAGE value="Update readme to include instructions for running via command line. Add check for whether order cost is 0, if so don't tell user order will be ready soon. Add check to prevent customers from seeing empty menus while allowing employees to still view them" />
     <MESSAGE value="Update initMenus method based on refactored database. Update Menu constructor to read menu items from the database and create dishes or beverages from them. Update constructors for all related menu and menu item classes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Update initMenus method based on refactored database. Update Menu constructor to read menu items from the database and create dishes or beverages from them. Update constructors for all related menu and menu item classes." />
+    <MESSAGE value="Refactor manager class to make variable names and ui more readable. Update UiUtils to be public and include check for -1 max and min values for when the range isn't needed. Refactor User class to work with new database structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor manager class to make variable names and ui more readable. Update UiUtils to be public and include check for -1 max and min values for when the range isn't needed. Refactor User class to work with new database structure" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/company/users/User.java</url>
+          <line>162</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
