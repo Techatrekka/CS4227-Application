@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'Restuarant.middlewareexample.SimpleMiddleware',
 ]
 
 ROOT_URLCONF = 'Server.urls'
@@ -83,8 +84,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'RMS',
         'USER': 'postgres',
-        'PASSWORD': 'password',
-        'HOST' : 'slynch.ie',
+        'PASSWORD': 'pass',
+        'HOST' : 'localhost',
         'PORT' : '5432'
 
     }

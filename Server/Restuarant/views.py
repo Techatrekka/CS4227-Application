@@ -55,7 +55,7 @@ def employeesalaryApi(request,id=0):
         return JsonResponse("Unsuccessful",safe=False)
     elif request.method=='PUT':
         users_data=JSONParser().parse(request)
-        users=Users.objects.get(user_id=users_data['user_id'])
+        users=EmployeeSalary.objects.get(user_id=users_data['user_id'])
         users_serializer=EmployeeSalarySerializer(users, data=users_data)
         if users_serializer.is_valid():
             users_serializer.save()
@@ -63,7 +63,7 @@ def employeesalaryApi(request,id=0):
         return JsonResponse("failed",safe=True)
     elif request.method=='PATCH':
         users_data=JSONParser().parse(request)
-        users=Users.objects.get(user_id=users_data['user_id'])
+        users=EmployeeSalary.objects.get(user_id=users_data['user_id'])
         users_serializer=EmployeeSalarySerializer(users, data=users_data,partial=True)
         if users_serializer.is_valid():
             users_serializer.save()
@@ -261,11 +261,11 @@ def orderlineitemsApi(request,id=0):
         orderLineItemsSerializer =OrderLineItemsSerializer(data=orderlineitems)
         if (orderLineItemsSerializer.is_valid()):
             orderLineItemsSerializer.save()
-            return JsonResponse("Added Successfully "+str(orderLineItemsSerializer.data['orderlineitems_id']),safe=False)
+            return JsonResponse("Added Successfully "+str(orderLineItemsSerializer.data['line_item']),safe=False)
         return JsonResponse("Unsuccessful",safe=False)
     elif request.method=='PUT':
         users_data=JSONParser().parse(request)
-        users=OrderLineItems.objects.get(loyalty_id=users_data['orderlineitems_id'])
+        users=OrderLineItems.objects.get(loyalty_id=users_data['line_item'])
         users_serializer=OrderLineItemsSerializer(users, data=users_data)
         if users_serializer.is_valid():
             users_serializer.save()
@@ -273,7 +273,7 @@ def orderlineitemsApi(request,id=0):
         return JsonResponse("failed",safe=True)
     elif request.method=='PATCH':
         users_data=JSONParser().parse(request)
-        users=OrderLineItems.objects.get(loyalty_id=users_data['orderlineitems_id'])
+        users=OrderLineItems.objects.get(loyalty_id=users_data['line_item'])
         users_serializer=OrderLineItemsSerializer(users, data=users_data,partial=True)
         if users_serializer.is_valid():
             users_serializer.save()
