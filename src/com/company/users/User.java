@@ -23,10 +23,10 @@ public abstract class User {
                 System.out.println(menu);
             } else if(userType.equals("employee")) {
                 System.out.println(menu);
-                System.out.println("Note: Customers will only see the menus that have items in them." +
-                        "Managers can use the edit menu option to add menu items.");
             }
         }
+        if(userType.equals("employee")) System.out.println("Note: Customers will only see the menus that have items in them. " +
+                "Managers can use the edit menu option to add menu items.");
 
         if(!option.equals("view:")) {
             return chooseMenu(option, restaurantMenus);
@@ -86,7 +86,12 @@ public abstract class User {
             System.out.println("Would you like to order a meal deal, which includes a set meal and drink? Y / N");
             String choice = scanner.nextLine();
             if(choice.equalsIgnoreCase("y")) {
-                setMealCost += buildMeal();
+                SetMeal meal = buildMeal();
+                setMealCost += meal.getMealPrice();
+                for(int id : meal.getMenuItemIds()) {
+                    MenuItem item = newOrder.addSetMenuItem(id);
+                    newOrder.addMenuItem(item);
+                }
             } else {
                 System.out.println("Press any key to view menus to order a la carte.");
                 scanner.nextLine();
@@ -104,7 +109,7 @@ public abstract class User {
                                 item = chooseSideDish(Integer.parseInt(choice),  menuItem instanceof Dish);
                             }
                         }
-                        newOrder.addMenuItem(menuId, item);
+                        newOrder.addMenuItem(item);
                     }
                 }
             }
@@ -118,17 +123,19 @@ public abstract class User {
         orderDetails.put("user_id", userId);
 
         int orderId = Database.writeToTable("order", orderDetails);
-        for(MenuItem item : newOrder.getMenuItems().values()) {
+        System.out.println("Your order:");
+        for(MenuItem item : newOrder.getMenuItems()) {
             JSONObject orderItemDetails = new JSONObject();
             orderItemDetails.put("menu_item", item.getID());
             orderItemDetails.put("order_id", orderId);
-            System.out.println(orderItemDetails);
+            System.out.println("ORDER ITEM DETAILS IS " + orderItemDetails);
+            System.out.println(item);
             Database.writeToTable("orderlineitem", orderItemDetails);
         }
 
         if(newOrder.getTotalCost() > 0) {
             int time = (int) (Math.random() * 30) + 6;
-            System.out.println("Your order will be ready for collection in " + time + " minutes and will cost €" + newOrder.getTotalCost());
+            System.out.println("Your order will be ready for collection in " + time + " minutes and will cost €" + String.format("%.2f", newOrder.getTotalCost()));
         } else {
             System.out.println("The order was cancelled.");
         }
@@ -161,7 +168,7 @@ public abstract class User {
                     JSONObject orderItemDetails = (JSONObject) orderItemObj;
                     JSONObject itemDetails = getOrderItem(orderItemDetails.getInt("menu_item"));
                     MenuItem item = itemDetails.getBoolean("isFood") ? new Dish(itemDetails) : new Beverage(itemDetails);
-                    order.addMenuItem(-1, item);
+                    order.addMenuItem(item);
                 }
                 System.out.println(order);
             }
@@ -217,32 +224,38 @@ public abstract class User {
         if(sideChoice.equalsIgnoreCase("c")) {
             itemDetails = getOrderItem(choice);
             item = isFood ? new Chips(new Dish(itemDetails)) : new Chips(new Beverage(itemDetails));
+            System.out.println("Chips added");
         } else if(sideChoice.equalsIgnoreCase("w")) {
             itemDetails = getOrderItem(choice);
             item = isFood ? new Wedges(new Dish(itemDetails)) : new Wedges(new Beverage(itemDetails));
+            System.out.println("Wedges added");
         } else if(sideChoice.equalsIgnoreCase("b")) {
             itemDetails = getOrderItem(choice);
             item = isFood ? new Wedges(new Chips(new Dish(itemDetails))) : new Wedges(new Chips(new Beverage(itemDetails)));
+            System.out.println("Chips and wedges added");
         } else {
             itemDetails = getOrderItem(choice);
             item = isFood ? new Dish(itemDetails) : new Beverage(itemDetails);
+            System.out.println("No side dishes added");
         }
         return item;
     }
 
-    double buildMeal() {
+    SetMeal buildMeal() {
         MealDirector director = new MealDirector();
         SetMealBuilder builder = null;
         System.out.println("Do you want to order a kids meal? Y / N");
         String choice = scanner.nextLine();
+
         if (choice.equalsIgnoreCase("y")) {
             builder = new KidsMealBuilder();
         } else {
             builder = new AdultMealBuilder();
             System.out.println("Adult's meal deal has been ordered.");
         }
+
         SetMeal meal = director.createMeal(builder);
         System.out.println(meal);
-        return meal.getMealPrice();
+        return meal;
     }
 }
