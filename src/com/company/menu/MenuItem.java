@@ -1,9 +1,12 @@
 package com.company.menu;
 
+import java.util.List;
+
 public abstract class MenuItem{
     public String name;
     public double price;
     public int id;
+    List<String> allergens;
     String description;
 
     public double getPrice(){
@@ -31,9 +34,20 @@ public abstract class MenuItem{
     public String getDescription() {
         return this.description;
     }
+
+    public List<String> getAllergens() {
+        return allergens;
+    }
     @Override
     public String toString(){
+        StringBuilder allergenList = new StringBuilder();
+        if(allergens.size() > 0) {
+            for(String item : allergens) {
+                allergenList.append(item).append("\t\t");
+            }
+        }
+        if(description == null) description = "";
         return  "\n\tId: " + this.getID() + "\n\tName: " + this.getName() +
-                "\n\tPrice: €" + this.getPrice() + "\n\tDescription: " + this.getDescription();
+                "\n\tPrice: €" + this.getPrice() + "\n\tDescription: " + this.getDescription() + "\n\tAllergens: " + allergenList + "\n";
     }
 }

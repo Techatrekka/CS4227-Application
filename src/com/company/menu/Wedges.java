@@ -15,8 +15,15 @@ public class Wedges extends MenuItemDecorator {
         item.description += " + Wedges";
         return item.toString();
     }
-    public String getDescription(){
-        return item.getDescription() + " + Wedges";
+    public String getDescription() {
+        if(super.getDescription() == null) {
+            return decorateWithWedges();
+        } else {
+            return super.getDescription() + decorateWithWedges();
+        }
+    }
+    private String decorateWithWedges() {
+        return " + Wedges";
     }
     public double getPrice(){
         return item.getPrice() + 3.45;

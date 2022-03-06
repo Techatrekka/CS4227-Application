@@ -1,13 +1,18 @@
 package com.company.order;
 
+import com.company.menu.Beverage;
+import com.company.menu.Dish;
+import com.company.menu.Menu;
 import com.company.menu.MenuItem;
+import com.company.restaurant.Database;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Order {
     private int orderID;
-    private HashMap<Integer, MenuItem> menuItems = new HashMap<>();
+    private ArrayList<MenuItem> menuItems = new ArrayList<>();
     private double totalCost;
 
     public Order() {
@@ -30,15 +35,26 @@ public class Order {
         this.totalCost = totalCost;
     }
 
-    public void addMenuItem(int menuId, MenuItem item) {
-        menuItems.put(menuId, item);
+    public void addMenuItem(MenuItem item) {
+        menuItems.add(item);
     }
 
-    public int getOrderItemMenuId(int itemId) {
-        for (int i : menuItems.keySet()) {
-            if(menuItems.get(i).getID() == itemId) return i;
+    public MenuItem addSetMenuItem(int itemId) {
+        ArrayList<String> cols = new ArrayList<>();
+        cols.add("menu_item");
+        cols.add("Alcoholic");
+        cols.add("Description");
+        cols.add("Ingredients");
+        cols.add("Price");
+        cols.add("Allergens");
+        cols.add("isFood");
+        cols.add("name");
+        JSONObject itemDetails = Database.readFromTable("menuitem", itemId, cols, "menu_item");
+        if (itemDetails.getBoolean("isFood")) {
+            return new Dish(itemDetails);
+        } else {
+            return new Beverage(itemDetails);
         }
-        return -1;
     }
 
     public double getTotalCost(){
@@ -47,24 +63,24 @@ public class Order {
 
     public double calcCostOfItems() {
         double cost = 0.0;
-        for (int i : menuItems.keySet()) {
-           cost += menuItems.get(i).getPrice();
+        for (MenuItem i : menuItems) {
+           cost += i.getPrice();
         }
         return cost;
     }
 
-     public void setMenuItems( HashMap<Integer, MenuItem> menuItems){
+     public void setMenuItems( ArrayList menuItems){
          this.menuItems = menuItems;
      }
 
-     public  HashMap<Integer, MenuItem> getMenuItems(){
+     public  ArrayList<MenuItem> getMenuItems(){
          return this.menuItems;
      }
 
      public String toString() {
         StringBuilder items = new StringBuilder();
-         for (int i : menuItems.keySet()) {
-             items.append(menuItems.get(i));
+         for (MenuItem i : menuItems) {
+             items.append(i);
          }
         return "Order id: " + this.getOrderID() + "\tTotal cost: €" + this.getTotalCost() + "\nOrder items:\n" +
                 items;

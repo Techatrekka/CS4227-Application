@@ -7,15 +7,14 @@ import java.util.List;
 
 public class Dish extends MenuItem{
     private String description;
-    private List<String> allergens;
+
     public Dish(JSONObject dishDetails){
-        super.id = dishDetails.getInt("dish_id");
+        super.id = dishDetails.getInt("menu_item");
         super.name = dishDetails.getString("name");
-        super.price = dishDetails.getDouble("price");
-        super.description = dishDetails.getString("description");
-        String dishAllergens = dishDetails.getString("allergens");
-        String[] dishAllergenArr = dishAllergens.split(",");
-        this.allergens = Arrays.asList(dishAllergenArr);
+        super.price = dishDetails.getDouble("Price");
+        super.description = dishDetails.getString("Description");
+        String[] dishAllergenArr = dishDetails.getString("Allergens").split(",");
+        super.allergens = Arrays.asList(dishAllergenArr);
     }
     @Override
     public double getPrice() {
@@ -37,15 +36,4 @@ public class Dish extends MenuItem{
         this.name = name;
     }
 
-    @Override
-    public String toString(){
-        StringBuilder allergenList = new StringBuilder();
-        if(allergens.size() > 0) {
-            for(String item : allergens) {
-                allergenList.append(item).append("\t\t");
-            }
-        }
-        if(description == null) description = "";
-        return super.toString() + "\n\tAllergens: " + allergenList + "\n";
-    }
 }

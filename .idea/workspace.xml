@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+
     <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Update edit menu to actually work. Small edits to formatting">
+
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/users/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/Manager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -38,7 +54,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/cs4125-restaurant-project-main" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -104,7 +120,77 @@
       <option name="project" value="LOCAL" />
       <updated>1637703250888</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Update readme to include instructions for running via command line. Add check for whether order cost is 0, if so don't tell user order will be ready soon. Add check to prevent customers from seeing empty menus while allowing employees to still view them">
+      <created>1645798320729</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1645798320729</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Update initMenus method based on refactored database. Update Menu constructor to read menu items from the database and create dishes or beverages from them. Update constructors for all related menu and menu item classes.">
+      <created>1645798453154</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1645798453154</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Refactor manager class to make variable names and ui more readable. Update UiUtils to be public and include check for -1 max and min values for when the range isn't needed. Refactor User class to work with new database structure">
+      <created>1646317182504</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1646317182504</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Update all relevant classes to reflect database changes - mainly there is one menu item table for dishes and beverages rather than a separate table for each.">
+      <created>1646321323588</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1646321323588</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Apply &quot;Extract Method&quot; refactoring technique to long methods in the User class">
+      <created>1646321379613</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1646321379613</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Update MenuFactory to account for empty menu items attribute. Update SetMeal to include method that gets the menu item ids included in the meal. Update order to have an arraylist rather than a hash map and add method AddSetMenuItem to add a menu item to an order from a set menu">
+      <created>1646591085598</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1646591085598</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Update decorator classes to fix duplicate string issue. Add check for empty menu items list in menu class. Add getAllergens method for menu items">
+      <created>1646591182123</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1646591182123</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Update to fix bug with orders for meal deals/set menus where order line items weren't written to database correctly due to hash map id being overridden">
+      <created>1646591246350</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1646591246350</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Remove duplicate email question line. Change table queried for employee salary to be the correct one. Fix inputB check by actually checking if it's true to take action">
+      <created>1646591372805</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1646591372805</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Return total cost from place order method and implement loyalty point collection after successful ordering. Add code  to read loyalty points from the database. Update menu class to work with refactored database. Use null as the value of empty menu items">
+      <created>1646601342188</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1646601342188</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -124,6 +210,32 @@
     <MESSAGE value="Update view employees to display employee details better. Fix bug in datatase class which caused error due to a lack of a check for an int." />
     <MESSAGE value="Update to include description field for beverages in all classes that create or read beverages." />
     <MESSAGE value="Update edit menu to actually work. Small edits to formatting" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update edit menu to actually work. Small edits to formatting" />
+    <MESSAGE value="Update readme to include instructions for running via command line. Add check for whether order cost is 0, if so don't tell user order will be ready soon. Add check to prevent customers from seeing empty menus while allowing employees to still view them" />
+    <MESSAGE value="Update initMenus method based on refactored database. Update Menu constructor to read menu items from the database and create dishes or beverages from them. Update constructors for all related menu and menu item classes." />
+    <MESSAGE value="Refactor manager class to make variable names and ui more readable. Update UiUtils to be public and include check for -1 max and min values for when the range isn't needed. Refactor User class to work with new database structure" />
+    <MESSAGE value="Update all relevant classes to reflect database changes - mainly there is one menu item table for dishes and beverages rather than a separate table for each." />
+    <MESSAGE value="Apply &quot;Extract Method&quot; refactoring technique to long methods in the User class" />
+    <MESSAGE value="Update MenuFactory to account for empty menu items attribute. Update SetMeal to include method that gets the menu item ids included in the meal. Update order to have an arraylist rather than a hash map and add method AddSetMenuItem to add a menu item to an order from a set menu" />
+    <MESSAGE value="Update decorator classes to fix duplicate string issue. Add check for empty menu items list in menu class. Add getAllergens method for menu items" />
+    <MESSAGE value="Update to fix bug with orders for meal deals/set menus where order line items weren't written to database correctly due to hash map id being overridden" />
+    <MESSAGE value="Remove duplicate email question line. Change table queried for employee salary to be the correct one. Fix inputB check by actually checking if it's true to take action" />
+    <MESSAGE value="Return total cost from place order method and implement loyalty point collection after successful ordering. Add code  to read loyalty points from the database. Update menu class to work with refactored database. Use null as the value of empty menu items" />
+    <option name="LAST_COMMIT_MESSAGE" value="Return total cost from place order method and implement loyalty point collection after successful ordering. Add code  to read loyalty points from the database. Update menu class to work with refactored database. Use null as the value of empty menu items" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/company/users/User.java</url>
+          <line>128</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/company/users/User.java</url>
+          <line>130</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
