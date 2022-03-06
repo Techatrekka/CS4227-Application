@@ -34,6 +34,10 @@ public abstract class MenuItem{
     public String getDescription() {
         return this.description;
     }
+
+    public List<String> getAllergens() {
+        return allergens;
+    }
     @Override
     public String toString(){
         StringBuilder allergenList = new StringBuilder();

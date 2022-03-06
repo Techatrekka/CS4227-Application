@@ -33,12 +33,14 @@ public class Menu {
         cols.add("isFood");
         cols.add("name");
         String[] items = menuItems.split(",");
-        for(String menuItemId : items) {
-            JSONObject itemDetails = Database.readFromTable("menuitem", Integer.parseInt(menuItemId), cols, "menu_item");
-            if(itemDetails.getBoolean("isFood")) {
-                menuList.add(new Dish(itemDetails));
-            } else {
-                menuList.add(new Beverage(itemDetails));
+        if(!items[0].equals("") && !items[0].equals("-1")) {
+            for (String menuItemId : items) {
+                JSONObject itemDetails = Database.readFromTable("menuitem", Integer.parseInt(menuItemId), cols, "menu_item");
+                if (itemDetails.getBoolean("isFood")) {
+                    menuList.add(new Dish(itemDetails));
+                } else {
+                    menuList.add(new Beverage(itemDetails));
+                }
             }
         }
     }

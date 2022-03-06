@@ -1,5 +1,9 @@
 package com.company.menu;
 
 public abstract class MenuItemDecorator extends MenuItem{
-    public abstract String getDescription();
+
+    @Override
+    public String getDescription() {
+        return super.getDescription();
+    }
 }
