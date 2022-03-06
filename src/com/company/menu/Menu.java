@@ -34,6 +34,7 @@ public class Menu {
         cols.add("Allergens");
         cols.add("isFood");
         cols.add("name");
+
         String[] items = menuItems.split(",");
         if(!items[0].equals("") && !items[0].equals("-1")) {
             for (String menuItemId : items) {
@@ -82,9 +83,6 @@ public class Menu {
         }
     }
     public void addNewMenuItem(String choice) {
-        MenuItem item;
-        int id;
-
         System.out.println("What do you want to call this menu item?");
         String name = scanner.nextLine();
         System.out.println("How much does this menu item cost?");
@@ -106,6 +104,12 @@ public class Menu {
         System.out.println("What stock items does this menu item use? Please enter the id for each stock item separated by a comma.");
         String ingredients = scanner.nextLine();
         newMenuItem.put("Ingredients", ingredients);
+        createNewItem(choice, newMenuItem);
+    }
+
+    private void createNewItem(String choice, JSONObject newMenuItem) {
+        MenuItem item;
+        int id;
 
         if(choice.equalsIgnoreCase("b")){
             newMenuItem.put("isFood", false);
@@ -179,6 +183,39 @@ public class Menu {
                 updateMenu(item, "add");
                 break;
             }
+        }
+    }
+
+    public void editMenuItems() {
+        System.out.println("Do you want to add or remove menu items? A = add, R = remove");
+        String choice2 = UiUtils.getInputChoice(new ArrayList<String>() {
+            {
+                add("r");
+                add("a");
+            }
+        });
+        if(choice2.equals("a")) {
+            System.out.println("Do you want to create a new menu item or choose from existing menu items? N = new, E = existing");
+            choice2 = UiUtils.getInputChoice(new ArrayList<String>() {
+                {
+                    add("n");
+                    add("e");
+                }
+            });
+            if(choice2.equals("n")) {
+                System.out.println("Would you like to create a new beverage or dish? B = Beverage, D = Dish");
+                choice2 = UiUtils.getInputChoice(new ArrayList<String>() {
+                    {
+                        add("b");
+                        add("d");
+                    }
+                });
+                addNewMenuItem(choice2);
+            } else {
+                addExistingMenuItem();
+            }
+        } else {
+            removeMenuItem();
         }
     }
 

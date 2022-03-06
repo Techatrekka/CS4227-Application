@@ -121,14 +121,12 @@ public class Manager extends Staff {
             if(menuType.equalsIgnoreCase("Y")){
                 System.out.println("How much of a discount does this menu have? Enter a number for the percentage discount");
                 menuType = scanner.nextLine();
-                menuObj.put("set_menu_price", "0.0");
                 menuObj.put("discount", menuType);
             } else {
-                menuObj.put("set_menu_price", "0.0");
                 menuObj.put("discount", "0.0");
             }
+            menuObj.put("set_menu_price", "0.0");
         }
-
         menuObj.put("name", name);
         menuObj.put("description", description);
         menuObj.put("date_created", LocalDate.now());
@@ -157,44 +155,14 @@ public class Manager extends Staff {
 
             if (Database.updateTable("menu", editedMenu)){
                 System.out.println("Menu edited successfully");
-            }else{
+            } else{
                 System.out.println("Menu was not edited");
             }
         }
         System.out.println("Continue editing the menu to add/remove menu items or go back to home screen? B = back, Any other key = continue");
         String choice = scanner.nextLine();
         if(UiUtils.inputB(choice)) return;
-
-        System.out.println("Do you want to add or remove menu items? A = add, R = remove");
-        String choice2 = UiUtils.getInputChoice(new ArrayList<String>() {
-            {
-                add("r");
-                add("a");
-            }
-        });
-        if(choice2.equals("a")) {
-            System.out.println("Do you want to create a new menu item or choose from existing menu items? N = new, E = existing");
-            choice2 = UiUtils.getInputChoice(new ArrayList<String>() {
-                {
-                    add("n");
-                    add("e");
-                }
-            });
-            if(choice2.equals("n")) {
-                System.out.println("Would you like to create a new beverage or dish? B = Beverage, D = Dish");
-                choice2 = UiUtils.getInputChoice(new ArrayList<String>() {
-                    {
-                        add("b");
-                        add("d");
-                    }
-                });
-                menu.addNewMenuItem(choice2);
-            } else {
-               menu.addExistingMenuItem();
-            }
-        } else {
-            menu.removeMenuItem();
-        }
+        menu.editMenuItems();
     }
 
     public void deleteMenu(int menuID){
