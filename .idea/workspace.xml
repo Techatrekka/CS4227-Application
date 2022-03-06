@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Remove duplicate email question line. Change table queried for employee salary to be the correct one. Fix inputB check by actually checking if it's true to take action">
+    <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Return total cost from place order method and implement loyalty point collection after successful ordering. Add code  to read loyalty points from the database. Update menu class to work with refactored database. Use null as the value of empty menu items">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ui/RestaurantTerminal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/ui/RestaurantTerminal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/users/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/users/LoyaltyPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/LoyaltyPoints.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/users/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/users/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +181,14 @@
       <option name="project" value="LOCAL" />
       <updated>1646591372805</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Return total cost from place order method and implement loyalty point collection after successful ordering. Add code  to read loyalty points from the database. Update menu class to work with refactored database. Use null as the value of empty menu items">
+      <created>1646601342188</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1646601342188</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -214,7 +217,8 @@
     <MESSAGE value="Update decorator classes to fix duplicate string issue. Add check for empty menu items list in menu class. Add getAllergens method for menu items" />
     <MESSAGE value="Update to fix bug with orders for meal deals/set menus where order line items weren't written to database correctly due to hash map id being overridden" />
     <MESSAGE value="Remove duplicate email question line. Change table queried for employee salary to be the correct one. Fix inputB check by actually checking if it's true to take action" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove duplicate email question line. Change table queried for employee salary to be the correct one. Fix inputB check by actually checking if it's true to take action" />
+    <MESSAGE value="Return total cost from place order method and implement loyalty point collection after successful ordering. Add code  to read loyalty points from the database. Update menu class to work with refactored database. Use null as the value of empty menu items" />
+    <option name="LAST_COMMIT_MESSAGE" value="Return total cost from place order method and implement loyalty point collection after successful ordering. Add code  to read loyalty points from the database. Update menu class to work with refactored database. Use null as the value of empty menu items" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

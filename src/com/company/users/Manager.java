@@ -160,12 +160,10 @@ public class Manager extends Staff {
             }else{
                 System.out.println("Menu was not edited");
             }
-            System.out.println("Continue editing the menu to add/remove menu items or go back to home screen? B = back, Any other key = continue");
-            String choice = scanner.nextLine();
-            if(UiUtils.inputB(choice)) return;
-        } else {
-            System.out.println("You entered a blank value, try again!");
         }
+        System.out.println("Continue editing the menu to add/remove menu items or go back to home screen? B = back, Any other key = continue");
+        String choice = scanner.nextLine();
+        if(UiUtils.inputB(choice)) return;
 
         System.out.println("Do you want to add or remove menu items? A = add, R = remove");
         String choice2 = UiUtils.getInputChoice(new ArrayList<String>() {
@@ -192,8 +190,7 @@ public class Manager extends Staff {
                 });
                 menu.addNewMenuItem(choice2);
             } else {
-                // get existing items
-                System.out.println("Sorry, this use case was not implemented");
+               menu.addExistingMenuItem();
             }
         } else {
             menu.removeMenuItem();

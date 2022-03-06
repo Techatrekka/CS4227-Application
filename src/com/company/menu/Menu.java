@@ -7,6 +7,7 @@ import java.util.Scanner;
 import com.company.restaurant.Database;
 
 import com.company.ui.UiUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Menu {
@@ -82,6 +83,7 @@ public class Menu {
     }
     public void addNewMenuItem(String choice) {
         MenuItem item;
+        int id;
 
         System.out.println("What do you want to call this menu item?");
         String name = scanner.nextLine();
@@ -93,9 +95,14 @@ public class Menu {
         newMenuItem.put("name", name);
         newMenuItem.put("Price", cost);
         newMenuItem.put("Description", desc);
-        System.out.println("Does this menu item contain any allergens? Please enter each allergen separated by a comma.");
+        System.out.println("Does this menu item contain any allergens? Please enter each allergen separated by a comma.\n" +
+                "If there are no allergens, press enter or type None");
         String allergens = scanner.nextLine();
-        newMenuItem.put("Allergens", allergens);
+        if(allergens.isEmpty()) {
+            newMenuItem.put("Allergens", "None");
+        } else {
+            newMenuItem.put("Allergens", allergens);
+        }
         System.out.println("What stock items does this menu item use? Please enter the id for each stock item separated by a comma.");
         String ingredients = scanner.nextLine();
         newMenuItem.put("Ingredients", ingredients);
@@ -112,18 +119,67 @@ public class Menu {
 
             boolean isAlcoholic = alco.equals("y");
             newMenuItem.put("Alcoholic", isAlcoholic);
+            id = Database.writeToTable("menuitem", newMenuItem);
+            newMenuItem.put("menu_item", id);
             item = new Beverage(newMenuItem);
         } else {
             newMenuItem.put("Alcoholic", false);
             newMenuItem.put("isFood", true);
+            id = Database.writeToTable("menuitem", newMenuItem);
+            newMenuItem.put("menu_item", id);
             item = new Dish(newMenuItem);
         }
-        Database.writeToTable("menuitem", newMenuItem);
-        menuList.add(item);
+        updateMenu(item, "add");
     }
 
+    private void updateMenu(MenuItem item, String action) {
+        StringBuilder items = new StringBuilder();
+        if(menuList.size() > 0) {
+            for(int i = 0; i < menuList.size(); i++) {
+                if(i == menuList.size()-1) {
+                    items.append(menuList.get(i).getID());
+                } else {
+                    items.append(menuList.get(i).getID()).append(",");
+                }
+            }
+            if(action.equals("add")) items.append(+item.getID());
+        } else {
+            if(action.equals("add")) {
+                items = new StringBuilder(String.valueOf(item.getID()));
+            } else {
+                return;
+            }
+        }
+        System.out.println("Menu items " + items);
+        JSONObject menuDetails = new JSONObject();
+        menuDetails.put("menu_id", getId());
+        menuDetails.put("menu_items", items.toString());
+        Database.updateTable("menu", menuDetails);
+        if(action.equals("add")) menuList.add(item);
+    }
     public void addExistingMenuItem() {
+        MenuItem item;
+        JSONArray dbMenuItems = Database.readAllFromTable("menuitem", -1, null, "");
+        for (Object obj : dbMenuItems) {
+            JSONObject obj2 = (JSONObject) obj;
+            item = obj2.getBoolean("isFood") ? new Dish(obj2) : new Beverage(obj2);
+            System.out.println(item);
+        }
 
+        System.out.println("Enter the id of the item you'd like to add to the menu");
+        String choice = scanner.nextLine();
+        while(!UiUtils.isValid(choice, -1, -1)) {
+            choice = scanner.nextLine();
+        }
+
+        for (Object obj : dbMenuItems) {
+            JSONObject obj2 = (JSONObject) obj;
+            if(obj2.getInt("menu_item") == Integer.parseInt(choice)) {
+                item = obj2.getBoolean("isFood") ? new Dish(obj2) : new Beverage(obj2);
+                updateMenu(item, "add");
+                break;
+            }
+        }
     }
 
     public boolean removeMenuItem() {
@@ -132,10 +188,9 @@ public class Menu {
             System.out.println("Enter the id of the item you'd like to remove from the menu:");
             String choice = scanner.nextLine();
             int id = Integer.parseInt(choice);
-            if(Database.deleteFromTable("menuitem", "menu_item", id)) {
-                menuList.removeIf(menuItem -> id == menuItem.getID());
-                return true;
-            }
+            menuList.removeIf(menuItem -> id == menuItem.getID());
+            updateMenu(null, "delete");
+            return true;
         } else {
             System.out.println("This menu has no items in it.");
         }
