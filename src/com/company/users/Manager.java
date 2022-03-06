@@ -29,7 +29,6 @@ public class Manager extends Staff {
     public void addStaffMember() {
         System.out.println("What is the Staff member's full name?");
         String fullName = scanner.nextLine();
-        System.out.println("Enter their email");
         String email = UiUtils.getEmail();
         System.out.println("Enter temporary password");
         String password = scanner.nextLine();
@@ -95,7 +94,7 @@ public class Manager extends Staff {
         editedStaff.put("salary", newSalary);
         editedStaff.put("user_id", idNum);
 
-        if (Database.updateTable("user", editedStaff)){
+        if (Database.updateTable("employeesalary", editedStaff)){
             System.out.println("User salary edited successfully");
         }else{
             System.out.println("User salary was not edited");
@@ -104,9 +103,9 @@ public class Manager extends Staff {
 
     public Menu makeMenu(){
         JSONObject menuObj = new JSONObject();
-        System.out.println("What will you call the menu? Press B to go back to the previous screen");
+        System.out.println("What will you call the menu? Press B to go back");
         String name = scanner.nextLine();
-        UiUtils.inputB(name);
+        if(UiUtils.inputB(name)) return null;
         System.out.println("Describe the menu:");
         String description = scanner.nextLine();
         System.out.println("Is this a set menu? y/n");
@@ -134,7 +133,6 @@ public class Manager extends Staff {
         menuObj.put("description", description);
         menuObj.put("date_created", LocalDate.now());
         menuObj.put("menu_items", "");
-
         int id = Database.writeToTable("menu", menuObj);
         return new Menu(id, name, description, LocalDate.now(), "");
     }
