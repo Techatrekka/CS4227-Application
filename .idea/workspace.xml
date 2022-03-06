@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Apply &quot;Extract Method&quot; refactoring technique to long methods in the User class">
+    <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Remove duplicate email question line. Change table queried for employee salary to be the correct one. Fix inputB check by actually checking if it's true to take action">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Chips.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Chips.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/menu/MenuFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/MenuFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/menu/MenuItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/MenuItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/menu/MenuItemDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/MenuItemDecorator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/menu/SetMeal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/SetMeal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Wedges.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Wedges.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/order/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/order/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/restaurant/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/restaurant/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/ui/RestaurantTerminal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/ui/RestaurantTerminal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/users/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/users/LoyaltyPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/LoyaltyPoints.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/users/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/Manager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/users/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/User.java" afterDir="false" />
     </list>
@@ -162,7 +157,35 @@
       <option name="project" value="LOCAL" />
       <updated>1646321379613</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Update MenuFactory to account for empty menu items attribute. Update SetMeal to include method that gets the menu item ids included in the meal. Update order to have an arraylist rather than a hash map and add method AddSetMenuItem to add a menu item to an order from a set menu">
+      <created>1646591085598</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1646591085598</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Update decorator classes to fix duplicate string issue. Add check for empty menu items list in menu class. Add getAllergens method for menu items">
+      <created>1646591182123</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1646591182123</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Update to fix bug with orders for meal deals/set menus where order line items weren't written to database correctly due to hash map id being overridden">
+      <created>1646591246350</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1646591246350</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Remove duplicate email question line. Change table queried for employee salary to be the correct one. Fix inputB check by actually checking if it's true to take action">
+      <created>1646591372805</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1646591372805</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -187,7 +210,11 @@
     <MESSAGE value="Refactor manager class to make variable names and ui more readable. Update UiUtils to be public and include check for -1 max and min values for when the range isn't needed. Refactor User class to work with new database structure" />
     <MESSAGE value="Update all relevant classes to reflect database changes - mainly there is one menu item table for dishes and beverages rather than a separate table for each." />
     <MESSAGE value="Apply &quot;Extract Method&quot; refactoring technique to long methods in the User class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Apply &quot;Extract Method&quot; refactoring technique to long methods in the User class" />
+    <MESSAGE value="Update MenuFactory to account for empty menu items attribute. Update SetMeal to include method that gets the menu item ids included in the meal. Update order to have an arraylist rather than a hash map and add method AddSetMenuItem to add a menu item to an order from a set menu" />
+    <MESSAGE value="Update decorator classes to fix duplicate string issue. Add check for empty menu items list in menu class. Add getAllergens method for menu items" />
+    <MESSAGE value="Update to fix bug with orders for meal deals/set menus where order line items weren't written to database correctly due to hash map id being overridden" />
+    <MESSAGE value="Remove duplicate email question line. Change table queried for employee salary to be the correct one. Fix inputB check by actually checking if it's true to take action" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove duplicate email question line. Change table queried for employee salary to be the correct one. Fix inputB check by actually checking if it's true to take action" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

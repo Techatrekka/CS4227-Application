@@ -28,12 +28,12 @@ public class Customer extends User implements Observer{
         // code
     }
 
-    public int getLoyaltyPoints(){
-        return this.loyaltyPoints.getLoyaltyPoints();
+    public int getLoyaltyPoints(int userId){
+        return this.loyaltyPoints.getLoyaltyPoints(userId);
     }
 
     public String toString() {
-        return "User id: " + super.getIdNum() + "\nCustomer Name: " + super.getFullName() + "\nLoyalty Points: " + getLoyaltyPoints();
+        return "User id: " + super.getIdNum() + "\nCustomer Name: " + super.getFullName() + "\nLoyalty Points: " + getLoyaltyPoints(getIdNum());
     }
 
     @Override

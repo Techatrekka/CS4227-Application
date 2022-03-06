@@ -78,7 +78,7 @@ public abstract class User {
         return fullName;
     }
 
-    public void placeOrder(int userId, ArrayList<Menu> restaurantMenus){
+    public double placeOrder(int userId, ArrayList<Menu> restaurantMenus){
         Order newOrder = new Order();
         boolean addToOrder = true;
         double setMealCost = 0.0;
@@ -138,7 +138,9 @@ public abstract class User {
             System.out.println("Your order will be ready for collection in " + time + " minutes and will cost €" + String.format("%.2f", newOrder.getTotalCost()));
         } else {
             System.out.println("The order was cancelled.");
+            newOrder.setTotalCost(0);
         }
+        return newOrder.getTotalCost();
     }
 
     private JSONObject getOrderItem(int menuItemId) {

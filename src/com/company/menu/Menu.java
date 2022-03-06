@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import com.company.restaurant.Database;
 
+import com.company.ui.UiUtils;
 import org.json.JSONObject;
 
 public class Menu {
@@ -79,7 +80,9 @@ public class Menu {
             System.out.println(menuItem.getName());
         }
     }
-    public MenuItem addNewMenuItem(String choice) {
+    public void addNewMenuItem(String choice) {
+        MenuItem item;
+
         System.out.println("What do you want to call this menu item?");
         String name = scanner.nextLine();
         System.out.println("How much does this menu item cost?");
@@ -88,48 +91,39 @@ public class Menu {
         String desc = scanner.nextLine();
         JSONObject newMenuItem = new JSONObject();
         newMenuItem.put("name", name);
-        newMenuItem.put("price", cost);
-        newMenuItem.put("description", desc);
+        newMenuItem.put("Price", cost);
+        newMenuItem.put("Description", desc);
+        System.out.println("Does this menu item contain any allergens? Please enter each allergen separated by a comma.");
+        String allergens = scanner.nextLine();
+        newMenuItem.put("Allergens", allergens);
+        System.out.println("What stock items does this menu item use? Please enter the id for each stock item separated by a comma.");
+        String ingredients = scanner.nextLine();
+        newMenuItem.put("Ingredients", ingredients);
 
         if(choice.equalsIgnoreCase("b")){
+            newMenuItem.put("isFood", false);
             System.out.println("Is this an alcoholic drink? y/n");
-            String alco = scanner.nextLine();
-
-            while(!alco.equalsIgnoreCase("y") && !alco.equalsIgnoreCase("n")) {
-                System.out.println("Please enter a valid option.");
-                alco = scanner.nextLine();
-            }
+            String alco = UiUtils.getInputChoice(new ArrayList<String>() {
+                {
+                    add("y");
+                    add("n");
+                }
+            });
 
             boolean isAlcoholic = alco.equals("y");
-            newMenuItem.put("alcoholic", isAlcoholic);
-            int id = Database.writeToTable("beverages", newMenuItem);
-            newMenuItem.put("beverage_id", id);
-            JSONObject newItem = new JSONObject();
-            newItem.put("dish_bev_id", id);
-            newItem.put("food", false);
-            newItem.put("menu_id", this.getId());
-            Database.writeToTable("menuitem", newItem);
-            MenuItem beverage = new Beverage(newMenuItem);
-            menuList.add(beverage);
-            return beverage;
+            newMenuItem.put("Alcoholic", isAlcoholic);
+            item = new Beverage(newMenuItem);
+        } else {
+            newMenuItem.put("Alcoholic", false);
+            newMenuItem.put("isFood", true);
+            item = new Dish(newMenuItem);
         }
-        else{
-            System.out.println("Does this dish contain any allergens? Please enter each allergen separated by a comma.");
-            String allergens = scanner.nextLine();
-            newMenuItem.put("allergens", allergens);
-            int id = Database.writeToTable("dishes", newMenuItem);
-            newMenuItem.put("dish_id", id);
-            JSONObject newItem = new JSONObject();
-            newItem.put("dish_bev_id", id);
-            newItem.put("food", true);
-            newItem.put("menu_id", this.getId());
-            Database.writeToTable("menuitem", newItem);
-            MenuItem dish = new Dish(newMenuItem);
-            System.out.println("DISH IS " + dish);
-            menuList.add(dish);
-            System.out.println("MENU LIST IS " + menuList);
-            return dish;
-        }
+        Database.writeToTable("menuitem", newMenuItem);
+        menuList.add(item);
+    }
+
+    public void addExistingMenuItem() {
+
     }
 
     public boolean removeMenuItem() {

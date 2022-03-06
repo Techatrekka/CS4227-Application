@@ -52,13 +52,14 @@ public class RestaurantTerminal {
         int choice;
 
         if(Objects.equals(user.getUserType(), "customer")) {
-            System.out.println("You have " +  ((Customer) user).getLoyaltyPoints() + " loyalty points.");
+            System.out.println("You have " +  ((Customer) user).getLoyaltyPoints(user.getIdNum()) + " loyalty points.");
             System.out.println("1. Place an order 2. View Menus 3. View Previous Orders 4. Settings 5. Logout 6. Quit");
             choice = UiUtils.getInput(1, 6);
             switch(choice) {
                 case 1:
                     if(businessHours.isOpenNow()) {
-                        user.placeOrder(user.getIdNum(), restaurantMenus);
+                        double cost = user.placeOrder(user.getIdNum(), restaurantMenus);
+                        addLoyaltyPoints(cost, user.getIdNum());
                     } else {
                         break;
                     }
@@ -135,6 +136,19 @@ public class RestaurantTerminal {
         }
     }
 
+    private void addLoyaltyPoints(double cost, int userId) {
+        if(cost > 0) {
+            int loyaltyPointsEarned = (int) (cost / 10);
+            if(loyaltyPointsEarned > 0) {
+                int balance = ((Customer) user).getLoyaltyPoints(userId);
+                JSONObject newPoints = new JSONObject();
+                newPoints.put("user_id", userId);
+                newPoints.put("loyalty_points", balance + loyaltyPointsEarned);
+                Database.updateTable("loyalty", newPoints);
+            }
+        }
+    }
+
     private void staffPlaceOrder() {
         System.out.println("Enter the user id of the user you'd like to place an order for");
         System.out.println("B = go back");
@@ -142,7 +156,8 @@ public class RestaurantTerminal {
         if(UiUtils.inputB(idChoice)) return;
         int id = Integer.parseInt(idChoice);
         if(businessHours.isOpenNow()) {
-            user.placeOrder(id, restaurantMenus);
+            double cost = user.placeOrder(id, restaurantMenus);
+            addLoyaltyPoints(cost, id);
         } else {
             System.out.println("Sorry, you can't place an order right now as the restaurant is closed.");
         }

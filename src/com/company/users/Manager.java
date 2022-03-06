@@ -132,7 +132,7 @@ public class Manager extends Staff {
         menuObj.put("name", name);
         menuObj.put("description", description);
         menuObj.put("date_created", LocalDate.now());
-        menuObj.put("menu_items", "");
+        menuObj.put("menu_items", JSONObject.NULL);
         int id = Database.writeToTable("menu", menuObj);
         return new Menu(id, name, description, LocalDate.now(), "");
     }
@@ -162,7 +162,7 @@ public class Manager extends Staff {
             }
             System.out.println("Continue editing the menu to add/remove menu items or go back to home screen? B = back, Any other key = continue");
             String choice = scanner.nextLine();
-            UiUtils.inputB(choice);
+            if(UiUtils.inputB(choice)) return;
         } else {
             System.out.println("You entered a blank value, try again!");
         }
