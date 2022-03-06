@@ -11,4 +11,7 @@ public class SetMeal {
     public double getMealPrice() {
         return dish.getPrice() + beverage.getPrice();
     }
+    public int[] getMenuItemIds() {
+        return new int[] {dish.getID(), beverage.getID()};
+    }
 }
