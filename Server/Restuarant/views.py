@@ -281,6 +281,6 @@ def orderlineitemsApi(request,id=0):
         return JsonResponse("failed",safe=False)
     elif request.method=='DELETE':
         orderlineitems_data=JSONParser().parse(request)
-        orderlineitems=Menu.objects.get(orderlineitems_id=orderlineitems_data['orderlineitems_id'])
+        orderlineitems=Menu.objects.get(orderlineitems_id=orderlineitems_data['line_item'])
         orderlineitems.delete()
         return JsonResponse("Delete succesful",safe=False)
