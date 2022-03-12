@@ -10,7 +10,7 @@ class InterceptorManager:
     def remove(self, interceptor):
         self.interceptors.remove(interceptor)
     
-    def execute(self, request):
+    def execute(self, level, request):
         for interceptor in self.interceptors:
-            interceptor.execute(request)
+            interceptor.executeIntercept(level, request)
         self.application.execute(request)

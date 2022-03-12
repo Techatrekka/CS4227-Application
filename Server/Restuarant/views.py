@@ -191,7 +191,7 @@ def stockitemsApi(request,id=0):
         stockitemsserializer =StockItemsSerializer(data=stockitem_data)
         if (stockitemsserializer.is_valid()):
             stockitemsserializer.save()
-            return JsonResponse("Added Successfully " + str(stockitemsserializer.data['stock_item']),safe=False)
+            return JsonResponse("Added Successfully " + str(stockitemsserializer.data['stock_item_id']),safe=False)
         return JsonResponse("Unsuccessful",safe=False)
     elif request.method=='PUT':
         stockitem_data=JSONParser().parse(request)
@@ -226,7 +226,7 @@ def menuitemApi(request,id=0):
         menuitemSerializer =MenuItemSerializer(data=menuitem_data)
         if (menuitemSerializer.is_valid()):
             menuitemSerializer.save()
-            return JsonResponse("Added Successfully " + str(menuitemSerializer.data['menu_item']),safe=False)
+            return JsonResponse("Added Successfully " + str(menuitemSerializer.data['menu_item_id']),safe=False)
         return JsonResponse("Unsuccessful",safe=False)
     elif request.method=='PUT':
         users_data=JSONParser().parse(request)
