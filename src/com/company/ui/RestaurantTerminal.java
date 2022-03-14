@@ -1,16 +1,18 @@
 package com.company.ui;
 
-        import com.company.restaurant.BusinessHours;
-        import com.company.restaurant.Database;
-        import com.company.restaurant.RestaurantInit;
-        import com.company.menu.Menu;
-        import com.company.users.*;
-        import org.json.JSONObject;
+import com.company.restaurant.BusinessHours;
+import com.company.restaurant.Database;
+import com.company.restaurant.RestaurantInit;
+import com.company.menu.Menu;
+import com.company.stock.Stock;
+import com.company.users.*;
+import org.json.JSONObject;
 
-        import java.util.*;
+import java.util.*;
 
 public class RestaurantTerminal {
     private ArrayList<Menu> restaurantMenus;
+    private Stock stock;
     private UserLogin userLogin;
     private UserRegistration userRegistration;
     private User user;
@@ -33,6 +35,7 @@ public class RestaurantTerminal {
 
     public void run() {
         restaurantMenus = RestaurantInit.initMenus();
+        stock = RestaurantInit.initStock();
         System.out.println(businessHours.toString());
 
         userLogin = new UserLogin();
@@ -173,8 +176,24 @@ public class RestaurantTerminal {
     }
 
     private void stockManagement() {
-        System.out.println("1. View stock 2. Order stock");
-        System.out.println("Sorry, this use case was not implemented");
+        System.out.println("1. View stock 2. Add New Stock Item 3. Update Stock Item Capacity " +
+                "4. Remove stock item 5. Order Stock");
+        int choice = UiUtils.getInput(1, 5);
+        switch (choice) {
+            case 1:
+                stock.show();
+                break;
+            case 2:
+                System.out.println("Add stock item here");
+                break;
+            case 3:
+                System.out.println("Update capacity here");
+                break;
+            case 4:
+            case 5:
+                System.out.println("Sorry, this use case was not implemented");
+                break;
+        }
     }
 
     private void employeeManagement() {

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-
-    <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Update edit menu to actually work. Small edits to formatting">
-
+    <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Apply extract method refactoring on the create new menu item code. Move edit menu items method from manager to menu class">
+      <change afterPath="$PROJECT_DIR$/src/com/company/stock/Stock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/stock/StockComponent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/stock/StockItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/users/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/restaurant/RestaurantInit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/restaurant/RestaurantInit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/ui/RestaurantTerminal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/ui/RestaurantTerminal.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,13 +18,14 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="refactoring" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
