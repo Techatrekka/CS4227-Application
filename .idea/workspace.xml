@@ -2,12 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Apply extract method refactoring on the create new menu item code. Move edit menu items method from manager to menu class">
-      <change afterPath="$PROJECT_DIR$/src/com/company/stock/Stock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/stock/StockComponent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/stock/StockItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Beverage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Beverage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Dish.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Dish.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/menu/MenuItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/menu/MenuItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/restaurant/RestaurantInit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/restaurant/RestaurantInit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/stock/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/stock/Stock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/stock/StockItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/stock/StockItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/ui/RestaurantTerminal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/ui/RestaurantTerminal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/users/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/Manager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="refactoring" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -56,6 +60,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="ToolWindowRun.ShowToolbar" value="false" />
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/cs4125-restaurant-project-main" />
   </component>
   <component name="RunManager">

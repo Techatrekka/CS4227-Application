@@ -5,16 +5,15 @@ import org.json.JSONObject;
 import java.util.Arrays;
 import java.util.List;
 
-public class Dish extends MenuItem{
-    private String description;
+public class Dish extends MenuItem {
 
     public Dish(JSONObject dishDetails){
         super.id = dishDetails.getInt("menu_item");
         super.name = dishDetails.getString("name");
         super.price = dishDetails.getDouble("Price");
         super.description = dishDetails.getString("Description");
-        String[] dishAllergenArr = dishDetails.getString("Allergens").split(",");
-        super.allergens = Arrays.asList(dishAllergenArr);
+        super.allergens = Arrays.asList(dishDetails.getString("Allergens").split(","));
+        super.ingredients = Arrays.asList(dishDetails.getString("Ingredients").split(","));
     }
     @Override
     public double getPrice() {

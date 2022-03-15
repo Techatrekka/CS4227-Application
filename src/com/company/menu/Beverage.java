@@ -12,8 +12,8 @@ public class Beverage extends MenuItem {
         super.price = bevDetails.getDouble("Price");
         super.description = bevDetails.getString("Description");
         this.alcoholic = bevDetails.getBoolean("Alcoholic");
-        String[] bevAllergenArr = bevDetails.getString("Allergens").split(",");
-        super.allergens = Arrays.asList(bevAllergenArr);
+        super.allergens = Arrays.asList(bevDetails.getString("Allergens").split(","));
+        super.ingredients = Arrays.asList(bevDetails.getString("Ingredients").split(","));
     }
     @Override
     public double getPrice() {

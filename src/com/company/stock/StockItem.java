@@ -9,12 +9,14 @@ public class StockItem extends StockComponent {
     private int count;
     private LocalDate expiryDate;
     private boolean isFood;
+    private int id;
 
     public StockItem(JSONObject details) {
         this.name = details.getString("name");
         this.count = details.getInt("count");
         this.expiryDate = LocalDate.parse(details.getString("expiry_date"));
         this.isFood = details.getBoolean("isFood");
+        this.id = details.getInt("stock_item_id");
     }
 
     public String getName() {
@@ -29,9 +31,14 @@ public class StockItem extends StockComponent {
         return expiryDate;
     }
 
+    int getId() {
+        return this.id;
+    }
+
     public String show() {
         return "\n" + getName() +
-                "\n--" + getCount() + "\n" +
-                "-- " + getExpiryDate();
+                "\n--Count: " + getCount() + "\n" +
+                "--Expiry Date: " + getExpiryDate() +
+                "\n--Id: " + getId() + "\n";
     }
 }
