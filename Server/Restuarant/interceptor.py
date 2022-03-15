@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
 
-class Interceptor:
+class Interceptor(ABC):
     
-    def __init__(self):
+    def __init__(self,level = 0):
         self.nextInterceptor = None
-        self.level = 0
+        self.level = level
     
     @abstractmethod
     def execute(self, request):
@@ -14,7 +14,7 @@ class Interceptor:
         self.nextInterceptor = Interceptor
     
     def executeIntercept(self, level, message):
-        if self.level < level:
+        if self.level == level:
             self.execute(message)
         if self.nextInterceptor != None:
             self.nextInterceptor.executeIntercept(level,message)
