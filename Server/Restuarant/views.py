@@ -195,7 +195,7 @@ def stockitemsApi(request,id=0):
         return JsonResponse("Unsuccessful",safe=False)
     elif request.method=='PUT':
         stockitem_data=JSONParser().parse(request)
-        stockitem=StockItems.objects.get(stockitem_id=stockitem_data['stock_item_id'])
+        stockitem=StockItems.objects.get(stock_item_id=stockitem_data['stock_item_id'])
         stockitemsserializer=StockItemsSerializer(stockitem, data=stockitem_data)
         if stockitemsserializer.is_valid():
             stockitemsserializer.save()
@@ -203,7 +203,7 @@ def stockitemsApi(request,id=0):
         return JsonResponse("failed",safe=True)
     elif request.method=='PATCH':
         stockitem_data=JSONParser().parse(request)
-        stockitem=StockItems.objects.get(stockitem_id=stockitem_data['stock_item_id'])
+        stockitem=StockItems.objects.get(stock_item_id=stockitem_data['stock_item_id'])
         stockitemsserializer=stockitemsserializer(stockitem, data=stockitem_data,partial=True)
         if stockitemsserializer.is_valid():
             stockitemsserializer.save()
@@ -211,7 +211,7 @@ def stockitemsApi(request,id=0):
         return JsonResponse("failed",safe=False)
     elif request.method=='DELETE':
         stockitem_data=JSONParser().parse(request)
-        stockitem=StockItems.objects.get(stockitem_id=stockitem_data['stock_item_id'])
+        stockitem=StockItems.objects.get(stock_item_id=stockitem_data['stock_item_id'])
         stockitem.delete()
         return JsonResponse("Delete succesful",safe=False)
 
