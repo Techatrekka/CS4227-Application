@@ -5,6 +5,7 @@ import com.company.restaurant.Database;
 import com.company.restaurant.RestaurantInit;
 import com.company.menu.Menu;
 import com.company.stock.Stock;
+import com.company.stock.StockComponent;
 import com.company.users.*;
 import org.json.JSONObject;
 
@@ -12,10 +13,11 @@ import java.util.*;
 
 public class RestaurantTerminal {
     private ArrayList<Menu> restaurantMenus;
-    private Stock stock;
+    private StockComponent stock;
     private UserLogin userLogin;
     private UserRegistration userRegistration;
     private User user;
+    private int stockCapacity = 15000;
 
     private BusinessHours businessHours = new BusinessHours();
     private Scanner scanner = new Scanner(System.in);
@@ -35,9 +37,8 @@ public class RestaurantTerminal {
 
     public void run() {
         restaurantMenus = RestaurantInit.initMenus();
-        stock = RestaurantInit.initStock();
+        stock = RestaurantInit.initStock(stockCapacity);
         System.out.println(businessHours.toString());
-
         userLogin = new UserLogin();
         userRegistration = new UserRegistration();
 
@@ -176,18 +177,22 @@ public class RestaurantTerminal {
     }
 
     private void stockManagement() {
-        System.out.println("1. View stock 2. Add New Stock Item 3. Update Stock Item Capacity " +
-                "4. Remove stock item 5. Order Stock");
+        System.out.println("1. View stock 2. Add New Stock Item 3. Update Stock Item Details (including count) " +
+                "4. Remove stock item 5. Order Stock \nB = go back");
         int choice = UiUtils.getInput(1, 5);
         switch (choice) {
             case 1:
-                stock.show();
+                System.out.println(stock.show());
                 break;
             case 2:
-                System.out.println("Add stock item here");
+                ((Stock) stock).addNewStockItem();
+                stock = null;
+                stock = RestaurantInit.initStock(stockCapacity);
                 break;
             case 3:
-                System.out.println("Update capacity here");
+                ((Stock) stock).updateStockItemDetails();
+                stock = null;
+                stock = RestaurantInit.initStock(stockCapacity);
                 break;
             case 4:
             case 5:
@@ -227,7 +232,7 @@ public class RestaurantTerminal {
                 int menuID = user.viewMenu(restaurantMenus, "edit:");
                 for(Menu menu : restaurantMenus) {
                     if(menu.getId() == menuID) {
-                        ((Manager) user).editMenu(menu);
+                        menu.editMenu(stock);
                     }
                 }
                 break;

@@ -135,36 +135,6 @@ public class Manager extends Staff {
         return new Menu(id, name, description, LocalDate.now(), "");
     }
 
-    public void editMenu(Menu menu){
-        String newName = askAboutAttr("name");
-        String newDes = askAboutAttr("description");
-
-        JSONObject editedMenu = new JSONObject();
-
-        if(!Objects.equals(newName, "")){
-            editedMenu.put("name", newName);
-            menu.setName(newName);
-        }
-        if(!Objects.equals(newDes, "")){
-            editedMenu.put("description", newDes);
-            menu.setDescription(newDes);
-        }
-
-        if(!Objects.equals(newName, "") || !Objects.equals(newDes, "")){
-            editedMenu.put("menu_id", menu.getId());
-
-            if (Database.updateTable("menu", editedMenu)){
-                System.out.println("Menu edited successfully");
-            } else{
-                System.out.println("Menu was not edited");
-            }
-        }
-        System.out.println("Continue editing the menu to add/remove menu items or go back to home screen? B = back, Any other key = continue");
-        String choice = scanner.nextLine();
-        if(UiUtils.inputB(choice)) return;
-        menu.editMenuItems();
-    }
-
     public void deleteMenu(int menuID){
         if (Database.deleteFromTable("menu", "menu_id", menuID)){
             System.out.println("Menu deleted successfully");
@@ -175,16 +145,5 @@ public class Manager extends Staff {
 
     public void payStaff(){
         // Use case not implemented
-    }
-
-    public String askAboutAttr(String attribute){
-        String newAttribute = "";
-        System.out.println("Do you want to change the menu " + attribute + "? y/n");
-        String input = scanner.nextLine();
-        if(input.equalsIgnoreCase("Y")){
-            System.out.println("Enter the new menu " + attribute);
-            newAttribute = scanner.nextLine();
-        }
-        return newAttribute;
     }
 }

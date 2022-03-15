@@ -9,6 +9,7 @@ import com.company.menu.Beverage;
 import com.company.menu.Dish;
 
 import com.company.stock.Stock;
+import com.company.stock.StockComponent;
 import com.company.stock.StockItem;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,8 +29,8 @@ public class RestaurantInit {
         return menus;
     }
 
-    public static Stock initStock() {
-        Stock stock = new Stock(1500);
+    public static StockComponent initStock(int capacity) {
+        Stock stock = new Stock(capacity);
         JSONArray dbStock = Database.readAllFromTable("stockitems", -1, null, "");
         for (Object obj : dbStock) {
             JSONObject obj2 = (JSONObject) obj;
