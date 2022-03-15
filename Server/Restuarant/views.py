@@ -204,7 +204,7 @@ def stockitemsApi(request,id=0):
     elif request.method=='PATCH':
         stockitem_data=JSONParser().parse(request)
         stockitem=StockItems.objects.get(stock_item_id=stockitem_data['stock_item_id'])
-        stockitemsserializer=stockitemsserializer(stockitem, data=stockitem_data,partial=True)
+        stockitemsserializer=StockItemsSerializer(stockitem, data=stockitem_data,partial=True)
         if stockitemsserializer.is_valid():
             stockitemsserializer.save()
             return JsonResponse("Successful update",safe=False)
