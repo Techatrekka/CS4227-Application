@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from asyncio.windows_events import NULL
 
 class Interceptor:
     

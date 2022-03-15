@@ -203,7 +203,7 @@ def stockitemsApi(request,id=0):
         return JsonResponse("failed",safe=True)
     elif request.method=='PATCH':
         stockitem_data=JSONParser().parse(request)
-        stockitem=MenuItem.objects.get(stockitem_id=stockitem_data['stock_item_id'])
+        stockitem=StockItems.objects.get(stockitem_id=stockitem_data['stock_item_id'])
         stockitemsserializer=stockitemsserializer(stockitem, data=stockitem_data,partial=True)
         if stockitemsserializer.is_valid():
             stockitemsserializer.save()
@@ -211,7 +211,7 @@ def stockitemsApi(request,id=0):
         return JsonResponse("failed",safe=False)
     elif request.method=='DELETE':
         stockitem_data=JSONParser().parse(request)
-        stockitem=Menu.objects.get(stockitem_id=stockitem_data['stock_item_id'])
+        stockitem=StockItems.objects.get(stockitem_id=stockitem_data['stock_item_id'])
         stockitem.delete()
         return JsonResponse("Delete succesful",safe=False)
 
@@ -246,7 +246,7 @@ def menuitemApi(request,id=0):
         return JsonResponse("failed",safe=False)
     elif request.method=='DELETE':
         menuitem_data=JSONParser().parse(request)
-        menuitem=Menu.objects.get(menuitem_id=menuitem_data['menuitem_id'])
+        menuitem=MenuItem.objects.get(menuitem_id=menuitem_data['menuitem_id'])
         menuitem.delete()
         return JsonResponse("Delete succesful",safe=False)
 
@@ -281,6 +281,6 @@ def orderlineitemsApi(request,id=0):
         return JsonResponse("failed",safe=False)
     elif request.method=='DELETE':
         orderlineitems_data=JSONParser().parse(request)
-        orderlineitems=Menu.objects.get(orderlineitems_id=orderlineitems_data['line_item'])
+        orderlineitems=OrderLineItems.objects.get(orderlineitems_id=orderlineitems_data['line_item'])
         orderlineitems.delete()
         return JsonResponse("Delete succesful",safe=False)

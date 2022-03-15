@@ -1,1 +1,1 @@
-<WSGIRequest: GET '/stockitems'>
+<WSGIRequest: GET '/stockitems'><WSGIRequest: GET '/'><WSGIRequest: GET '/favicon.ico'><WSGIRequest: GET '/'><WSGIRequest: GET '/favicon.ico'><WSGIRequest: GET '/user'>
