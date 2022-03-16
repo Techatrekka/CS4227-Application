@@ -23,6 +23,10 @@ public class StockItem extends StockComponent {
         return name;
     }
 
+    public void setCount(int count) {
+        this.count = count;
+    }
+
     public int getCount() {
         return  count;
     }
