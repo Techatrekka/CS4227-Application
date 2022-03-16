@@ -81,9 +81,10 @@ public class Menu {
     public void setMenuItems(ArrayList<MenuItem> items){
         this.menuList = items;
     }
+
     public void printMenu(){
         for (MenuItem menuItem : menuList) {
-            System.out.println(menuItem.getName());
+            System.out.println(menuItem.toString());
         }
     }
     public void addNewMenuItem(String choice) {
@@ -161,7 +162,6 @@ public class Menu {
                 return;
             }
         }
-        System.out.println("Menu items " + items);
         JSONObject menuDetails = new JSONObject();
         menuDetails.put("menu_id", getId());
         menuDetails.put("menu_items", items.toString());
@@ -278,9 +278,9 @@ public class Menu {
         boolean noItems = true;
         if(menuList != null && menuList.size() > 0) {
             for(MenuItem item : menuList) {
-                if(!Objects.equals(item.toString(), "")) {
-                   items.append(item);
-                   noItems = false;
+                if(item.ingredientsInStock() && !Objects.equals(item.toString(), "")) {
+                    items.append(item);
+                    noItems = false;
                 }
            }
         } else {

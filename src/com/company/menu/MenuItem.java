@@ -56,26 +56,25 @@ public abstract class MenuItem{
                 add("count");
             }};
             JSONObject ingredientDetails = Database.readFromTable("stockitems", id, cols, "stock_item_id");
-            if (ingredientDetails.getInt("count") < 1) return false;
+            if (ingredientDetails.getInt("count") < 1) {
+                return false;
+            }
         }
         return true;
     }
 
     @Override
     public String toString(){
-        if(ingredientsInStock()) {
-            StringBuilder allergenList = new StringBuilder();
-            if (allergens.size() > 0) {
-                for (String item : allergens) {
-                    allergenList.append(item).append("\t\t");
-                }
+        StringBuilder allergenList = new StringBuilder();
+        if (allergens.size() > 0) {
+            for (String item : allergens) {
+                allergenList.append(item).append("\t\t");
             }
-            if (description == null) description = "";
-            return "\n\tId: " + this.getID() + "\n\tName: " + this.getName() +
-                    "\n\tPrice: €" + this.getPrice() + "\n\tDescription: " + this.getDescription() + "\n\tAllergens: " + allergenList + "\n";
-        } else {
-            return "";
         }
+        if (description == null) description = "";
+        return "\n\tId: " + this.getID() + "\n\tName: " + this.getName() +
+                "\n\tPrice: €" + this.getPrice() + "\n\tDescription: " + this.getDescription() + "\n\tAllergens: " + allergenList + "\n";
+
     }
 
 }

@@ -62,8 +62,12 @@ public class RestaurantTerminal {
             switch(choice) {
                 case 1:
                     if(businessHours.isOpenNow()) {
-                        double cost = user.placeOrder(user.getIdNum(), restaurantMenus);
-                        addLoyaltyPoints(cost, user.getIdNum());
+                        double cost = user.placeOrder(user.getIdNum(), restaurantMenus, (Stock) stock);
+                        if(cost > 0) {
+                            addLoyaltyPoints(cost, user.getIdNum());
+                            stock = null;
+                            stock = RestaurantInit.initStock(stockCapacity);
+                        }
                     } else {
                         break;
                     }
@@ -160,8 +164,11 @@ public class RestaurantTerminal {
         if(UiUtils.inputB(idChoice)) return;
         int id = Integer.parseInt(idChoice);
         if(businessHours.isOpenNow()) {
-            double cost = user.placeOrder(id, restaurantMenus);
-            addLoyaltyPoints(cost, id);
+            double cost = user.placeOrder(id, restaurantMenus, (Stock) stock);
+            if(cost > 0) {
+                stock = null;
+                stock = RestaurantInit.initStock(stockCapacity);
+            }
         } else {
             System.out.println("Sorry, you can't place an order right now as the restaurant is closed.");
         }
