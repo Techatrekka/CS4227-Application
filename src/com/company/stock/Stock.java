@@ -7,9 +7,7 @@ import com.company.restaurant.Database;
 import com.company.ui.UiUtils;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Scanner;
+import java.util.*;
 
 public class Stock extends StockComponent {
     int capacity;
@@ -127,7 +125,7 @@ public class Stock extends StockComponent {
 
     public void addStockItem(StockItem item) {
         stockItems.add(item);
-        ++currentCapacity;
+        currentCapacity += item.getCount();
         add(item);
     }
 
@@ -144,8 +142,34 @@ public class Stock extends StockComponent {
         stockItems.remove(stockComponent);
     }
 
+    public void removeStockItemsForOrder(HashMap<Integer, Integer> stockItemMap) {
+        for(Map.Entry entry : stockItemMap.entrySet()) {
+            StockItem s = getStockItemById((Integer) entry.getKey());
+            int newCount = s.getCount() - (int) entry.getValue();
+            JSONObject stockItemDetails = new JSONObject();
+            stockItemDetails.put("stock_item_id", s.getId());
+            stockItemDetails.put("count", newCount);
+            Database.updateTable("stockitems", stockItemDetails);
+        }
+    }
+
     public StockComponent getChild(int index) {
         return (StockComponent) stockComponents.get(index);
+    }
+
+    private StockItem getStockItemById(int id) {
+        for(StockItem s : stockItems) {
+            if(s.getId() == id) return s;
+        }
+        return null;
+    }
+
+    public boolean ingredientsInStock(HashMap<Integer, Integer> stockItems) {
+        for(Map.Entry<Integer, Integer> entry : stockItems.entrySet()) {
+            StockItem s = getStockItemById(entry.getKey());
+            if(entry.getValue() > s.getCount()) return false;
+        }
+        return true;
     }
 
     public String show() {
