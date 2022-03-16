@@ -141,7 +141,7 @@ def ordersApi(request,id=0):
         return JsonResponse("failed",safe=False)
     elif request.method=='DELETE':
         orders_data=JSONParser().parse(request)
-        orders=Orders.objects.get(user_id=orders_data['order_id'])
+        orders=Orders.objects.get(order_id=orders_data['order_id'])
         orders.delete()
         return JsonResponse("Delete succesful",safe=False)
 
