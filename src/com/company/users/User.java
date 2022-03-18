@@ -4,10 +4,12 @@ import com.company.restaurant.Database;
 import com.company.menu.*;
 import com.company.order.Order;
 
+import com.company.stock.Stock;
 import com.company.ui.UiUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.xml.crypto.Data;
 import java.util.*;
 
 public abstract class User {
@@ -78,7 +80,7 @@ public abstract class User {
         return fullName;
     }
 
-    public double placeOrder(int userId, ArrayList<Menu> restaurantMenus){
+    public double placeOrder(int userId, ArrayList<Menu> restaurantMenus, Stock stock){
         Order newOrder = new Order();
         boolean addToOrder = true;
         double setMealCost = 0.0;
@@ -87,7 +89,6 @@ public abstract class User {
             String choice = scanner.nextLine();
             if(choice.equalsIgnoreCase("y")) {
                 SetMeal meal = buildMeal();
-                setMealCost += meal.getMealPrice();
                 for(int id : meal.getMenuItemIds()) {
                     MenuItem item = newOrder.addSetMenuItem(id);
                     newOrder.addMenuItem(item);
@@ -123,23 +124,44 @@ public abstract class User {
         orderDetails.put("user_id", userId);
 
         int orderId = Database.writeToTable("order", orderDetails);
-        System.out.println("Your order:");
+
+        HashMap<Integer, Integer> orderStockItems = new HashMap<>();
         for(MenuItem item : newOrder.getMenuItems()) {
-            JSONObject orderItemDetails = new JSONObject();
-            orderItemDetails.put("menu_item", item.getID());
-            orderItemDetails.put("order_id", orderId);
-            System.out.println("ORDER ITEM DETAILS IS " + orderItemDetails);
-            System.out.println(item);
-            Database.writeToTable("orderlineitem", orderItemDetails);
+            List<String> stockItems = item.getIngredients();
+            for(String s : stockItems) {
+                if(orderStockItems.containsKey(Integer.parseInt(s))) {
+                    orderStockItems.put(Integer.parseInt(s), orderStockItems.get(Integer.parseInt(s)) + 1);
+                } else {
+                    orderStockItems.put(Integer.parseInt(s), 1);
+                }
+            }
         }
 
-        if(newOrder.getTotalCost() > 0) {
-            int time = (int) (Math.random() * 30) + 6;
-            System.out.println("Your order will be ready for collection in " + time + " minutes and will cost €" + String.format("%.2f", newOrder.getTotalCost()));
+        if(stock.ingredientsInStock(orderStockItems)) {
+            if(newOrder.getTotalCost() > 0) {
+                System.out.println("Your order:");
+                for(MenuItem item : newOrder.getMenuItems()) {
+                    JSONObject orderItemDetails = new JSONObject();
+                    orderItemDetails.put("menu_item", item.getID());
+                    orderItemDetails.put("order_id", orderId);
+                    System.out.println(item);
+                    Database.writeToTable("orderlineitem", orderItemDetails);
+                }
+                stock.removeStockItemsForOrder(orderStockItems);
+                int time = (int) (Math.random() * 30) + 6;
+                System.out.println("Your order will be ready for collection in " + time + " minutes and will cost €" + String.format("%.2f", newOrder.getTotalCost()));
+            } else {
+                System.out.println("The order was cancelled.");
+                newOrder.setTotalCost(0);
+                Database.deleteFromTable("order", "order_id", orderId);
+            }
         } else {
-            System.out.println("The order was cancelled.");
+            System.out.println("Sorry, but there aren't enough ingredients in stock for all your order items.\n" +
+                    "The order was cancelled, please try again.");
             newOrder.setTotalCost(0);
+            Database.deleteFromTable("order", "order_id", orderId);
         }
+
         return newOrder.getTotalCost();
     }
 

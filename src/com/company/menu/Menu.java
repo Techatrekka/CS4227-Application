@@ -2,10 +2,13 @@ package com.company.menu;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 import com.company.restaurant.Database;
 
+import com.company.stock.Stock;
+import com.company.stock.StockComponent;
 import com.company.ui.UiUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,6 +20,7 @@ public class Menu {
     private LocalDate dateCreated;
     private Scanner scanner = new Scanner(System.in);
     public ArrayList<MenuItem> menuList;
+    private StockComponent stock;
 
     public Menu(int id, String name,String description, LocalDate date, String menuItems){
         this.menuID = id;
@@ -77,9 +81,10 @@ public class Menu {
     public void setMenuItems(ArrayList<MenuItem> items){
         this.menuList = items;
     }
+
     public void printMenu(){
         for (MenuItem menuItem : menuList) {
-            System.out.println(menuItem.getName());
+            System.out.println(menuItem.toString());
         }
     }
     public void addNewMenuItem(String choice) {
@@ -101,7 +106,10 @@ public class Menu {
         } else {
             newMenuItem.put("Allergens", allergens);
         }
-        System.out.println("What stock items does this menu item use? Please enter the id for each stock item separated by a comma.");
+        System.out.println("What stock items does this menu item use? Please enter the id for each stock item separated by a comma. " +
+                "Press enter to see the stock item ids.");
+        scanner.nextLine();
+        System.out.println(stock.show());
         String ingredients = scanner.nextLine();
         newMenuItem.put("Ingredients", ingredients);
         createNewItem(choice, newMenuItem);
@@ -146,7 +154,7 @@ public class Menu {
                     items.append(menuList.get(i).getID()).append(",");
                 }
             }
-            if(action.equals("add")) items.append(+item.getID());
+            if(action.equals("add")) items.append(item.getID());
         } else {
             if(action.equals("add")) {
                 items = new StringBuilder(String.valueOf(item.getID()));
@@ -154,7 +162,6 @@ public class Menu {
                 return;
             }
         }
-        System.out.println("Menu items " + items);
         JSONObject menuDetails = new JSONObject();
         menuDetails.put("menu_id", getId());
         menuDetails.put("menu_items", items.toString());
@@ -184,6 +191,37 @@ public class Menu {
                 break;
             }
         }
+    }
+
+    public void editMenu(StockComponent stock){
+        this.stock = stock;
+        String newName = askAboutAttr("name");
+        String newDes = askAboutAttr("description");
+
+        JSONObject editedMenu = new JSONObject();
+
+        if(!Objects.equals(newName, "")){
+            editedMenu.put("name", newName);
+            this.setName(newName);
+        }
+        if(!Objects.equals(newDes, "")){
+            editedMenu.put("description", newDes);
+            this.setDescription(newDes);
+        }
+
+        if(!Objects.equals(newName, "") || !Objects.equals(newDes, "")){
+            editedMenu.put("menu_id", this.getId());
+
+            if (Database.updateTable("menu", editedMenu)){
+                System.out.println("Menu edited successfully");
+            } else{
+                System.out.println("Menu was not edited");
+            }
+        }
+        System.out.println("Continue editing the menu to add/remove menu items or go back to home screen? B = back, Any other key = continue");
+        String choice = scanner.nextLine();
+        if(UiUtils.inputB(choice)) return;
+        this.editMenuItems();
     }
 
     public void editMenuItems() {
@@ -237,18 +275,36 @@ public class Menu {
     @Override
     public String toString() {
         StringBuilder items = new StringBuilder();
+        boolean noItems = true;
         if(menuList != null && menuList.size() > 0) {
             for(MenuItem item : menuList) {
-                items.append(item.toString());
+                if(item.ingredientsInStock() && !Objects.equals(item.toString(), "")) {
+                    items.append(item);
+                    noItems = false;
+                }
            }
         } else {
-            items.append("\tNone\n");
+            items.append("\tNone.\n");
+        }
+        if(noItems) {
+            items.append("\tAll menu items are out of stock\n");
         }
         return  "Menu ID: " + menuID +
                 " Menu name: " + name +
                 " Menu Description: " + description +
                 " Date Created: " + dateCreated.toString() +
                 "\nMenu Items: \n" + items;
+    }
+
+    public String askAboutAttr(String attribute){
+        String newAttribute = "";
+        System.out.println("Do you want to change the menu " + attribute + "? y/n");
+        String input = scanner.nextLine();
+        if(input.equalsIgnoreCase("Y")){
+            System.out.println("Enter the new menu " + attribute);
+            newAttribute = scanner.nextLine();
+        }
+        return newAttribute;
     }
 
 }

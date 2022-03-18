@@ -1,19 +1,23 @@
 package com.company.ui;
 
-        import com.company.restaurant.BusinessHours;
-        import com.company.restaurant.Database;
-        import com.company.restaurant.RestaurantInit;
-        import com.company.menu.Menu;
-        import com.company.users.*;
-        import org.json.JSONObject;
+import com.company.restaurant.BusinessHours;
+import com.company.restaurant.Database;
+import com.company.restaurant.RestaurantInit;
+import com.company.menu.Menu;
+import com.company.stock.Stock;
+import com.company.stock.StockComponent;
+import com.company.users.*;
+import org.json.JSONObject;
 
-        import java.util.*;
+import java.util.*;
 
 public class RestaurantTerminal {
     private ArrayList<Menu> restaurantMenus;
+    private StockComponent stock;
     private UserLogin userLogin;
     private UserRegistration userRegistration;
     private User user;
+    private int stockCapacity = 15000;
 
     private BusinessHours businessHours = new BusinessHours();
     private Scanner scanner = new Scanner(System.in);
@@ -33,8 +37,8 @@ public class RestaurantTerminal {
 
     public void run() {
         restaurantMenus = RestaurantInit.initMenus();
+        stock = RestaurantInit.initStock(stockCapacity);
         System.out.println(businessHours.toString());
-
         userLogin = new UserLogin();
         userRegistration = new UserRegistration();
 
@@ -58,8 +62,12 @@ public class RestaurantTerminal {
             switch(choice) {
                 case 1:
                     if(businessHours.isOpenNow()) {
-                        double cost = user.placeOrder(user.getIdNum(), restaurantMenus);
-                        addLoyaltyPoints(cost, user.getIdNum());
+                        double cost = user.placeOrder(user.getIdNum(), restaurantMenus, (Stock) stock);
+                        if(cost > 0) {
+                            addLoyaltyPoints(cost, user.getIdNum());
+                            stock = null;
+                            stock = RestaurantInit.initStock(stockCapacity);
+                        }
                     } else {
                         break;
                     }
@@ -156,8 +164,11 @@ public class RestaurantTerminal {
         if(UiUtils.inputB(idChoice)) return;
         int id = Integer.parseInt(idChoice);
         if(businessHours.isOpenNow()) {
-            double cost = user.placeOrder(id, restaurantMenus);
-            addLoyaltyPoints(cost, id);
+            double cost = user.placeOrder(id, restaurantMenus, (Stock) stock);
+            if(cost > 0) {
+                stock = null;
+                stock = RestaurantInit.initStock(stockCapacity);
+            }
         } else {
             System.out.println("Sorry, you can't place an order right now as the restaurant is closed.");
         }
@@ -173,8 +184,28 @@ public class RestaurantTerminal {
     }
 
     private void stockManagement() {
-        System.out.println("1. View stock 2. Order stock");
-        System.out.println("Sorry, this use case was not implemented");
+        System.out.println("1. View stock 2. Add New Stock Item 3. Update Stock Item Details (including count) " +
+                "4. Remove stock item 5. Order Stock \nB = go back");
+        int choice = UiUtils.getInput(1, 5);
+        switch (choice) {
+            case 1:
+                System.out.println(stock.show());
+                break;
+            case 2:
+                ((Stock) stock).addNewStockItem();
+                stock = null;
+                stock = RestaurantInit.initStock(stockCapacity);
+                break;
+            case 3:
+                ((Stock) stock).updateStockItemDetails();
+                stock = null;
+                stock = RestaurantInit.initStock(stockCapacity);
+                break;
+            case 4:
+            case 5:
+                System.out.println("Sorry, this use case was not implemented");
+                break;
+        }
     }
 
     private void employeeManagement() {
@@ -208,7 +239,7 @@ public class RestaurantTerminal {
                 int menuID = user.viewMenu(restaurantMenus, "edit:");
                 for(Menu menu : restaurantMenus) {
                     if(menu.getId() == menuID) {
-                        ((Manager) user).editMenu(menu);
+                        menu.editMenu(stock);
                     }
                 }
                 break;

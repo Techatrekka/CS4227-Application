@@ -9,6 +9,10 @@ public class SetMenu extends Menu {
     public SetMenu(int id, String name, String description, LocalDate date, double setMenuPrice, String menuItems) {
         super(id, name, description, date, menuItems);
         this.setMenuPrice = setMenuPrice;
-        super.menuList = new ArrayList<>();
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\nSet Menu Price: " + this.setMenuPrice + "\n";
     }
 }
