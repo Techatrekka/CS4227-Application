@@ -1,0 +1,11 @@
+
+U
+java:S1118":Add a private constructor to hide the implicit public one.(è°ıüøÿÿÿÿ
+m
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 34 to the 15 allowed.(µÇ¡—ûÿÿÿÿ
+X
+java:S1854"=Remove this useless assignment to local variable "menuItems".(ßÅÄùüÿÿÿÿ
+I
+java:S1481".Remove this unused "menuItems" local variable.(ßÅÄùüÿÿÿÿ
+‹
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(µÇ¡—ûÿÿÿÿ

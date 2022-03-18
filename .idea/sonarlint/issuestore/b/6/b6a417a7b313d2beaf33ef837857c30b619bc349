@@ -1,0 +1,8 @@
+
+lpython:S3776y"TRefactor this function to reduce its Cognitive Complexity from 21 to the 15 allowed.(¦ãÂ«
+Apython:S108®")Either remove or fill this block of code.(ã‘Û¾
+opython:S2710Ú"QRename "self" to a valid class parameter name or add the missing class parameter.(Ã²¦øÿÿÿÿ
+Dpython:S5806Œ"+Rename this variable; it shadows a builtin.(ì±‰ı
+Hpython:S6035’"0Replace this alternation with a character class.(ÓÆ¤d
+Npython:S6035œ"0Replace this alternation with a character class.(óğ¼şıÿÿÿÿ
+lpython:S5843’"TSimplify this regular expression to reduce its complexity from 32 to the 20 allowed.(ÓÆ¤d

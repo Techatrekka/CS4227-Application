@@ -1,0 +1,5 @@
+
+xpython:S1192¨"ZDefine a constant instead of duplicating this literal 'application/octet-stream' 11 times.(¢Ö€¸ùÿÿÿÿ
+npython:S1192Ü"PDefine a constant instead of duplicating this literal 'wsgi.url_scheme' 3 times.(š½Û©üÿÿÿÿ
+rpython:S3776á"TRefactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.(°•Ñøÿÿÿÿ
+rpython:S3776¨"TRefactor this function to reduce its Cognitive Complexity from 19 to the 15 allowed.(·¡¿­ÿÿÿÿÿ

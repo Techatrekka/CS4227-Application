@@ -1,0 +1,3 @@
+
+—python:S1192§"~Define a constant instead of duplicating this literal "Django doesn't provide a DB representation for AnonymousUser." 4 times.(§â§Á
+}python:S117Ž"`Rename this local variable "GlobalUserModel" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ò§¢Äþÿÿÿÿ

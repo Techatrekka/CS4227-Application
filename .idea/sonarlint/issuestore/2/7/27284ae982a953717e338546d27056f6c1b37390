@@ -1,0 +1,8 @@
+
+qpython:S1192¿"SDefine a constant instead of duplicating this literal 'distutils.commands' 3 times.(şÊ»Òùÿÿÿÿ
+qpython:S3776~"TRefactor this function to reduce its Cognitive Complexity from 21 to the 15 allowed.(Øâ¹¥üÿÿÿÿ
+rpython:S3776®"TRefactor this function to reduce its Cognitive Complexity from 21 to the 15 allowed.(™á¿¤ùÿÿÿÿ
+mpython:S3776µ"TRefactor this function to reduce its Cognitive Complexity from 31 to the 15 allowed.(ŠÀ¿’
+rpython:S3776‡"TRefactor this function to reduce its Cognitive Complexity from 18 to the 15 allowed.(ÏÔí…ûÿÿÿÿ
+Spython:S2836Ä"5Add a "break" statement or remove this "else" clause.(³£œ‰øÿÿÿÿ
+mpython:S3776"TRefactor this function to reduce its Cognitive Complexity from 20 to the 15 allowed.(ûÌÁ‹

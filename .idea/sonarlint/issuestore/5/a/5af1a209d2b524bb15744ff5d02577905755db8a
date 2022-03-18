@@ -1,0 +1,8 @@
+
+cpython:S1192è"KDefine a constant instead of duplicating this literal 'an integer' 5 times.(¬‘ 
+jpython:S1192ª"QDefine a constant instead of duplicating this literal 'a list or tuple' 17 times.(“…í
+kpython:S1192¯"MDefine a constant instead of duplicating this literal 'a dictionary' 3 times.(…˜Ä…ùÿÿÿÿ
+qpython:S3776:"TRefactor this function to reduce its Cognitive Complexity from 21 to the 15 allowed.(ñµÅÿÿÿÿÿ
+<python:S125¨"Remove this commented out code.(ÿ“Ãùÿÿÿÿ
+rpython:S3776³"TRefactor this function to reduce its Cognitive Complexity from 18 to the 15 allowed.(Âß®ÿÿÿÿÿ
+python:S1871ä"cEither merge this branch with the identical one on line "738" or change one of the implementations.(¡’Ìïşÿÿÿÿ

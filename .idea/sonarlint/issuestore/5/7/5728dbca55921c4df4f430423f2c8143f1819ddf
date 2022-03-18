@@ -1,0 +1,9 @@
+
+—
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(…ä©Ì
+b
+java:S1192"LDefine a constant instead of duplicating this literal "description" 3 times.(æ´Ã
+^
+java:S1192"HDefine a constant instead of duplicating this literal "menu_id" 3 times.(æ´Ã
+c
+java:S1192"MDefine a constant instead of duplicating this literal "date_created" 3 times.(²ƒıä
