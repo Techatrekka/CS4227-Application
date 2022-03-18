@@ -1,0 +1,65 @@
+
+S	java:S106:"9Replace this use of System.out or System.err by a logger.(ØÖþÌþÿÿÿÿ
+N	java:S106>"9Replace this use of System.out or System.err by a logger.(ŽðÔ‚
+S
+java:S1117?"8Rename "name" which hides the field declared at line 13.(Ü°ŒŸÿÿÿÿÿ
+N	java:S106@"9Replace this use of System.out or System.err by a logger.(½“Ñ¼
+S	java:S106B"9Replace this use of System.out or System.err by a logger.(­Èëùÿÿÿÿ
+S	java:S106J"9Replace this use of System.out or System.err by a logger.(·Ç—þÿÿÿÿ
+N	java:S106N"9Replace this use of System.out or System.err by a logger.(á§à³
+S	java:S106`"9Replace this use of System.out or System.err by a logger.(”˜äèûÿÿÿÿ
+N	java:S106k"9Replace this use of System.out or System.err by a logger.(øìÖÍ
+N	java:S106m"9Replace this use of System.out or System.err by a logger.(îø‰
+N	java:S106t"9Replace this use of System.out or System.err by a logger.(¬Òˆÿ
+N	java:S106u"9Replace this use of System.out or System.err by a logger.(ïÌÌú
+T	java:S106€"9Replace this use of System.out or System.err by a logger.(—±–Äþÿÿÿÿ
+g
+java:S1192W"LDefine a constant instead of duplicating this literal "dish_bev_id" 3 times.(ã½¸ñùÿÿÿÿ
+^
+java:S1192Y"HDefine a constant instead of duplicating this literal "menu_id" 3 times.(Â¿ý²
+d
+java:S1192Z"IDefine a constant instead of duplicating this literal "menuitem" 4 times.(ŒáŽ¼üÿÿÿÿ
+}
+java:S1319"hThe type of "menuList" should be an interface such as "List" rather than the implementation "ArrayList".(÷â‹x
+‹
+java:S13191"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ÿáš¢ÿÿÿÿÿ
+{
+java:S13195"eThe type of "items" should be an interface such as "List" rather than the implementation "ArrayList".(ÏÈþõ
+`
+java:S1155s">Use isEmpty() to check whether the collection is empty or not.(í„öýÿÿÿÿ8™™‡‡ó/
+\
+java:S1155ˆ">Use isEmpty() to check whether the collection is empty or not.(þƒŽ›8š™‡‡ó/
+i
+java:S1104"TMake menuList a static final constant or non-public and provide accessors if needed.(÷â‹x
+S	java:S106:"9Replace this use of System.out or System.err by a logger.(ØÖþÌþÿÿÿÿ
+N	java:S106>"9Replace this use of System.out or System.err by a logger.(ŽðÔ‚
+S
+java:S1117?"8Rename "name" which hides the field declared at line 13.(Ü°ŒŸÿÿÿÿÿ
+N	java:S106@"9Replace this use of System.out or System.err by a logger.(½“Ñ¼
+S	java:S106B"9Replace this use of System.out or System.err by a logger.(­Èëùÿÿÿÿ
+S	java:S106J"9Replace this use of System.out or System.err by a logger.(·Ç—þÿÿÿÿ
+N	java:S106N"9Replace this use of System.out or System.err by a logger.(á§à³
+S	java:S106`"9Replace this use of System.out or System.err by a logger.(”˜äèûÿÿÿÿ
+N	java:S106k"9Replace this use of System.out or System.err by a logger.(øìÖÍ
+N	java:S106m"9Replace this use of System.out or System.err by a logger.(îø‰
+N	java:S106t"9Replace this use of System.out or System.err by a logger.(¬Òˆÿ
+N	java:S106u"9Replace this use of System.out or System.err by a logger.(ïÌÌú
+T	java:S106€"9Replace this use of System.out or System.err by a logger.(—±–Äþÿÿÿÿ
+g
+java:S1192W"LDefine a constant instead of duplicating this literal "dish_bev_id" 3 times.(ã½¸ñùÿÿÿÿ
+^
+java:S1192Y"HDefine a constant instead of duplicating this literal "menu_id" 3 times.(Â¿ý²
+d
+java:S1192Z"IDefine a constant instead of duplicating this literal "menuitem" 4 times.(ŒáŽ¼üÿÿÿÿ
+}
+java:S1319"hThe type of "menuList" should be an interface such as "List" rather than the implementation "ArrayList".(÷â‹x
+‹
+java:S13191"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ÿáš¢ÿÿÿÿÿ
+{
+java:S13195"eThe type of "items" should be an interface such as "List" rather than the implementation "ArrayList".(ÏÈþõ
+Y
+java:S1155s">Use isEmpty() to check whether the collection is empty or not.(í„öýÿÿÿÿ
+U
+java:S1155ˆ">Use isEmpty() to check whether the collection is empty or not.(þƒŽ›
+i
+java:S1104"TMake menuList a static final constant or non-public and provide accessors if needed.(÷â‹x

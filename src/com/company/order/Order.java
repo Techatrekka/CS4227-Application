@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Order {
+public class Order implements Visitable {
     private int orderID;
     private ArrayList<MenuItem> menuItems = new ArrayList<>();
     private double totalCost;
@@ -21,6 +21,10 @@ public class Order {
     public Order(JSONObject orderDetails) {
         this.orderID = orderDetails.getInt("order_id");
         this.totalCost = Double.parseDouble(orderDetails.getString("total_cost"));
+    }
+
+    public void accept(Visitor visitor){
+        visitor.visit(this);
     }
     
     public void setOrderID(int orderID){

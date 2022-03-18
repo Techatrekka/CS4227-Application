@@ -1,0 +1,62 @@
+
+N	java:S106"9Replace this use of System.out or System.err by a logger.(¶ÈË¸
+N	java:S106 "9Replace this use of System.out or System.err by a logger.(¤Åñˆ
+M	java:S106""9Replace this use of System.out or System.err by a logger.(Áõ
+S	java:S106$"9Replace this use of System.out or System.err by a logger.(ÜÜ¡ûúÿÿÿÿ
+S	java:S106;"9Replace this use of System.out or System.err by a logger.(€¦Ùıøÿÿÿÿ
+g
+java:S3457B"Q%n should be used in place of \n to produce the platform-specific line separator.(¶­ı
+N	java:S106B"9Replace this use of System.out or System.err by a logger.(¶­ı
+N	java:S106I"9Replace this use of System.out or System.err by a logger.(ÁÇÍƒ
+S	java:S106L"9Replace this use of System.out or System.err by a logger.(ù¨ãøÿÿÿÿ
+S	java:S106P"9Replace this use of System.out or System.err by a logger.(¼‘Ì¹üÿÿÿÿ
+S	java:S106R"9Replace this use of System.out or System.err by a logger.(çÛµÏşÿÿÿÿ
+S	java:S106Y"9Replace this use of System.out or System.err by a logger.(°ûçÖüÿÿÿÿ
+S	java:S106["9Replace this use of System.out or System.err by a logger.( °‰Õÿÿÿÿÿ
+N	java:S106c"9Replace this use of System.out or System.err by a logger.(ùâÂº
+S	java:S106e"9Replace this use of System.out or System.err by a logger.(ÒÉµıÿÿÿÿ
+S	java:S106k"9Replace this use of System.out or System.err by a logger.(Ş³ñØÿÿÿÿÿ
+S	java:S106m"9Replace this use of System.out or System.err by a logger.(×¹æ‰ÿÿÿÿÿ
+N	java:S106o"9Replace this use of System.out or System.err by a logger.(Æİó¬
+N	java:S106r"9Replace this use of System.out or System.err by a logger.(Îá‚”
+S	java:S106w"9Replace this use of System.out or System.err by a logger.(ØÓÔùÿÿÿÿ
+N	java:S106z"9Replace this use of System.out or System.err by a logger.(º‡Ó
+O	java:S106Ÿ"9Replace this use of System.out or System.err by a logger.(¦ç´›
+T	java:S106¡"9Replace this use of System.out or System.err by a logger.(ŒÒ¡Ôúÿÿÿÿ
+N	java:S106£"9Replace this use of System.out or System.err by a logger.(Ú…Ü
+O	java:S106¨"9Replace this use of System.out or System.err by a logger.(¾Â®¾
+H
+java:S3599©",Use another way to initialize this instance.(ş†Ö×şÿÿÿÿ
+u
+java:S1171ª"YMove the contents of this initializer to a standard constructor or to field initializers.(ÒÌâ–øÿÿÿÿ
+O	java:S106°"9Replace this use of System.out or System.err by a logger.(¸‹À³
+C
+java:S3599±",Use another way to initialize this instance.(Îî÷ó
+u
+java:S1171²"YMove the contents of this initializer to a standard constructor or to field initializers.(ÒÌâ–øÿÿÿÿ
+O	java:S106¸"9Replace this use of System.out or System.err by a logger.(½ìì¢
+C
+java:S3599¹",Use another way to initialize this instance.(Îî÷ó
+u
+java:S1171º"YMove the contents of this initializer to a standard constructor or to field initializers.(ÒÌâ–øÿÿÿÿ
+T	java:S106Â"9Replace this use of System.out or System.err by a logger.(£êÑÖıÿÿÿÿ
+O	java:S106Ë"9Replace this use of System.out or System.err by a logger.(è•¸ù
+O	java:S106Í"9Replace this use of System.out or System.err by a logger.(èÊˆ˜
+T	java:S106×"9Replace this use of System.out or System.err by a logger.(“ì÷şÿÿÿÿ
+O	java:S106Ú"9Replace this use of System.out or System.err by a logger.(ˆÈèÅ
+U
+java:S1128"9Remove this unused import 'com.company.menu.MenuFactory'.(¡·˜8ûš‡‡ó/
+h
+java:S1192…"LDefine a constant instead of duplicating this literal "description" 3 times.(”Éöûÿÿÿÿ
+d
+java:S1192u"IDefine a constant instead of duplicating this literal "discount" 3 times.(Æªôùÿÿÿÿ
+]
+java:S11923"GDefine a constant instead of duplicating this literal "salary" 4 times.(’ĞÊ§
+d
+java:S1192"IDefine a constant instead of duplicating this literal "employee" 3 times.(ğşşÿÿÿÿ
+d
+java:S1192t"ODefine a constant instead of duplicating this literal "set_menu_price" 3 times.(£Åq
+c
+java:S11922"NDefine a constant instead of duplicating this literal "employee_type" 3 times.(¡ÆúW
+c
+java:S11921"HDefine a constant instead of duplicating this literal "user_id" 7 times.(ÿ¸äëşÿÿÿÿ

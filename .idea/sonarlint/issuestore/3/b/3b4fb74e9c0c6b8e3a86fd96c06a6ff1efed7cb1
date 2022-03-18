@@ -1,0 +1,30 @@
+
+[	java:S112 "FDefine and throw a dedicated exception instead of using a generic one.(ªÑ›µ
+[	java:S112M"FDefine and throw a dedicated exception instead of using a generic one.(ªÑ›µ
+\	java:S112€"FDefine and throw a dedicated exception instead of using a generic one.(ªÑ›µ
+U
+java:S1118":Add a private constructor to hide the implicit public one.(Ñ°Ù®şÿÿÿÿ
+h
+java:S3776C"RRefactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.(ÇœŞ•
+g
+java:S1871a"LThis branch's code block is the same as the block for the branch on line 93.(Üâè”üÿÿÿÿ
+H
+java:S3011ó",This accessibility update should be removed.(„«µ”ùÿÿÿÿ
+C
+java:S3011ô",This accessibility bypass should be removed.(øÜ²Ã
+B
+java:S3011ö",This accessibility update should be removed.(ŞªÖ
+B
+java:S3011ı",This accessibility bypass should be removed.(İÚw
+m
+java:S1192G"WDefine a constant instead of duplicating this literal "http://slynch.ie:8000/" 5 times.(Š…½Ì
+i
+java:S1192­"MDefine a constant instead of duplicating this literal "Content-Type" 3 times.(’Ìµ×ùÿÿÿÿ
+h
+java:S1192¬"QDefine a constant instead of duplicating this literal "application/json" 6 times.(¸£¶ì
+^
+java:S1192¬"GDefine a constant instead of duplicating this literal "Accept" 3 times.(¸£¶ì
+i
+java:S1192 "SDefine a constant instead of duplicating this literal "HttpResponseCode: " 3 times.(ªÑ›µ
+Q
+java:S1141¼"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ

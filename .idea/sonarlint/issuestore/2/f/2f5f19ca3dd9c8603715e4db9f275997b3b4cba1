@@ -1,0 +1,23 @@
+
+~python:S1192»	"`Define a constant instead of duplicating this literal 'admin/%s/%s/popup_response.html' 3 times.(ü ¸ïıÿÿÿÿ
+{python:S1192¼	"]Define a constant instead of duplicating this literal 'admin/%s/popup_response.html' 3 times.(¾±ßıÿÿÿÿ
+spython:S1192½	"ZDefine a constant instead of duplicating this literal 'admin/popup_response.html' 3 times.(ÖöÕ±
+jpython:S1192¹
+"LDefine a constant instead of duplicating this literal 'admin:index' 3 times.(õ’êÁıÿÿÿÿ
+upython:S1192—"WDefine a constant instead of duplicating this literal 'admin:%s_%s_changelist' 3 times.(«‰Æ±ÿÿÿÿÿ
+Mpython:S1066Ê"/Merge this if statement with the enclosing one.(â©¼—ÿÿÿÿÿ
+lpython:S3776„"TRefactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.(ÍÖT
+rpython:S3776ù"TRefactor this function to reduce its Cognitive Complexity from 21 to the 15 allowed.(î¼‘ÿÿÿÿÿ
+xpython:S117ß"[Rename this local variable "ChangeList" to match the regular expression ^[_a-z][a-z0-9_]*$.(²ã‘¬ûÿÿÿÿ
+Dpython:S5806õ"+Rename this variable; it shadows a builtin.(Ó£°±
+mpython:S3776Û"TRefactor this function to reduce its Cognitive Complexity from 30 to the 15 allowed.(åŒÃª
+rpython:S3776˜	"TRefactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.(èÎ’öúÿÿÿÿ
+rpython:S117¦"ZRename this local variable "ModelForm" to match the regular expression ^[_a-z][a-z0-9_]*$.(é¹ùÄ
+wpython:S117Ê"ZRename this local variable "adminForm" to match the regular expression ^[_a-z][a-z0-9_]*$.( ¸«ğûÿÿÿÿ
+rpython:S3776†"TRefactor this function to reduce its Cognitive Complexity from 49 to the 15 allowed.(»íŞóøÿÿÿÿ
+upython:S117à"XRename this local variable "FormSet" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ë–Ïıÿÿÿÿ
+mpython:S3776–"TRefactor this function to reduce its Cognitive Complexity from 46 to the 15 allowed.(Ñš—
+ppython:S117©"XRename this local variable "FormSet" to match the regular expression ^[_a-z][a-z0-9_]*$.(í‘¯
+mpython:S3776¡"TRefactor this function to reduce its Cognitive Complexity from 19 to the 15 allowed.(ÿÃ¼Œ
+mpython:S3776†"TRefactor this function to reduce its Cognitive Complexity from 23 to the 15 allowed.(é¿Â
+Gpython:S2638ú".Remove parameter obj or provide default value.(â¨»

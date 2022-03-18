@@ -40,6 +40,16 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/com/company/users/User.java">
+      <ranges>
+        <range start1="2" end1="2" start2="2" end2="3" changelist="3f74816f-879d-4bdf-bd25-3e5afb226402" />
+        <range start1="11" end1="12" start2="12" end2="12" changelist="ada54322-a08e-4d13-b89d-2d23fefb8ef5" />
+        <range start1="84" end1="84" start2="84" end2="85" changelist="ada54322-a08e-4d13-b89d-2d23fefb8ef5" />
+        <range start1="151" end1="152" start2="152" end2="156" changelist="3f74816f-879d-4bdf-bd25-3e5afb226402" />
+      </ranges>
+    </file>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -241,12 +251,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/company/users/User.java</url>
-          <line>128</line>
+          <line>131</line>
           <option name="timeStamp" value="30" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/company/users/User.java</url>
-          <line>130</line>
+          <line>133</line>
           <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>

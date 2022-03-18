@@ -1,5 +1,6 @@
 package com.company.users;
 
+import com.company.order.ShoppingCart;
 import com.company.restaurant.Database;
 import com.company.menu.*;
 import com.company.order.Order;
@@ -9,7 +10,6 @@ import com.company.ui.UiUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javax.xml.crypto.Data;
 import java.util.*;
 
 public abstract class User {
@@ -82,6 +82,7 @@ public abstract class User {
 
     public double placeOrder(int userId, ArrayList<Menu> restaurantMenus, Stock stock){
         Order newOrder = new Order();
+        System.out.println("Delivery costs €0.40 per item for orders under €10, €0.20 per item for orders under €20, and is free for orders over €20.");
         boolean addToOrder = true;
         double setMealCost = 0.0;
         while(addToOrder) {
@@ -149,7 +150,10 @@ public abstract class User {
                 }
                 stock.removeStockItemsForOrder(orderStockItems);
                 int time = (int) (Math.random() * 30) + 6;
-                System.out.println("Your order will be ready for collection in " + time + " minutes and will cost €" + String.format("%.2f", newOrder.getTotalCost()));
+                ShoppingCart cart = new ShoppingCart();
+                cart.items.add(newOrder);
+                double deliveryCost = cart.accept();
+                System.out.println("Your order will be delivered in " + time + " minutes and will cost €" + String.format("%.2f", newOrder.getTotalCost()) + " + delivery fee €" + String.format("%.2f", deliveryCost));
             } else {
                 System.out.println("The order was cancelled.");
                 newOrder.setTotalCost(0);
