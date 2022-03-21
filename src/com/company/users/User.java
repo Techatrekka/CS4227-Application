@@ -18,6 +18,7 @@ public abstract class User {
     private String fullName;
     private String email;
     private Scanner scanner = new Scanner(System.in);
+    public LoyaltyStrategy loyaltyPoints;
 
     public int viewMenu(ArrayList<Menu> restaurantMenus, String option){
         for(Menu menu : restaurantMenus) {
@@ -165,8 +166,18 @@ public abstract class User {
             newOrder.setTotalCost(0);
             Database.deleteFromTable("order", "order_id", orderId);
         }
+        System.out.println("Would you like to apply your loyalty discount?");
+        String choice = scanner.nextLine();
+        if(choice.equalsIgnoreCase("y")) {
+            loyaltyPoints = new ApplyDiscount();
+        }
+        else {
+            loyaltyPoints = new DoNotApplyDiscount();
+        }
 
+        newOrder.setTotalCost(newOrder.getTotalCost()+loyaltyPoints.applyLoyaltyDiscount(userId, newOrder.getTotalCost()));
         return newOrder.getTotalCost();
+
     }
 
     private JSONObject getOrderItem(int menuItemId) {
