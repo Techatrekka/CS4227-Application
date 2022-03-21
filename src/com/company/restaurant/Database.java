@@ -88,15 +88,17 @@ public class Database {
                 scanner.close();
                 JSONArray jsonData = new JSONArray(inline.toString());
 
+                boolean noMatch = true;
                 for(Object obj : jsonData) {
                     JSONObject obj2 = (JSONObject) obj;
                     if(obj2.getInt(idCol) == id) {
+                        noMatch = false;
                         for(String col : cols) {
                             rowDetails.put(col, obj2.get(col));
                         }
                     }
-
                 }
+                if(noMatch) rowDetails.put("noMatch", true);
             }
             http.getResponseCode();
         } catch (IOException e) {
@@ -183,8 +185,7 @@ public class Database {
                 String num = splitSb[2].replace("\"", "");
                 try {
                     idNum = Integer.parseInt(num);
-                } catch (NumberFormatException e) {
-                    idNum = -1;
+                } catch (NumberFormatException ignored) {
                 }
             }
             

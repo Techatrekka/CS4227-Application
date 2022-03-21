@@ -5,7 +5,8 @@ public class ApplyDiscount implements LoyaltyStrategy{
 
     @Override
     public double applyLoyaltyDiscount(int userID, double price){
-        return loyaltyPoints.getLoyaltyPoints(userID)*10;
+        loyaltyPoints = new LoyaltyPoints(0);
+        return loyaltyPoints.getLoyaltyPoints(userID)*.01;
     }
 }
 
