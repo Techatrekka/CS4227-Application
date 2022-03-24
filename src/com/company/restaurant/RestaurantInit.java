@@ -30,12 +30,12 @@ public class RestaurantInit {
     }
 
     public static StockComponent initStock(int capacity) {
-        Stock stock = new Stock(capacity);
+        Stock stock = new Stock(capacity, "All Item Stock");
         JSONArray dbStock = Database.readAllFromTable("stockitems", -1, null, "");
         for (Object obj : dbStock) {
             JSONObject obj2 = (JSONObject) obj;
             StockItem item = new StockItem(obj2);
-            stock.addStockItem(item);
+            stock.add(item);
         }
         return stock;
     }
