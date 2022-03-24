@@ -18,11 +18,11 @@ To compile and run the program:
 3. Do one of the following:
    1. If Perl is installed, regardless of OS, use the following command: *perl convertToCmdFormat.pl* (if on Linux/MacOS and you get a permission error, use the command *sudo perl convertToCmdFormat.pl*)
    2. If on Windows, use the following command: *.\convertToCmdFormatWin.exe*
-   3. If on Linux/Mac, first make the convertToCmdFormatLinux file executable by right-clicking, selecting properties, and enabling the "Allow executing file as program" option. Then use the following command: 
+   3. If on Linux, first make the convertToCmdFormatLinux file executable by right-clicking on it, selecting properties, and enabling the "Allow executing file as program" option. Then use the following command: 
    *sudo ./convertToCmdFormatLinux*
 4. Type this command: *cd cmdSrc*
 5. Type this command to compile the program: *javac Main.java*
-6. Type this command to run the program: *java Main.java*
+6. Type this command to run the program: *java Main*
 
 To run the program using previously compiled files from IDE:
 
