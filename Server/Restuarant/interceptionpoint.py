@@ -1,4 +1,4 @@
-from Restuarant.interceptormanager import InterceptorManager
+from Restuarant.dispatcher import InterceptorManager
 from Restuarant.interceptor import TableInterceptor, RequestTypeInterceptor
 
 class SimpleMiddleware:

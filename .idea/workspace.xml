@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4ac5c165-04b5-4e72-8130-8b043a69e031" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint-state.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/Adapter/CurrencyAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/Adapter/EuropeanCurrency.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/Adapter/FrancsCurrency.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/Adapter/OtherCurrency.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/Adapter/PoundCurrency.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/Adapter/USDollarCurrency.java" afterDir="false" />
+    <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Update edit menu to actually work. Small edits to formatting">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,16 +32,6 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/com/company/users/User.java">
-      <ranges>
-        <range start1="2" end1="2" start2="2" end2="3" changelist="3f74816f-879d-4bdf-bd25-3e5afb226402" />
-        <range start1="11" end1="12" start2="12" end2="12" changelist="ada54322-a08e-4d13-b89d-2d23fefb8ef5" />
-        <range start1="84" end1="84" start2="84" end2="85" changelist="ada54322-a08e-4d13-b89d-2d23fefb8ef5" />
-        <range start1="151" end1="152" start2="152" end2="156" changelist="3f74816f-879d-4bdf-bd25-3e5afb226402" />
-      </ranges>
-    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />

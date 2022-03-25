@@ -32,3 +32,4 @@ class RequestTypeInterceptor(Interceptor):
         RTlog = open("RTLog.txt", "a")
         RTlog.write(request)
         RTlog.close()
+        
