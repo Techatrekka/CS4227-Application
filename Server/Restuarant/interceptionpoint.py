@@ -1,4 +1,4 @@
-from Restuarant.dispatcher import InterceptorManager
+from Restuarant.dispatcher import Dispatcher
 from Restuarant.interceptor import TableInterceptor, RequestTypeInterceptor
 
 class SimpleMiddleware:
@@ -12,9 +12,9 @@ class SimpleMiddleware:
 
         response = self.get_response(request)
         StrRequest = (str)(request)
-        req1 = StrRequest.split()[1]
-        req2 = StrRequest.split()[2]
-        interceptorManager = InterceptorManager(SimpleMiddleware)
+        request1 = StrRequest.split()[1]
+        request2 = StrRequest.split()[2]
+        interceptorManager = Dispatcher(SimpleMiddleware)
         tableInterceptor = TableInterceptor(1)
         requestTypeInterceptor = RequestTypeInterceptor(2)
         #context object is the api for the application
@@ -22,8 +22,9 @@ class SimpleMiddleware:
         #invoke setter to pass a reference to the context object
         interceptorManager.add(tableInterceptor)
         interceptorManager.add(requestTypeInterceptor)
-        interceptorManager.execute(2,req1)
-        interceptorManager.execute(1,req2)
+        #due to poor forethought this implementation needs to be refactored to correct this error
+        interceptorManager.execute(2,request1)
+        interceptorManager.execute(1,request2)
 
         return response
     
