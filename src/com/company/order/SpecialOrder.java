@@ -2,15 +2,15 @@ package com.company.order;
 
 public class SpecialOrder extends Order{
 
-    private double discount;
+    private double deliveryDiscount;
 
-    public SpecialOrder(double totalCost, double discount){
+    public SpecialOrder(double totalCost, double deliveryDiscount){
         super(totalCost);
-        this.discount = discount;
+        this.deliveryDiscount = deliveryDiscount;
     }
 
-    public double getDiscount(){
-        return this.discount;
+    public double getDeliveryDiscount(){
+        return this.deliveryDiscount;
     }
 
     public void accept(Visitor visitor){

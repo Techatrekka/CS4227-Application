@@ -24,7 +24,7 @@ public class DeliveryVisitor implements Visitor{
         } else {
             totalDeliveryCost = 0.0;
         }
-        totalDeliveryCost *= (1 - order.getDiscount());
+        totalDeliveryCost *= (1 - order.getDeliveryDiscount());
     }
 
 
