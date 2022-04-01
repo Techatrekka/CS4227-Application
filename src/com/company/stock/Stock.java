@@ -1,8 +1,5 @@
 package com.company.stock;
 
-import com.company.menu.Beverage;
-import com.company.menu.Dish;
-import com.company.menu.MenuItem;
 import com.company.restaurant.Database;
 import com.company.ui.UiUtils;
 import org.json.JSONObject;
@@ -12,18 +9,35 @@ import java.util.*;
 public class Stock extends StockComponent {
     int capacity;
     int currentCapacity;
-    ArrayList<StockItem> stockItems;
-    private final ArrayList stockComponents = new ArrayList();
+    String type;
+    private ArrayList<StockComponent> stockComponents = new ArrayList();
     private Scanner scanner = new Scanner(System.in);
 
-    public Stock(int capacity) {
+    public Stock(int capacity, String type) {
         this.capacity = capacity;
-        this.stockItems = new ArrayList<>();
+        this.type = type;
         currentCapacity = 0;
     }
 
     public int getCapacity() {
         return this.capacity;
+    }
+
+    public String show() {
+        StringBuilder stockDisplay = new StringBuilder(getStockInfo());
+        for (StockComponent stockComponent : stockComponents) {
+            stockDisplay.append(stockComponent.show());
+        }
+        return stockDisplay.toString();
+    }
+
+    private String getStockInfo() {
+        return "\nTotal Capacity: " + getCapacity() +
+                "\nCurrent Capacity: " + getCurrentCapacity();
+    }
+
+    public StockComponent getChild(int index) {
+        return stockComponents.get(index);
     }
 
     void setCapacity(int capacity) {
@@ -87,7 +101,7 @@ public class Stock extends StockComponent {
                 add("a");
             }
         });
-        String change = "";
+        String change;
         switch (choice) {
             case "n":
                 System.out.println("Enter the new name");
@@ -123,23 +137,17 @@ public class Stock extends StockComponent {
         return this.currentCapacity;
     }
 
-    public void addStockItem(StockItem item) {
-        stockItems.add(item);
-        currentCapacity += item.getCount();
-        add(item);
-    }
-
-    public ArrayList<StockItem> getStockItems() {
-        return stockItems;
+    public ArrayList<StockComponent> getStockItems() {
+        return stockComponents;
     }
 
     public void add(StockComponent stockComponent) {
         stockComponents.add(stockComponent);
+        currentCapacity += stockComponent.getCount();
     }
 
     public void remove(StockComponent stockComponent) {
         stockComponents.remove(stockComponent);
-        stockItems.remove(stockComponent);
     }
 
     public void removeStockItemsForOrder(HashMap<Integer, Integer> stockItemMap) {
@@ -153,13 +161,9 @@ public class Stock extends StockComponent {
         }
     }
 
-    public StockComponent getChild(int index) {
-        return (StockComponent) stockComponents.get(index);
-    }
-
     private StockItem getStockItemById(int id) {
-        for(StockItem s : stockItems) {
-            if(s.getId() == id) return s;
+        for(StockComponent s : stockComponents) {
+            if(((StockItem) s).getId() == id) return (StockItem) s;
         }
         return null;
     }
@@ -170,20 +174,5 @@ public class Stock extends StockComponent {
             if(entry.getValue() > s.getCount()) return false;
         }
         return true;
-    }
-
-    public String show() {
-        String stockDisplay = getStockComponentInfo();
-        Iterator iterator = stockComponents.iterator();
-        while (iterator.hasNext()) {
-            StockComponent stockComponent = (StockComponent) iterator.next();
-            stockDisplay += stockComponent.show();
-        }
-        return stockDisplay;
-    }
-
-    private String getStockComponentInfo() {
-        return "\nTotal Capacity: " + getCapacity() +
-                "\nCurrent Capacity: " + getCurrentCapacity();
     }
 }

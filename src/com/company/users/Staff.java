@@ -31,10 +31,6 @@ public class Staff extends User{
         return this.employeeType;
     }
 
-    public void checkStock(){
-        // code
-    }
-
     public void orderStock(){
         // code
     }

@@ -19,6 +19,7 @@ public abstract class User {
     private String fullName;
     private String email;
     private Scanner scanner = new Scanner(System.in);
+    public LoyaltyStrategy loyaltyPoints;
 
     public int viewMenu(ArrayList<Menu> restaurantMenus, String option){
         for(Menu menu : restaurantMenus) {
@@ -159,6 +160,34 @@ public abstract class User {
                 ShoppingCart cart = new ShoppingCart();
                 cart.items.add(newOrder);
                 double deliveryCost = cart.accept();
+
+                System.out.println("Would you like to apply your loyalty discount? Y = yes, any other key = No");
+                String choice = scanner.nextLine();
+                if(choice.equalsIgnoreCase("y")) {
+                    loyaltyPoints = new ApplyDiscount();
+                } else {
+                    loyaltyPoints = new DoNotApplyDiscount();
+                }
+
+                double pointsSpent = loyaltyPoints.applyLoyaltyDiscount(userId, newOrder.getTotalCost()) / 0.01;
+                if(newOrder.getTotalCost() - loyaltyPoints.applyLoyaltyDiscount(userId, newOrder.getTotalCost()) < 0) {
+                    double remainder = (loyaltyPoints.applyLoyaltyDiscount(userId, newOrder.getTotalCost()) - newOrder.getTotalCost()) / 0.01;
+                    pointsSpent = (pointsSpent - remainder);
+                    newOrder.setTotalCost(0.0);
+                }
+                int pointsToAdd = (int) (Math.round(newOrder.getTotalCost()) * 5);
+                ArrayList<String> cols = new ArrayList<String>() {
+                    {
+                        add("loyalty_points");
+                        add("loyalty_id");
+                    }
+                };
+                newOrder.setTotalCost(newOrder.getTotalCost() - loyaltyPoints.applyLoyaltyDiscount(userId, newOrder.getTotalCost()));
+                JSONObject loyaltyPointDetails = Database.readFromTable("loyalty", userId, cols, "user_id");
+                loyaltyPointDetails.put("loyalty_points", loyaltyPointDetails.getInt("loyalty_points") + pointsToAdd - pointsSpent);
+                Database.updateTable("loyalty", loyaltyPointDetails);
+                System.out.println("points add " + pointsToAdd + " points spent " + pointsSpent);
+
                 System.out.println("Your order will be delivered in " + time + " minutes and will cost €" + String.format("%.2f", newOrder.getTotalCost()) + " + delivery fee €" + String.format("%.2f", deliveryCost));
             } else {
                 System.out.println("The order was cancelled.");
@@ -173,6 +202,7 @@ public abstract class User {
         }
 
         return newOrder.getTotalCost();
+
     }
 
     private JSONObject getOrderItem(int menuItemId) {

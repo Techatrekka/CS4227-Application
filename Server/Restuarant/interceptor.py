@@ -13,11 +13,11 @@ class Interceptor(ABC):
     def setNextInterceptor(self, Interceptor):
         self.nextInterceptor = Interceptor
     
-    def executeIntercept(self, level, message):
+    def executeIntercept(self, level, request):
         if self.level == level:
-            self.execute(message)
+            self.execute(request)
         if self.nextInterceptor != None:
-            self.nextInterceptor.executeIntercept(level,message)
+            self.nextInterceptor.executeIntercept(level,request)
         
 class TableInterceptor(Interceptor):
     
@@ -32,3 +32,4 @@ class RequestTypeInterceptor(Interceptor):
         RTlog = open("RTLog.txt", "a")
         RTlog.write(request)
         RTlog.close()
+        
