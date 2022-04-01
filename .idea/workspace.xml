@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Remove unused classes">
-      <change beforePath="$PROJECT_DIR$/src/com/company/order/DeliveryVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/order/DeliveryVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/order/SpecialOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/order/SpecialOrder.java" afterDir="false" />
+    <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Rename discount to deliveryDiscount">
+      <change beforePath="$PROJECT_DIR$/src/com/company/stock/StockComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/stock/StockComponent.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,7 +203,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648829826771</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Rename discount to deliveryDiscount">
+      <created>1648833420056</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1648833420056</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -236,6 +242,7 @@
     <MESSAGE value="Return total cost from place order method and implement loyalty point collection after successful ordering. Add code  to read loyalty points from the database. Update menu class to work with refactored database. Use null as the value of empty menu items" />
     <MESSAGE value="Implement AddNewStockItem and UpdateStockItemDetails use cases. Add methods to check for maximum stock capacity. Update beverage, dish, and menu item classes to take stock into account. Add method to check if all ingredients for a menu item are in stock so it can be hidden from the menu if not." />
     <MESSAGE value="Remove unused classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove unused classes" />
+    <MESSAGE value="Rename discount to deliveryDiscount" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rename discount to deliveryDiscount" />
   </component>
 </project>

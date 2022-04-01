@@ -19,10 +19,6 @@ public abstract class StockComponent {
         throw new UnsupportedOperationException();
     }
 
-    public LocalDate getExpiryDate() {
-        throw new UnsupportedOperationException();
-    }
-
     public int getCount() {
         throw new UnsupportedOperationException();
     }
