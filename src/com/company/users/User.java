@@ -1,6 +1,7 @@
 package com.company.users;
 
 import com.company.order.ShoppingCart;
+import com.company.order.SpecialOrder;
 import com.company.restaurant.Database;
 import com.company.menu.*;
 import com.company.order.Order;
@@ -81,7 +82,7 @@ public abstract class User {
     }
 
     public double placeOrder(int userId, ArrayList<Menu> restaurantMenus, Stock stock){
-        Order newOrder = new Order();
+        Order newOrder = new Order(0.0);
         System.out.println("Delivery costs €0.40 per item for orders under €10, €0.20 per item for orders under €20, and is free for orders over €20.");
         boolean addToOrder = true;
         double setMealCost = 0.0;
@@ -89,6 +90,7 @@ public abstract class User {
             System.out.println("Would you like to order a meal deal, which includes a set meal and drink? Y / N");
             String choice = scanner.nextLine();
             if(choice.equalsIgnoreCase("y")) {
+                newOrder = new SpecialOrder(0.0, 0.05);
                 SetMeal meal = buildMeal();
                 for(int id : meal.getMenuItemIds()) {
                     MenuItem item = newOrder.addSetMenuItem(id);

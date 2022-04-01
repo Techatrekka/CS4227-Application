@@ -1,13 +1,16 @@
 
+X
+java:S11175"6Rename "id" which hides the field declared at line 12.(öèÖ‡ıÿÿÿÿ8…áùù/
+H
+java:S35996",Use another way to initialize this instance.(¾¬W8‡áùù/
+u
+java:S11716"YMove the contents of this initializer to a standard constructor or to field initializers.(¾¬W8ˆáùù/
+[
+java:S1155E">Use isEmpty() to check whether the collection is empty or not.(È…ªò8ªáùù/
 f
-java:S1104"PMake name a static final constant or non-public and provide accessors if needed.( şÍ¾
+java:S1104
+"PMake name a static final constant or non-public and provide accessors if needed.( şÍ¾
 g
-java:S1104"QMake price a static final constant or non-public and provide accessors if needed.(¢ì­ 
+java:S1104"QMake price a static final constant or non-public and provide accessors if needed.(¢ì­ 
 i
-java:S1104"NMake id a static final constant or non-public and provide accessors if needed.(ÍéÌ‘øÿÿÿÿ
-f
-java:S1104"PMake name a static final constant or non-public and provide accessors if needed.( şÍ¾
-g
-java:S1104"QMake price a static final constant or non-public and provide accessors if needed.(¢ì­ 
-i
-java:S1104"NMake id a static final constant or non-public and provide accessors if needed.(ÍéÌ‘øÿÿÿÿ
+java:S1104"NMake id a static final constant or non-public and provide accessors if needed.(ÍéÌ‘øÿÿÿÿ

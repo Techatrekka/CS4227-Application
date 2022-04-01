@@ -2,6 +2,11 @@
 <project version="4">
   <component name="SonarLintProjectSettings">
     <option name="bindingEnabled" value="true" />
+    <option name="fileExclusions">
+      <list>
+        <option value="DIRECTORY:cmdSrc/ansible" />
+      </list>
+    </option>
     <option name="projectKey" value="CS4227" />
     <option name="serverId" value="CS4227-sonarqube" />
   </component>

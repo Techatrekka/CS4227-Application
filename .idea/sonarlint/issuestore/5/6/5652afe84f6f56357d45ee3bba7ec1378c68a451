@@ -1,0 +1,7 @@
+
+kpython:S117"TRename this parameter "jsonName" to match the regular expression ^[_a-z][a-z0-9_]*$.(©€†‰
+epython:S1542"MRename function "addJson" to match the regular expression ^[a-z_][a-z0-9_]*$.(©€†‰
+kpython:S117"TRename this parameter "jsonName" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÛÍè 
+gpython:S1542"ORename function "clearJson" to match the regular expression ^[a-z_][a-z0-9_]*$.(ÛÍè 
+ppython:S117"YRename this local variable "fullName" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÎŸÄ“
+Cpython:S5806"+Rename this variable; it shadows a builtin.(¶Šß˜

@@ -15,8 +15,8 @@ public class Order implements Visitable {
     private ArrayList<MenuItem> menuItems = new ArrayList<>();
     private double totalCost;
 
-    public Order() {
-        totalCost = 0.0;
+    public Order(double totalCost) {
+        this.totalCost = totalCost;
     }
     public Order(JSONObject orderDetails) {
         this.orderID = orderDetails.getInt("order_id");

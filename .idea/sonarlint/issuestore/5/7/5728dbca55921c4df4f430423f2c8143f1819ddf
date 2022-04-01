@@ -6,4 +6,6 @@ java:S1192"LDefine a constant instead of duplicating this literal "description
 ^
 java:S1192"HDefine a constant instead of duplicating this literal "menu_id" 3 times.(æ´Ã
 c
-java:S1192"MDefine a constant instead of duplicating this literal "date_created" 3 times.(²ƒıä
+java:S1192"MDefine a constant instead of duplicating this literal "date_created" 3 times.(ò‰¦­
+h
+java:S1192"KDefine a constant instead of duplicating this literal "menu_items" 3 times.(ò‰¦­8¯½½•ú/
