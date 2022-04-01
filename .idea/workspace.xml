@@ -2,49 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cde78180-c86d-4e40-a704-ce16cf40b787" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarIssues.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarSettings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/7/27139a5b95542a4504e50e0734b3c6df45ec2784" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/9/395c73942d9a871fcb34b4c5e6f0e8d8ed791b07" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/a/4a831b10439099d44774d0ccc387e808deffaeab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/6/5652afe84f6f56357d45ee3bba7ec1378c68a451" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/f/5f3450e3996d6ed7e8c23c02be771686041d200f" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/8/b832d98b79c2266144f772f2ee0ef739f935a3fd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/a/ba06aed8148ab179bd6be8234f4a6de31bdf3090" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/b/bb40376353e1a28c3bd126c71fd0ede116730098" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/c/ccfde34126de7aec04c8cb1b583cb39b127ce65f" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/f/cfeb00ece5400c553f8cf5ac52bd92a651fcb239" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/2/d29bbf82a676363af3704aa71ac7b8f8c0ab2ef2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/order/SpecialOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint-state.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint-state.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/d/0d6138bfaf749666bcf4a78abf7f1b39e771a61c" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/d/0d6138bfaf749666bcf4a78abf7f1b39e771a61c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/8/28638c762f50ceea26e35f1d2978e47e052f97da" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/8/28638c762f50ceea26e35f1d2978e47e052f97da" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/b/3b4fb74e9c0c6b8e3a86fd96c06a6ff1efed7cb1" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/b/3b4fb74e9c0c6b8e3a86fd96c06a6ff1efed7cb1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/7/5728dbca55921c4df4f430423f2c8143f1819ddf" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/7/5728dbca55921c4df4f430423f2c8143f1819ddf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/6/76724d5f420d3d67947049f9588464718bb5ba69" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/6/76724d5f420d3d67947049f9588464718bb5ba69" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/8/78c60c9fcf2277c37baffaac036d334862a35eea" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/8/78c60c9fcf2277c37baffaac036d334862a35eea" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/0/908877a12bcc8f904476121168d1aeb1735c83f7" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/0/908877a12bcc8f904476121168d1aeb1735c83f7" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/4/94c330fcd5de1035bb2941182a4a11093dd33db3" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/4/94c330fcd5de1035bb2941182a4a11093dd33db3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/e/9e8f2e0e96e97c81f1744df63bfd9e147465ce28" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/e/9e8f2e0e96e97c81f1744df63bfd9e147465ce28" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/4/a45b677763b2e9e81ce0ada63fc21978d4acba95" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/4/a45b677763b2e9e81ce0ada63fc21978d4acba95" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/1/c14cbc4614df451f666520e62d8b6390ee81b6ad" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/1/c14cbc4614df451f666520e62d8b6390ee81b6ad" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/1/c1a609323677c8601a37bab361b05bd0be12ad7a" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/1/c1a609323677c8601a37bab361b05bd0be12ad7a" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/7/c7b4dcaa2155808c33bf5df7cb5706e1f1132f8e" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/7/c7b4dcaa2155808c33bf5df7cb5706e1f1132f8e" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/6/f60106dfabebfb4a5e9cfd0945060077f9e72e02" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/6/f60106dfabebfb4a5e9cfd0945060077f9e72e02" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/6/f6067a6ff91d232828d62401b6c80e848449f8ae" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/6/f6067a6ff91d232828d62401b6c80e848449f8ae" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cs4125-restaurant-project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/cs4125-restaurant-project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/menu/Chips.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/menu/Chips.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/order/DeliveryVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/order/DeliveryVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/users/User$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/users/User$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/users/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/users/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/order/DeliveryVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/order/DeliveryVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/order/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/order/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/order/Visitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/order/Visitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/order/SpecialOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/order/SpecialOrder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/users/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -121,7 +81,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="" />
+      <changelist id="cde78180-c86d-4e40-a704-ce16cf40b787" name="Changes" comment="" />
       <created>1637593316619</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -272,21 +232,5 @@
     <MESSAGE value="Return total cost from place order method and implement loyalty point collection after successful ordering. Add code  to read loyalty points from the database. Update menu class to work with refactored database. Use null as the value of empty menu items" />
     <MESSAGE value="Implement AddNewStockItem and UpdateStockItemDetails use cases. Add methods to check for maximum stock capacity. Update beverage, dish, and menu item classes to take stock into account. Add method to check if all ingredients for a menu item are in stock so it can be hidden from the menu if not." />
     <option name="LAST_COMMIT_MESSAGE" value="Implement AddNewStockItem and UpdateStockItemDetails use cases. Add methods to check for maximum stock capacity. Update beverage, dish, and menu item classes to take stock into account. Add method to check if all ingredients for a menu item are in stock so it can be hidden from the menu if not." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/company/users/User.java</url>
-          <line>135</line>
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/company/users/User.java</url>
-          <line>133</line>
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

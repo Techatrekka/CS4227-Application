@@ -1,7 +1,5 @@
 package com.company.order;
 
-import org.json.JSONObject;
-
 public class SpecialOrder extends Order{
 
     private double discount;
@@ -15,4 +13,7 @@ public class SpecialOrder extends Order{
         return this.discount;
     }
 
+    public void accept(Visitor visitor){
+        visitor.visit(this);
+    }
 }
