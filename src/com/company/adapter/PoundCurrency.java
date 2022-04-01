@@ -9,5 +9,4 @@ public class PoundCurrency implements EuropeanCurrency {
     public void convertFrancsToEuro(double amount) {
         // Do Nothing
     }
-
 }

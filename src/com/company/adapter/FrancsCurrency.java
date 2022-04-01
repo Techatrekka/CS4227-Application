@@ -11,5 +11,4 @@ public class FrancsCurrency implements EuropeanCurrency{
         System.out.println("Francs to Euro: " + newAmount);
 
     }
-
 }

@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cde78180-c86d-4e40-a704-ce16cf40b787" name="Changes" comment="">
+    <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Implement AddNewStockItem and UpdateStockItemDetails use cases. Add methods to check for maximum stock capacity. Update beverage, dish, and menu item classes to take stock into account. Add method to check if all ingredients for a menu item are in stock so it can be hidden from the menu if not.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/order/DeliveryVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/order/DeliveryVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/order/SpecialOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/order/SpecialOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/users/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/hamcrest-core-1.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/restaurant/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/restaurant/Database.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/restaurant/RestaurantInit.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/restaurant/RestaurantInit.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/stock/Stock$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/stock/Stock$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/stock/Stock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/stock/Stock.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/users/Staff.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs4125-restaurant-project/com/company/users/Staff.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/adapter/CurrencyAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/adapter/CurrencyAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/adapter/FrancsCurrency.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/adapter/FrancsCurrency.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/adapter/PoundCurrency.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/adapter/PoundCurrency.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/ansible/accountInfo.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/ansible/addPasswordToJson.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/ansible/emailPassword.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/ansible/generatePassword.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/jenkins/Jenkinsfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/users/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/Customer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -212,7 +224,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update Order to print menu items in order without menu id. Small edits to other files to tidy up project." />

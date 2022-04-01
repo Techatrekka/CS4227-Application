@@ -1,6 +1,5 @@
 package com.company.adapter;
 
-
 public class CurrencyAdapter implements OtherCurrency{
     private EuropeanCurrency europeanCurrency;
 

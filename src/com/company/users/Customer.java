@@ -41,5 +41,3 @@ public class Customer extends User implements Observer{
         System.out.println(updates);
     }
 }
-
-
