@@ -741,20 +741,13 @@ BServer/lvenv/lib/python3.8/site-packages/setuptools/ssl_support.py,6/c/6cb4c82
 0Server/venv/Lib/site-packages/pip/_vendor/six.py,1/d/1d308889e2fe43d2566f2c593496a84da95c015c
 c
 3Server/venv/Lib/site-packages/pip/_vendor/distro.py,2/c/2cbd3e8d5ebba6a62f566f79192c5fbcc95836c7
-Y
-)src/com/company/menu/KidsMealBuilder.java,6/9/696680c9ab41efc0524ca2ab91df83d61faedd49
-Q
-!src/com/company/menu/SetMenu.java,f/6/f6067a6ff91d232828d62401b6c80e848449f8ae
-X
-(src/com/company/menu/SetMealBuilder.java,a/c/aca1267b2a25671f32c372a4a4e980b3ea043c4d
-V
-&src/com/company/menu/MealDirector.java,f/6/f6fa4ad3e385157d086318adbf69a21081ff26a5
-O
-src/com/company/ui/UiUtils.java,1/3/132bccbc43267c8c07793b5b8e553453ffdaf45d
-P
- src/com/company/menu/Wedges.java,7/8/78c60c9fcf2277c37baffaac036d334862a35eea
-Z
-*src/com/company/ui/RestaurantTerminal.java,c/1/c14cbc4614df451f666520e62d8b6390ee81b6ad
+:
+
+.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
+9
+	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+M
+cs4125-restaurant-project.iml,3/9/395c73942d9a871fcb34b4c5e6f0e8d8ed791b07
 S
 #src/com/company/jenkins/Jenkinsfile,b/4/b4bf2fbf77fcc1d3fe94a9d695f1fd89c66c5f9e
 X
@@ -769,28 +762,14 @@ X
 (src/com/company/ui/UserRegistration.java,2/8/285e112177356d7a342ae4fd94cfae766475f01e
 S
 #src/com/company/users/Observer.java,7/f/7f3dea2746d51caac826893dabbbe07ef21d55ce
-Z
-*src/com/company/menu/AdultMealBuilder.java,e/9/e94e6aa56588193a3e1062c7300e25f97b9cf3f4
 S
 #src/com/company/users/Customer.java,3/9/39a4aa80c71da90473e9f21d06b8fa4a70744ad3
 V
 &src/com/company/users/UserFactory.java,f/9/f9aa004eb1d94226795cc52185f787130dd797eb
-U
-%src/com/company/menu/SpecialMenu.java,2/8/28638c762f50ceea26e35f1d2978e47e052f97da
-N
-src/com/company/menu/Dish.java,9/0/908877a12bcc8f904476121168d1aeb1735c83f7
-U
-%src/com/company/menu/MenuFactory.java,5/7/5728dbca55921c4df4f430423f2c8143f1819ddf
-R
-"src/com/company/menu/Beverage.java,c/7/c7b4dcaa2155808c33bf5df7cb5706e1f1132f8e
-O
-src/com/company/menu/Chips.java,9/e/9e8f2e0e96e97c81f1744df63bfd9e147465ce28
 Y
 )src/com/company/ansible/emailPassword.yml,2/3/23ac18074b08349b9ca112da75db1026cc3902a6
 \
 ,src/com/company/ansible/addPasswordToJson.py,a/1/a1df5acd8b7e2e0bfacfd620e4d72e1b1bb4b36c
-Q
-!src/com/company/menu/SetMeal.java,8/5/85a675a20dc22041f521ed031cb41dfa4913a678
 X
 (src/com/company/ansible/accountInfo.json,1/8/1875832d7e1dc092ae1190635db4c4e5978f448c
 [
@@ -803,12 +782,57 @@ X
 (src/com/company/restaurant/Database.java,3/b/3b4fb74e9c0c6b8e3a86fd96c06a6ff1efed7cb1
 Z
 *src/com/company/restaurant/Observable.java,b/6/b6c83d41f8458e4a0af09e8effdd8e358ae39ad1
-R
-"src/com/company/menu/MenuItem.java,f/6/f60106dfabebfb4a5e9cfd0945060077f9e72e02
+Y
+)src/com/company/menu/KidsMealBuilder.java,6/9/696680c9ab41efc0524ca2ab91df83d61faedd49
+Q
+!src/com/company/menu/SetMenu.java,f/6/f6067a6ff91d232828d62401b6c80e848449f8ae
+X
+(src/com/company/menu/SetMealBuilder.java,a/c/aca1267b2a25671f32c372a4a4e980b3ea043c4d
+V
+&src/com/company/menu/MealDirector.java,f/6/f6fa4ad3e385157d086318adbf69a21081ff26a5
+O
+src/com/company/ui/UiUtils.java,1/3/132bccbc43267c8c07793b5b8e553453ffdaf45d
+P
+ src/com/company/menu/Wedges.java,7/8/78c60c9fcf2277c37baffaac036d334862a35eea
+T
+$src/com/company/stock/StockItem.java,b/a/ba06aed8148ab179bd6be8234f4a6de31bdf3090
+Y
+)src/com/company/stock/StockComponent.java,c/c/ccfde34126de7aec04c8cb1b583cb39b127ce65f
 N
 src/com/company/menu/Menu.java,c/1/c1a609323677c8601a37bab361b05bd0be12ad7a
+P
+ src/com/company/stock/Stock.java,5/f/5f3450e3996d6ed7e8c23c02be771686041d200f
+Z
+*src/com/company/menu/AdultMealBuilder.java,e/9/e94e6aa56588193a3e1062c7300e25f97b9cf3f4
+I
+src/com/company/Main.java,4/a/4a831b10439099d44774d0ccc387e808deffaeab
+U
+%src/com/company/menu/SpecialMenu.java,2/8/28638c762f50ceea26e35f1d2978e47e052f97da
+N
+src/com/company/menu/Dish.java,9/0/908877a12bcc8f904476121168d1aeb1735c83f7
+U
+%src/com/company/menu/MenuFactory.java,5/7/5728dbca55921c4df4f430423f2c8143f1819ddf
+R
+"src/com/company/menu/Beverage.java,c/7/c7b4dcaa2155808c33bf5df7cb5706e1f1132f8e
+R
+"src/com/company/menu/MenuItem.java,f/6/f60106dfabebfb4a5e9cfd0945060077f9e72e02
+O
+src/com/company/menu/Chips.java,9/e/9e8f2e0e96e97c81f1744df63bfd9e147465ce28
 [
 +src/com/company/menu/MenuItemDecorator.java,a/4/a45b677763b2e9e81ce0ada63fc21978d4acba95
-:
-
-.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
+Q
+!src/com/company/menu/SetMeal.java,8/5/85a675a20dc22041f521ed031cb41dfa4913a678
+Z
+*src/com/company/ui/RestaurantTerminal.java,c/1/c14cbc4614df451f666520e62d8b6390ee81b6ad
+O
+cmdSrc/ansible/accountInfo.json,d/2/d29bbf82a676363af3704aa71ac7b8f8c0ab2ef2
+P
+ cmdSrc/ansible/emailPassword.yml,b/8/b832d98b79c2266144f772f2ee0ef739f935a3fd
+S
+#cmdSrc/.scannerwork/report-task.txt,b/b/bb40376353e1a28c3bd126c71fd0ede116730098
+J
+cmdSrc/jenkins/Jenkinsfile,2/7/27139a5b95542a4504e50e0734b3c6df45ec2784
+R
+"cmdSrc/ansible/generatePassword.py,c/f/cfeb00ece5400c553f8cf5ac52bd92a651fcb239
+S
+#cmdSrc/ansible/addPasswordToJson.py,5/6/5652afe84f6f56357d45ee3bba7ec1378c68a451

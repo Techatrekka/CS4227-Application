@@ -1,38 +1,40 @@
 
 p
-java:S3008"ZRename this field "single_instance" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(éß¡
-S	java:S106"9Replace this use of System.out or System.err by a logger.(ªüÖ¾úÿÿÿÿ
-S	java:S106$"9Replace this use of System.out or System.err by a logger.(ÊÈÃŞüÿÿÿÿ
-S	java:S106-"9Replace this use of System.out or System.err by a logger.(äû¯òùÿÿÿÿ
+java:S3008"ZRename this field "single_instance" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(éß¡
+S	java:S106"9Replace this use of System.out or System.err by a logger.(ªüÖ¾úÿÿÿÿ
+S	java:S106)"9Replace this use of System.out or System.err by a logger.(ÊÈÃŞüÿÿÿÿ
+S	java:S1061"9Replace this use of System.out or System.err by a logger.(äû¯òùÿÿÿÿ
 h
-java:S37762"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(Æ©Ú‹
-S	java:S1063"9Replace this use of System.out or System.err by a logger.(ö¾Ôâùÿÿÿÿ
-N	java:S1067"9Replace this use of System.out or System.err by a logger.(ùİºş
-N	java:S1068"9Replace this use of System.out or System.err by a logger.(Ğı¿¶
-`	java:S128N"LEnd this switch case with an unconditional break, return or throw statement.(û¿4
-S	java:S106O"9Replace this use of System.out or System.err by a logger.(­ùÑûÿÿÿÿ
-S	java:S106W"9Replace this use of System.out or System.err by a logger.(ÀÌëñùÿÿÿÿ
-`	java:S128l"LEnd this switch case with an unconditional break, return or throw statement.(ÒñŠ{
-S	java:S106m"9Replace this use of System.out or System.err by a logger.(­ùÑûÿÿÿÿ
-S	java:S106t"9Replace this use of System.out or System.err by a logger.(İÚô”ûÿÿÿÿ
-g	java:S128€"LEnd this switch case with an unconditional break, return or throw statement.(µ»ïşıÿÿÿÿ
-T	java:S106"9Replace this use of System.out or System.err by a logger.(­ùÑûÿÿÿÿ
-O	java:S106‹"9Replace this use of System.out or System.err by a logger.(ó­˜´
-O	java:S106Œ"9Replace this use of System.out or System.err by a logger.(¯“÷–
-T	java:S106“"9Replace this use of System.out or System.err by a logger.(µë“éşÿÿÿÿ
-O	java:S106¡"9Replace this use of System.out or System.err by a logger.(…ÅÒÆ
-T	java:S106¢"9Replace this use of System.out or System.err by a logger.(£êÑÖıÿÿÿÿ
-O	java:S106¦"9Replace this use of System.out or System.err by a logger.(ÀˆÄä
-8	java:S131¨""Add a default case to this switch.(¨ÕÉ
-T	java:S106¹"9Replace this use of System.out or System.err by a logger.( º®êøÿÿÿÿ
-O	java:S106º"9Replace this use of System.out or System.err by a logger.(ƒÇ³¤
-8	java:S131¼""Add a default case to this switch.(¨ÕÉ
-O	java:S106Ô"9Replace this use of System.out or System.err by a logger.(óÂ·•
-T	java:S106Ü"9Replace this use of System.out or System.err by a logger.(Õõ¶øÿÿÿÿ
-T	java:S106Ş"9Replace this use of System.out or System.err by a logger.(ş©é’ùÿÿÿÿ
-O	java:S106ä"9Replace this use of System.out or System.err by a logger.(æÒƒ½
-T	java:S106å"9Replace this use of System.out or System.err by a logger.(ˆäÓÒûÿÿÿÿ
-=	java:S131è""Add a default case to this switch.(Ÿ¬ç¯ûÿÿÿÿ
-T	java:S106ø"9Replace this use of System.out or System.err by a logger.(ñŠ»ƒıÿÿÿÿ
+java:S37766"RRefactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.(Æ©Ú‹
+S	java:S1067"9Replace this use of System.out or System.err by a logger.(ö¾Ôâùÿÿÿÿ
+U	java:S106;"9Replace this use of System.out or System.err by a logger.(ßÆ8Õğÿ“ú/
+N	java:S106<"9Replace this use of System.out or System.err by a logger.(Ğı¿¶
+`	java:S128W"LEnd this switch case with an unconditional break, return or throw statement.(û¿4
+S	java:S106X"9Replace this use of System.out or System.err by a logger.(­ùÑûÿÿÿÿ
+S	java:S106`"9Replace this use of System.out or System.err by a logger.(ÀÌëñùÿÿÿÿ
+`	java:S128u"LEnd this switch case with an unconditional break, return or throw statement.(ÒñŠ{
+S	java:S106v"9Replace this use of System.out or System.err by a logger.(­ùÑûÿÿÿÿ
+S	java:S106}"9Replace this use of System.out or System.err by a logger.(İÚô”ûÿÿÿÿ
+g	java:S128‰"LEnd this switch case with an unconditional break, return or throw statement.(µ»ïşıÿÿÿÿ
+T	java:S106Š"9Replace this use of System.out or System.err by a logger.(­ùÑûÿÿÿÿ
+O	java:S106¡"9Replace this use of System.out or System.err by a logger.(ó­˜´
+O	java:S106¢"9Replace this use of System.out or System.err by a logger.(¯“÷–
+T	java:S106­"9Replace this use of System.out or System.err by a logger.(µë“éşÿÿÿÿ
+V	java:S106»"9Replace this use of System.out or System.err by a logger.(…È³È8õğÿ“ú/
+8	java:S131¾""Add a default case to this switch.(¨ÕÉ
+U	java:S106À"9Replace this use of System.out or System.err by a logger.(¬²¨8÷ğÿ“ú/
+[	java:S106Î"9Replace this use of System.out or System.err by a logger.(£êÑÖıÿÿÿÿ8øğÿ“ú/
+O	java:S106Ô"9Replace this use of System.out or System.err by a logger.(ÀˆÄä
+8	java:S131Ö""Add a default case to this switch.(¨ÕÉ
+T	java:S106ç"9Replace this use of System.out or System.err by a logger.( º®êøÿÿÿÿ
+O	java:S106è"9Replace this use of System.out or System.err by a logger.(ƒÇ³¤
+?	java:S131ê""Add a default case to this switch.(¨ÕÉ8 ñÿ“ú/
+V	java:S106‚"9Replace this use of System.out or System.err by a logger.(óÂ·•8¤ñÿ“ú/
+T	java:S106Š"9Replace this use of System.out or System.err by a logger.(Õõ¶øÿÿÿÿ
+T	java:S106Œ"9Replace this use of System.out or System.err by a logger.(ş©é’ùÿÿÿÿ
+O	java:S106’"9Replace this use of System.out or System.err by a logger.(æÒƒ½
+T	java:S106“"9Replace this use of System.out or System.err by a logger.(ˆäÓÒûÿÿÿÿ
+=	java:S131–""Add a default case to this switch.(Ÿ¬ç¯ûÿÿÿÿ
+T	java:S106¦"9Replace this use of System.out or System.err by a logger.(ñŠ»ƒıÿÿÿÿ
 s
-java:S1192O"XDefine a constant instead of duplicating this literal "Shutting down system..." 3 times.(­ùÑûÿÿÿÿ
+java:S1192X"XDefine a constant instead of duplicating this literal "Shutting down system..." 3 times.(­ùÑûÿÿÿÿ

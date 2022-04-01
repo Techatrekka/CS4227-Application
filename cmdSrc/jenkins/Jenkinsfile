@@ -1,0 +1,13 @@
+pipeline {
+    agent any
+    stages {
+        stage('Email User their password') {
+            steps {
+                dir('src/com/company/ansible') {
+                    sh "pwd"
+                    sh 'ansible-playbook emailPassword.yml'
+                }
+            }
+        }
+    }
+}

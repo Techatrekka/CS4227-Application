@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Update edit menu to actually work. Small edits to formatting">
+    <list default="true" id="cde78180-c86d-4e40-a704-ce16cf40b787" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/order/DeliveryVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/order/DeliveryVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/order/SpecialOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/order/SpecialOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/users/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/users/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +81,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="" />
+      <changelist id="cde78180-c86d-4e40-a704-ce16cf40b787" name="Changes" comment="" />
       <created>1637593316619</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -209,6 +212,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update Order to print menu items in order without menu id. Small edits to other files to tidy up project." />
@@ -228,21 +232,5 @@
     <MESSAGE value="Return total cost from place order method and implement loyalty point collection after successful ordering. Add code  to read loyalty points from the database. Update menu class to work with refactored database. Use null as the value of empty menu items" />
     <MESSAGE value="Implement AddNewStockItem and UpdateStockItemDetails use cases. Add methods to check for maximum stock capacity. Update beverage, dish, and menu item classes to take stock into account. Add method to check if all ingredients for a menu item are in stock so it can be hidden from the menu if not." />
     <option name="LAST_COMMIT_MESSAGE" value="Implement AddNewStockItem and UpdateStockItemDetails use cases. Add methods to check for maximum stock capacity. Update beverage, dish, and menu item classes to take stock into account. Add method to check if all ingredients for a menu item are in stock so it can be hidden from the menu if not." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/company/users/User.java</url>
-          <line>131</line>
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/company/users/User.java</url>
-          <line>133</line>
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

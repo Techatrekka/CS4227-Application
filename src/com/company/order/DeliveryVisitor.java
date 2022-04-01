@@ -15,6 +15,19 @@ public class DeliveryVisitor implements Visitor{
         }
     }
 
+    public void visit(SpecialOrder order){
+        totalDeliveryCost = 0.0;
+        if(order.getTotalCost() < 10) {
+            totalDeliveryCost += order.getMenuItems().size() * 0.4;
+        } else if(order.getTotalCost() < 20) {
+            totalDeliveryCost += order.getMenuItems().size() * 0.2;
+        } else {
+            totalDeliveryCost = 0.0;
+        }
+        totalDeliveryCost *= (1 - order.getDiscount());
+    }
+
+
     public double getTotalDeliveryCost(){
         return totalDeliveryCost;
     }
