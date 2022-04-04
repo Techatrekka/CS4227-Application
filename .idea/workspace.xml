@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Rename discount to deliveryDiscount">
-      <change beforePath="$PROJECT_DIR$/src/com/company/stock/StockComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/stock/StockComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarIssues.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarIssues.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/adapter/CurrencyAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/adapter/CurrencyAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/adapter/EuropeanCurrency.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/adapter/EuropeanCurrency.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/adapter/FrancsCurrency.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/adapter/FrancsCurrency.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/adapter/OtherCurrency.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/adapter/OtherCurrency.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/adapter/PoundCurrency.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/adapter/PoundCurrency.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/adapter/USDollarCurrency.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/adapter/Currency.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +85,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="cde78180-c86d-4e40-a704-ce16cf40b787" name="Changes" comment="" />
+      <changelist id="8185f45e-b672-4f50-b427-62fdaadb3239" name="Changes" comment="Rename discount to deliveryDiscount" />
       <created>1637593316619</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -223,6 +230,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update Order to print menu items in order without menu id. Small edits to other files to tidy up project." />

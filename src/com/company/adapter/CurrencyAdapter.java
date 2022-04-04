@@ -12,11 +12,11 @@ public class CurrencyAdapter implements OtherCurrency{
     }
 
     @Override
-    public void convertToEuro(String countryName, double amount, double duty) {
+    public void convertToEuro(String countryName, double amount, double duty, double rate) {
         if (countryName.equalsIgnoreCase("United Kingdom")) {
-            europeanCurrency.convertPoundsToEuro(amount);
+            europeanCurrency.convertPoundsToEuro(amount, rate);
         } else if (countryName.equalsIgnoreCase("Switzerland")) {
-            europeanCurrency.convertFrancsToEuro(amount);
+            europeanCurrency.convertFrancsToEuro(amount, rate);
         }
     }
 }
