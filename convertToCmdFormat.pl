@@ -102,7 +102,7 @@ sub read_java_file {
 sub write_java_file {
     my ($filename, $content) = @_;
  
-    open my $out, '>:encoding(UTF-8)', $filename or die "Could not open '$filename' for writing $!";;
+    open my $out, '>:encoding(UTF-8)', $filename or die "Could not open '$filename' for writing $!";
     print $out $content;
     close $out;
  
