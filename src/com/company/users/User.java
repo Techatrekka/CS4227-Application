@@ -19,7 +19,6 @@ public abstract class User {
     private String fullName;
     private String email;
     private Scanner scanner = new Scanner(System.in);
-    public LoyaltyStrategy loyaltyPoints;
 
     public int viewMenu(ArrayList<Menu> restaurantMenus, String option){
         for(Menu menu : restaurantMenus) {
@@ -83,6 +82,7 @@ public abstract class User {
     }
 
     public double placeOrder(int userId, ArrayList<Menu> restaurantMenus, Stock stock){
+        LoyaltyStrategy loyaltyPoints;
         Order newOrder = null;
         System.out.println("Delivery costs €0.40 per item for orders under €10, €0.20 per item for orders under €20, and is free for orders over €20.");
         boolean addToOrder = true;
@@ -104,17 +104,7 @@ public abstract class User {
                 int menuId = viewMenu(restaurantMenus, "order from:");
                 for(Menu menu : restaurantMenus) {
                     if (menu.getId() == menuId) {
-                        System.out.println("Enter the id of the item you'd like to order");
-                        choice = scanner.nextLine();
-                        while(!UiUtils.isValid(choice, -1, -1)) {
-                            choice = scanner.nextLine();
-                        }
-                        MenuItem item = null;
-                        for(MenuItem menuItem : menu.getMenuItems()) {
-                            if(menuItem.getID() == Integer.parseInt(choice)) {
-                                item = chooseSideDish(Integer.parseInt(choice),  menuItem instanceof Dish);
-                            }
-                        }
+                        MenuItem item = chooseMenuItem(menu);
                         newOrder.addMenuItem(item);
                     }
                 }
@@ -124,9 +114,6 @@ public abstract class User {
             if (choice.equalsIgnoreCase("n")) addToOrder = false;
         }
         JSONObject orderDetails = new JSONObject();
-        if (newOrder == null){
-            newOrder = new Order(0.0);
-        }
         newOrder.setTotalCost(newOrder.calcCostOfItems() + setMealCost);
         orderDetails.put("total_cost", String.valueOf(newOrder.getTotalCost()));
         orderDetails.put("user_id", userId);
@@ -147,14 +134,8 @@ public abstract class User {
 
         if(stock.ingredientsInStock(orderStockItems)) {
             if(newOrder.getTotalCost() > 0) {
-                System.out.println("Your order:");
-                for(MenuItem item : newOrder.getMenuItems()) {
-                    JSONObject orderItemDetails = new JSONObject();
-                    orderItemDetails.put("menu_item", item.getID());
-                    orderItemDetails.put("order_id", orderId);
-                    System.out.println(item);
-                    Database.writeToTable("orderlineitem", orderItemDetails);
-                }
+                printOrderLineItems(newOrder, orderId);
+
                 stock.removeStockItemsForOrder(orderStockItems);
                 int time = (int) (Math.random() * 30) + 6;
                 ShoppingCart cart = new ShoppingCart();
@@ -168,7 +149,6 @@ public abstract class User {
                 } else {
                     loyaltyPoints = new DoNotApplyDiscount();
                 }
-
                 double pointsSpent = loyaltyPoints.applyLoyaltyDiscount(userId, newOrder.getTotalCost()) / 0.01;
                 if(newOrder.getTotalCost() - loyaltyPoints.applyLoyaltyDiscount(userId, newOrder.getTotalCost()) < 0) {
                     double remainder = (loyaltyPoints.applyLoyaltyDiscount(userId, newOrder.getTotalCost()) - newOrder.getTotalCost()) / 0.01;
@@ -186,7 +166,7 @@ public abstract class User {
                 JSONObject loyaltyPointDetails = Database.readFromTable("loyalty", userId, cols, "user_id");
                 loyaltyPointDetails.put("loyalty_points", loyaltyPointDetails.getInt("loyalty_points") + pointsToAdd - pointsSpent);
                 Database.updateTable("loyalty", loyaltyPointDetails);
-                System.out.println("points add " + pointsToAdd + " points spent " + pointsSpent);
+                System.out.println("Points added " + pointsToAdd + ", points spent " + pointsSpent);
 
                 System.out.println("Your order will be delivered in " + time + " minutes and will cost €" + String.format("%.2f", newOrder.getTotalCost()) + " + delivery fee €" + String.format("%.2f", deliveryCost));
             } else {
@@ -203,6 +183,32 @@ public abstract class User {
 
         return newOrder.getTotalCost();
 
+    }
+
+    private void printOrderLineItems(Order newOrder, int orderId) {
+        System.out.println("Your order:");
+        for(MenuItem item : newOrder.getMenuItems()) {
+            JSONObject orderItemDetails = new JSONObject();
+            orderItemDetails.put("menu_item", item.getID());
+            orderItemDetails.put("order_id", orderId);
+            System.out.println(item);
+            Database.writeToTable("orderlineitem", orderItemDetails);
+        }
+    }
+
+    private MenuItem chooseMenuItem(Menu menu) {
+        System.out.println("Enter the id of the item you'd like to order");
+        String choice = scanner.nextLine();
+        while(!UiUtils.isValid(choice, -1, -1)) {
+            choice = scanner.nextLine();
+        }
+        MenuItem item = null;
+        for(MenuItem menuItem : menu.getMenuItems()) {
+            if(menuItem.getID() == Integer.parseInt(choice)) {
+                item = chooseSideDish(Integer.parseInt(choice),  menuItem instanceof Dish);
+            }
+        }
+        return item;
     }
 
     private JSONObject getOrderItem(int menuItemId) {
