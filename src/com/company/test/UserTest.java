@@ -1,3 +1,5 @@
+package com.company.test;
+
 import com.company.restaurant.Database;
 import com.company.users.Customer;
 import com.company.users.User;
