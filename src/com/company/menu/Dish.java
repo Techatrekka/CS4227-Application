@@ -3,7 +3,6 @@ package com.company.menu;
 import org.json.JSONObject;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class Dish extends MenuItem {
 

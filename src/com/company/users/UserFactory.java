@@ -4,19 +4,24 @@ import org.json.JSONObject;
 import java.util.Objects;
 
 public class UserFactory {
-    public UserFactory() {}
+    public UserFactory() { // empty default constructor
+    }
 
     public User createUser(JSONObject user) {
+        String userId = "user_id";
+        String email = "email";
+        String employeeType = "employee_type";
+        String fullName = "fullname";
         if(Objects.equals(user.getString("user_type"), "customer")) {
-            return new Customer(user.getInt("user_id"), user.getString("email"),
-                    user.getString("fullname"), user.getInt("loyalty_points"));
+            return new Customer(user.getInt(userId), user.getString(email),
+                    user.getString(fullName), user.getInt("loyalty_points"));
         } else if(Objects.equals(user.getString("user_type"), "employee")) {
-            if(Objects.equals(user.getString("employee_type"), "manager")) {
-                return new Manager(user.getInt("user_id"), user.getString("email"),
-                        user.getString("fullname"), user.getString("employee_type"), user.getDouble("salary"));
+            if(Objects.equals(user.getString(employeeType), "manager")) {
+                return new Manager(user.getInt(userId), user.getString(email),
+                        user.getString(fullName), user.getString(employeeType), user.getDouble("salary"));
             } else {
-                return new Staff(user.getInt("user_id"), user.getString("email"),
-                        user.getString("fullname"), user.getString("employee_type"), user.getDouble("salary"));
+                return new Staff(user.getInt(userId), user.getString(email),
+                        user.getString(fullName), user.getString(employeeType), user.getDouble("salary"));
             }
         } else {
             return null;

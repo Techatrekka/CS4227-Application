@@ -19,20 +19,28 @@ public abstract class User {
     private String fullName;
     private String email;
     private Scanner scanner = new Scanner(System.in);
+    private static String userIdKey = "user_id";
+    private String orderTable = "order";
+    private static String loyaltyPointsKey = "loyalty_points";
+    private static String loyaltyKey = "loyalty";
+    private String orderKey = "order_id";
+    private String menuKey = "menu_item";
 
-    public int viewMenu(ArrayList<Menu> restaurantMenus, String option){
+    public int viewMenu(List<Menu> restaurantMenus, String option){
+        String customerKey = "customer";
+        String employeeKey = "employee";
         for(Menu menu : restaurantMenus) {
-            if(userType.equals("customer") && menu.getMenuItems().size() > 0) {
+            if(userType.equals(customerKey) && !menu.getMenuItems().isEmpty()) {
                 System.out.println(menu);
-            } else if(userType.equals("employee")) {
+            } else if(userType.equals(employeeKey)) {
                 System.out.println(menu);
             }
         }
-        if(userType.equals("employee")) System.out.println("Note: Customers will only see the menus that have items in them. " +
+        if(userType.equals(employeeKey)) System.out.println("Note: Customers will only see the menus that have items in them. " +
                 "Managers can use the edit menu option to add menu items.");
 
         if(!option.equals("view:")) {
-            return chooseMenu(option, restaurantMenus);
+            return chooseMenu(option, (ArrayList<Menu>) restaurantMenus);
         }
         return -1;
     }
@@ -81,8 +89,7 @@ public abstract class User {
         return fullName;
     }
 
-    public double placeOrder(int userId, ArrayList<Menu> restaurantMenus, Stock stock){
-        LoyaltyStrategy loyaltyPoints;
+    public double placeOrder(int userId, List<Menu> restaurantMenus, Stock stock){
         Order newOrder = null;
         System.out.println("Delivery costs €0.40 per item for orders under €10, €0.20 per item for orders under €20, and is free for orders over €20.");
         boolean addToOrder = true;
@@ -111,15 +118,26 @@ public abstract class User {
             }
             System.out.println("Would you like to order anything else? y/n");
             choice = scanner.nextLine();
-            if (choice.equalsIgnoreCase("n")) addToOrder = false;
+            addToOrder = continueOrder(choice);
         }
         JSONObject orderDetails = new JSONObject();
         newOrder.setTotalCost(newOrder.calcCostOfItems() + setMealCost);
         orderDetails.put("total_cost", String.valueOf(newOrder.getTotalCost()));
-        orderDetails.put("user_id", userId);
+        orderDetails.put(userIdKey, userId);
 
-        int orderId = Database.writeToTable("order", orderDetails);
+        int orderId = Database.writeToTable(orderTable, orderDetails);
 
+        checkStockAndCompleteOrder(newOrder, orderId, stock, userId);
+
+        return newOrder.getTotalCost();
+
+    }
+
+    private boolean continueOrder(String choice) {
+        return !choice.equalsIgnoreCase("n");
+    }
+
+    private HashMap<Integer, Integer> getOrderStockItems(Order newOrder) {
         HashMap<Integer, Integer> orderStockItems = new HashMap<>();
         for(MenuItem item : newOrder.getMenuItems()) {
             List<String> stockItems = item.getIngredients();
@@ -131,6 +149,12 @@ public abstract class User {
                 }
             }
         }
+        return orderStockItems;
+    }
+
+    private void checkStockAndCompleteOrder(Order newOrder, int orderId, Stock stock, int userId) {
+        LoyaltyStrategy loyaltyPoints;
+        HashMap<Integer, Integer> orderStockItems = getOrderStockItems(newOrder);
 
         if(stock.ingredientsInStock(orderStockItems)) {
             if(newOrder.getTotalCost() > 0) {
@@ -156,41 +180,35 @@ public abstract class User {
                     newOrder.setTotalCost(0.0);
                 }
                 int pointsToAdd = (int) (Math.round(newOrder.getTotalCost()) * 5);
-                ArrayList<String> cols = new ArrayList<String>() {
-                    {
-                        add("loyalty_points");
-                        add("loyalty_id");
-                    }
-                };
+                ArrayList<String> cols = new ArrayList<>();
+                cols.add(loyaltyPointsKey);
+                cols.add("loyalty_id");
                 newOrder.setTotalCost(newOrder.getTotalCost() - loyaltyPoints.applyLoyaltyDiscount(userId, newOrder.getTotalCost()));
-                JSONObject loyaltyPointDetails = Database.readFromTable("loyalty", userId, cols, "user_id");
-                loyaltyPointDetails.put("loyalty_points", loyaltyPointDetails.getInt("loyalty_points") + pointsToAdd - pointsSpent);
-                Database.updateTable("loyalty", loyaltyPointDetails);
+                JSONObject loyaltyPointDetails = Database.readFromTable(loyaltyKey, userId, cols, userIdKey);
+                loyaltyPointDetails.put(loyaltyPointsKey, loyaltyPointDetails.getInt(loyaltyPointsKey) + pointsToAdd - pointsSpent);
+                Database.updateTable(loyaltyKey, loyaltyPointDetails);
                 System.out.println("Points added " + pointsToAdd + ", points spent " + pointsSpent);
 
                 System.out.println("Your order will be delivered in " + time + " minutes and will cost €" + String.format("%.2f", newOrder.getTotalCost()) + " + delivery fee €" + String.format("%.2f", deliveryCost));
             } else {
                 System.out.println("The order was cancelled.");
                 newOrder.setTotalCost(0);
-                Database.deleteFromTable("order", "order_id", orderId);
+                Database.deleteFromTable(orderTable, orderKey, orderId);
             }
         } else {
             System.out.println("Sorry, but there aren't enough ingredients in stock for all your order items.\n" +
                     "The order was cancelled, please try again.");
             newOrder.setTotalCost(0);
-            Database.deleteFromTable("order", "order_id", orderId);
+            Database.deleteFromTable(orderTable, orderKey, orderId);
         }
-
-        return newOrder.getTotalCost();
-
     }
 
     private void printOrderLineItems(Order newOrder, int orderId) {
         System.out.println("Your order:");
         for(MenuItem item : newOrder.getMenuItems()) {
             JSONObject orderItemDetails = new JSONObject();
-            orderItemDetails.put("menu_item", item.getID());
-            orderItemDetails.put("order_id", orderId);
+            orderItemDetails.put(menuKey, item.getID());
+            orderItemDetails.put(orderKey, orderId);
             System.out.println(item);
             Database.writeToTable("orderlineitem", orderItemDetails);
         }
@@ -213,30 +231,30 @@ public abstract class User {
 
     private JSONObject getOrderItem(int menuItemId) {
         JSONObject menuItemDetails;
-        ArrayList<String> cols = new ArrayList<String>() {{
-            add("name");
-            add("Price");
-            add("Description");
-            add("Ingredients");
-            add("isFood");
-            add("Allergens");
-            add("menu_item");
-            add("Alcoholic");
-        }};
-        menuItemDetails = Database.readFromTable("menuitem", menuItemId, cols, "menu_item");
+        ArrayList<String> cols = new ArrayList<>();
+        cols.add("name");
+        cols.add("Price");
+        cols.add("Description");
+        cols.add("Ingredients");
+        cols.add("isFood");
+        cols.add("Allergens");
+        cols.add(menuKey);
+        cols.add("Alcoholic");
+
+        menuItemDetails = Database.readFromTable("menuitem", menuItemId, cols, menuKey);
         return menuItemDetails;
     }
 
     public void getOrders() {
-        JSONArray allUserOrders = Database.readAllFromTable("order", this.getIdNum(), "user_id", "");
+        JSONArray allUserOrders = Database.readAllFromTable(orderTable, this.getIdNum(), userIdKey, "");
         if(allUserOrders.length() > 0) {
             for (Object orderObj : allUserOrders){
                 JSONObject orderDetails = (JSONObject)orderObj;
                 Order order = new Order(orderDetails);
-                JSONArray allOrderItems = Database.readAllFromTable("orderlineitem", orderDetails.getInt("order_id"), "order_id", "");
+                JSONArray allOrderItems = Database.readAllFromTable("orderlineitem", orderDetails.getInt(orderKey), orderKey, "");
                 for (Object orderItemObj : allOrderItems) {
                     JSONObject orderItemDetails = (JSONObject) orderItemObj;
-                    JSONObject itemDetails = getOrderItem(orderItemDetails.getInt("menu_item"));
+                    JSONObject itemDetails = getOrderItem(orderItemDetails.getInt(menuKey));
                     MenuItem item = itemDetails.getBoolean("isFood") ? new Dish(itemDetails) : new Beverage(itemDetails);
                     order.addMenuItem(item);
                 }
@@ -253,33 +271,38 @@ public abstract class User {
     }
 
     public static User createUser(boolean isNewUser, String email) {
+        String employeeTypeKey = "employee_type";
+        String salaryKey = "salary";
+        String userTypeKey = "user_type";
+        String customerUser = "customer";
+        String employeeUser = "employee";
         List<String> cols = new ArrayList<>();
         // JSON for extra attributes for user depending on whether they're employees or customers
         JSONObject extraAttributes = new JSONObject();
         JSONObject userDetailsJson;
         userDetailsJson = Database.readFromUserTable(email, null);
-        extraAttributes.put("user_id", userDetailsJson.getInt("user_id"));
+        extraAttributes.put(userIdKey, userDetailsJson.getInt(userIdKey));
 
         // if it's a new user, we need to write loyalty points to the loyalty table
         if(isNewUser) {
-            if(Objects.equals(userDetailsJson.getString("user_type"), "customer")) {
-                extraAttributes.put("loyalty_points", 0);
-                Database.writeToTable("loyalty", extraAttributes);
-                userDetailsJson.put("loyalty_points", 0);
+            if(Objects.equals(userDetailsJson.getString(userTypeKey), customerUser)) {
+                extraAttributes.put(loyaltyPointsKey, 0);
+                Database.writeToTable(loyaltyKey, extraAttributes);
+                userDetailsJson.put(loyaltyPointsKey, 0);
             }
         } else {
             // If it's an existing customer, read their loyalty points value from the database
-            if(Objects.equals(userDetailsJson.getString("user_type"), "customer")) {
-                cols.add("loyalty_points");
-                extraAttributes = Database.readFromTable("loyalty", userDetailsJson.getInt("user_id"), cols, "user_id");
-                userDetailsJson.put("loyalty_points", extraAttributes.getInt("loyalty_points"));
+            if(Objects.equals(userDetailsJson.getString(userTypeKey), customerUser)) {
+                cols.add(loyaltyPointsKey);
+                extraAttributes = Database.readFromTable(loyaltyKey, userDetailsJson.getInt(userIdKey), cols, userIdKey);
+                userDetailsJson.put(loyaltyPointsKey, extraAttributes.getInt(loyaltyPointsKey));
             // If it's an existing employee, read their salary and employee type from the database
-            } else if(Objects.equals(userDetailsJson.getString("user_type"), "employee")) {
-                cols.add("salary");
-                cols.add("employee_type");
-                JSONObject employeeTypeSalary = Database.readFromTable("employeesalary", userDetailsJson.getInt("user_id"), cols, "user_id");
-                userDetailsJson.put("salary", employeeTypeSalary.getDouble("salary"));
-                userDetailsJson.put("employee_type", employeeTypeSalary.getString("employee_type"));
+            } else if(Objects.equals(userDetailsJson.getString(userTypeKey), employeeUser)) {
+                cols.add(salaryKey);
+                cols.add(employeeTypeKey);
+                JSONObject employeeTypeSalary = Database.readFromTable("employeesalary", userDetailsJson.getInt(userIdKey), cols, userIdKey);
+                userDetailsJson.put(salaryKey, employeeTypeSalary.getDouble(salaryKey));
+                userDetailsJson.put(employeeTypeKey, employeeTypeSalary.getString(employeeTypeKey));
             }
         }
         UserFactory userFactory = new UserFactory();

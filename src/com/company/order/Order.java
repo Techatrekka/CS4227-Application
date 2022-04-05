@@ -2,13 +2,11 @@ package com.company.order;
 
 import com.company.menu.Beverage;
 import com.company.menu.Dish;
-import com.company.menu.Menu;
 import com.company.menu.MenuItem;
 import com.company.restaurant.Database;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Order implements Visitable {
     private int orderID;
@@ -73,7 +71,7 @@ public class Order implements Visitable {
         return cost;
     }
 
-     public void setMenuItems( ArrayList menuItems){
+     public void setMenuItems(ArrayList<MenuItem> menuItems){
          this.menuItems = menuItems;
      }
 

@@ -2,20 +2,15 @@ package com.company.test;
 
 import com.company.menu.*;
 import com.company.order.Order;
-import com.company.stock.StockItem;
-import com.company.users.User;
 import com.company.restaurant.Database;
-import org.json.JSONArray;
 import org.json.JSONObject;
-import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static junit.framework.TestCase.assertEquals;
 
 class OrderTest {
-    private Object JSONObject;
 
     @Test
     void getName() {
@@ -39,8 +34,8 @@ class OrderTest {
         orderDetails.put("user_id_id", 1);
         int orderId = Database.writeToTable("order", orderDetails);
 
-
-        JSONObject orderItemDetails = Database.readFromTable("stockitems", orderId, cols, "stock_item_id");
+        JSONObject orderItemDetails = Database.readFromTable("stockitems", orderId,
+                cols, "stock_item_id");
         JSONObject item = new JSONObject(orderItemDetails);
         Order returnedOrder = new Order(item);
         assertEquals(returnedOrder.toString(),newOrder.toString());

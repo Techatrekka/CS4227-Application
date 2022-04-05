@@ -11,7 +11,6 @@ import java.util.*;
 public class BusinessHours implements Observable {
     private List<Observer> users = new ArrayList<>();
     private LinkedHashMap<DayOfWeek, LocalTime> openingHours;
-    private boolean isOpen = false;
 
     public BusinessHours() {
         openingHours = new LinkedHashMap<>();
@@ -29,13 +28,12 @@ public class BusinessHours implements Observable {
 
     public boolean isOpenNow() {
         LocalDateTime now = LocalDateTime.now();
-        if(!openingHours.containsKey(now.getDayOfWeek())) {
+        boolean isOpen = false;
+        if(!openingHours.containsKey(now.getDayOfWeek()) ||
+                (now.getHour() > this.getClosingTime(openingHours.get(now.getDayOfWeek())).getHour() && now.getHour() < openingHours.get(now.getDayOfWeek()).getHour())) {
             isOpen = false;
             notifyObservers("Sorry, the restaurant is closed right now - you won't be able to place any orders.");
-        } else if(now.getHour() > this.getClosingTime(openingHours.get(now.getDayOfWeek())).getHour() && now.getHour() < openingHours.get(now.getDayOfWeek()).getHour()) {
-              isOpen = false;
-            notifyObservers("Sorry, the restaurant is closed right now - you won't be able to place any orders.");
-       } else {
+        } else {
             isOpen = true;
             notifyObservers("The restaurant is currently open.");
         }

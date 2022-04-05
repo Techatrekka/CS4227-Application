@@ -1,8 +1,0 @@
-
-N	java:S106"9Replace this use of System.out or System.err by a logger.(õÇ³Ó
-N	java:S106"9Replace this use of System.out or System.err by a logger.(¨ÒØá
-S	java:S106("9Replace this use of System.out or System.err by a logger.(Ì•¼ûüÿÿÿÿ
-^
-java:S1128"ARemove this unused import 'javax.mail.internet.AddressException'.(ÏŠŠÂ8ÚŸ‡‡ó/
-b
-java:S1128"@Remove this unused import 'javax.mail.internet.InternetAddress'.(–¹“êûÿÿÿÿ8ÚŸ‡‡ó/

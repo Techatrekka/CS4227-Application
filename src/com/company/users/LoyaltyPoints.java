@@ -14,11 +14,8 @@ public class LoyaltyPoints{
     }
 
     public int getLoyaltyPoints(int userId){
-        ArrayList<String> cols = new ArrayList<String>() {
-            {
-             add("loyalty_points");
-            }
-        };
+        ArrayList<String> cols = new ArrayList<>();
+        cols.add("loyalty_points");
         JSONObject loyaltyPointDetails = Database.readFromTable("loyalty", userId, cols, "user_id");
         numOfPoints = loyaltyPointDetails.getInt("loyalty_points");
         return this.numOfPoints;

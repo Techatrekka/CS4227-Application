@@ -10,8 +10,11 @@ public class Stock extends StockComponent {
     int capacity;
     int currentCapacity;
     String type;
-    private ArrayList<StockComponent> stockComponents = new ArrayList();
+    private ArrayList<StockComponent> stockComponents = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
+    private String countStr = "count";
+    private String allergensStr = "allergens";
+    private String stockItemsStr = "stockitems";
 
     public Stock(int capacity, String type) {
         this.capacity = capacity;
@@ -23,6 +26,7 @@ public class Stock extends StockComponent {
         return this.capacity;
     }
 
+    @Override
     public String show() {
         StringBuilder stockDisplay = new StringBuilder(getStockInfo());
         for (StockComponent stockComponent : stockComponents) {
@@ -36,6 +40,7 @@ public class Stock extends StockComponent {
                 "\nCurrent Capacity: " + getCurrentCapacity();
     }
 
+    @Override
     public StockComponent getChild(int index) {
         return stockComponents.get(index);
     }
@@ -68,20 +73,20 @@ public class Stock extends StockComponent {
         String expiry = scanner.nextLine();
         JSONObject newStockItem = new JSONObject();
         newStockItem.put("name", name);
-        newStockItem.put("count", count);
+        newStockItem.put(countStr, count);
         newStockItem.put("expiry_date", expiry);
         System.out.println("Does this stock item contain any allergens? Please enter each allergen separated by a comma.\n" +
                 "If there are no allergens, press enter or type None");
         String allergens = scanner.nextLine();
         if(allergens.isEmpty()) {
-            newStockItem.put("allergens", "None");
+            newStockItem.put(allergensStr, "None");
         } else {
-            newStockItem.put("allergens", allergens);
+            newStockItem.put(allergensStr, allergens);
         }
         System.out.println("Is this stock item a food? Y = yes, anything else = no");
         String isFood = scanner.nextLine();
         newStockItem.put("isFood", isFood.equalsIgnoreCase("y"));
-        Database.writeToTable("stockitems", newStockItem);
+        Database.writeToTable(stockItemsStr, newStockItem);
     }
 
     public void updateStockItemDetails() {
@@ -112,7 +117,7 @@ public class Stock extends StockComponent {
                 System.out.println("Enter the new count for the item as a whole number");
                 change = scanner.nextLine();
                 checkAtCapacity(Integer.parseInt(change));
-                updatedStockItem.put("count", change);
+                updatedStockItem.put(countStr, change);
                 break;
             case "e":
                 System.out.println("Enter the new expiry date in the form YYYY-MM-DD");
@@ -120,17 +125,18 @@ public class Stock extends StockComponent {
                 updatedStockItem.put("expiry_date", change);
                 break;
             case "a":
+            default:
                 System.out.println("Enter the new Allergens list for the stock item." +
                         "Please enter each allergen separated by a comma. If there are no allergens, press enter or type None");
                 change = scanner.nextLine();
                 if(change.isEmpty()) {
-                    updatedStockItem.put("allergens", "None");
+                    updatedStockItem.put(allergensStr, "None");
                 } else {
-                    updatedStockItem.put("allergens", change);
+                    updatedStockItem.put(allergensStr, change);
                 }
                 break;
         }
-        Database.updateTable("stockitems", updatedStockItem);
+        Database.updateTable(stockItemsStr, updatedStockItem);
     }
 
     public int getCurrentCapacity() {
@@ -156,8 +162,8 @@ public class Stock extends StockComponent {
             int newCount = s.getCount() - (int) entry.getValue();
             JSONObject stockItemDetails = new JSONObject();
             stockItemDetails.put("stock_item_id", s.getId());
-            stockItemDetails.put("count", newCount);
-            Database.updateTable("stockitems", stockItemDetails);
+            stockItemDetails.put(countStr, newCount);
+            Database.updateTable(stockItemsStr, stockItemDetails);
         }
     }
 

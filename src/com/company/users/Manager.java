@@ -2,7 +2,6 @@ package com.company.users;
 
 import com.company.restaurant.Database;
 import com.company.menu.Menu;
-import com.company.menu.MenuFactory;
 
 import com.company.ui.UiUtils;
 import org.json.JSONArray;
@@ -11,17 +10,21 @@ import org.json.JSONObject;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Manager extends Staff {
     private Scanner scanner = new Scanner(System.in);
+    private String employeeStr = "employee";
+    private String employeeTypeStr = "employee_type";
+    private String userIdStr = "user_id";
+    private String salaryStr = "salary";
+    private String employeeSalaryStr = "employeesalary";
 
     public Manager(int idNum, String email, String fullName, String employeeType, double salary) {
         super.setIdNum(idNum);
         super.setFullName(fullName);
         super.setEmail(email);
-        super.setUserType("employee");
+        super.setUserType(employeeStr);
         super.setEmployeeType(employeeType);
         super.setSalary(salary);
     }
@@ -39,30 +42,30 @@ public class Manager extends Staff {
         staffDetails.put("fullname", fullName);
         staffDetails.put("email", email);
         staffDetails.put("password", password);
-        staffDetails.put("user_type", "employee");
+        staffDetails.put("user_type", employeeStr);
         Database.writeToTable("user", staffDetails);
 
         JSONObject staffID = Database.readFromUserTable(email, null);
 
         JSONObject newStaffSalary = new JSONObject();
-        newStaffSalary.put("user_id", staffID.get("user_id"));
-        newStaffSalary.put("employee_type", "clerk");
-        newStaffSalary.put("salary", salary);
+        newStaffSalary.put(userIdStr, staffID.get(userIdStr));
+        newStaffSalary.put(employeeTypeStr, "clerk");
+        newStaffSalary.put(salaryStr, salary);
 
-        Database.writeToTable("employeesalary", newStaffSalary);
+        Database.writeToTable(employeeSalaryStr, newStaffSalary);
     }
 
     public void viewStaffMember() {
-        JSONArray allStaff = Database.readAllFromTable("user", -1, "user_type", "employee");
+        JSONArray allStaff = Database.readAllFromTable("user", -1, "user_type", employeeStr);
 
         System.out.println("List of Employees: ");
         for (Object obj : allStaff){
             JSONObject obj2 = (JSONObject)obj;
             List<String> salaryList = new ArrayList<>();
-            salaryList.add("salary");
-            salaryList.add("employee_type");
-            JSONObject salary = Database.readFromTable("employeesalary", obj2.getInt("user_id"), salaryList, "user_id");
-            System.out.printf("\tID: %s\t\tName: %s\n\t\t\t\tSalary: €%s\t Position: %s\n", obj2.get("user_id"), obj2.get("fullname"), salary.get("salary"), salary.get("employee_type"));
+            salaryList.add(salaryStr);
+            salaryList.add(employeeTypeStr);
+            JSONObject salary = Database.readFromTable(employeeSalaryStr, obj2.getInt(userIdStr), salaryList, userIdStr);
+            System.out.printf("\tID: %s\t\tName: %s\n\t\t\t\tSalary: €%s\t Position: %s\n", obj2.get(userIdStr), obj2.get("fullname"), salary.get(salaryStr), salary.get(employeeTypeStr));
         }
     }
 
@@ -75,7 +78,7 @@ public class Manager extends Staff {
             System.out.println("You cannot delete yourself, enter a different ID number");
             idNum = scanner.nextInt();
         }
-        if (Database.deleteFromTable("user", "user_id", idNum)){
+        if (Database.deleteFromTable("user", userIdStr, idNum)){
             System.out.println("User deleted successfully");
         }else{
             System.out.println("User was not deleted");
@@ -91,10 +94,10 @@ public class Manager extends Staff {
         double newSalary = scanner.nextDouble();
 
         JSONObject editedStaff = new JSONObject();
-        editedStaff.put("salary", newSalary);
-        editedStaff.put("user_id", idNum);
+        editedStaff.put(salaryStr, newSalary);
+        editedStaff.put(userIdStr, idNum);
 
-        if (Database.updateTable("employeesalary", editedStaff)){
+        if (Database.updateTable(employeeSalaryStr, editedStaff)){
             System.out.println("User salary edited successfully");
         }else{
             System.out.println("User salary was not edited");
@@ -110,20 +113,21 @@ public class Manager extends Staff {
         String description = scanner.nextLine();
         System.out.println("Is this a set menu? y/n");
         String menuType = scanner.nextLine();
+        String discountStr = "discount";
         if(menuType.equalsIgnoreCase("Y")){
             System.out.println("How much does it cost?");
             menuType = scanner.nextLine();
             menuObj.put("set_menu_price", menuType);
-            menuObj.put("discount", "0.0");
+            menuObj.put(discountStr, "0.0");
         } else {
             System.out.println("Does this menu have a discount on it? y/n");
             menuType = scanner.nextLine();
             if(menuType.equalsIgnoreCase("Y")){
                 System.out.println("How much of a discount does this menu have? Enter a number for the percentage discount");
                 menuType = scanner.nextLine();
-                menuObj.put("discount", menuType);
+                menuObj.put(discountStr, menuType);
             } else {
-                menuObj.put("discount", "0.0");
+                menuObj.put(discountStr, "0.0");
             }
             menuObj.put("set_menu_price", "0.0");
         }

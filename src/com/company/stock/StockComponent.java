@@ -1,7 +1,5 @@
 package com.company.stock;
 
-import java.time.LocalDate;
-
 public abstract class StockComponent {
     public void add(StockComponent menuComponent) {
         throw new UnsupportedOperationException();

@@ -3,10 +3,7 @@ package com.company.restaurant;
 import java.util.ArrayList;
 
 import com.company.menu.Menu;
-import com.company.menu.MenuItem;
 import com.company.menu.MenuFactory;
-import com.company.menu.Beverage;
-import com.company.menu.Dish;
 
 import com.company.stock.Stock;
 import com.company.stock.StockComponent;
@@ -15,6 +12,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class RestaurantInit {
+
+    private RestaurantInit() {
+        // Private constructor to hide implicit public one
+    }
     public static ArrayList<Menu> initMenus() {
         JSONArray dbMenus = Database.readAllFromTable("menu", -1, null, "");
 

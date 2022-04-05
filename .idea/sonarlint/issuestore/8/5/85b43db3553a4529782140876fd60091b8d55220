@@ -1,7 +1,0 @@
-
-qpython:S117	"ZRename this local variable "lowerCase" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÆÑŸ·
-spython:S117"\Rename this local variable "passwordLen" to match the regular expression ^[_a-z][a-z0-9_]*$.( †
-qpython:S117
-"ZRename this local variable "upperCase" to match the regular expression ^[_a-z][a-z0-9_]*$.(¢ÑÁÁ
-tpython:S1542"WRename function "passwordGenerator" to match the regular expression ^[a-z_][a-z0-9_]*$.(Ùàªÿşÿÿÿÿ
-Hpython:S5806"+Rename this variable; it shadows a builtin.(œ™¼Æıÿÿÿÿ

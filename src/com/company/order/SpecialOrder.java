@@ -13,6 +13,7 @@ public class SpecialOrder extends Order{
         return this.deliveryDiscount;
     }
 
+    @Override
     public void accept(Visitor visitor){
         visitor.visit(this);
     }

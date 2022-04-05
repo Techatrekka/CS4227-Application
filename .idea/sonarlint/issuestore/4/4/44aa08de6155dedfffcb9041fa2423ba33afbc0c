@@ -1,20 +1,0 @@
-
-jpython:S116"RRename this field "shouldStop" to match the regular expression ^[_a-z][_a-z0-9]*$.(åğ‚‡
-hpython:S116‚"PRename this field "testsRun" to match the regular expression ^[_a-z][_a-z0-9]*$.(Ö£÷
-mpython:S100İ"PRename method "startTestRun" to match the regular expression ^[a-z_][a-z0-9_]*$.(¢‘çÄûÿÿÿÿ
-lpython:S100à"ORename method "stopTestRun" to match the regular expression ^[a-z_][a-z0-9_]*$.(¡è·Õûÿÿÿÿ
-epython:S100ã"MRename method "startTest" to match the regular expression ^[a-z_][a-z0-9_]*$.(»òµ¼
-ipython:S100ç"LRename method "stopTest" to match the regular expression ^[a-z_][a-z0-9_]*$.(§¬¯àùÿÿÿÿ
-dpython:S100ê"LRename method "addError" to match the regular expression ^[a-z_][a-z0-9_]*$.(šÙ™á
-kpython:S100ï"NRename method "addFailure" to match the regular expression ^[a-z_][a-z0-9_]*$.(§«Ç—üÿÿÿÿ
-kpython:S100ô"NRename method "addSubTest" to match the regular expression ^[a-z_][a-z0-9_]*$.(ÎÙ­İÿÿÿÿÿ
-fpython:S100ÿ"NRename method "addSuccess" to match the regular expression ^[a-z_][a-z0-9_]*$.(·•ÃÑ
-hpython:S100‚"KRename method "addSkip" to match the regular expression ^[a-z_][a-z0-9_]*$.(şŸª¥ıÿÿÿÿ
-spython:S100…"VRename method "addExpectedFailure" to match the regular expression ^[a-z_][a-z0-9_]*$.(‚ üÿÿÿÿ
-ppython:S100"XRename method "addUnexpectedSuccess" to match the regular expression ^[a-z_][a-z0-9_]*$.(Î…°Ğ
-opython:S2638ú"QAdd missing parameters debug. This method overrides unittest.suite.TestSuite.run.(ÜèÃşÿÿÿÿ
-epython:S107½"MMethod "__init__" has 18 parameters, which is greater than the 13 authorized.(ºÖä¤
-rpython:S3776¯"TRefactor this function to reduce its Cognitive Complexity from 39 to the 15 allowed.(«ª·Äùÿÿÿÿ
-lpython:S1226¯"NIntroduce a new variable or use its initial value before reassigning 'kwargs'.(«ª·Äùÿÿÿÿ
-gpython:S1226›"NIntroduce a new variable or use its initial value before reassigning 'kwargs'.(´¶ó¿
-Cpython:S1481‰"%Remove the unused local variable "i".(»ÕË¯ùÿÿÿÿ

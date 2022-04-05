@@ -10,6 +10,7 @@ public class UserLogin {
     private String email = "";
 
     public UserLogin() {
+        // Empty default constructor
     }
 
     protected String getEmail() {
@@ -28,29 +29,29 @@ public class UserLogin {
         System.out.println("Enter Q on its own in the email field to shut down the system, or enter B to go back to the previous screen.");
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter Email Address:");
-        String email = scanner.nextLine();
-        UiUtils.checkQ(email);
-        if(UiUtils.inputB(email)) {
+        String emailInput = scanner.nextLine();
+        UiUtils.checkQ(emailInput);
+        if(UiUtils.inputB(emailInput)) {
             return;
         }
         String password = UiUtils.getPassword("Enter ");
 
-        JSONObject userDetails = Database.readFromUserTable(email,password);
+        JSONObject userDetails = Database.readFromUserTable(emailInput,password);
         boolean validCredentials = userDetails.has("correct_pass");
         while(!validCredentials) {
             System.out.println("Please enter valid login details. You must register before you can login.");
             System.out.println("Enter Email address:");
-            email = scanner.nextLine();
-            if(UiUtils.inputB(email)) {
+            emailInput = scanner.nextLine();
+            if(UiUtils.inputB(emailInput)) {
                 this.setSuccessfulLogin(false);
                 return;
             }
             password = UiUtils.getPassword("Enter ");
-            userDetails = Database.readFromUserTable(email,password);
+            userDetails = Database.readFromUserTable(emailInput,password);
             validCredentials = userDetails.has("correct_pass");
         }
         this.setSuccessfulLogin(true);
-        this.email = email;
+        this.email = emailInput;
     }
     protected void setEmail(String email) {
         this.email = email;

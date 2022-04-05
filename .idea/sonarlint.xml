@@ -7,7 +7,7 @@
         <option value="DIRECTORY:cmdSrc/ansible" />
       </list>
     </option>
-    <option name="projectKey" value="CS4227" />
-    <option name="serverId" value="CS4227-sonarqube" />
+    <option name="projectKey" value="nicole-berty_CS4227-Application" />
+    <option name="serverId" value="sonarcloud" />
   </component>
 </project>

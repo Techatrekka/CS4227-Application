@@ -1,28 +1,0 @@
-
-|python:S1192’"cDefine a constant instead of duplicating this literal 'Second argument is not valid HTML:' 3 times.(É“±
-€python:S1192‘"bDefine a constant instead of duplicating this literal 'First argument is not valid HTML:' 3 times.(à–Šºüÿÿÿÿ
-Hpython:S1066—"/Merge this if statement with the enclosing one.(µÔñ£
-xpython:S117D"\Rename this local variable "standardMsg" to match the regular expression ^[_a-z][a-z0-9_]*$.(üôÄ–ÿÿÿÿÿ
-xpython:S117„"[Rename this local variable "testMethod" to match the regular expression ^[_a-z][a-z0-9_]*$.( ¤ª’ûÿÿÿÿ
-rpython:S3776ü"TRefactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.(™Ö¦–ÿÿÿÿÿ
-rpython:S3776ä"TRefactor this function to reduce its Cognitive Complexity from 19 to the 15 allowed.(Š¢êËúÿÿÿÿ
-mpython:S3776›"TRefactor this function to reduce its Cognitive Complexity from 19 to the 15 allowed.(õå†§
-spython:S117•"\Rename this local variable "standardMsg" to match the regular expression ^[_a-z][a-z0-9_]*$.(¿Ä²
-ypython:S117£"\Rename this local variable "standardMsg" to match the regular expression ^[_a-z][a-z0-9_]*$.(‚èÉ¦ÿÿÿÿÿ
-tpython:S117Ş"\Rename this local variable "standardMsg" to match the regular expression ^[_a-z][a-z0-9_]*$.(ùüÉñ
-tpython:S117ò"\Rename this local variable "standardMsg" to match the regular expression ^[_a-z][a-z0-9_]*$.(ùüÉñ
-qpython:S1542
-"SRename function "_deferredSkip" to match the regular expression ^[a-z_][a-z0-9_]*$.(Ô“ß€üÿÿÿÿ
-rpython:S3776
-"TRefactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.(Ô“ß€üÿÿÿÿ
-spython:S1542½
-"URename function "skipIfDBFeature" to match the regular expression ^[a-z_][a-z0-9_]*$.(„ÃÙôşÿÿÿÿ
-wpython:S1542Æ
-"YRename function "skipUnlessDBFeature" to match the regular expression ^[a-z_][a-z0-9_]*$.(ƒÏà¯úÿÿÿÿ
-zpython:S1542Ï
-"\Rename function "skipUnlessAnyDBFeature" to match the regular expression ^[a-z_][a-z0-9_]*$.(ÅÜáªúÿÿÿÿ
-qpython:S1186İ
-"YAdd a nested comment explaining why this method is empty, or complete the implementation.(Š•ü
-
-kpython:S100·"NRename method "setUpClass" to match the regular expression ^[a-z_][a-z0-9_]*$.(°¡­«úÿÿÿÿ
-npython:S100Á"QRename method "tearDownClass" to match the regular expression ^[a-z_][a-z0-9_]*$.(´¥›Àûÿÿÿÿ

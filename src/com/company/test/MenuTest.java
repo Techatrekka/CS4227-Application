@@ -4,13 +4,11 @@ package com.company.test;
 import com.company.menu.Menu;
 import com.company.menu.MenuFactory;
 import com.company.restaurant.Database;
-import org.json.JSONArray;
 import org.json.JSONObject;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import com.company.menu.Menu;
-import com.company.menu.MenuItem;
-import com.company.menu.MenuFactory;
+import org.junit.Test;
+
+import static junit.framework.TestCase.assertEquals;
+
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,11 +19,11 @@ class MenuTest {
     double price = 10.50;
     String description = "This is a test";
     JSONObject menuObj = new JSONObject();
-    ArrayList<Menu> menus = new ArrayList<Menu>();
     MenuFactory menuFactory = new MenuFactory();
 
     @Test
     public void testMenu() {
+        String menuIdStr = "menu_id";
         menuObj.put("set_menu_price", price);
         menuObj.put("name", name);
         menuObj.put("description", description);
@@ -40,14 +38,14 @@ class MenuTest {
         cols.add("description");
         cols.add("discount");
         cols.add("date_created");
-        cols.add("menu_id");
+        cols.add(menuIdStr);
 
-        JSONObject menuItemDetails = Database.readFromTable("menu", id, cols, "menu_id");
+        JSONObject menuItemDetails = Database.readFromTable("menu", id, cols, menuIdStr);
         Menu menuTest = menuFactory.createMenu(menuItemDetails);
         System.out.println(menuTest);
 
         System.out.println("test");
         assertEquals(name, menuTest.getName());
-        Database.deleteFromTable("menu", "menu_id", menuItemDetails.getInt("menu_id"));
+        Database.deleteFromTable("menu", menuIdStr, menuItemDetails.getInt(menuIdStr));
     }
 }

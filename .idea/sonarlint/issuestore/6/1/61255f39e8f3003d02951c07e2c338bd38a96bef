@@ -1,8 +1,0 @@
-
-ppython:S116È"SRename this field "IE_sanitize" to match the regular expression ^[_a-z][_a-z0-9]*$.(ğıÈ°ûÿÿÿÿ
-lpython:S1172"PRename this parameter "META" to match the regular expression ^[_a-z][a-z0-9_]*$.(åï—ıÿÿÿÿ
-lpython:S3776h"TRefactor this function to reduce its Cognitive Complexity from 89 to the 15 allowed.(¦ù¡
-jpython:S1134Ì"LTake the required action to fix the issue indicated by this "FIXME" comment.(™²Ãùşÿÿÿÿ
-Ipython:S5806§"+Rename this variable; it shadows a builtin.(ğ´¯ßûÿÿÿÿ
-Ipython:S5806Ä"+Rename this variable; it shadows a builtin.(ƒ¡­ıÿÿÿÿ
-rpython:S3776Ÿ"TRefactor this function to reduce its Cognitive Complexity from 17 to the 15 allowed.(³üËÒøÿÿÿÿ

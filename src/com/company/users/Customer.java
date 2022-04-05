@@ -20,12 +20,8 @@ public class Customer extends User implements Observer{
         observable.registerObserver(customer);
     }
 
-    protected void addLoyaltyProgramme(int userId) {
-
-    }
-
     protected void leaveFeedback(int orderId, String feedback){
-        // code
+        // Not implementing this use case
     }
 
     public int getLoyaltyPoints(int userId){

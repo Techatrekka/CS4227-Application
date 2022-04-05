@@ -7,14 +7,18 @@ public class Wedges extends MenuItemDecorator {
         this.item = item;
     }
 
+    @Override
     public int getID() {
         return item.id;
     }
 
+    @Override
     public String toString() {
         item.description += " + Wedges";
         return item.toString();
     }
+
+    @Override
     public String getDescription() {
         if(super.getDescription() == null) {
             return decorateWithWedges();
@@ -22,9 +26,13 @@ public class Wedges extends MenuItemDecorator {
             return super.getDescription() + decorateWithWedges();
         }
     }
+
     private String decorateWithWedges() {
-        return " + Wedges";
+        String wedges = " + Wedges";
+        return wedges;
     }
+
+    @Override
     public double getPrice(){
         return item.getPrice() + 3.45;
     }

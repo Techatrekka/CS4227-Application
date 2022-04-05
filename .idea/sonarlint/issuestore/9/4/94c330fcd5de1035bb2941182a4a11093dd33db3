@@ -1,8 +1,0 @@
-
-u
-java:S1450
-"ZRemove the "pointsValue" field and declare it as a local variable in the relevant methods.(‚“î’þÿÿÿÿ
-I
-java:S3599",Use another way to initialize this instance.(çµ¼‰8å ½•ú/
-{
-java:S1171"YMove the contents of this initializer to a standard constructor or to field initializers.(ÒÌâ–øÿÿÿÿ8ê ½•ú/

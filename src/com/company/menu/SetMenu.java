@@ -1,7 +1,6 @@
 package com.company.menu;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class SetMenu extends Menu {
     protected double setMenuPrice;

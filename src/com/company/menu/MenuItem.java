@@ -50,12 +50,11 @@ public abstract class MenuItem{
 
     boolean ingredientsInStock() {
         for(String i : ingredients) {
-            int id = Integer.parseInt(i);
-            ArrayList<String> cols = new ArrayList<String>() {{
-                add("stock_item_id");
-                add("count");
-            }};
-            JSONObject ingredientDetails = Database.readFromTable("stockitems", id, cols, "stock_item_id");
+            int stockItemId = Integer.parseInt(i);
+            ArrayList<String> cols = new ArrayList<String>();
+            cols.add("stock_item_id");
+            cols.add("count");
+            JSONObject ingredientDetails = Database.readFromTable("stockitems", stockItemId, cols, "stock_item_id");
             if (ingredientDetails.getInt("count") < 1) {
                 return false;
             }
@@ -66,7 +65,7 @@ public abstract class MenuItem{
     @Override
     public String toString(){
         StringBuilder allergenList = new StringBuilder();
-        if (allergens.size() > 0) {
+        if (!allergens.isEmpty()) {
             for (String item : allergens) {
                 allergenList.append(item).append("\t\t");
             }

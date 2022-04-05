@@ -34,6 +34,8 @@ public class Beverage extends MenuItem {
     public void setName(String name) {
         super.name = name;
     }
+
+    @Override
     public String toString(){
         if(alcoholic){
             return super.toString()+"\n\tAlcoholic: Yes\n";

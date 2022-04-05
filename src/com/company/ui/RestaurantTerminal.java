@@ -18,10 +18,11 @@ public class RestaurantTerminal {
     private UserRegistration userRegistration;
     private User user;
     private int stockCapacity = 15000;
+    private String shutDown = "Shutting down system...";
 
     private BusinessHours businessHours = new BusinessHours();
     private Scanner scanner = new Scanner(System.in);
-    private static RestaurantTerminal single_instance = null;
+    private static RestaurantTerminal singleInstance = null;
 
     private RestaurantTerminal() {
         System.out.println("Welcome to The Dream Team's Diner!");
@@ -29,10 +30,10 @@ public class RestaurantTerminal {
 
     public static RestaurantTerminal getInstance()
     {
-        if (single_instance == null)
-            single_instance = new RestaurantTerminal();
+        if (singleInstance == null)
+            singleInstance = new RestaurantTerminal();
 
-        return single_instance;
+        return singleInstance;
     }
 
     public void run() {
@@ -85,61 +86,68 @@ public class RestaurantTerminal {
                     logout();
                     break;
                 case 6:
-                    System.out.println("Shutting down system...");
+                    System.out.println(shutDown);
                     System.exit(0);
+                    break;
                 default:
                     break;
             }
         } else if(Objects.equals(user.getUserType(), "employee")) {
             String employeeType = ((Staff) user).getEmployeeType();
-            if(employeeType.equalsIgnoreCase("manager")) {
-                System.out.println("1.Place Order 2. Menu Management 3. Employee Management 4. Stock Management 5. Settings 6. Logout 7. Quit");
-                choice = UiUtils.getInput(1, 7);
-                switch(choice) {
-                    case 1:
-                        staffPlaceOrder();
-                        break;
-                    case 2:
-                        menuManagement();
-                        break;
-                    case 3:
-                        employeeManagement();
-                        break;
-                    case 4:
-                        stockManagement();
-                        break;
-                    case 5:
-                        changePassword();
-                        break;
-                    case 6:
-                        logout();
-                        break;
-                    case 7:
-                        System.out.println("Shutting down system...");
-                        System.exit(0);
-                    default:
-                        break;
-                }
-            } else {
-                // if clerk then
-                System.out.println("1. Place Order 2. Stock Management 3. Logout 4. Quit");
-                choice = UiUtils.getInput(1, 4);
-                switch(choice) {
-                    case 1:
-                        staffPlaceOrder();
-                        break;
-                    case 2:
-                        stockManagement();
-                        break;
-                    case 3:
-                        logout();
-                        break;
-                    case 4:
-                        System.out.println("Shutting down system...");
-                        System.exit(0);
-                    default:
-                        break;
-                }
+            displayEmployeeOptions(employeeType);
+        }
+    }
+
+    private void displayEmployeeOptions(String employeeType) {
+        if(employeeType.equalsIgnoreCase("manager")) {
+            System.out.println("1.Place Order 2. Menu Management 3. Employee Management 4. Stock Management 5. Settings 6. Logout 7. Quit");
+            int choice2 = UiUtils.getInput(1, 7);
+            switch(choice2) {
+                case 1:
+                    staffPlaceOrder();
+                    break;
+                case 2:
+                    menuManagement();
+                    break;
+                case 3:
+                    employeeManagement();
+                    break;
+                case 4:
+                    stockManagement();
+                    break;
+                case 5:
+                    changePassword();
+                    break;
+                case 6:
+                    logout();
+                    break;
+                case 7:
+                    System.out.println(shutDown);
+                    System.exit(0);
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            // if clerk then
+            System.out.println("1. Place Order 2. Stock Management 3. Logout 4. Quit");
+            int choice3 = UiUtils.getInput(1, 4);
+            switch(choice3) {
+                case 1:
+                    staffPlaceOrder();
+                    break;
+                case 2:
+                    stockManagement();
+                    break;
+                case 3:
+                    logout();
+                    break;
+                case 4:
+                    System.out.println(shutDown);
+                    System.exit(0);
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -203,6 +211,7 @@ public class RestaurantTerminal {
                 break;
             case 4:
             case 5:
+            default:
                 System.out.println("Sorry, this use case was not implemented");
                 break;
         }
@@ -223,6 +232,8 @@ public class RestaurantTerminal {
                 break;
             case 4:
                 ((Manager) user).removeStaffMember();
+                break;
+            default:
                 break;
         }
     }
@@ -249,6 +260,7 @@ public class RestaurantTerminal {
                 restaurantMenus.removeIf(menu -> menu.getId() == menuID);
                 break;
             case 4:
+            default:
                 user.viewMenu(restaurantMenus, "view:");
                 break;
         }
@@ -291,6 +303,7 @@ public class RestaurantTerminal {
                 }
                 break;
             case 3:
+            default:
                 System.out.println("Shutting down system.");
                 System.exit(0);
                 break;

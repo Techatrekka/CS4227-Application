@@ -12,6 +12,11 @@ import java.util.Scanner;
 
 public final class UiUtils {
     private static final Scanner scanner = new Scanner(System.in);
+    private static final String falseStr = "false";
+
+    private UiUtils() {
+        // Private constructor to hide the implicit public one
+    }
 
     public static boolean inputB(String input) {
         if(input.equalsIgnoreCase("b")) {
@@ -32,7 +37,7 @@ public final class UiUtils {
         String password = getPassword("Enter ");
         checkQ(password);
         if(inputB(password)) {
-            return "false";
+            return falseStr;
         }
         password = checkPasswordLength(password);
         String repeatPass = getPassword("Repeat ");
@@ -40,7 +45,7 @@ public final class UiUtils {
             password = getPassword("Please enter the same password twice.\n");
             checkQ(password);
             if(inputB(password)) {
-                return "false";
+                return falseStr;
             }
             password = checkPasswordLength(password);
             repeatPass = getPassword("Repeat ");
@@ -65,7 +70,7 @@ public final class UiUtils {
             System.out.println("Password must be at least 8 characters, please try again");
             password = scanner.nextLine();
             if(inputB(password)) {
-                return "false";
+                return falseStr;
             }
         }
         return password;
@@ -98,7 +103,7 @@ public final class UiUtils {
         String email = scanner.nextLine();
         UiUtils.checkQ(email);
         if(UiUtils.inputB(email)) {
-            return "false";
+            return falseStr;
         }
 
         while(!isValidEmailAddress(email)) {
@@ -106,7 +111,7 @@ public final class UiUtils {
             email = scanner.nextLine();
             UiUtils.checkQ(email);
             if(UiUtils.inputB(email)) {
-                return "false";
+                return falseStr;
             }
         }
 

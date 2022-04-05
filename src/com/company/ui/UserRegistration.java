@@ -3,8 +3,6 @@ package com.company.ui;
 import com.company.restaurant.Database;
 import org.json.JSONObject;
 
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
 import java.util.Objects;
 import java.util.Scanner;
 

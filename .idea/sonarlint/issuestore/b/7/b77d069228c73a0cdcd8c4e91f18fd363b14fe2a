@@ -1,15 +1,0 @@
-
-N	java:S106!"9Replace this use of System.out or System.err by a logger.(ö¡¹ê
-N	java:S106,"9Replace this use of System.out or System.err by a logger.(ĞúÕ
-N	java:S106."9Replace this use of System.out or System.err by a logger.(ëôßÊ
-4
-java:S1128"Remove this duplicated import.(ª˜¤ƒ
-3
-java:S1128
-"Remove this duplicated import.(¡·˜
-t
-java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(×¶¿ıÿÿÿÿ
-^
-java:S1192("HDefine a constant instead of duplicating this literal "menu_id" 4 times.(´Á¹
-0
-java:S1220""Move this file to a named package.

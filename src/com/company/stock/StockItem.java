@@ -19,6 +19,7 @@ public class StockItem extends StockComponent {
         this.id = details.getInt("stock_item_id");
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -27,6 +28,7 @@ public class StockItem extends StockComponent {
         this.count = count;
     }
 
+    @Override
     public int getCount() {
         return  count;
     }
@@ -39,6 +41,7 @@ public class StockItem extends StockComponent {
         return this.id;
     }
 
+    @Override
     public String show() {
         return "\n" + getName() +
                 "\n--Count: " + getCount() + "\n" +

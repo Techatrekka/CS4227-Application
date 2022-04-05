@@ -1,9 +1,0 @@
-
-
-java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(‹Œú8’Óê†ó/
-Z	java:S106"9Replace this use of System.out or System.err by a logger.(ŠÙË¸ùÿÿÿÿ8¥Óê†ó/
-U	java:S106"9Replace this use of System.out or System.err by a logger.(¿½¼Ò8°Óê†ó/
-V
-java:S1117"9Rename "email" which hides the field declared at line 10.(Ø×…ù8°Óê†ó/
-T	java:S106)"9Replace this use of System.out or System.err by a logger.(şÍ18´Óê†ó/
-Z	java:S106*"9Replace this use of System.out or System.err by a logger.(Ñ»ëûÿÿÿÿ8´Óê†ó/
