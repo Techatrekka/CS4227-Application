@@ -1,3 +1,6 @@
+
+package com.company.test;
+
 import com.company.menu.Menu;
 import com.company.menu.MenuFactory;
 import com.company.restaurant.Database;
@@ -39,7 +42,7 @@ class MenuTest {
         cols.add("date_created");
         cols.add("menu_id");
 
-        JSONObject menuItemDetails = Database.readFromTable("menu", id, cols, "menu_id", -1, "");
+        JSONObject menuItemDetails = Database.readFromTable("menu", id, cols, "menu_id");
         Menu menuTest = menuFactory.createMenu(menuItemDetails);
         System.out.println(menuTest);
 
